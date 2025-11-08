@@ -1,65 +1,147 @@
-import Image from "next/image";
+"use client";
+import { useCallback, useMemo, useState } from "react";
+import { FLOOR_DATA, FloorData } from "./data";
+import classNames from "classnames";
 
 export default function Home() {
+  const [floorPieces, setFloorPieces] = useState<FloorData[]>(FLOOR_DATA);
+  const [selectedFloorPiece, setSelectedFloorPiece] =
+    useState<FloorData | null>(null);
+
+  const highlightedFloorPieceCategories = useMemo(() => {
+    const allSelectedFloorPieces = floorPieces
+      .map((piece, index) =>
+        piece.category === selectedFloorPiece?.category ? index : null
+      )
+      .filter((index) => index !== null);
+
+    console.log(allSelectedFloorPieces);
+
+    if (allSelectedFloorPieces.length === 0) return [];
+
+    const highlightedFloorPieceCategories = allSelectedFloorPieces
+      .flatMap((index) =>
+        getHighlightedFloorPieceCategories(index, floorPieces)
+      )
+      // Filter out selected piece if it's in the highlighted categories
+      .filter((category) => category !== selectedFloorPiece?.category);
+
+    console.log(highlightedFloorPieceCategories);
+
+    return highlightedFloorPieceCategories;
+  }, [selectedFloorPiece]);
+
+  const onSelectOrMerge = useCallback(
+    (floorPiece: FloorData) => {
+      if (selectedFloorPiece == null) {
+        setSelectedFloorPiece(floorPiece);
+        return;
+      }
+
+      const newFloorPieces = floorPieces.map((piece) => {
+        // Overwrite the newly selected floor piece with the winning one (existing piece for now)
+        if (piece.category === floorPiece.category) {
+          return selectedFloorPiece;
+        }
+
+        return piece;
+      });
+      setFloorPieces(newFloorPieces);
+      setSelectedFloorPiece(null);
+    },
+    [floorPieces, selectedFloorPiece]
+  );
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <main className="w-full h-screen">
+      <div className="grid grid-cols-4 grid-rows-8 h-full p-20">
+        {floorPieces.map((floorPiece, index) => (
+          <FloorPiece
+            key={index}
+            floorPiece={floorPiece}
+            isSelected={selectedFloorPiece?.category === floorPiece.category}
+            isHighlighted={highlightedFloorPieceCategories.includes(
+              floorPiece.category
+            )}
+            onSelect={onSelectOrMerge}
+            selectedFloorPiece={selectedFloorPiece}
+          />
+        ))}
+      </div>
+    </main>
   );
 }
+
+function FloorPiece({
+  floorPiece,
+  isSelected,
+  isHighlighted,
+  onSelect,
+  selectedFloorPiece,
+}: {
+  floorPiece: FloorData;
+  /** Selected floor piece */
+  isSelected: boolean;
+  /** Highlighted floor piece surrounding the selected floor piece */
+  isHighlighted: boolean;
+
+  onSelect: (floorPiece: FloorData) => void;
+  selectedFloorPiece: FloorData | null;
+}) {
+  const onClick = useCallback(() => {
+    if (!isHighlighted && selectedFloorPiece) return;
+
+    onSelect(floorPiece);
+  }, [onSelect, floorPiece]);
+  return (
+    <button
+      className={classNames(
+        "flex flex-col items-center justify-center border border-white font-bold",
+        {
+          "bg-blue-100 text-black": isSelected,
+          "bg-blue-400": isHighlighted,
+          "text-white": !isSelected && !isHighlighted,
+          "border-yellow-500 border-2": isHighlighted,
+        }
+      )}
+      onClick={onClick}
+    >
+      <h2 suppressHydrationWarning>{floorPiece.person}</h2>
+      <p suppressHydrationWarning>{floorPiece.category}</p>
+    </button>
+  );
+}
+
+const getHighlightedFloorPieceCategories = (
+  selectedIndex: number,
+  floorPieces: FloorData[]
+): string[] => {
+  if (selectedIndex === -1) return [];
+
+  const COLS = 4;
+  const adjacentIndices: number[] = [];
+
+  // Above
+  if (selectedIndex >= COLS) {
+    adjacentIndices.push(selectedIndex - COLS);
+  }
+
+  // Below
+  if (selectedIndex < floorPieces.length - COLS) {
+    adjacentIndices.push(selectedIndex + COLS);
+  }
+
+  // Left (check we're not on the left edge)
+  if (selectedIndex % COLS !== 0) {
+    adjacentIndices.push(selectedIndex - 1);
+  }
+
+  // Right (check we're not on the right edge)
+  if (selectedIndex % COLS !== COLS - 1) {
+    adjacentIndices.push(selectedIndex + 1);
+  }
+
+  return adjacentIndices
+    .map((index) => floorPieces[index])
+    .map((piece) => piece.category);
+};
