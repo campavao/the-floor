@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { FLOOR_DATA, FloorData } from "./data";
 import classNames from "classnames";
 
@@ -15,8 +15,6 @@ export default function Home() {
       )
       .filter((index) => index !== null);
 
-    console.log(allSelectedFloorPieces);
-
     if (allSelectedFloorPieces.length === 0) return [];
 
     const highlightedFloorPieceCategories = allSelectedFloorPieces
@@ -26,38 +24,36 @@ export default function Home() {
       // Filter out selected piece if it's in the highlighted categories
       .filter((category) => category !== selectedFloorPiece?.category);
 
-    console.log(highlightedFloorPieceCategories);
-
     return highlightedFloorPieceCategories;
-  }, [selectedFloorPiece]);
+  }, [selectedFloorPiece, floorPieces]);
 
-  const onSelectOrMerge = useCallback(
-    (floorPiece: FloorData) => {
-      if (selectedFloorPiece == null) {
-        setSelectedFloorPiece(floorPiece);
-        return;
+  const onSelectOrMerge = (floorPiece: FloorData) => {
+    if (selectedFloorPiece == null) {
+      setSelectedFloorPiece(floorPiece);
+      return;
+    }
+
+    console.log(floorPiece.category);
+    console.log(selectedFloorPiece.category);
+
+    const newFloorPieces = floorPieces.map((piece) => {
+      // Overwrite the newly selected floor piece with the winning one (existing piece for now)
+      if (piece.category === floorPiece.category) {
+        return selectedFloorPiece;
       }
 
-      const newFloorPieces = floorPieces.map((piece) => {
-        // Overwrite the newly selected floor piece with the winning one (existing piece for now)
-        if (piece.category === floorPiece.category) {
-          return selectedFloorPiece;
-        }
-
-        return piece;
-      });
-      setFloorPieces(newFloorPieces);
-      setSelectedFloorPiece(null);
-    },
-    [floorPieces, selectedFloorPiece]
-  );
+      return piece;
+    });
+    setFloorPieces(newFloorPieces);
+    setSelectedFloorPiece(null);
+  };
 
   return (
     <main className="w-full h-screen">
       <div className="grid grid-cols-4 grid-rows-8 h-full p-20">
         {floorPieces.map((floorPiece, index) => (
           <FloorPiece
-            key={index}
+            key={floorPiece.category + "-" + index}
             floorPiece={floorPiece}
             isSelected={selectedFloorPiece?.category === floorPiece.category}
             isHighlighted={highlightedFloorPieceCategories.includes(
@@ -88,11 +84,12 @@ function FloorPiece({
   onSelect: (floorPiece: FloorData) => void;
   selectedFloorPiece: FloorData | null;
 }) {
-  const onClick = useCallback(() => {
+  const onClick = () => {
     if (!isHighlighted && selectedFloorPiece) return;
 
     onSelect(floorPiece);
-  }, [onSelect, floorPiece]);
+  };
+
   return (
     <button
       className={classNames(
@@ -106,8 +103,8 @@ function FloorPiece({
       )}
       onClick={onClick}
     >
-      <h2 suppressHydrationWarning>{floorPiece.person}</h2>
-      <p suppressHydrationWarning>{floorPiece.category}</p>
+      <h2>{floorPiece.person}</h2>
+      {(isSelected || isHighlighted) && <p>{floorPiece.category}</p>}
     </button>
   );
 }
