@@ -1,12 +1,26 @@
 "use client";
-import { useMemo, useState } from "react";
-import { FLOOR_DATA, FloorData } from "./data";
+import { useEffect, useMemo, useState } from "react";
+import { Category, FLOOR_DATA, FloorData } from "./data";
 import classNames from "classnames";
+import Round from "./round";
+
+interface Round {
+  category: Category;
+  challenger: FloorData;
+  defender: FloorData;
+}
 
 export default function Home() {
   const [floorPieces, setFloorPieces] = useState<FloorData[]>(FLOOR_DATA);
+
+  // Randomize after mount to avoid hydration mismatch
+  useEffect(() => {
+    setFloorPieces([...FLOOR_DATA].sort(() => Math.random() - 0.5));
+  }, []);
+
   const [selectedFloorPiece, setSelectedFloorPiece] =
     useState<FloorData | null>(null);
+  const [round, setRound] = useState<Round>();
 
   const highlightedFloorPieceCategories = useMemo(() => {
     const allSelectedFloorPieces = floorPieces
@@ -27,26 +41,44 @@ export default function Home() {
     return highlightedFloorPieceCategories;
   }, [selectedFloorPiece, floorPieces]);
 
-  const onSelectOrMerge = (floorPiece: FloorData) => {
+  const onSelectOrMerge = (winner: FloorData, loser: FloorData) => {
+    const newFloorPieces = floorPieces.map((piece) => {
+      // Overwrite the newly selected floor piece with the winning one (existing piece for now)
+      if (piece.category === loser.category) {
+        return winner;
+      }
+
+      return piece;
+    });
+
+    setFloorPieces(newFloorPieces);
+    setSelectedFloorPiece(winner);
+    setRound(undefined);
+  };
+
+  const onStartRound = (floorPiece: FloorData) => {
     if (selectedFloorPiece == null) {
       setSelectedFloorPiece(floorPiece);
       return;
     }
 
-    console.log(floorPiece.category);
-    console.log(selectedFloorPiece.category);
-
-    const newFloorPieces = floorPieces.map((piece) => {
-      // Overwrite the newly selected floor piece with the winning one (existing piece for now)
-      if (piece.category === floorPiece.category) {
-        return selectedFloorPiece;
-      }
-
-      return piece;
+    setRound({
+      category: floorPiece.category,
+      challenger: selectedFloorPiece,
+      defender: floorPiece,
     });
-    setFloorPieces(newFloorPieces);
-    setSelectedFloorPiece(null);
   };
+
+  if (round) {
+    return (
+      <Round
+        category={round.category}
+        challenger={round.challenger}
+        defender={round.defender}
+        onFinish={onSelectOrMerge}
+      />
+    );
+  }
 
   return (
     <main className="w-full h-screen">
@@ -59,11 +91,17 @@ export default function Home() {
             isHighlighted={highlightedFloorPieceCategories.includes(
               floorPiece.category
             )}
-            onSelect={onSelectOrMerge}
+            onSelect={onStartRound}
             selectedFloorPiece={selectedFloorPiece}
           />
         ))}
       </div>
+      <button
+        className="bg-blue-500 text-white p-2 rounded-md"
+        onClick={() => setSelectedFloorPiece(null)}
+      >
+        Go back to floor
+      </button>
     </main>
   );
 }
@@ -103,8 +141,9 @@ function FloorPiece({
       )}
       onClick={onClick}
     >
-      <h2>{floorPiece.person}</h2>
-      {(isSelected || isHighlighted) && <p>{floorPiece.category}</p>}
+      <p>{floorPiece.person}</p>
+      <p>{floorPiece.category}</p>
+      {/* {(isSelected || isHighlighted) && <p>{floorPiece.category}</p>} */}
     </button>
   );
 }
