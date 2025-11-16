@@ -1017,4 +1017,496 @@ export const CATEGORY_METADATA: Record<
       },
     ],
   },
+  "Kitchen gadgets": {
+    name: "Kitchen gadgets",
+    folder: "kitchen-gadgets",
+    examples: [
+      {
+        name: "Air fryer",
+        image: "air-fryer.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Baking sheet",
+        image: "baking-sheet.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Blender",
+        image: "blender.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Bottle opener",
+        image: "bottle-opener.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Can opener",
+        image: "can-opener.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Cast iron pan",
+        image: "cast-iron-pan.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Cheese grater",
+        image: "cheese-grater.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Citrus zester",
+        image: "citrus-zester.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Coffee grinder",
+        image: "coffee-grinder.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Colander",
+        image: "colander.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Cutting board",
+        image: "cutting-board.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Digital thermometer",
+        image: "digital-thermometer.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Egg separator",
+        image: "egg-separator.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Food processor",
+        image: "food-processor.jpg",
+        alternatives: [],
+      },
+      {
+        name: "French press",
+        image: "french-press.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Funnel",
+        image: "funnel.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Garlic press",
+        image: "garlic-press.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Hand mixer",
+        image: "hand-mixer.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Ice cream scoop",
+        image: "ice-cream-scoop.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Immersion blender",
+        image: "immersion-blender.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Juicer",
+        image: "juicer.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Kitchen scale",
+        image: "kitchen-scale.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Kitchen shears",
+        image: "kitchen-shears.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Mandoline slicer",
+        image: "mandoline-slicer.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Measuring cups",
+        image: "measuring-cups.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Measuring spoons",
+        image: "measuring-spoons.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Meat tenderizer",
+        image: "meat-tenderizer.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Microwave",
+        image: "microwave.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Mortar and pestle",
+        image: "mortar-and-pestle.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Muffin tin",
+        image: "muffin-tin.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Oven mitts",
+        image: "oven-mitts.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Pastry brush",
+        image: "pastry-brush.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Pizza cutter",
+        image: "pizza-cutter.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Potato peeler",
+        image: "potato-peeler.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Pressure cooker",
+        image: "pressure-cookier.png",
+        alternatives: [],
+      },
+      {
+        name: "Rice cooker",
+        image: "rice-cooker.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Rolling pin",
+        image: "rolling-pin.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Salad spinner",
+        image: "salad-spinner.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Slow cooker",
+        image: "slow-cooker.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Spatula",
+        image: "spatula.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Spice grinder",
+        image: "spice-grinder.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Splatter screen",
+        image: "splatter-screen.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Stand mixer",
+        image: "stand-mixer.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Strainer",
+        image: "strainer.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Toaster oven",
+        image: "toaster-oven.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Tongs",
+        image: "tongs.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Whisk",
+        image: "whisk.jpg",
+        alternatives: [],
+      },
+    ],
+  },
+  "Pop divas": {
+    name: "Pop divas",
+    folder: "pop-divas",
+    examples: [
+      {
+        name: "Adele",
+        image: "adele.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Alicia Keys",
+        image: "alicia-keys.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Ariana Grande",
+        image: "ariana-grande.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Ashanti",
+        image: "ashanti.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Avril Lavigne",
+        image: "avril-lavigne.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Beyoncé",
+        image: "beyonce.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Billie Eilish",
+        image: "billie-eilish.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Bonnie Tyler",
+        image: "bonnie-tyler.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Britney Spears",
+        image: "britney-spears.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Camila Cabello",
+        image: "camila-cabello.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Celine Dion",
+        image: "celine-dion.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Chappell Roan",
+        image: "chappell-roan.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Charli XCX",
+        image: "charli-xcx.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Chloe Bailey",
+        image: "chloe-bailey.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Christina Aguilera",
+        image: "christina-aguilera.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Demi Lovato",
+        image: "demi-lovato.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Doja Cat",
+        image: "doja-cat.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Dua Lipa",
+        image: "dua-lipa.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Ellie Goulding",
+        image: "ellie-goulding.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Fergie",
+        image: "fergie.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Florence Welch",
+        image: "florence-welch.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Grimes",
+        image: "grimes.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Halsey",
+        image: "halsey.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Hayley Williams",
+        image: "hayley-williams.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Janelle Monáe",
+        image: "janelle-monae.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Janet Jackson",
+        image: "janet-jackson.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Jennifer Lopez",
+        image: "jennifer-lopez.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Jessie J",
+        image: "jessie-j.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Katy Perry",
+        image: "katy-perry.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Kesha",
+        image: "kesha.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Kylie Minogue",
+        image: "kylie-minogue.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Lady Gaga",
+        image: "lady-gaga.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Lizzo",
+        image: "lizzo.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Madonna",
+        image: "madonna.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Mariah Carey",
+        image: "mariah-carey.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Miley Cyrus",
+        image: "miley-cyrus.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Nicki Minaj",
+        image: "nicki-minaj.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Normani",
+        image: "normani.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Olivia Rodrigo",
+        image: "olivia-rodrigo.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Pink",
+        image: "pink.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Rihanna",
+        image: "rihanna.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Rosalía",
+        image: "rosalia.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Selena Gomez",
+        image: "selena-gomez.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Shakira",
+        image: "shakira.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Sia",
+        image: "sia.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Taylor Swift",
+        image: "taylor-swift.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Tinashe",
+        image: "tinashe.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Tove Lo",
+        image: "tove-lo.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Whitney Houston",
+        image: "whitney-houston.jpg",
+        alternatives: [],
+      },
+    ],
+  },
 };
