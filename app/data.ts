@@ -1509,4 +1509,516 @@ export const CATEGORY_METADATA: Record<
       },
     ],
   },
+  Apps: {
+    name: "Apps",
+    folder: "apps",
+    examples: [
+      {
+        name: "Amazon",
+        image: "amazon.png",
+        alternatives: [],
+      },
+      {
+        name: "Apple Maps",
+        image: "apple-maps.png",
+        alternatives: [],
+      },
+      {
+        name: "Cash App",
+        image: "cash-app.png",
+        alternatives: [],
+      },
+      {
+        name: "Discord",
+        image: "discord.png",
+        alternatives: [],
+      },
+      {
+        name: "Disney",
+        image: "disney.jpg",
+        alternatives: [],
+      },
+      {
+        name: "DoorDash",
+        image: "doordash.png",
+        alternatives: [],
+      },
+      {
+        name: "ESPN",
+        image: "espn.png",
+        alternatives: [],
+      },
+      {
+        name: "Facebook",
+        image: "facebook.png",
+        alternatives: [],
+      },
+      {
+        name: "Fidelity",
+        image: "fidelity.png",
+        alternatives: [],
+      },
+      {
+        name: "Gmail",
+        image: "gmail.png",
+        alternatives: [],
+      },
+      {
+        name: "Google Maps",
+        image: "google-maps.png",
+        alternatives: [],
+      },
+      {
+        name: "Grubhub",
+        image: "grubhub.png",
+        alternatives: [],
+      },
+      {
+        name: "Instacart",
+        image: "instacart.png",
+        alternatives: [],
+      },
+      {
+        name: "Instagram",
+        image: "instagram.png",
+        alternatives: [],
+      },
+      {
+        name: "Kindle",
+        image: "kindle.png",
+        alternatives: [],
+      },
+      {
+        name: "LinkedIn",
+        image: "linkedin.png",
+        alternatives: [],
+      },
+      {
+        name: "Messenger",
+        image: "messenger.png",
+        alternatives: [],
+      },
+      {
+        name: "Microsoft Teams",
+        image: "microsoft-teams.png",
+        alternatives: [],
+      },
+      {
+        name: "Netflix",
+        image: "netflix.png",
+        alternatives: [],
+      },
+      {
+        name: "Notion",
+        image: "notion.png",
+        alternatives: [],
+      },
+      {
+        name: "Pandora",
+        image: "pandora.png",
+        alternatives: [],
+      },
+      {
+        name: "Partiful",
+        image: "partiful.png",
+        alternatives: [],
+      },
+      {
+        name: "PayPal",
+        image: "paypal.png",
+        alternatives: [],
+      },
+      {
+        name: "Pinterest",
+        image: "pinterest.png",
+        alternatives: [],
+      },
+      {
+        name: "Prime Video",
+        image: "prime-video.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Reddit",
+        image: "reddit.png",
+        alternatives: [],
+      },
+      {
+        name: "Robinhood",
+        image: "robinhood.png",
+        alternatives: [],
+      },
+      {
+        name: "Roku",
+        image: "roku.png",
+        alternatives: [],
+      },
+      {
+        name: "Shazam",
+        image: "shazam.png",
+        alternatives: [],
+      },
+      {
+        name: "Signal",
+        image: "signal.png",
+        alternatives: [],
+      },
+      {
+        name: "Slack",
+        image: "slack.png",
+        alternatives: [],
+      },
+      {
+        name: "Snapchat",
+        image: "snapchat.png",
+        alternatives: [],
+      },
+      {
+        name: "Southwest",
+        image: "southwest.png",
+        alternatives: [],
+      },
+      {
+        name: "Spotify",
+        image: "spotify.png",
+        alternatives: [],
+      },
+      {
+        name: "Strava",
+        image: "strava.png",
+        alternatives: [],
+      },
+      {
+        name: "Target",
+        image: "target.png",
+        alternatives: [],
+      },
+      {
+        name: "Telegram",
+        image: "telegram.png",
+        alternatives: [],
+      },
+      {
+        name: "TikTok",
+        image: "tiktok.png",
+        alternatives: [],
+      },
+      {
+        name: "Trello",
+        image: "trello.png",
+        alternatives: [],
+      },
+      {
+        name: "Twitch",
+        image: "twitch.png",
+        alternatives: [],
+      },
+      {
+        name: "Twitter",
+        image: "twitter.png",
+        alternatives: [],
+      },
+      {
+        name: "Uber",
+        image: "uber.png",
+        alternatives: [],
+      },
+      {
+        name: "United Airlines",
+        image: "united-airlines.png",
+        alternatives: [],
+      },
+      {
+        name: "Venmo",
+        image: "venmo.png",
+        alternatives: [],
+      },
+      {
+        name: "Walmart",
+        image: "walmart.png",
+        alternatives: [],
+      },
+      {
+        name: "WeChat",
+        image: "wechat.png",
+        alternatives: [],
+      },
+      {
+        name: "WhatsApp",
+        image: "whatsapp.png",
+        alternatives: [],
+      },
+      {
+        name: "YouTube",
+        image: "youtube.png",
+        alternatives: [],
+      },
+      {
+        name: "Zoom",
+        image: "zoom.png",
+        alternatives: [],
+      },
+    ],
+  },
+  "Board games": {
+    name: "Board games",
+    folder: "board-games",
+    examples: [
+      {
+        name: "7 Wonders",
+        image: "7-wonders.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Aggravation",
+        image: "aggravation.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Apples to Apples",
+        image: "apples-to-apples.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Arkham Horror",
+        image: "arkham-horror.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Azul",
+        image: "azul.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Backgammon",
+        image: "backgammon.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Bananagrams",
+        image: "bananagrams.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Battleship",
+        image: "battleship.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Blokus",
+        image: "blokus.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Candy Land",
+        image: "candy-land.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Carcassonne",
+        image: "carcassonne.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Cards Against Humanity",
+        image: "cards-against-humanity.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Catan",
+        image: "catan.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Chess",
+        image: "chess.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Chutes and Ladders",
+        image: "chutes-and-ladders.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Clue",
+        image: "clue.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Connect Four",
+        image: "connect-four.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Decrypto",
+        image: "decrypto.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Dominion",
+        image: "dominion.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Five Tribes",
+        image: "five-tribes.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Fluxx",
+        image: "fluxx.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Forbidden Island",
+        image: "forbidden-island.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Gloomhaven",
+        image: "gloomhaven.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Guess Who",
+        image: "guess-who.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Hues and Clues",
+        image: "hues-and-clues.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Hungry Hungry Hippos",
+        image: "hungry-hungry-hippos.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Labyrinth",
+        image: "labyrinth.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Monopoly",
+        image: "monopoly.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Mouse Trap",
+        image: "mouse-trap.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Operation",
+        image: "operation.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Othello",
+        image: "othello.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Pandemic",
+        image: "pandemic.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Pictionary",
+        image: "pictionary.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Risk",
+        image: "risk.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Scattergories",
+        image: "scattergories.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Scrabble",
+        image: "scrabble.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Secret Hitler",
+        image: "secret-hitler.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Shadows Over Camelot",
+        image: "shadows-over-camelot.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Sorry",
+        image: "sorry.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Spirit Island",
+        image: "spirit-island.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Stratego",
+        image: "stratego.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Taboo",
+        image: "taboo.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Game of Life",
+        image: "the-game-of-life.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Ticket to Ride",
+        image: "ticket-to-ride.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Trivial Pursuit",
+        image: "trivial-pursuit.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Trouble",
+        image: "trouble.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Twister",
+        image: "twister.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Villainous",
+        image: "villainous.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Wavelength",
+        image: "wavelength.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Wingspan",
+        image: "wingspan.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Yahtzee",
+        image: "yahtzee.jpg",
+        alternatives: [],
+      },
+    ],
+  },
 };
