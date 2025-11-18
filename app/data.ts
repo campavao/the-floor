@@ -1258,6 +1258,513 @@ export const CATEGORY_METADATA: Record<
       },
     ],
   },
+  "Junk drawer": {
+    name: "Junk drawer",
+    folder: "junk-drawer",
+    examples: [
+      {
+        name: "Rubber bands",
+        image: "rubber-bands.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Scissors",
+        image: "scissors.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Old batteries",
+        image: "old-batteries.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Loose change",
+        image: "loose-change.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Pens",
+        image: "pens.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Pencils",
+        image: "pencils.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Post-it notes",
+        image: "post-it-notes.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Thumbtacks",
+        image: "thumbtacks.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Paper clips",
+        image: "paper-clips.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Dried-out markers",
+        image: "dried-out-markers.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Broken phone chargers",
+        image: "broken-phone-chargers.jpg",
+        alternatives: [],
+      },
+      {
+        name: "USB cables",
+        image: "usb-cables.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Random keys",
+        image: "random-keys.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Binder clips",
+        image: "binder-clips.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Safety pins",
+        image: "safety-pins.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Glue sticks",
+        image: "glue-sticks.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Adhesive tape",
+        image: "adhesive-tape.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Spare buttons",
+        image: "spare-buttons.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Twine",
+        image: "twine.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Small flashlight",
+        image: "small-flashlight.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Matches",
+        image: "matches.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Lighters",
+        image: "lighters.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Screwdriver",
+        image: "screwdriver.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Allen wrenches",
+        image: "allen-wrenches.jpg",
+        alternatives: [],
+      },
+      {
+        name: "AA batteries",
+        image: "aa-batteries.jpg",
+        alternatives: [],
+      },
+      {
+        name: "AAA batteries",
+        image: "aaa-batteries.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Sticky tack",
+        image: "sticky-tack.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Old gift cards",
+        image: "old-gift-cards.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Candle stubs",
+        image: "candle-stubs.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Rubber gloves",
+        image: "rubber-gloves.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Felt pads",
+        image: "felt-pads.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Coin purse",
+        image: "coin-purse.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Old receipts",
+        image: "old-receipts.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Expired coupons",
+        image: "expired-coupons.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Clothespins",
+        image: "clothespins.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Twist ties",
+        image: "twist-ties.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Plastic utensils",
+        image: "plastic-utensils.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Loose screws",
+        image: "loose-screws.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Spare fuses",
+        image: "spare-fuses.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Old sunglasses",
+        image: "old-sunglasses.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Chip clips",
+        image: "chip-clips.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Pocket knife",
+        image: "pocket-knife.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Flash drives",
+        image: "flash-drives.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Playing cards",
+        image: "playing-cards.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Bottle opener",
+        image: "bottle-opener.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Old magnets",
+        image: "old-magnets.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Rubber stopper",
+        image: "rubber-stopper.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Keychains",
+        image: "keychains.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Notepad",
+        image: "notepad.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Coasters",
+        image: "coasters.jpg",
+        alternatives: [],
+      },
+    ],
+  },
+  "Laundry": {
+    name: "Laundry",
+    folder: "laundry",
+    examples: [
+      {
+        name: "Laundry detergent",
+        image: "laundry-detergent.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Fabric softener",
+        image: "fabric-softener.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Dryer sheets",
+        image: "dryer-sheets.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Stain remover",
+        image: "stain-remover.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Delicates bag",
+        image: "delicates-bag.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Laundry basket",
+        image: "laundry-basket.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Hamper",
+        image: "hamper.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Folded towels",
+        image: "folded-towels.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Clothesline",
+        image: "clothesline.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Clothespins",
+        image: "clothespins.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Washing machine",
+        image: "washing-machine.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Dryer",
+        image: "dryer.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Iron",
+        image: "iron.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Ironing board",
+        image: "ironing-board.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Wrinkle releaser spray",
+        image: "wrinkle-releaser-spray.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Bleach",
+        image: "bleach.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Color catcher sheets",
+        image: "color-catcher-sheets.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Wool dryer balls",
+        image: "wool-dryer-balls.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Dry cleaning bag",
+        image: "dry-cleaning-bag.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Lint roller",
+        image: "lint-roller.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Lint trap",
+        image: "lint-trap.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Mesh laundry bag",
+        image: "mesh-laundry-bag.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Soaking basin",
+        image: "soaking-basin.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Detergent pods",
+        image: "detergent-pods.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Laundry sanitizer",
+        image: "laundry-sanitizer.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Pre-treatment spray",
+        image: "pre-treatment-spray.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Fabric refresher",
+        image: "fabric-refresher.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Hand-wash soap",
+        image: "hand-wash-soap.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Drying rack",
+        image: "drying-rack.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Steamer",
+        image: "steamer.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Clothing hangers",
+        image: "clothing-hangers.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Scent boosters",
+        image: "scent-boosters.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Laundry marker",
+        image: "laundry-marker.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Clothes brush",
+        image: "clothes-brush.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Spot remover pen",
+        image: "spot-remover-pen.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Laundry scoop",
+        image: "laundry-scoop.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Folding board",
+        image: "folding-board.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Static guard",
+        image: "static-guard.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Laundry basket wheels",
+        image: "laundry-basket-wheels.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Delicate detergent",
+        image: "delicate-detergent.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Baby detergent",
+        image: "baby-detergent.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Down detergent",
+        image: "down-detergent.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Starch spray",
+        image: "starch-spray.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Laundry timer",
+        image: "laundry-timer.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Clothing repair kit",
+        image: "clothing-repair-kit.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Spare buttons",
+        image: "spare-buttons.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Detergent measuring cup",
+        image: "detergent-measuring-cup.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Terry cloth rags",
+        image: "terry-cloth-rags.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Clothing clips",
+        image: "clothing-clips.jpg",
+        alternatives: [],
+      },
+    ],
+  },
   "Pop divas": {
     name: "Pop divas",
     folder: "pop-divas",
@@ -1505,6 +2012,252 @@ export const CATEGORY_METADATA: Record<
       {
         name: "Whitney Houston",
         image: "whitney-houston.jpg",
+        alternatives: [],
+      },
+    ],
+  },
+  "Chicago tourist stuff": {
+    name: "Chicago tourist stuff",
+    folder: "chicago-tourist-stuff",
+    examples: [
+      {
+        name: "Cloud Gate (The Bean)",
+        image: "cloud-gate-the-bean.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Navy Pier",
+        image: "navy-pier.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Millennium Park",
+        image: "millennium-park.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Chicago Riverwalk",
+        image: "chicago-riverwalk.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Architectural Boat Tour",
+        image: "architectural-boat-tour.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Shedd Aquarium",
+        image: "shedd-aquarium.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Field Museum",
+        image: "field-museum.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Adler Planetarium",
+        image: "adler-planetarium.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Art Institute of Chicago",
+        image: "art-institute-of-chicago.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Lincoln Park Zoo",
+        image: "lincoln-park-zoo.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Maggie Daley Park",
+        image: "maggie-daley-park.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Wrigley Field",
+        image: "wrigley-field.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Soldier Field",
+        image: "soldier-field.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Garfield Park Conservatory",
+        image: "garfield-park-conservatory.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Chicago Theatre",
+        image: "chicago-theatre.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Grant Park",
+        image: "grant-park.jpg",
+        alternatives: [],
+      },
+      {
+        name: "360 Chicago",
+        image: "360-chicago.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Museum of Science and Industry",
+        image: "museum-of-science-and-industry.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Chicago Cultural Center",
+        image: "chicago-cultural-center.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Magnificent Mile",
+        image: "the-magnificent-mile.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Chicago Water Tower",
+        image: "chicago-water-tower.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Chicago History Museum",
+        image: "chicago-history-museum.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Promontory Point",
+        image: "promontory-point.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Robey rooftop",
+        image: "the-robey-rooftop.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Ferris wheel at Navy Pier",
+        image: "ferris-wheel-at-navy-pier.jpg",
+        alternatives: [],
+      },
+      {
+        name: "ChinaTown Square",
+        image: "chinatown-square.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Maxwell Street Market",
+        image: "maxwell-street-market.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Billy Goat Tavern",
+        image: "billy-goat-tavern.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Portillo's",
+        image: "portillos.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Gino's East",
+        image: "ginos-east.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Garrett Popcorn",
+        image: "garrett-popcorn.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Divvy bikes",
+        image: "divvy-bikes.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Metra Electric line",
+        image: "metra-electric-line.png",
+        alternatives: [],
+      },
+      {
+        name: "Chicago Pedway",
+        image: "chicago-pedway.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Violet Hour",
+        image: "the-violet-hour.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Second City",
+        image: "second-city.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Blue Man Group",
+        image: "blue-man-group.png",
+        alternatives: [],
+      },
+      {
+        name: "The Green Mill",
+        image: "the-green-mill.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Chicago Botanic Garden",
+        image: "chicago-botanic-garden.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Brookfield Zoo",
+        image: "brookfield-zoo.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Calder's Flamingo",
+        image: "calders-flamingo.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Chicago Lakefront Trail",
+        image: "chicago-lakefront-trail.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The 606 Trail",
+        image: "the-606-trail.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Andersonville Clark St.",
+        image: "andersonville-clark-st.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Chicago Hot Dog stands",
+        image: "chicago-hot-dog-stands.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Buckingham Fountain",
+        image: "buckingham-fountain.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Chicago Pizza Museum (former)",
+        image: "chicago-pizza-museum-former.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Shakespeare Theater Navy Pier",
+        image: "shakespeare-theater-navy-pier.jpg",
         alternatives: [],
       },
     ],
