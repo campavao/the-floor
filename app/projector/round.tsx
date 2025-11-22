@@ -1,7 +1,14 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Category, CATEGORY_METADATA, FloorData } from "../data";
 import classNames from "classnames";
+import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  Category,
+  CATEGORY_METADATA,
+  FloorData,
+  ImageExample,
+  TextExample,
+} from "../data";
 import {
   PRESENTER_MESSAGE_TYPE,
   PROJECTOR_MESSAGE_TYPE,
@@ -45,9 +52,13 @@ export default function Round({
     revealExampleNameRef.current = revealExampleName;
   }, [revealExampleName]);
 
-  const randomizedExamples = useMemo(() => {
-    return examples.sort(() => Math.random() - 0.5);
-  }, [examples]);
+  function shuffle<T extends { name: string }[]>(array: T): T {
+    return array.sort(() => Math.random() - 0.5);
+  }
+
+  const [randomizedExamples] = useState<ImageExample[] | TextExample[]>(() =>
+    shuffle(examples)
+  );
 
   const onRoundFinish = useCallback(() => {
     const winner =
@@ -55,7 +66,7 @@ export default function Round({
     const loser = challengerTimeLeft > defenderTimeLeft ? defender : challenger;
 
     onFinish(winner, loser);
-  }, [challenger, defender, onFinish]);
+  }, [challenger, challengerTimeLeft, defender, defenderTimeLeft, onFinish]);
 
   const onNext = useCallback(
     async (timeout: number = 1000) => {
@@ -158,14 +169,22 @@ export default function Round({
   }, [selectedExampleIndex, randomizedExamples]);
 
   if (currentTurn == null) {
-    return <div className="p-20 text-white">Waiting for start...</div>;
+    return <div className='p-20 text-white'>Waiting for start...</div>;
   }
 
   return (
-    <div className="p-20">
-      <div className="flex flex-col items-center justify-center bg-white h-[75vh] mx-auto">
+    <div className='p-20'>
+      <div className='flex flex-col items-center justify-center bg-white h-[75vh] mx-auto'>
         {randomizedExamples.map((example, index) => {
           const isSelected = index === selectedExampleIndex;
+          if ("text" in example) {
+            return (
+              <p className='text-4xl font-bold text-white' key={index}>
+                {example.text}
+              </p>
+            );
+          }
+
           return (
             <img
               src={`/images/${folder}/${example.image}`}
@@ -177,20 +196,20 @@ export default function Round({
           );
         })}
       </div>
-      <div className="flex flex-col gap-2 w-full">
-        <div className="flex flex-row gap-2 w-full justify-between p-2">
-          <div className="bg-blue-500 outline outline-4 outline-yellow-500 px-6 py-3 transform skew-x-[15deg] flex items-center justify-center min-w-[120px] min-h-[60px]">
-            <p className="text-2xl font-bold text-white uppercase transform skew-x-[-15deg]">
+      <div className='flex flex-col gap-2 w-full'>
+        <div className='flex flex-row gap-2 w-full justify-between p-2'>
+          <div className='bg-blue-500 outline outline-4 outline-yellow-500 px-6 py-3 transform skew-x-[15deg] flex items-center justify-center min-w-[120px] min-h-[60px]'>
+            <p className='text-2xl font-bold text-white uppercase transform skew-x-[-15deg]'>
               {challenger.person}
             </p>
           </div>
-          <div className="bg-blue-500 outline outline-4 outline-yellow-500 px-6 py-3 transform skew-x-[-15deg] flex items-center justify-center min-w-[120px] min-h-[60px]">
-            <p className="text-2xl font-bold text-white uppercase transform skew-x-[15deg]">
+          <div className='bg-blue-500 outline outline-4 outline-yellow-500 px-6 py-3 transform skew-x-[-15deg] flex items-center justify-center min-w-[120px] min-h-[60px]'>
+            <p className='text-2xl font-bold text-white uppercase transform skew-x-[15deg]'>
               {defender.person}
             </p>
           </div>
         </div>
-        <div className="flex flex-row gap-2 w-full">
+        <div className='flex flex-row gap-2 w-full'>
           <div
             className={classNames(
               "bg-blue-600 px-6 py-4 rounded flex items-center justify-center min-w-[120px]",
@@ -214,8 +233,8 @@ export default function Round({
               {challengerTimeLeft}
             </p>
           </div>
-          <div className="flex-1 bg-blue-600 px-6 py-4 rounded flex items-center justify-center">
-            <p className="text-4xl font-bold text-white">
+          <div className='flex-1 bg-blue-600 px-6 py-4 rounded flex items-center justify-center'>
+            <p className='text-4xl font-bold text-white'>
               {revealExampleName !== REVEAL_STATE.NOT_REVEALED
                 ? randomizedExamples[selectedExampleIndex]?.name || ""
                 : ""}

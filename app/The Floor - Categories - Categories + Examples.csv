@@ -541,55 +541,6 @@ Board games,Sorry!,TRUE
 Board games,Shadows Over Camelot,TRUE
 Board games,Dominion,TRUE
 Board games,Decrypto,TRUE
-Video games,Super Mario Bros.,FALSE
-Video games,The Legend of Zelda,FALSE
-Video games,Pokémon Red/Blue,FALSE
-Video games,Pokémon Scarlet/Violet,FALSE
-Video games,Minecraft,FALSE
-Video games,Fortnite,FALSE
-Video games,Roblox,FALSE
-Video games,Overwatch,FALSE
-Video games,Call of Duty,FALSE
-Video games,Halo,FALSE
-Video games,Gears of War,FALSE
-Video games,League of Legends,FALSE
-Video games,Valorant,FALSE
-Video games,Apex Legends,FALSE
-Video games,Grand Theft Auto V,FALSE
-Video games,Red Dead Redemption 2,FALSE
-Video games,Skyrim,FALSE
-Video games,Fallout 4,FALSE
-Video games,Animal Crossing: New Horizons,FALSE
-Video games,Stardew Valley,FALSE
-Video games,Undertale,FALSE
-Video games,Celeste,FALSE
-Video games,Hades,FALSE
-Video games,Diablo III,FALSE
-Video games,World of Warcraft,FALSE
-Video games,StarCraft,FALSE
-Video games,Metroid Prime,FALSE
-Video games,Donkey Kong Country,FALSE
-Video games,Sonic the Hedgehog,FALSE
-Video games,Street Fighter II,FALSE
-Video games,Mortal Kombat,FALSE
-Video games,FIFA,FALSE
-Video games,Madden NFL,FALSE
-Video games,NBA 2K,FALSE
-Video games,Rocket League,FALSE
-Video games,Tetris,FALSE
-Video games,Pac-Man,FALSE
-Video games,Resident Evil 4,FALSE
-Video games,Dead by Daylight,FALSE
-Video games,Destiny 2,FALSE
-Video games,Splatoon 3,FALSE
-Video games,Fire Emblem,FALSE
-Video games,Persona 5,FALSE
-Video games,Kingdom Hearts,FALSE
-Video games,Final Fantasy VII,FALSE
-Video games,Elden Ring,FALSE
-Video games,Dark Souls,FALSE
-Video games,Bloodborne,FALSE
-Video games,The Sims,FALSE
 Pokemon,Bulbasaur,TRUE
 Pokemon,Ivysaur,TRUE
 Pokemon,Venusaur,TRUE
@@ -836,55 +787,6 @@ Reality TV Shows,The Mole,FALSE
 Reality TV Shows,Fear Factor,FALSE
 Reality TV Shows,Undercover Boss,FALSE
 Reality TV Shows,Extreme Makeover: Home Edition,FALSE
-Marvel Movies,Iron Man,FALSE
-Marvel Movies,Iron Man 2,FALSE
-Marvel Movies,Iron Man 3,FALSE
-Marvel Movies,The Incredible Hulk,FALSE
-Marvel Movies,Thor,FALSE
-Marvel Movies,Thor: The Dark World,FALSE
-Marvel Movies,Thor: Ragnarok,FALSE
-Marvel Movies,Captain America: The First Avenger,FALSE
-Marvel Movies,Captain America: The Winter Soldier,FALSE
-Marvel Movies,Captain America: Civil War,FALSE
-Marvel Movies,The Avengers,FALSE
-Marvel Movies,Avengers: Age of Ultron,FALSE
-Marvel Movies,Avengers: Infinity War,FALSE
-Marvel Movies,Avengers: Endgame,FALSE
-Marvel Movies,Guardians of the Galaxy,FALSE
-Marvel Movies,Guardians of the Galaxy Vol. 2,FALSE
-Marvel Movies,Guardians of the Galaxy Vol. 3,FALSE
-Marvel Movies,Ant-Man,FALSE
-Marvel Movies,Ant-Man and the Wasp,FALSE
-Marvel Movies,Ant-Man and the Wasp: Quantumania,FALSE
-Marvel Movies,Black Panther,FALSE
-Marvel Movies,Black Panther: Wakanda Forever,FALSE
-Marvel Movies,Doctor Strange,FALSE
-Marvel Movies,Doctor Strange in the Multiverse of Madness,FALSE
-Marvel Movies,Spider-Man: Homecoming,FALSE
-Marvel Movies,Spider-Man: Far From Home,FALSE
-Marvel Movies,Spider-Man: No Way Home,FALSE
-Marvel Movies,Eternals,FALSE
-Marvel Movies,Shang-Chi and the Legend of the Ten Rings,FALSE
-Marvel Movies,Captain Marvel,FALSE
-Marvel Movies,The Marvels,FALSE
-Marvel Movies,Hawkeye,FALSE
-Marvel Movies,WandaVision,FALSE
-Marvel Movies,Loki,FALSE
-Marvel Movies,Falcon and the Winter Soldier,FALSE
-Marvel Movies,She-Hulk,FALSE
-Marvel Movies,Moon Knight,FALSE
-Marvel Movies,Secret Invasion,FALSE
-Marvel Movies,What If...?,FALSE
-Marvel Movies,X-Men (2000),FALSE
-Marvel Movies,X2,FALSE
-Marvel Movies,X-Men: The Last Stand,FALSE
-Marvel Movies,X-Men: First Class,FALSE
-Marvel Movies,X-Men: Days of Future Past,FALSE
-Marvel Movies,X-Men: Apocalypse,FALSE
-Marvel Movies,Logan,FALSE
-Marvel Movies,Deadpool,FALSE
-Marvel Movies,Deadpool 2,FALSE
-Marvel Movies,Deadpool & Wolverine,FALSE
 Fair Foods,Corn Dog,FALSE
 Fair Foods,Funnel Cake,FALSE
 Fair Foods,Fried Oreos,FALSE
@@ -1575,3 +1477,302 @@ Shoe brands,Sperry,FALSE
 Shoe brands,Teva,FALSE
 Shoe brands,Blundstone,FALSE
 Shoe brands,Oliver Cabell,FALSE
+Harry Potter characters,Harry Potter
+Harry Potter characters,Hermione Granger
+Harry Potter characters,Ron Weasley
+Harry Potter characters,Albus Dumbledore
+Harry Potter characters,Severus Snape
+Harry Potter characters,Rubeus Hagrid
+Harry Potter characters,Draco Malfoy
+Harry Potter characters,Minerva McGonagall
+Harry Potter characters,Sirius Black
+Harry Potter characters,Remus Lupin
+Harry Potter characters,Lord Voldemort
+Harry Potter characters,Bellatrix Lestrange
+Harry Potter characters,Neville Longbottom
+Harry Potter characters,Luna Lovegood
+Harry Potter characters,Ginny Weasley
+Harry Potter characters,Fred Weasley
+Harry Potter characters,George Weasley
+Harry Potter characters,Molly Weasley
+Harry Potter characters,Arthur Weasley
+Harry Potter characters,Percy Weasley
+Harry Potter characters,Charlie Weasley
+Harry Potter characters,Bill Weasley
+Harry Potter characters,Cedric Diggory
+Harry Potter characters,Cho Chang
+Harry Potter characters,Dean Thomas
+Harry Potter characters,Seamus Finnigan
+Harry Potter characters,Lavender Brown
+Harry Potter characters,Parvati Patil
+Harry Potter characters,Padma Patil
+Harry Potter characters,Alastor Moody
+Harry Potter characters,Nymphadora Tonks
+Harry Potter characters,Kingsley Shacklebolt
+Harry Potter characters,Dolores Umbridge
+Harry Potter characters,Gilderoy Lockhart
+Harry Potter characters,Pomona Sprout
+Harry Potter characters,Sybil Trelawney
+Harry Potter characters,Argus Filch
+Harry Potter characters,Dobby
+Harry Potter characters,Kreacher
+Harry Potter characters,Lucius Malfoy
+Harry Potter characters,Narcissa Malfoy
+Harry Potter characters,Horace Slughorn
+Harry Potter characters,Barty Crouch Jr.
+Harry Potter characters,Peter Pettigrew
+Harry Potter characters,Viktor Krum
+Harry Potter characters,Igor Karkaroff
+Harry Potter characters,Rita Skeeter
+Harry Potter characters,Cornelius Fudge
+Harry Potter characters,Fenrir Greyback
+MLB teams,Arizona Diamondbacks
+MLB teams,Atlanta Braves
+MLB teams,Baltimore Orioles
+MLB teams,Boston Red Sox
+MLB teams,Chicago Cubs
+MLB teams,Chicago White Sox
+MLB teams,Cincinnati Reds
+MLB teams,Cleveland Guardians
+MLB teams,Colorado Rockies
+MLB teams,Detroit Tigers
+MLB teams,Houston Astros
+MLB teams,Kansas City Royals
+MLB teams,Los Angeles Angels
+MLB teams,Los Angeles Dodgers
+MLB teams,Miami Marlins
+MLB teams,Milwaukee Brewers
+MLB teams,Minnesota Twins
+MLB teams,New York Mets
+MLB teams,New York Yankees
+MLB teams,Oakland Athletics
+MLB teams,Philadelphia Phillies
+MLB teams,Pittsburgh Pirates
+MLB teams,San Diego Padres
+MLB teams,San Francisco Giants
+MLB teams,Seattle Mariners
+MLB teams,St. Louis Cardinals
+MLB teams,Tampa Bay Rays
+MLB teams,Texas Rangers
+MLB teams,Toronto Blue Jays
+MLB teams,Washington Nationals
+MLB teams,Brooklyn Dodgers
+MLB teams,Montreal Expos
+MLB teams,St. Louis Browns
+MLB teams,Washington Senators
+MLB teams,Boston Braves
+MLB teams,New York Giants
+MLB teams,Philadelphia Athletics
+MLB teams,Seattle Pilots
+MLB teams,Kansas City Athletics
+MLB teams,Milwaukee Braves
+MLB teams,Cleveland Naps
+MLB teams,Baltimore Terrapins
+MLB teams,Chicago Whales
+MLB teams,Pittsburgh Rebels
+MLB teams,Buffalo Blues
+MLB teams,Louisville Colonels
+MLB teams,Hartford Dark Blues
+MLB teams,Providence Grays
+MLB teams,St. Paul Apostles
+MLB teams,Brooklyn Bridegrooms
+Superheros,Superman
+Superheros,Batman
+Superheros,Wonder Woman
+Superheros,Spider-Man
+Superheros,Iron Man
+Superheros,Captain America
+Superheros,Thor
+Superheros,Hulk
+Superheros,Black Widow
+Superheros,Wolverine
+Superheros,The Flash
+Superheros,Green Lantern
+Superheros,Aquaman
+Superheros,Cyborg
+Superheros,Deadpool
+Superheros,Daredevil
+Superheros,Black Panther
+Superheros,Doctor Strange
+Superheros,Scarlet Witch
+Superheros,Vision
+Superheros,Ant-Man
+Superheros,The Wasp
+Superheros,Captain Marvel
+Superheros,Star-Lord
+Superheros,Gamora
+Superheros,Drax
+Superheros,Rocket Raccoon
+Superheros,Groot
+Superheros,Shazam
+Superheros,Green Arrow
+Superheros,Supergirl
+Superheros,Batgirl
+Superheros,Nightwing
+Superheros,Robin
+Superheros,Beast Boy
+Superheros,Raven
+Superheros,Starfire
+Superheros,Cyclops
+Superheros,Jean Grey
+Superheros,Storm
+Superheros,Rogue
+Superheros,Gambit
+Superheros,Professor X
+Superheros,Silver Surfer
+Superheros,The Thing
+Superheros,Mr. Fantastic
+Superheros,Invisible Woman
+Superheros,Human Torch
+Superheros,Hawkeye
+Superheros,Martian Manhunter
+Video game characters,Mario
+Video game characters,Luigi
+Video game characters,Princess Peach
+Video game characters,Bowser
+Video game characters,Link
+Video game characters,Zelda
+Video game characters,Ganondorf
+Video game characters,Donkey Kong
+Video game characters,Pikachu
+Video game characters,Sonic the Hedgehog
+Video game characters,Tails
+Video game characters,Knuckles
+Video game characters,Dr. Eggman
+Video game characters,Samus Aran
+Video game characters,Kirby
+Video game characters,Mega Man
+Video game characters,Pac-Man
+Video game characters,Ryu
+Video game characters,Ken Masters
+Video game characters,Chun-Li
+Video game characters,Cloud Strife
+Video game characters,Sephiroth
+Video game characters,Solid Snake
+Video game characters,Master Chief
+Video game characters,Kratos
+Video game characters,Nathan Drake
+Video game characters,Lara Croft
+Video game characters,Geralt of Rivia
+Video game characters,Ellie
+Video game characters,Joel Miller
+Video game characters,Arthur Morgan
+Video game characters,Charizard
+Video game characters,Steve
+Video game characters,Crash Bandicoot
+Video game characters,Spyro the Dragon
+Video game characters,Rayman
+Video game characters,Sora
+Video game characters,Joker
+Video game characters,Tracer
+Video game characters,Doom Slayer
+Video game characters,Gordon Freeman
+Video game characters,Agent 47
+Video game characters,Ezio Auditore
+Video game characters,Altaïr Ibn-La'Ahad
+Video game characters,Scorpion
+Video game characters,Sub-Zero
+Video game characters,Jill Valentine
+Video game characters,Leon S. Kennedy
+Video game characters,Yoshi
+Video game characters,Princess Zelda
+City skylines,New York City
+City skylines,London
+City skylines,Paris
+City skylines,Tokyo
+City skylines,Shanghai
+City skylines,Dubai
+City skylines,Chicago
+City skylines,Hong Kong
+City skylines,Singapore
+City skylines,Sydney
+City skylines,Toronto
+City skylines,Kuala Lumpur
+City skylines,Frankfurt
+City skylines,Seoul
+City skylines,Los Angeles
+City skylines,San Francisco
+City skylines,Seattle
+City skylines,Moscow
+City skylines,Istanbul
+City skylines,Rio de Janeiro
+City skylines,Bangkok
+City skylines,Taipei
+City skylines,Melbourne
+City skylines,Vancouver
+City skylines,Panama City
+City skylines,Miami
+City skylines,Boston
+City skylines,Philadelphia
+City skylines,Dallas
+City skylines,Houston
+City skylines,Atlanta
+City skylines,Las Vegas
+City skylines,Madrid
+City skylines,Barcelona
+City skylines,Berlin
+City skylines,Rome
+City skylines,Athens
+City skylines,Cairo
+City skylines,Johannesburg
+City skylines,Mumbai
+City skylines,Delhi
+City skylines,Beijing
+City skylines,Osaka
+City skylines,Jakarta
+City skylines,Manila
+City skylines,Mexico City
+City skylines,Buenos Aires
+City skylines,Sao Paulo
+City skylines,Santiago
+City skylines,Bogota
+Movies,The Godfather
+Movies,The Shawshank Redemption
+Movies,Schindler's List
+Movies,Raging Bull
+Movies,Casablanca
+Movies,Citizen Kane
+Movies,Gone with the Wind
+Movies,The Wizard of Oz
+Movies,One Flew Over the Cuckoo's Nest
+Movies,Lawrence of Arabia
+Movies,Vertigo
+Movies,Psycho
+Movies,The Godfather Part II
+Movies,On the Waterfront
+Movies,Sunset Boulevard
+Movies,Forrest Gump
+Movies,The Sound of Music
+Movies,12 Angry Men
+Movies,Star Wars
+Movies,2001: A Space Odyssey
+Movies,E.T. the Extra-Terrestrial
+Movies,The Silence of the Lambs
+Movies,Chinatown
+Movies,The Bridge on the River Kwai
+Movies,Singin' in the Rain
+Movies,It's a Wonderful Life
+Movies,Dr. Strangelove
+Movies,Some Like It Hot
+Movies,Ben-Hur
+Movies,Apocalypse Now
+Movies,Amadeus
+Movies,The Lord of the Rings: The Return of the King
+Movies,Gladiator
+Movies,Titanic
+Movies,Saving Private Ryan
+Movies,Unforgiven
+Movies,Raiders of the Lost Ark
+Movies,Rocky
+Movies,A Streetcar Named Desire
+Movies,To Kill a Mockingbird
+Movies,An American in Paris
+Movies,The Best Years of Our Lives
+Movies,My Fair Lady
+Movies,A Clockwork Orange
+Movies,Doctor Zhivago
+Movies,The Searchers
+Movies,Jaws
+Movies,Patton
+Movies,Butch Cassidy and the Sundance Kid
+Movies,The Good, the Bad and the Ugly

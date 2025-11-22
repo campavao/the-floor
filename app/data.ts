@@ -262,18 +262,25 @@ const GUESTS = [
   "Nic",
 ];
 
-export const CATEGORY_METADATA: Record<
-  Category,
-  {
-    name: string;
-    folder: string;
-    examples: {
-      name: string;
-      image: string;
-      alternatives: string[];
-    }[];
-  }
-> = {
+export type ImageExample = {
+  name: string;
+  image: string;
+  alternatives: string[];
+};
+
+export type TextExample = {
+  name: string;
+  text: string;
+  alternatives: string[];
+};
+
+type CategoryMetadata = {
+  name: string;
+  folder: string;
+  examples: ImageExample[] | TextExample[];
+};
+
+export const CATEGORY_METADATA: Record<Category, CategoryMetadata> = {
   Pokemon: {
     name: "Pokemon",
     folder: "pokemon",
@@ -1514,7 +1521,7 @@ export const CATEGORY_METADATA: Record<
       },
     ],
   },
-  "Laundry": {
+  Laundry: {
     name: "Laundry",
     folder: "laundry",
     examples: [
@@ -2770,6 +2777,967 @@ export const CATEGORY_METADATA: Record<
       {
         name: "Yahtzee",
         image: "yahtzee.jpg",
+        alternatives: [],
+      },
+    ],
+  },
+  States: {
+    name: "States",
+    folder: "states",
+    examples: [
+      { name: "Alabama", image: "alabama.jpg", alternatives: [] },
+      { name: "Alaska", image: "alaska.jpg", alternatives: [] },
+      { name: "Arizona", image: "arizona.jpg", alternatives: [] },
+      { name: "Arkansas", image: "arkansas.jpg", alternatives: [] },
+      { name: "California", image: "california.jpg", alternatives: [] },
+      { name: "Colorado", image: "colorado.jpg", alternatives: [] },
+      { name: "Connecticut", image: "connecticut.jpg", alternatives: [] },
+      { name: "Delaware", image: "delaware.jpg", alternatives: [] },
+      { name: "Florida", image: "florida.jpg", alternatives: [] },
+      { name: "Georgia", image: "georgia.jpg", alternatives: [] },
+      { name: "Idaho", image: "idaho.jpg", alternatives: [] },
+      { name: "Illinois", image: "illinois.jpg", alternatives: [] },
+      { name: "Indiana", image: "indiana.jpg", alternatives: [] },
+      { name: "Iowa", image: "iowa.jpg", alternatives: [] },
+      { name: "Kansas", image: "kansas.jpg", alternatives: [] },
+      { name: "Kentucky", image: "kentucky.png", alternatives: [] },
+      { name: "Louisiana", image: "louisiana.jpg", alternatives: [] },
+      { name: "Maine", image: "maine.jpg", alternatives: [] },
+      { name: "Maryland", image: "maryland.jpg", alternatives: [] },
+      { name: "Massachusetts", image: "massachusetts.png", alternatives: [] },
+      { name: "Michigan", image: "michigan.jpg", alternatives: [] },
+      { name: "Minnesota", image: "minnesota.jpg", alternatives: [] },
+      { name: "Mississippi", image: "mississippi.jpg", alternatives: [] },
+      { name: "Missouri", image: "missouri.jpg", alternatives: [] },
+      { name: "Montana", image: "montana.jpg", alternatives: [] },
+      { name: "Nebraska", image: "nebraska.jpg", alternatives: [] },
+      { name: "Nevada", image: "nevada.png", alternatives: [] },
+      { name: "New Jersey", image: "new-jersey.jpg", alternatives: [] },
+      { name: "New Mexico", image: "new-mexico.jpg", alternatives: [] },
+      { name: "New York", image: "new-york.jpg", alternatives: [] },
+      { name: "North Carolina", image: "north-carolina.jpg", alternatives: [] },
+      { name: "North Dakota", image: "north-dakota.jpg", alternatives: [] },
+      { name: "Ohio", image: "ohio.png", alternatives: [] },
+      { name: "Oklahoma", image: "oklahoma.jpg", alternatives: [] },
+      { name: "Oregon", image: "oregon.jpg", alternatives: [] },
+      { name: "Pennsylvania", image: "pennsylvania.jpg", alternatives: [] },
+      { name: "Rhode Island", image: "rhode-island.jpg", alternatives: [] },
+      { name: "South Dakota", image: "south-dakota.jpg", alternatives: [] },
+      { name: "Tennessee", image: "tennessee.png", alternatives: [] },
+      { name: "Texas", image: "texas.jpg", alternatives: [] },
+      { name: "Utah", image: "utah.jpg", alternatives: [] },
+      { name: "Vermont", image: "vermont.jpg", alternatives: [] },
+      { name: "Virginia", image: "virginia.jpg", alternatives: [] },
+      { name: "Washington", image: "washington.jpg", alternatives: [] },
+      { name: "West Virginia", image: "west-virginia.jpg", alternatives: [] },
+      { name: "Wisconsin", image: "wisconsin.jpg", alternatives: [] },
+    ],
+  },
+  "Harry Potter characters": {
+    name: "Harry Potter characters",
+    folder: "harry-potter-characters",
+    examples: [
+      { name: "Alastor Moody", image: "alastor-moody.jpg", alternatives: [] },
+      {
+        name: "Albus Dumbledore",
+        image: "albus-dumbledore.jpg",
+        alternatives: [],
+      },
+      { name: "Argus Filch", image: "argus-filch.jpg", alternatives: [] },
+      { name: "Arthur Weasley", image: "arthur-weasley.jpg", alternatives: [] },
+      {
+        name: "Barty Crouch Jr.",
+        image: "barty-crouch-jr.png",
+        alternatives: [],
+      },
+      {
+        name: "Bellatrix Lestrange",
+        image: "bellatrix-lestrange.jpg",
+        alternatives: [],
+      },
+      { name: "Bill Weasley", image: "bill-weasley.jpg", alternatives: [] },
+      { name: "Cedric Diggory", image: "cedric-diggory.jpg", alternatives: [] },
+      {
+        name: "Charlie Weasley",
+        image: "charlie-weasley.jpg",
+        alternatives: [],
+      },
+      { name: "Cho Chang", image: "cho-chang.jpg", alternatives: [] },
+      {
+        name: "Cornelius Fudge",
+        image: "cornelius-fudge.jpg",
+        alternatives: [],
+      },
+      { name: "Dean Thomas", image: "dean-thomas.jpg", alternatives: [] },
+      { name: "Dobby", image: "dobby.jpg", alternatives: [] },
+      {
+        name: "Dolores Umbridge",
+        image: "dolores-umbridge.jpg",
+        alternatives: [],
+      },
+      { name: "Draco Malfoy", image: "draco-malfoy.jpg", alternatives: [] },
+      {
+        name: "Fenrir Greyback",
+        image: "fenrir-greyback.jpg",
+        alternatives: [],
+      },
+      { name: "Fred Weasley", image: "fred-weasley.jpg", alternatives: [] },
+      { name: "George Weasley", image: "george-weasley.jpg", alternatives: [] },
+      {
+        name: "Gilderoy Lockhart",
+        image: "gilderoy-lockhart.jpg",
+        alternatives: [],
+      },
+      { name: "Ginny Weasley", image: "ginny-weasley.jpg", alternatives: [] },
+      { name: "Harry Potter", image: "harry-potter.jpg", alternatives: [] },
+      {
+        name: "Hermione Granger",
+        image: "hermione-granger.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Horace Slughorn",
+        image: "horace-slughorn.jpg",
+        alternatives: [],
+      },
+      { name: "Igor Karkaroff", image: "igor-karkaroff.jpg", alternatives: [] },
+      {
+        name: "Kingsley Shacklebolt",
+        image: "kingsley-shacklebolt.jpg",
+        alternatives: [],
+      },
+      { name: "Kreacher", image: "kreacher.jpg", alternatives: [] },
+      { name: "Lavender Brown", image: "lavender-brown.jpg", alternatives: [] },
+      { name: "Lord Voldemort", image: "lord-voldemort.jpg", alternatives: [] },
+      { name: "Lucius Malfoy", image: "lucius-malfoy.jpg", alternatives: [] },
+      { name: "Luna Lovegood", image: "luna-lovegood.jpg", alternatives: [] },
+      {
+        name: "Minerva McGonagall",
+        image: "minerva-mcgonagall.jpg",
+        alternatives: [],
+      },
+      { name: "Molly Weasley", image: "molly-weasley.jpg", alternatives: [] },
+      {
+        name: "Narcissa Malfoy",
+        image: "narcissa-malfoy.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Neville Longbottom",
+        image: "neville-longbottom.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Nymphadora Tonks",
+        image: "nymphadora-tonks.jpg",
+        alternatives: [],
+      },
+      { name: "Padma Patil", image: "padma-patil.jpg", alternatives: [] },
+      { name: "Parvati Patil", image: "parvati-patil.jpg", alternatives: [] },
+      { name: "Percy Weasley", image: "percy-weasley.jpg", alternatives: [] },
+      {
+        name: "Peter Pettigrew",
+        image: "peter-pettigrew.jpg",
+        alternatives: [],
+      },
+      { name: "Pomona Sprout", image: "pomona-sprout.jpg", alternatives: [] },
+      { name: "Remus Lupin", image: "remus-lupin.jpg", alternatives: [] },
+      { name: "Rita Skeeter", image: "rita-skeeter.jpg", alternatives: [] },
+      { name: "Ron Weasley", image: "ron-weasley.jpg", alternatives: [] },
+      { name: "Rubeus Hagrid", image: "rubeus-hagrid.png", alternatives: [] },
+      {
+        name: "Seamus Finnigan",
+        image: "seamus-finnigan.jpg",
+        alternatives: [],
+      },
+      { name: "Severus Snape", image: "severus-snape.jpg", alternatives: [] },
+      { name: "Sirius Black", image: "sirius-black.jpg", alternatives: [] },
+      {
+        name: "Sybil Trelawney",
+        image: "sybil-trelawney.jpg",
+        alternatives: [],
+      },
+      { name: "Viktor Krum", image: "viktor-krum.jpg", alternatives: [] },
+    ],
+  },
+  "Spirit Halloween Catalogue": {
+    name: "Spirit Halloween Catalogue",
+    folder: "spirit-halloween-catalogue",
+    examples: [
+      { name: "Angel", image: "angel.jpg", alternatives: [] },
+      { name: "Astronaut", image: "astronaut.jpg", alternatives: [] },
+      { name: "Banana suit", image: "banana-suit.jpg", alternatives: [] },
+      { name: "Batman", image: "batman.jpg", alternatives: [] },
+      { name: "Beetlejuice", image: "beetlejuice.jpg", alternatives: [] },
+      { name: "Cat costume", image: "cat-costume.jpg", alternatives: [] },
+      { name: "Cheerleader", image: "cheerleader.jpg", alternatives: [] },
+      { name: "Chucky", image: "chucky.jpg", alternatives: [] },
+    ],
+  },
+  "Superheros": {
+    name: "Superheros",
+    folder: "superheros",
+    examples: [
+      {
+        name: "Superman",
+        image: "superman.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Batman",
+        image: "batman.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Wonder Woman",
+        image: "wonder-woman.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Spider-Man",
+        image: "spider-man.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Iron Man",
+        image: "iron-man.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Captain America",
+        image: "captain-america.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Thor",
+        image: "thor.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Hulk",
+        image: "hulk.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Black Widow",
+        image: "black-widow.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Wolverine",
+        image: "wolverine.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Flash",
+        image: "the-flash.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Green Lantern",
+        image: "green-lantern.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Aquaman",
+        image: "aquaman.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Cyborg",
+        image: "cyborg.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Deadpool",
+        image: "deadpool.png",
+        alternatives: [],
+      },
+      {
+        name: "Daredevil",
+        image: "daredevil.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Black Panther",
+        image: "black-panther.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Doctor Strange",
+        image: "doctor-strange.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Scarlet Witch",
+        image: "scarlet-witch.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Vision",
+        image: "vision.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Ant-Man",
+        image: "ant-man.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Wasp",
+        image: "the-wasp.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Captain Marvel",
+        image: "captain-marvel.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Star-Lord",
+        image: "star-lord.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Gamora",
+        image: "gamora.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Drax",
+        image: "drax.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Rocket Raccoon",
+        image: "rocket-raccoon.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Groot",
+        image: "groot.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Shazam",
+        image: "shazam.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Green Arrow",
+        image: "green-arrow.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Supergirl",
+        image: "supergirl.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Batgirl",
+        image: "batgirl.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Nightwing",
+        image: "nightwing.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Robin",
+        image: "robin.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Beast Boy",
+        image: "beast-boy.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Raven",
+        image: "raven.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Starfire",
+        image: "starfire.png",
+        alternatives: [],
+      },
+      {
+        name: "Cyclops",
+        image: "cyclops.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Jean Grey",
+        image: "jean-grey.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Storm",
+        image: "storm.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Rogue",
+        image: "rogue.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Gambit",
+        image: "gambit.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Professor X",
+        image: "professor-x.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Silver Surfer",
+        image: "silver-surfer.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Thing",
+        image: "the-thing.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Mr. Fantastic",
+        image: "mr-fantastic.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Invisible Woman",
+        image: "invisible-woman.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Human Torch",
+        image: "human-torch.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Hawkeye",
+        image: "hawkeye.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Martian Manhunter",
+        image: "martian-manhunter.jpg",
+        alternatives: [],
+      },
+    ],
+  },
+  "Video Game Characters": {
+    name: "Video Game Characters",
+    folder: "video-game-characters",
+    examples: [
+      {
+        name: "Mario",
+        image: "mario.png",
+        alternatives: [],
+      },
+      {
+        name: "Luigi",
+        image: "luigi.png",
+        alternatives: [],
+      },
+      {
+        name: "Princess Peach",
+        image: "princess-peach.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Bowser",
+        image: "bowser.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Link",
+        image: "link.png",
+        alternatives: [],
+      },
+      {
+        name: "Zelda",
+        image: "zelda.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Ganondorf",
+        image: "ganondorf.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Donkey Kong",
+        image: "donkey-kong.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Pikachu",
+        image: "pikachu.png",
+        alternatives: [],
+      },
+      {
+        name: "Sonic the Hedgehog",
+        image: "sonic-the-hedgehog.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Tails",
+        image: "tails.png",
+        alternatives: [],
+      },
+      {
+        name: "Knuckles",
+        image: "knuckles.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Dr. Eggman",
+        image: "dr-eggman.png",
+        alternatives: [],
+      },
+      {
+        name: "Samus Aran",
+        image: "samus-aran.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Kirby",
+        image: "kirby.png",
+        alternatives: [],
+      },
+      {
+        name: "Mega Man",
+        image: "mega-man.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Pac-Man",
+        image: "pac-man.png",
+        alternatives: [],
+      },
+      {
+        name: "Ryu",
+        image: "ryu.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Ken Masters",
+        image: "ken-masters.png",
+        alternatives: [],
+      },
+      {
+        name: "Chun-Li",
+        image: "chun-li.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Cloud Strife",
+        image: "cloud-strife.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Sephiroth",
+        image: "sephiroth.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Solid Snake",
+        image: "solid-snake.png",
+        alternatives: [],
+      },
+      {
+        name: "Master Chief",
+        image: "master-chief.png",
+        alternatives: [],
+      },
+      {
+        name: "Kratos",
+        image: "kratos.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Nathan Drake",
+        image: "nathan-drake.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Lara Croft",
+        image: "lara-croft.png",
+        alternatives: [],
+      },
+      {
+        name: "Geralt of Rivia",
+        image: "geralt-of-rivia.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Ellie",
+        image: "ellie.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Joel Miller",
+        image: "joel-miller.png",
+        alternatives: [],
+      },
+      {
+        name: "Arthur Morgan",
+        image: "arthur-morgan.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Charizard",
+        image: "charizard.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Steve",
+        image: "steve.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Crash Bandicoot",
+        image: "crash-bandicoot.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Spyro the Dragon",
+        image: "spyro-the-dragon.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Rayman",
+        image: "rayman.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Sora",
+        image: "sora.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Joker",
+        image: "joker.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Tracer",
+        image: "tracer.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Doom Slayer",
+        image: "doom-slayer.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Gordon Freeman",
+        image: "gordon-freeman.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Agent 47",
+        image: "agent-47.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Ezio Auditore",
+        image: "ezio-auditore.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Altaïr Ibn-La'Ahad",
+        image: "altaïr-ibn-laahad.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Scorpion",
+        image: "scorpion.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Sub-Zero",
+        image: "sub-zero.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Jill Valentine",
+        image: "jill-valentine.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Leon S. Kennedy",
+        image: "leon-s-kennedy.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Yoshi",
+        image: "yoshi.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Princess Zelda",
+        image: "princess-zelda.jpg",
+        alternatives: [],
+      },
+    ],
+  },
+  "City Skylines": {
+    name: "City Skylines",
+    folder: "city-skylines",
+    examples: [
+      {
+        name: "New York City",
+        image: "new-york-city.jpg",
+        alternatives: [],
+      },
+      {
+        name: "London",
+        image: "london.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Paris",
+        image: "paris.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Tokyo",
+        image: "tokyo.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Shanghai",
+        image: "shanghai.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Dubai",
+        image: "dubai.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Chicago",
+        image: "chicago.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Hong Kong",
+        image: "hong-kong.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Singapore",
+        image: "singapore.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Sydney",
+        image: "sydney.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Toronto",
+        image: "toronto.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Kuala Lumpur",
+        image: "kuala-lumpur.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Frankfurt",
+        image: "frankfurt.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Seoul",
+        image: "seoul.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Los Angeles",
+        image: "los-angeles.jpg",
+        alternatives: [],
+      },
+      {
+        name: "San Francisco",
+        image: "san-francisco.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Seattle",
+        image: "seattle.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Moscow",
+        image: "moscow.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Istanbul",
+        image: "istanbul.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Rio de Janeiro",
+        image: "rio-de-janeiro.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Bangkok",
+        image: "bangkok.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Taipei",
+        image: "taipei.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Melbourne",
+        image: "melbourne.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Vancouver",
+        image: "vancouver.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Panama City",
+        image: "panama-city.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Miami",
+        image: "miami.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Boston",
+        image: "boston.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Philadelphia",
+        image: "philadelphia.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Dallas",
+        image: "dallas.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Houston",
+        image: "houston.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Atlanta",
+        image: "atlanta.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Las Vegas",
+        image: "las-vegas.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Madrid",
+        image: "madrid.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Barcelona",
+        image: "barcelona.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Berlin",
+        image: "berlin.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Rome",
+        image: "rome.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Athens",
+        image: "athens.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Cairo",
+        image: "cairo.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Johannesburg",
+        image: "johannesburg.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Mumbai",
+        image: "mumbai.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Delhi",
+        image: "delhi.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Beijing",
+        image: "beijing.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Osaka",
+        image: "osaka.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Jakarta",
+        image: "jakarta.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Manila",
+        image: "manila.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Mexico City",
+        image: "mexico-city.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Buenos Aires",
+        image: "buenos-aires.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Sao Paulo",
+        image: "sao-paulo.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Santiago",
+        image: "santiago.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Bogota",
+        image: "bogota.jpg",
         alternatives: [],
       },
     ],
