@@ -238,6 +238,9 @@ const CATEGORIES = [
   "Garage",
   "Camping",
   "Shoe brands",
+  "Movies",
+  "Books",
+  "Disney Channel Original Movies",
 ];
 
 export type Category = (typeof CATEGORIES)[number];
@@ -2974,7 +2977,7 @@ export const CATEGORY_METADATA: Record<Category, CategoryMetadata> = {
       { name: "Chucky", image: "chucky.jpg", alternatives: [] },
     ],
   },
-  "Superheros": {
+  Superheros: {
     name: "Superheros",
     folder: "superheros",
     examples: [
@@ -3738,6 +3741,769 @@ export const CATEGORY_METADATA: Record<Category, CategoryMetadata> = {
       {
         name: "Bogota",
         image: "bogota.jpg",
+        alternatives: [],
+      },
+    ],
+  },
+  Movies: {
+    name: "Movies",
+    folder: "movies",
+    examples: [
+      {
+        name: "Star Wars: A New Hope",
+        image: "star-wars-a-new-hope.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Empire Strikes Back",
+        image: "the-empire-strikes-back.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Wizard of Oz",
+        image: "the-wizard-of-oz.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Casablanca",
+        image: "casablanca.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Gone With the Wind",
+        image: "gone-with-the-wind.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Jaws",
+        image: "jaws.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Sound of Music",
+        image: "the-sound-of-music.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Jurassic Park",
+        image: "jurassic-park.jpg",
+        alternatives: [],
+      },
+      {
+        name: "E.T. the Extra-Terrestrial",
+        image: "et-the-extra-terrestrial.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Back to the Future",
+        image: "back-to-the-future.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Titanic",
+        image: "titanic.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Avatar",
+        image: "avatar.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Lord of the Rings: The Fellowship of the Ring",
+        image: "the-lord-of-the-rings-the-fellowship-of-the-ring.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Lord of the Rings: The Return of the King",
+        image: "the-lord-of-the-rings-the-return-of-the-king.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Matrix",
+        image: "the-matrix.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Forrest Gump",
+        image: "forrest-gump.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Lion King (1994)",
+        image: "the-lion-king-1994.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Harry Potter and the Sorcerer's Stone",
+        image: "harry-potter-and-the-sorcerers-stone.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Dark Knight",
+        image: "the-dark-knight.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Pirates of the Caribbean: The Curse of the Black Pearl",
+        image: "pirates-of-the-caribbean-the-curse-of-the-black-pearl.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Iron Man",
+        image: "iron-man.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Avengers: Endgame",
+        image: "avengers-endgame.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Avengers (2012)",
+        image: "the-avengers-2012.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Spider-Man (2002)",
+        image: "spider-man-2002.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Black Panther",
+        image: "black-panther.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Superman (1978)",
+        image: "superman-1978.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Toy Story",
+        image: "toy-story.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Finding Nemo",
+        image: "finding-nemo.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Frozen",
+        image: "frozen.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Shrek",
+        image: "shrek.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Despicable Me",
+        image: "despicable-me.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Spirited Away",
+        image: "spirited-away.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Exorcist",
+        image: "the-exorcist.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Halloween (1978)",
+        image: "halloween-1978.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Psycho",
+        image: "psycho.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Shining",
+        image: "the-shining.jpg",
+        alternatives: [],
+      },
+      {
+        name: "It (2017)",
+        image: "it-2017.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Godfather",
+        image: "the-godfather.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Rocky",
+        image: "rocky.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Ghostbusters",
+        image: "ghostbusters.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Indiana Jones: Raiders of the Lost Ark",
+        image: "indiana-jones-raiders-of-the-lost-ark.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Terminator 2: Judgment Day",
+        image: "terminator-2-judgment-day.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Alien",
+        image: "alien.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Top Gun",
+        image: "top-gun.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Breakfast Club",
+        image: "the-breakfast-club.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Home Alone",
+        image: "home-alone.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Shawshank Redemption",
+        image: "the-shawshank-redemption.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Barbie (2023)",
+        image: "barbie-2023.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Oppenheimer (2023)",
+        image: "oppenheimer-2023.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Joker (2019)",
+        image: "joker-2019.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Frozen II",
+        image: "frozen-ii.jpg",
+        alternatives: [],
+      },
+    ],
+  },
+  Books: {
+    name: "Books",
+    folder: "books",
+    examples: [
+      {
+        name: "Harry Potter and the Sorcerer's Stone",
+        image: "harry-potter-and-the-sorcerers-stone.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Hobbit",
+        image: "the-hobbit.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Lord of the Rings",
+        image: "the-lord-of-the-rings.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Catcher in the Rye",
+        image: "the-catcher-in-the-rye.jpg",
+        alternatives: [],
+      },
+      {
+        name: "To Kill a Mockingbird",
+        image: "to-kill-a-mockingbird.jpg",
+        alternatives: [],
+      },
+      {
+        name: "1984",
+        image: "1984.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Animal Farm",
+        image: "animal-farm.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Great Gatsby",
+        image: "the-great-gatsby.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Da Vinci Code",
+        image: "the-da-vinci-code.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Alchemist",
+        image: "the-alchemist.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Hunger Games",
+        image: "the-hunger-games.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Pride and Prejudice",
+        image: "pride-and-prejudice.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Jane Eyre",
+        image: "jane-eyre.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Wuthering Heights",
+        image: "wuthering-heights.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Lion the Witch and the Wardrobe",
+        image: "the-lion-the-witch-and-the-wardrobe.jpg",
+        alternatives: [],
+      },
+      {
+        name: "War and Peace",
+        image: "war-and-peace.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Odyssey",
+        image: "the-odyssey.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Iliad",
+        image: "the-iliad.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Moby-Dick",
+        image: "moby-dick.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Adventures of Huckleberry Finn",
+        image: "the-adventures-of-huckleberry-finn.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Chronicles of Narnia",
+        image: "the-chronicles-of-narnia.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Girl with the Dragon Tattoo",
+        image: "the-girl-with-the-dragon-tattoo.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Fault in Our Stars",
+        image: "the-fault-in-our-stars.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Shining",
+        image: "the-shining.jpg",
+        alternatives: [],
+      },
+      {
+        name: "It",
+        image: "it.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Hitchhiker's Guide to the Galaxy",
+        image: "the-hitchhikers-guide-to-the-galaxy.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Dune",
+        image: "dune.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Dracula",
+        image: "dracula.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Frankenstein",
+        image: "frankenstein.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Lord of the Flies",
+        image: "the-lord-of-the-flies.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Little Prince",
+        image: "the-little-prince.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Charlotte's Web",
+        image: "charlottes-web.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Green Eggs and Ham",
+        image: "green-eggs-and-ham.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Cat in the Hat",
+        image: "the-cat-in-the-hat.jpg",
+        alternatives: [],
+      },
+      {
+        name: "A Game of Thrones",
+        image: "a-game-of-thrones.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Fahrenheit 451",
+        image: "fahrenheit-451.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Brave New World",
+        image: "brave-new-world.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Kite Runner",
+        image: "the-kite-runner.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Book Thief",
+        image: "the-book-thief.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Life of Pi",
+        image: "life-of-pi.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Outsiders",
+        image: "the-outsiders.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Giver",
+        image: "the-giver.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Handmaid's Tale",
+        image: "the-handmaids-tale.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Twilight",
+        image: "twilight.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Color Purple",
+        image: "the-color-purple.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Very Hungry Caterpillar",
+        image: "the-very-hungry-caterpillar.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Where the Wild Things Are",
+        image: "where-the-wild-things-are.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Old Man and the Sea",
+        image: "the-old-man-and-the-sea.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Silence of the Lambs",
+        image: "the-silence-of-the-lambs.jpg",
+        alternatives: [],
+      },
+    ],
+  },
+  "Disney Channel Original Movies": {
+    name: "Disney Channel Original Movies",
+    folder: "disney-channel-original-movies",
+    examples: [
+      {
+        name: "High School Musical",
+        image: "high-school-musical.jpg",
+        alternatives: [],
+      },
+      {
+        name: "High School Musical 2",
+        image: "high-school-musical-2.jpg",
+        alternatives: [],
+      },
+      {
+        name: "High School Musical 3: Senior Year",
+        image: "high-school-musical-3-senior-year.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Camp Rock",
+        image: "camp-rock.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Camp Rock 2: The Final Jam",
+        image: "camp-rock-2-the-final-jam.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Cheetah Girls",
+        image: "the-cheetah-girls.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Cheetah Girls 2",
+        image: "the-cheetah-girls-2.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Cheetah Girls: One World",
+        image: "the-cheetah-girls-one-world.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Halloweentown",
+        image: "halloweentown.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Halloweentown II: Kalabar's Revenge",
+        image: "halloweentown-ii-kalabars-revenge.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Halloweentown High",
+        image: "halloweentown-high.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Return to Halloweentown",
+        image: "return-to-halloweentown.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Zenon: Girl of the 21st Century",
+        image: "zenon-girl-of-the-21st-century.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Zenon: The Zequel",
+        image: "zenon-the-zequel.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Zenon: Z3",
+        image: "zenon-z3.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Smart House",
+        image: "smart-house.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Johnny Tsunami",
+        image: "johnny-tsunami.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Johnny Kapahala: Back on Board",
+        image: "johnny-kapahala-back-on-board.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Cadet Kelly",
+        image: "cadet-kelly.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Luck of the Irish",
+        image: "the-luck-of-the-irish.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Eddie's Million Dollar Cook-Off",
+        image: "eddies-million-dollar-cook-off.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Thirteenth Year",
+        image: "the-thirteenth-year.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Color of Friendship",
+        image: "the-color-of-friendship.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Pixel Perfect",
+        image: "pixel-perfect.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Stuck in the Suburbs",
+        image: "stuck-in-the-suburbs.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Wendy Wu: Homecoming Warrior",
+        image: "wendy-wu-homecoming-warrior.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Read It and Weep",
+        image: "read-it-and-weep.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Twitches",
+        image: "twitches.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Twitches Too",
+        image: "twitches-too.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Let It Shine",
+        image: "let-it-shine.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Lemonade Mouth",
+        image: "lemonade-mouth.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Jump In!",
+        image: "jump-in.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Minutemen",
+        image: "minutemen.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Geek Charming",
+        image: "geek-charming.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Radio Rebel",
+        image: "radio-rebel.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Princess Protection Program",
+        image: "princess-protection-program.jpg",
+        alternatives: [],
+      },
+      {
+        name: "The Proud Family Movie",
+        image: "the-proud-family-movie.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Kim Possible Movie: So the Drama",
+        image: "kim-possible-movie-so-the-drama.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Teen Beach Movie",
+        image: "teen-beach-movie.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Teen Beach 2",
+        image: "teen-beach-2.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Descendants",
+        image: "descendants.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Descendants 2",
+        image: "descendants-2.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Descendants 3",
+        image: "descendants-3.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Zapped",
+        image: "zapped.jpg",
+        alternatives: [],
+      },
+      {
+        name: "How to Build a Better Boy",
+        image: "how-to-build-a-better-boy.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Girl vs. Monster",
+        image: "girl-vs-monster.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Invisible Sister",
+        image: "invisible-sister.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Dadnapped",
+        image: "dadnapped.jpg",
+        alternatives: [],
+      },
+      {
+        name: "Gotta Kick It Up!",
+        image: "gotta-kick-it-up.jpg",
         alternatives: [],
       },
     ],

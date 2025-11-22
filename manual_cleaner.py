@@ -10,6 +10,7 @@ Controls:
   [SPACE]: Run Traditional Inpainting (Clean, No Text)
   [TAB]:   Run AI Inpainting (Creative, Textures)
   [R]:     Reset to original
+  [T]:     Try Again (Re-download different poster)
   [S]:     Save and Next
   [N]:     Next (Skip saving)
   [ESC]:   Quit Batch
@@ -41,6 +42,8 @@ mask_layer = None
 img_display = None
 original_img = None
 pipe = None
+last_wheel_time = 0
+last_wheel_flags = 0
 
 def setup_pipeline():
     global pipe
@@ -66,7 +69,7 @@ def setup_pipeline():
     return pipe
 
 def mouse_callback(event, x, y, flags, param):
-    global ix, iy, drawing, mask_layer, img_display
+    global ix, iy, drawing, mask_layer, img_display, brush_size, last_wheel_y
 
     if event == cv2.EVENT_LBUTTONDOWN:
         drawing = True
@@ -81,6 +84,38 @@ def mouse_callback(event, x, y, flags, param):
         drawing = False
         cv2.circle(mask_layer, (x, y), brush_size, (255, 255, 255), -1)
         cv2.circle(img_display, (x, y), brush_size, (0, 0, 255), -1)
+
+    elif event == cv2.EVENT_MOUSEWHEEL:
+        # Check if CTRL is held down
+        if flags & cv2.EVENT_FLAG_CTRLKEY:
+            global last_wheel_time, last_wheel_flags
+            import time
+
+            current_time = time.time()
+            # On Windows, OpenCV encodes scroll delta in the high 16 bits of flags
+            # Extract the wheel delta (typically 120 for one scroll unit)
+            wheel_delta = (flags >> 16) & 0xFFFF
+            # Handle signed value (can be negative for scroll down)
+            if wheel_delta > 32768:  # Handle unsigned to signed conversion
+                wheel_delta = wheel_delta - 65536
+
+            # Alternative: if wheel_delta extraction doesn't work, use relative comparison
+            if wheel_delta == 0 and last_wheel_time > 0 and current_time - last_wheel_time < 0.2:
+                # Fallback: compare flags values
+                if flags > last_wheel_flags:
+                    wheel_delta = 120  # Scroll up
+                elif flags < last_wheel_flags:
+                    wheel_delta = -120  # Scroll down
+
+            if wheel_delta > 0:
+                brush_size = min(brush_size + 2, 200)  # Increase brush size, max 200
+            elif wheel_delta < 0:
+                brush_size = max(brush_size - 2, 5)  # Decrease brush size, min 5
+
+            last_wheel_time = current_time
+            last_wheel_flags = flags
+            if wheel_delta != 0:  # Only print if we detected a change
+                print(f"Brush size: {brush_size}", flush=True)
 
 def get_filename(movie_name):
     name = movie_name.lower()
@@ -154,31 +189,44 @@ def search_google_images(query, max_results=25):
         traceback.print_exc()
         return []
 
-def search_and_download(movie_name):
-    log(f"Searching for: {movie_name}...")
+def search_and_download(item_name, category="Movies", skip_urls=None):
+    log(f"Searching for: {item_name}...")
 
-    # Query Google Images (more reliable than DuckDuckGo currently)
-    query = f"{movie_name} movie poster iconic theatrical modern"
+    # Build query based on category
+    if category == "Books":
+        query = f"{item_name} book cover iconic classic high resolution"
+    elif category == "Movies" or category == "Disney Channel Original Movies":
+        # Both regular movies and Disney Channel movies use movie poster search
+        query = f"{item_name} movie poster iconic theatrical modern"
+    else:
+        # Generic search for other categories
+        query = f"{item_name} {category.lower()} high resolution"
+
     log("  Querying Google Images...")
 
     urls = search_google_images(query, max_results=25)
 
     if not urls:
         log("  No image URLs found from Google Images")
-        return None
+        return None, None
 
     log(f"  Found {len(urls)} image URLs from Google Images")
 
-    img = try_download_urls(urls)
+    img, url = try_download_urls(urls, skip_urls=skip_urls)
 
     if img is not None:
-        return img
+        return img, url
 
-    return None
+    return None, None
 
-def try_download_urls(urls):
+def try_download_urls(urls, skip_urls=None):
     """Try to download images from a list of URLs, returning the first successful one"""
+    if skip_urls is None:
+        skip_urls = set()
+
     for url in urls[:30]:  # Try up to 30 URLs since we're only using one source
+        if url in skip_urls:
+            continue
         try:
             log(f"  Downloading {url[:60]}...")
             resp = requests.get(url, headers={'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'}, timeout=8)
@@ -189,7 +237,7 @@ def try_download_urls(urls):
                     h, w = img.shape[:2]
                     if h > 300:
                         log(f"  Download successful ({w}x{h}).")
-                        return img
+                        return img, url  # Return both image and URL
                     else:
                         log(f"  Image too small ({w}x{h}). URL: {url}")
                 else:
@@ -197,7 +245,7 @@ def try_download_urls(urls):
         except Exception as e:
             log(f"  DL Error for {url[:60]}: {e}")
             continue
-    return None
+    return None, None
 
 def run_traditional_inpainting(img_cv, mask_cv):
     print("Running Traditional Inpainting (Telea)...")
@@ -242,8 +290,11 @@ def run_ai_inpainting(img_cv, mask_cv):
 
     return cv2.cvtColor(np.array(final_composite), cv2.COLOR_RGB2BGR)
 
-def process_image(image_source, output_path, movie_title="Image"):
+def process_image(image_source, output_path, item_title="Image", category="Movies"):
     global mask_layer, img_display, original_img
+
+    # Track URLs we've already tried for this item
+    tried_urls = set()
 
     # Load logic
     if isinstance(image_source, str) and os.path.exists(image_source):
@@ -252,10 +303,12 @@ def process_image(image_source, output_path, movie_title="Image"):
         original_img = image_source
     else:
         # Try downloading
-        original_img = search_and_download(image_source)
+        original_img, downloaded_url = search_and_download(image_source, category=category, skip_urls=tried_urls)
+        if downloaded_url:
+            tried_urls.add(downloaded_url)
 
     if original_img is None:
-        log(f"Could not load {movie_title}")
+        log(f"Could not load {item_title}")
         return False
 
     h, w = original_img.shape[:2]
@@ -268,13 +321,15 @@ def process_image(image_source, output_path, movie_title="Image"):
     mask_layer = np.zeros((h, w), dtype=np.uint8)
     img_display = current_img.copy()
 
-    window_name = f"Cleaning: {movie_title}"
+    window_name = f"Cleaning: {item_title}"
     cv2.namedWindow(window_name)
     cv2.setWindowProperty(window_name, cv2.WND_PROP_TOPMOST, 1)
     cv2.setMouseCallback(window_name, mouse_callback)
 
-    print(f"\n--- {movie_title} ---", flush=True)
-    print("Controls: [Space]=Trad | [Tab]=AI | [S]=Save+Next | [N]=Skip | [R]=Reset | [Esc]=Quit Batch", flush=True)
+    global brush_size
+    print(f"\n--- {item_title} ---", flush=True)
+    print("Controls: [Space]=Trad | [Tab]=AI | [S]=Save+Next | [N]=Skip | [R]=Reset | [T]=Try Again | [Esc]=Quit Batch", flush=True)
+    print("Brush: [Ctrl+Scroll]=Adjust size (current: {})".format(brush_size), flush=True)
 
     action = "next"
 
@@ -294,6 +349,38 @@ def process_image(image_source, output_path, movie_title="Image"):
             mask_layer = np.zeros((h, w), dtype=np.uint8)
             img_display = current_img.copy()
             print("Reset.")
+        elif key == ord('t'): # Try Again (Re-download)
+            # Determine item type based on category
+            if category == "Books":
+                item_type = "book cover"
+            elif category == "Movies" or category == "Disney Channel Original Movies":
+                item_type = "poster"
+            else:
+                item_type = "image"
+
+            print(f"Trying to download a different {item_type}...", flush=True)
+            cv2.putText(img_display, f"Downloading new {item_type}...", (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 0), 2)
+            cv2.imshow(window_name, img_display)
+            cv2.waitKey(1)
+
+            new_img, downloaded_url = search_and_download(item_title, category=category, skip_urls=tried_urls)
+            if new_img is not None:
+                if downloaded_url:
+                    tried_urls.add(downloaded_url)
+                h_new, w_new = new_img.shape[:2]
+                if h_new > 1000:
+                    scale = 1000 / h_new
+                    new_img = cv2.resize(new_img, (int(w_new*scale), int(h_new*scale)))
+                    h_new, w_new = new_img.shape[:2]
+
+                original_img = new_img.copy()
+                current_img = original_img.copy()
+                h, w = h_new, w_new
+                mask_layer = np.zeros((h, w), dtype=np.uint8)
+                img_display = current_img.copy()
+                print(f"New {item_type} loaded. You can continue editing or try again.")
+            else:
+                print(f"Failed to download a new {item_type}. Keeping current image.")
         elif key == 32: # SPACE (Trad)
             if np.sum(mask_layer) > 0:
                 cv2.putText(img_display, "Processing...", (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
@@ -327,35 +414,36 @@ def process_image(image_source, output_path, movie_title="Image"):
     cv2.destroyAllWindows()
     return action
 
-def run_batch_mode():
+def run_batch_mode(category="Movies", amount_to_process=2):
     csv_path = Path(__file__).parent / 'app' / 'The Floor - Categories - Categories + Examples.csv'
-    movies = []
+    items = []
 
-    print("Reading movie list...")
+    print(f"Reading {category} list...")
     with open(csv_path, 'r', encoding='utf-8') as f:
         reader = csv.DictReader(f)
         for row in reader:
-            if row['Category'] == 'Movies':
-                movies.append(row['Example'])
+            if row['Category'] == category:
+                items.append(row['Example'])
 
-    print(f"Found {len(movies)} movies.", flush=True)
+    print(f"Found {len(items)} {category.lower()}.", flush=True)
 
-    save_dir = Path(__file__).parent / 'public' / 'images' / 'movies'
+    # Convert category name to folder name (kebab-case)
+    folder_name = category.lower().replace(' ', '-')
+    save_dir = Path(__file__).parent / 'public' / 'images' / folder_name
     save_dir.mkdir(parents=True, exist_ok=True)
 
-    # LIMIT TO 2 AT A TIME FOR TESTING
     count_processed = 0
 
-    for i, movie in enumerate(movies):
-        if count_processed >= 2:
-            print("Batch limit of 2 reached. Stopping.", flush=True)
+    for i, item in enumerate(items):
+        if count_processed >= amount_to_process:
+            print(f"Batch limit of {amount_to_process} reached. Stopping.", flush=True)
             break
 
-        print(f"\n[{i+1}/{len(movies)}] Preparing: {movie}", flush=True)
-        filename = get_filename(movie)
+        print(f"\n[{i+1}/{len(items)}] Preparing: {item}", flush=True)
+        filename = get_filename(item)
         file_path = save_dir / filename
 
-        # Fallback for "The Godfather" -> "godfather.jpg"
+        # Fallback for "The X" -> "x.jpg"
         if not file_path.exists() and filename.startswith("the-"):
             alt_filename = filename[4:] # Remove "the-"
             alt_path = save_dir / alt_filename
@@ -365,29 +453,29 @@ def run_batch_mode():
 
         # SKIP if file already exists
         if file_path.exists():
-            print(f"  Skipping {movie} (already exists at {file_path.name})", flush=True)
+            print(f"  Skipping {item} (already exists at {file_path.name})", flush=True)
             continue
 
         count_processed += 1
 
         # Check if we already have a local file to start with
-        source = str(file_path) if file_path.exists() else movie
+        source = str(file_path) if file_path.exists() else item
 
         try:
             # Add delay before search to avoid rate limiting
             if not file_path.exists():
                 time.sleep(2)
 
-            action = process_image(source, file_path, movie_title=movie)
+            action = process_image(source, file_path, item_title=item, category=category)
 
             if action == "quit":
                 print("Batch processing stopped by user.", flush=True)
                 break
             elif action == False:
-                print(f"Skipping {movie} due to load error.", flush=True)
+                print(f"Skipping {item} due to load error.", flush=True)
 
         except Exception as e:
-            print(f"Error processing {movie}: {e}", flush=True)
+            print(f"Error processing {item}: {e}", flush=True)
             import traceback
             traceback.print_exc()
 
@@ -397,19 +485,31 @@ def run_batch_mode():
 
 def main():
     if len(sys.argv) > 1 and sys.argv[1] == "--batch":
-        run_batch_mode()
-    elif len(sys.argv) > 1:
-        # Single mode
-        input_arg = sys.argv[1]
+        # Parse arguments: --batch <category> <amount>
+        if len(sys.argv) < 3:
+            print("Usage: python manual_cleaner.py --batch <category> [amount]")
+            print("Example: python manual_cleaner.py --batch Books 2")
+            print("Example: python manual_cleaner.py --batch Movies 2")
+            return
 
-        save_dir = Path(__file__).parent / 'public' / 'images' / 'movies'
+        category = sys.argv[2]
+        amount_to_process = int(sys.argv[3]) if len(sys.argv) > 3 else 2
+        run_batch_mode(category, amount_to_process)
+    elif len(sys.argv) > 1:
+        # Single mode: python manual_cleaner.py "Item Name" [category]
+        input_arg = sys.argv[1]
+        category = sys.argv[2] if len(sys.argv) > 2 else "Movies"
+
+        # Convert category name to folder name
+        folder_name = category.lower().replace(' ', '-')
+        save_dir = Path(__file__).parent / 'public' / 'images' / folder_name
         save_dir.mkdir(parents=True, exist_ok=True)
 
         if os.path.exists(input_arg):
             name = Path(input_arg).stem
             if "_cleaned" in name: name = name.replace("_cleaned", "")
             output_path = save_dir / f"{name}.jpg"
-            process_image(input_arg, output_path, movie_title=name)
+            process_image(input_arg, output_path, item_title=name, category=category)
         else:
             # Name or URL
             name = "downloaded"
@@ -417,11 +517,16 @@ def main():
                 name = get_filename(input_arg).replace(".jpg", "")
 
             output_path = save_dir / f"{name}.jpg"
-            process_image(input_arg, output_path, movie_title=input_arg)
+            process_image(input_arg, output_path, item_title=input_arg, category=category)
     else:
         print("Usage:")
-        print("  python manual_cleaner.py --batch")
-        print("  python manual_cleaner.py 'Movie Name'")
+        print("  python manual_cleaner.py --batch <category> [amount]")
+        print("  python manual_cleaner.py 'Item Name' [category]")
+        print("")
+        print("Examples:")
+        print("  python manual_cleaner.py --batch Books 2")
+        print("  python manual_cleaner.py --batch Movies 2")
+        print("  python manual_cleaner.py 'The Great Gatsby' Books")
 
 if __name__ == "__main__":
     main()
