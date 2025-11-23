@@ -166,7 +166,7 @@ export default function Round({
       example,
       selectedExampleIndex,
     });
-  }, [selectedExampleIndex, randomizedExamples]);
+  }, [selectedExampleIndex, randomizedExamples, channel]);
 
   if (currentTurn == null) {
     return <div className='p-20 text-white'>Waiting for start...</div>;

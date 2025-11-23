@@ -195,9 +195,24 @@ def search_and_download(item_name, category="Movies", skip_urls=None):
     # Build query based on category
     if category == "Books":
         query = f"{item_name} book cover iconic classic high resolution"
-    elif category == "Movies" or category == "Disney Channel Original Movies":
-        # Both regular movies and Disney Channel movies use movie poster search
+    elif category == "Movies" or category == "Disney Channel Original Movies" or category == "Rom Coms":
+        # Movies, Disney Channel movies, and Rom Coms all use movie poster search
         query = f"{item_name} movie poster iconic theatrical modern"
+    elif category == "Reality tv shows":
+        # Reality TV shows use TV show poster search (similar to movies)
+        query = f"{item_name} TV show poster reality TV iconic modern high resolution"
+    elif category == "The Office":
+        # The Office category searches for character photos from the TV show
+        query = f"{item_name} The Office character photo portrait high resolution"
+    elif category == "Thanksgiving":
+        # Thanksgiving category searches for Thanksgiving-related photos (food, activities, objects)
+        query = f"{item_name} Thanksgiving photo high resolution"
+    elif category == "Dogs":
+        # Dogs category searches for dog breed photos
+        query = f"{item_name} dog breed photo high resolution"
+    elif category == "Horses":
+        # Horses category searches for horse breeds, activities, and equipment
+        query = f"{item_name} horse equestrian photo high resolution"
     else:
         # Generic search for other categories
         query = f"{item_name} {category.lower()} high resolution"
@@ -353,8 +368,10 @@ def process_image(image_source, output_path, item_title="Image", category="Movie
             # Determine item type based on category
             if category == "Books":
                 item_type = "book cover"
-            elif category == "Movies" or category == "Disney Channel Original Movies":
+            elif category == "Movies" or category == "Disney Channel Original Movies" or category == "Reality tv shows" or category == "Rom Coms":
                 item_type = "poster"
+            elif category == "The Office":
+                item_type = "character photo"
             else:
                 item_type = "image"
 
@@ -490,6 +507,12 @@ def main():
             print("Usage: python manual_cleaner.py --batch <category> [amount]")
             print("Example: python manual_cleaner.py --batch Books 2")
             print("Example: python manual_cleaner.py --batch Movies 2")
+            print("Example: python manual_cleaner.py --batch \"Reality tv shows\" 2")
+            print("Example: python manual_cleaner.py --batch \"The Office\" 2")
+            print("Example: python manual_cleaner.py --batch Thanksgiving 2")
+            print("Example: python manual_cleaner.py --batch Dogs 2")
+            print("Example: python manual_cleaner.py --batch Horses 2")
+            print("Example: python manual_cleaner.py --batch \"Rom Coms\" 2")
             return
 
         category = sys.argv[2]
@@ -526,7 +549,18 @@ def main():
         print("Examples:")
         print("  python manual_cleaner.py --batch Books 2")
         print("  python manual_cleaner.py --batch Movies 2")
+        print("  python manual_cleaner.py --batch \"Reality tv shows\" 2")
+        print("  python manual_cleaner.py --batch \"The Office\" 2")
+        print("  python manual_cleaner.py --batch Thanksgiving 2")
+        print("  python manual_cleaner.py --batch Dogs 2")
+        print("  python manual_cleaner.py --batch Horses 2")
+        print("  python manual_cleaner.py --batch \"Rom Coms\" 2")
         print("  python manual_cleaner.py 'The Great Gatsby' Books")
+        print("  python manual_cleaner.py 'Michael Scott' \"The Office\"")
+        print("  python manual_cleaner.py 'Turkey' Thanksgiving")
+        print("  python manual_cleaner.py 'Labrador Retriever' Dogs")
+        print("  python manual_cleaner.py 'Arabian Horse' Horses")
+        print("  python manual_cleaner.py 'When Harry Met Sally' \"Rom Coms\"")
 
 if __name__ == "__main__":
     main()
