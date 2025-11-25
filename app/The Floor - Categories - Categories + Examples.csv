@@ -146,55 +146,57 @@ Chicago tourist stuff,Chicago Hot Dog stands,FALSE
 Chicago tourist stuff,Buckingham Fountain,FALSE
 Chicago tourist stuff,Chicago Pizza Museum (former),FALSE
 Chicago tourist stuff,Shakespeare Theater Navy Pier,FALSE
-Comedians,Dave Chappelle,FALSE
-Comedians,John Mulaney,FALSE
-Comedians,Ali Wong,FALSE
-Comedians,Jim Gaffigan,FALSE
-Comedians,Hasan Minhaj,FALSE
-Comedians,Taylor Tomlinson,FALSE
-Comedians,Pete Davidson,FALSE
-Comedians,Bo Burnham,FALSE
-Comedians,Kevin Hart,FALSE
-Comedians,Tig Notaro,FALSE
-Comedians,Sarah Silverman,FALSE
-Comedians,Norm Macdonald,FALSE
-Comedians,Jerry Seinfeld,FALSE
-Comedians,Ellen DeGeneres,FALSE
-Comedians,Amy Schumer,FALSE
-Comedians,Trevor Noah,FALSE
-Comedians,Bill Burr,FALSE
-Comedians,Tom Segura,FALSE
-Comedians,Bert Kreischer,FALSE
-Comedians,Robin Williams,FALSE
-Comedians,Chris Rock,FALSE
-Comedians,Louis C.K.,FALSE
-Comedians,Hannah Gadsby,FALSE
-Comedians,Nikki Glaser,FALSE
-Comedians,Jo Koy,FALSE
-Comedians,Gabriel Iglesias,FALSE
-Comedians,Maria Bamford,FALSE
-Comedians,Mike Birbiglia,FALSE
-Comedians,Jim Jefferies,FALSE
-Comedians,Marc Maron,FALSE
-Comedians,Whitney Cummings,FALSE
-Comedians,Kathleen Madigan,FALSE
-Comedians,Ron Funches,FALSE
-Comedians,Joe Rogan,FALSE
-Comedians,George Carlin,FALSE
-Comedians,Richard Pryor,FALSE
-Comedians,Patton Oswalt,FALSE
-Comedians,Demetri Martin,FALSE
-Comedians,Jimmy Carr,FALSE
-Comedians,Ricky Gervais,FALSE
-Comedians,Larry David,FALSE
-Comedians,Wanda Sykes,FALSE
-Comedians,Chelsea Peretti,FALSE
-Comedians,Hasan Minhaj,FALSE
-Comedians,Cameron Esposito,FALSE
-Comedians,Rory Scovel,FALSE
-Comedians,Michelle Wolf,FALSE
-Comedians,Bill Hicks,FALSE
-Comedians,Eddie Murphy,FALSE
+Comedians,Jerry Seinfeld
+Comedians,Ellen DeGeneres
+Comedians,Jim Gaffigan
+Comedians,Brian Regan
+Comedians,Nate Bargatze
+Comedians,John Mulaney
+Comedians,Hasan Minhaj
+Comedians,Ali Wong
+Comedians,Tig Notaro
+Comedians,Mike Birbiglia
+Comedians,Iliza Shlesinger
+Comedians,Bo Burnham
+Comedians,Taylor Tomlinson
+Comedians,Kevin Hart
+Comedians,Trevor Noah
+Comedians,Wanda Sykes
+Comedians,Chris Rock
+Comedians,Dave Chappelle
+Comedians,Steve Martin
+Comedians,Martin Short
+Comedians,Amy Poehler
+Comedians,Tina Fey
+Comedians,Seth Meyers
+Comedians,Conan O'Brien
+Comedians,Stephen Colbert
+Comedians,Jimmy Fallon
+Comedians,Jimmy Kimmel
+Comedians,Jay Leno
+Comedians,Brian Posehn
+Comedians,Patton Oswalt
+Comedians,Maria Bamford
+Comedians,Demetri Martin
+Comedians,Russell Peters
+Comedians,Gabriel Iglesias
+Comedians,Ronny Chieng
+Comedians,Jordan Peele
+Comedians,Keegan-Michael Key
+Comedians,Fred Armisen
+Comedians,Bill Hader
+Comedians,Kristen Wiig
+Comedians,Melissa McCarthy
+Comedians,Kenan Thompson
+Comedians,Kate McKinnon
+Comedians,Bowen Yang
+Comedians,John Oliver
+Comedians,Phoebe Robinson
+Comedians,Nicole Byer
+Comedians,Fortune Feimster
+Comedians,Katherine Ryan
+Comedians,Marc Maron
+Comedians,Reggie Watts
 Improv comedians,Tina Fey,FALSE
 Improv comedians,Amy Poehler,FALSE
 Improv comedians,Colin Mochrie,FALSE
@@ -917,7 +919,7 @@ Sports,Handball,FALSE
 Sports,Water Polo,FALSE
 Sports,Powerlifting,FALSE
 Sports,Bodybuilding,FALSE
-Sports,Equestrian,FALSE
+Sports,Broomball
 Sports,Gymnastics,FALSE
 Sports,Curling,FALSE
 Sports,Archery,FALSE
@@ -928,7 +930,7 @@ Sports,Billiards,FALSE
 Sports,Darts,FALSE
 Sports,Ultimate Frisbee,FALSE
 Sports,Dodgeball,FALSE
-Sports,CrossFit,FALSE
+Sports,Cheerleading,FALSE
 Sports,Marathon,FALSE
 Sports,Triathlon,FALSE
 Sports,Climbing,FALSE
@@ -1234,7 +1236,7 @@ Closet,Windbreaker,FALSE
 Closet,Poncho,FALSE
 Fridge,Milk,FALSE
 Fridge,Eggs,FALSE
-Fridge,Butter,FALSE
+Fridge,Stick of butter,FALSE
 Fridge,Cheddar cheese,FALSE
 Fridge,Mozzarella,FALSE
 Fridge,Yogurt,FALSE
@@ -1248,16 +1250,16 @@ Fridge,Spinach,FALSE
 Fridge,Carrots,FALSE
 Fridge,Celery,FALSE
 Fridge,Broccoli,FALSE
-Fridge,Leftovers,FALSE
+Fridge,Brita,FALSE
 Fridge,Ketchup,FALSE
 Fridge,Mustard,FALSE
-Fridge,Mayonnaise,FALSE
+Fridge,Bottle of Mayonnaise,FALSE
 Fridge,Pickles,FALSE
 Fridge,Bacon,FALSE
 Fridge,Ham,FALSE
 Fridge,Turkey slices,FALSE
 Fridge,Grapes,FALSE
-Fridge,Berries,FALSE
+Fridge,Strawberries,FALSE
 Fridge,Applesauce cup,FALSE
 Fridge,Protein shake,FALSE
 Fridge,Salad dressing,FALSE
@@ -1276,8 +1278,8 @@ Fridge,Pesto,FALSE
 Fridge,Fruit cup,FALSE
 Fridge,Tortillas,FALSE
 Fridge,Hash browns,FALSE
-Fridge,Frozen waffles,FALSE
-Fridge,Chicken broth,FALSE
+Fridge,Waffles,FALSE
+Fridge,Blueberries,FALSE
 Fridge,Tofu,FALSE
 Fridge,Miso paste,FALSE
 Fridge,Fresh herbs,FALSE
@@ -1285,7 +1287,7 @@ Garage,Hammer,FALSE
 Garage,Screwdriver,FALSE
 Garage,Wrench,FALSE
 Garage,Power drill,FALSE
-Garage,Nails,FALSE
+Garage,Nail,FALSE
 Garage,Screws,FALSE
 Garage,Paint can,FALSE
 Garage,Paintbrush,FALSE
@@ -1314,21 +1316,18 @@ Garage,Chainsaw,FALSE
 Garage,Folding chair,FALSE
 Garage,Camp stove,FALSE
 Garage,Cooler,FALSE
-Garage,Plastic bins,FALSE
+Garage,Home Depot Bucket,FALSE
 Garage,Luggage,FALSE
 Garage,Sports equipment,FALSE
 Garage,Snow shovel,FALSE
-Garage,Rock salt,FALSE
-Garage,Workbench light,FALSE
 Garage,Ratchet straps,FALSE
 Garage,Shop vac,FALSE
 Garage,Work gloves,FALSE
 Garage,Roller skates,FALSE
 Garage,Paint roller,FALSE
-Garage,Cordless drill batteries,FALSE
+Garage,Cordless drill,FALSE
 Garage,Drill bits,FALSE
 Garage,Step ladder,FALSE
-Garage,Car wash soap,FALSE
 Garage,Tarp,FALSE
 Camping,Tent,FALSE
 Camping,Sleeping bag,FALSE
@@ -2210,3 +2209,146 @@ Rom Coms,Nappily Ever After
 Rom Coms,The Half of It
 Rom Coms,Moonstruck
 Rom Coms,Splash
+Holidays,New Year’s Day
+Holidays,Valentine’s Day
+Holidays,St. Patrick’s Day
+Holidays,Easter
+Holidays,Mother’s Day
+Holidays,Father’s Day
+Holidays,Independence Day
+Holidays,Halloween
+Holidays,Thanksgiving
+Holidays,Christmas
+Holidays,Hanukkah
+Holidays,Kwanzaa
+Holidays,New Year’s Eve
+Holidays,Lunar New Year
+Holidays,Diwali
+Holidays,Ramadan
+Holidays,Eid al-Fitr
+Holidays,Eid al-Adha
+Holidays,Passover
+Holidays,Rosh Hashanah
+Holidays,Yom Kippur
+Holidays,Veterans Day
+Holidays,Memorial Day
+Holidays,Labor Day
+Holidays,Martin Luther King Jr. Day
+Holidays,Cinco de Mayo
+Holidays,Mardi Gras
+Holidays,Groundhog Day
+Holidays,Arbor Day
+Holidays,Earth Day
+Holidays,Flag Day
+Holidays,Patriot Day
+Holidays,Columbus Day / Indigenous Peoples’ Day
+Holidays,Boxing Day
+Holidays,Oktoberfest
+Holidays,Carnival
+Holidays,Good Friday
+Holidays,All Saints’ Day
+Holidays,Day of the Dead
+Holidays,Victoria Day
+Holidays,Canada Day
+Holidays,Bastille Day
+Holidays,Guy Fawkes Night
+Holidays,Mid-Autumn Festival
+Holidays,International Women’s Day
+Holidays,Teacher Appreciation Day
+Holidays,Pride Day
+Holidays,Black Friday
+Holidays,Pi Day
+Famous People Under 30,Tupac Shakur,25
+Famous People Under 30,The Notorious B.I.G.,24
+Famous People Under 30,Anne Frank,15
+Famous People Under 30,Kurt Cobain,27
+Famous People Under 30,Amy Winehouse,27
+Famous People Under 30,Avicii,28
+Famous People Under 30,XXXTentacion,20
+Famous People Under 30,Juice WRLD,21
+Famous People Under 30,Joan of Arc,19
+Famous People Under 30,Tutankhamun,18
+Famous People Under 30,Pocahontas,21
+Famous People Under 30,Jimi Hendrix,27
+Famous People Under 30,James Dean,24
+Famous People Under 30,Jim Morrison,27
+Famous People Under 30,Janis Joplin,27
+Famous People Under 30,Aaliyah,22
+Famous People Under 30,River Phoenix,23
+Famous People Under 30,Otis Redding,26
+Famous People Under 30,Buddy Holly,22
+Famous People Under 30,Hank Williams,29
+Famous People Under 30,Lil Peep,21
+Famous People Under 30,Christina Grimmie,22
+Famous People Under 30,Anton Yelchin,27
+Famous People Under 30,Brandon Lee,28
+Famous People Under 30,Sid Vicious,21
+Famous People Under 30,Ritchie Valens,17
+Famous People Under 30,Robert Johnson,27
+Famous People Under 30,Brian Jones,27
+Famous People Under 30,Nick Drake,26
+Famous People Under 30,Stuart Sutcliffe,21
+Famous People Under 30,Jonathan Brandis,27
+Famous People Under 30,Brad Renfro,25
+Famous People Under 30,Heather O'Rourke,12
+Famous People Under 30,Gia Carangi,26
+Famous People Under 30,Peaches Geldof,25
+Famous People Under 30,Bobby Fuller,23
+Famous People Under 30,Jean Harlow,26
+Famous People Under 30,John Keats,25
+Famous People Under 30,Percy Bysshe Shelley,29
+Famous People Under 30,Camoflauge,21
+Famous People Under 30,Lil Snupe,18
+Famous People Under 30,Heather Bratton,19
+Famous People Under 30,Leslie Harvey,27
+Famous People Under 30,Stephen Foster,29
+Famous People Under 30,Edward VI,15
+Famous People Under 30,Lady Jane Grey,16
+Famous People Under 30,Princess Charlotte of Wales,21
+Famous People Under 30,David Rizzio,28
+Famous People Under 30,Henry Moseley,27
+Famous People Under 30,Évariste Galois,20
+Amusement Parks,Roller Coaster
+Amusement Parks,Ferris Wheel
+Amusement Parks,Bumper Cars
+Amusement Parks,Log Flume
+Amusement Parks,Drop Tower
+Amusement Parks,Carousel
+Amusement Parks,Swing Ride
+Amusement Parks,Water Slide
+Amusement Parks,Go-Karts
+Amusement Parks,Cotton Candy
+Amusement Parks,Popcorn
+Amusement Parks,Funnel Cake
+Amusement Parks,Churros
+Amusement Parks,Hot Dogs
+Amusement Parks,Pretzels
+Amusement Parks,Ice Cream
+Amusement Parks,Lemonade Stand
+Amusement Parks,Turkey Legs
+Amusement Parks,Soda Fountain
+Amusement Parks,Haunted House
+Amusement Parks,Funhouse Mirrors
+Amusement Parks,Arcade Games
+Amusement Parks,Mini Golf
+Amusement Parks,Parades
+Amusement Parks,Character Meet-and-Greets
+Amusement Parks,4D Theater
+Amusement Parks,Fireworks Show
+Amusement Parks,Petting Zoo
+Amusement Parks,Ride Operators
+Amusement Parks,Park Mascots
+Amusement Parks,Security Guards
+Amusement Parks,Food Vendors
+Amusement Parks,Maintenance Crew
+Amusement Parks,Park Maps
+Amusement Parks,Stuffed Animals
+Amusement Parks,Lockers
+Amusement Parks,Gift Shop
+Amusement Parks,Tea cups
+Amusement Parks,Lines
+Amusement Parks,Bumper boats
+Amusement Parks,Caterpillar
+Amusement Parks,Hayride
+Amusement Parks,Train Ride
+

@@ -213,6 +213,27 @@ def search_and_download(item_name, category="Movies", skip_urls=None):
     elif category == "Horses":
         # Horses category searches for horse breeds, activities, and equipment
         query = f"{item_name} horse equestrian photo high resolution"
+    elif category == "Garage" or category == "Fridge" or category == "Laundry":
+        # Garage, Fridge, and Laundry categories search for standalone items on white background
+        query = f"{item_name} isolated white background product photo high resolution"
+    elif category == "Sports":
+        # Sports category searches for action shots
+        query = f"{item_name} sports action shot high resolution"
+    elif category == "Comedians":
+        # Comedians category searches for comedian photos/portraits
+        query = f"{item_name} comedian photo portrait high resolution"
+    elif category == "Famous People Under 30":
+        # Famous People Under 30 category searches for photos/portraits of famous people
+        query = f"{item_name} photo portrait high resolution"
+    elif category == "Amusement Parks":
+        # Amusement Parks category searches for amusement park-related photos (rides, food, people, items)
+        query = f"{item_name} amusement park photo high resolution"
+    elif category == "Fast food chains":
+        # Fast food chains category searches for restaurant logos
+        query = f"{item_name} logo fast food restaurant high resolution"
+    elif category == "Holidays":
+        # Holidays category searches for photos of people celebrating the holiday (not text/cards)
+        query = f"people celebrating {item_name} photo high resolution"
     else:
         # Generic search for other categories
         query = f"{item_name} {category.lower()} high resolution"
@@ -372,6 +393,20 @@ def process_image(image_source, output_path, item_title="Image", category="Movie
                 item_type = "poster"
             elif category == "The Office":
                 item_type = "character photo"
+            elif category == "Comedians":
+                item_type = "photo"
+            elif category == "Famous People Under 30":
+                item_type = "photo"
+            elif category == "Amusement Parks":
+                item_type = "photo"
+            elif category == "Fast food chains":
+                item_type = "logo"
+            elif category == "Holidays":
+                item_type = "celebration photo"
+            elif category == "Garage" or category == "Fridge" or category == "Laundry":
+                item_type = "item"
+            elif category == "Sports":
+                item_type = "action shot"
             else:
                 item_type = "image"
 
@@ -431,7 +466,7 @@ def process_image(image_source, output_path, item_title="Image", category="Movie
     cv2.destroyAllWindows()
     return action
 
-def run_batch_mode(category="Movies", amount_to_process=2):
+def run_batch_mode(category="Movies", amount_to_process=2, replace=False):
     csv_path = Path(__file__).parent / 'app' / 'The Floor - Categories - Categories + Examples.csv'
     items = []
 
@@ -443,6 +478,8 @@ def run_batch_mode(category="Movies", amount_to_process=2):
                 items.append(row['Example'])
 
     print(f"Found {len(items)} {category.lower()}.", flush=True)
+    if replace:
+        print("Replace mode: Will process existing files for re-editing.", flush=True)
 
     # Convert category name to folder name (kebab-case)
     folder_name = category.lower().replace(' ', '-')
@@ -468,21 +505,24 @@ def run_batch_mode(category="Movies", amount_to_process=2):
                 print(f"  Found alternative local file: {alt_filename}", flush=True)
                 file_path = alt_path
 
-        # SKIP if file already exists
-        if file_path.exists():
+        # SKIP if file already exists (unless in replace mode)
+        if file_path.exists() and not replace:
             print(f"  Skipping {item} (already exists at {file_path.name})", flush=True)
             continue
 
         count_processed += 1
 
-        # Check if we already have a local file to start with
-        source = str(file_path) if file_path.exists() else item
+        # In replace mode, if file exists, load it for editing; otherwise search for new one
+        # In normal mode, always search for new one (file doesn't exist at this point)
+        if replace and file_path.exists():
+            print(f"  Loading existing file for re-editing: {file_path.name}", flush=True)
+            source = str(file_path)
+        else:
+            source = item
+            # Add delay before search to avoid rate limiting
+            time.sleep(2)
 
         try:
-            # Add delay before search to avoid rate limiting
-            if not file_path.exists():
-                time.sleep(2)
-
             action = process_image(source, file_path, item_title=item, category=category)
 
             if action == "quit":
@@ -502,22 +542,24 @@ def run_batch_mode(category="Movies", amount_to_process=2):
 
 def main():
     if len(sys.argv) > 1 and sys.argv[1] == "--batch":
-        # Parse arguments: --batch <category> <amount>
+        # Parse arguments: --batch <category> [amount] [--replace]
         if len(sys.argv) < 3:
-            print("Usage: python manual_cleaner.py --batch <category> [amount]")
+            print("Usage: python manual_cleaner.py --batch <category> [amount] [--replace]")
             print("Example: python manual_cleaner.py --batch Books 2")
-            print("Example: python manual_cleaner.py --batch Movies 2")
-            print("Example: python manual_cleaner.py --batch \"Reality tv shows\" 2")
-            print("Example: python manual_cleaner.py --batch \"The Office\" 2")
-            print("Example: python manual_cleaner.py --batch Thanksgiving 2")
-            print("Example: python manual_cleaner.py --batch Dogs 2")
-            print("Example: python manual_cleaner.py --batch Horses 2")
-            print("Example: python manual_cleaner.py --batch \"Rom Coms\" 2")
             return
 
         category = sys.argv[2]
-        amount_to_process = int(sys.argv[3]) if len(sys.argv) > 3 else 2
-        run_batch_mode(category, amount_to_process)
+        amount_to_process = 2
+        replace = False
+
+        # Parse arguments - look for amount and --replace flag
+        for arg in sys.argv[3:]:
+            if arg == "--replace":
+                replace = True
+            elif arg.isdigit():
+                amount_to_process = int(arg)
+
+        run_batch_mode(category, amount_to_process, replace)
     elif len(sys.argv) > 1:
         # Single mode: python manual_cleaner.py "Item Name" [category]
         input_arg = sys.argv[1]
@@ -543,24 +585,12 @@ def main():
             process_image(input_arg, output_path, item_title=input_arg, category=category)
     else:
         print("Usage:")
-        print("  python manual_cleaner.py --batch <category> [amount]")
+        print("  python manual_cleaner.py --batch <category> [amount] [--replace]")
         print("  python manual_cleaner.py 'Item Name' [category]")
         print("")
         print("Examples:")
         print("  python manual_cleaner.py --batch Books 2")
-        print("  python manual_cleaner.py --batch Movies 2")
-        print("  python manual_cleaner.py --batch \"Reality tv shows\" 2")
-        print("  python manual_cleaner.py --batch \"The Office\" 2")
-        print("  python manual_cleaner.py --batch Thanksgiving 2")
-        print("  python manual_cleaner.py --batch Dogs 2")
-        print("  python manual_cleaner.py --batch Horses 2")
-        print("  python manual_cleaner.py --batch \"Rom Coms\" 2")
-        print("  python manual_cleaner.py 'The Great Gatsby' Books")
-        print("  python manual_cleaner.py 'Michael Scott' \"The Office\"")
-        print("  python manual_cleaner.py 'Turkey' Thanksgiving")
-        print("  python manual_cleaner.py 'Labrador Retriever' Dogs")
-        print("  python manual_cleaner.py 'Arabian Horse' Horses")
-        print("  python manual_cleaner.py 'When Harry Met Sally' \"Rom Coms\"")
+
 
 if __name__ == "__main__":
     main()
