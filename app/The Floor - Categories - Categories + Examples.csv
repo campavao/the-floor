@@ -303,7 +303,7 @@ Junk drawer,Random keys,FALSE
 Junk drawer,Binder clips,FALSE
 Junk drawer,Safety pins,FALSE
 Junk drawer,Glue sticks,FALSE
-Junk drawer,Adhesive tape,FALSE
+Junk drawer,Duct tape,FALSE
 Junk drawer,Spare buttons,FALSE
 Junk drawer,Twine,FALSE
 Junk drawer,Small flashlight,FALSE
@@ -311,11 +311,9 @@ Junk drawer,Matches,FALSE
 Junk drawer,Lighters,FALSE
 Junk drawer,Screwdriver,FALSE
 Junk drawer,Allen wrenches,FALSE
-Junk drawer,AA batteries,FALSE
-Junk drawer,AAA batteries,FALSE
 Junk drawer,Sticky tack,FALSE
 Junk drawer,Old gift cards,FALSE
-Junk drawer,Candle stubs,FALSE
+Junk drawer,Candles,FALSE
 Junk drawer,Rubber gloves,FALSE
 Junk drawer,Felt pads,FALSE
 Junk drawer,Coin purse,FALSE
@@ -328,12 +326,11 @@ Junk drawer,Loose screws,FALSE
 Junk drawer,Spare fuses,FALSE
 Junk drawer,Old sunglasses,FALSE
 Junk drawer,Chip clips,FALSE
-Junk drawer,Pocket knife,FALSE
+Junk drawer,Swiss army knife,FALSE
 Junk drawer,Flash drives,FALSE
 Junk drawer,Playing cards,FALSE
 Junk drawer,Bottle opener,FALSE
 Junk drawer,Old magnets,FALSE
-Junk drawer,Rubber stopper,FALSE
 Junk drawer,Keychains,FALSE
 Junk drawer,Notepad,FALSE
 Junk drawer,Coasters,FALSE
@@ -1511,15 +1508,7 @@ MLB teams,Seattle Pilots
 MLB teams,Kansas City Athletics
 MLB teams,Milwaukee Braves
 MLB teams,Cleveland Naps
-MLB teams,Baltimore Terrapins
-MLB teams,Chicago Whales
 MLB teams,Pittsburgh Rebels
-MLB teams,Buffalo Blues
-MLB teams,Louisville Colonels
-MLB teams,Hartford Dark Blues
-MLB teams,Providence Grays
-MLB teams,St. Paul Apostles
-MLB teams,Brooklyn Bridegrooms
 Superheros,Superman
 Superheros,Batman
 Superheros,Wonder Woman

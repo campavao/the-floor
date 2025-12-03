@@ -74,16 +74,30 @@ def mouse_callback(event, x, y, flags, param):
     if event == cv2.EVENT_LBUTTONDOWN:
         drawing = True
         ix, iy = x, y
+        # Draw initial point
+        cv2.circle(mask_layer, (x, y), brush_size, (255, 255, 255), -1)
+        cv2.circle(img_display, (x, y), brush_size, (0, 0, 255), -1)
 
     elif event == cv2.EVENT_MOUSEMOVE:
         if drawing:
+            # Draw line between previous and current point for smoother drawing
+            if ix >= 0 and iy >= 0:
+                cv2.line(mask_layer, (ix, iy), (x, y), (255, 255, 255), brush_size * 2)
+                cv2.line(img_display, (ix, iy), (x, y), (0, 0, 255), brush_size * 2)
+            # Also draw circle at current position
             cv2.circle(mask_layer, (x, y), brush_size, (255, 255, 255), -1)
             cv2.circle(img_display, (x, y), brush_size, (0, 0, 255), -1)
+            ix, iy = x, y
 
     elif event == cv2.EVENT_LBUTTONUP:
         drawing = False
+        # Draw final point
+        if ix >= 0 and iy >= 0:
+            cv2.line(mask_layer, (ix, iy), (x, y), (255, 255, 255), brush_size * 2)
+            cv2.line(img_display, (ix, iy), (x, y), (0, 0, 255), brush_size * 2)
         cv2.circle(mask_layer, (x, y), brush_size, (255, 255, 255), -1)
         cv2.circle(img_display, (x, y), brush_size, (0, 0, 255), -1)
+        ix, iy = -1, -1
 
     elif event == cv2.EVENT_MOUSEWHEEL:
         # Check if CTRL is held down
@@ -92,30 +106,36 @@ def mouse_callback(event, x, y, flags, param):
             import time
 
             current_time = time.time()
-            # On Windows, OpenCV encodes scroll delta in the high 16 bits of flags
-            # Extract the wheel delta (typically 120 for one scroll unit)
-            wheel_delta = (flags >> 16) & 0xFFFF
-            # Handle signed value (can be negative for scroll down)
-            if wheel_delta > 32768:  # Handle unsigned to signed conversion
-                wheel_delta = wheel_delta - 65536
-
-            # Alternative: if wheel_delta extraction doesn't work, use relative comparison
-            if wheel_delta == 0 and last_wheel_time > 0 and current_time - last_wheel_time < 0.2:
-                # Fallback: compare flags values
+            # On macOS, OpenCV may encode scroll differently
+            # Try multiple methods to detect scroll direction
+            wheel_delta = 0
+            
+            # Method 1: Extract from high 16 bits (Windows/Linux)
+            delta_from_flags = (flags >> 16) & 0xFFFF
+            if delta_from_flags > 32768:
+                delta_from_flags = delta_from_flags - 65536
+            if delta_from_flags != 0:
+                wheel_delta = delta_from_flags
+            
+            # Method 2: For macOS trackpad, compare flags values over time
+            if wheel_delta == 0 and last_wheel_time > 0 and current_time - last_wheel_time < 0.3:
                 if flags > last_wheel_flags:
                     wheel_delta = 120  # Scroll up
                 elif flags < last_wheel_flags:
                     wheel_delta = -120  # Scroll down
+            
+            # Method 3: For macOS, sometimes the y coordinate changes indicate scroll
+            # (This is a fallback - OpenCV on macOS is tricky)
 
             if wheel_delta > 0:
                 brush_size = min(brush_size + 2, 200)  # Increase brush size, max 200
+                print(f"Brush size: {brush_size}", flush=True)
             elif wheel_delta < 0:
                 brush_size = max(brush_size - 2, 5)  # Decrease brush size, min 5
+                print(f"Brush size: {brush_size}", flush=True)
 
             last_wheel_time = current_time
             last_wheel_flags = flags
-            if wheel_delta != 0:  # Only print if we detected a change
-                print(f"Brush size: {brush_size}", flush=True)
 
 def get_filename(movie_name):
     name = movie_name.lower()
@@ -230,8 +250,8 @@ def search_and_download(item_name, category="Movies", skip_urls=None):
     elif category == "Horses":
         # Horses category searches for horse breeds, activities, and equipment
         query = f"{item_name} horse equestrian photo high resolution"
-    elif category == "Garage" or category == "Fridge" or category == "Laundry":
-        # Garage, Fridge, and Laundry categories search for standalone items on white background
+    elif category == "Garage" or category == "Fridge" or category == "Laundry" or category == "Junk drawer":
+        # Garage, Fridge, Laundry, and Junk drawer categories search for standalone items on white background
         query = f"{item_name} isolated white background product photo high resolution"
     elif category == "Sports":
         # Sports category searches for action shots
@@ -248,6 +268,12 @@ def search_and_download(item_name, category="Movies", skip_urls=None):
     elif category == "Fast food chains":
         # Fast food chains category searches for restaurant logos
         query = f"{item_name} logo fast food restaurant high resolution"
+    elif category == "MLB teams":
+        # MLB teams category searches for baseball team logos
+        query = f"{item_name} MLB baseball team logo high resolution"
+    elif category == "States":
+        # States category searches for state outline maps
+        query = f"{item_name} state outline map USA high resolution"
     elif category == "Holidays":
         # Holidays category searches for photos of people celebrating the holiday (not text/cards)
         query = f"people celebrating {item_name} photo high resolution"
@@ -466,7 +492,7 @@ def process_image(image_source, output_path, item_title="Image", category="Movie
         controls += " | [G]=Back to Grid"
     controls += " | [Esc]=Quit Batch"
     print(controls, flush=True)
-    print("Brush: [Ctrl+Scroll]=Adjust size (current: {})".format(brush_size), flush=True)
+    print("Brush: [Ctrl+Scroll] or [+/-]=Adjust size (current: {})".format(brush_size), flush=True)
 
     action = "next"
 
@@ -490,6 +516,12 @@ def process_image(image_source, output_path, item_title="Image", category="Movie
             mask_layer = np.zeros((h, w), dtype=np.uint8)
             img_display = current_img.copy()
             print("Reset.")
+        elif key == ord('+') or key == ord('='): # Increase brush size
+            brush_size = min(brush_size + 2, 200)
+            print(f"Brush size: {brush_size}", flush=True)
+        elif key == ord('-') or key == ord('_'): # Decrease brush size
+            brush_size = max(brush_size - 2, 5)
+            print(f"Brush size: {brush_size}", flush=True)
         elif key == ord('t'): # Try Again (Re-download)
             # Determine item type based on category
             if category == "Books":
@@ -504,11 +536,13 @@ def process_image(image_source, output_path, item_title="Image", category="Movie
                 item_type = "photo"
             elif category == "Amusement Parks":
                 item_type = "photo"
-            elif category == "Fast food chains":
+            elif category == "Fast food chains" or category == "MLB teams":
                 item_type = "logo"
+            elif category == "States":
+                item_type = "state outline"
             elif category == "Holidays":
                 item_type = "celebration photo"
-            elif category == "Garage" or category == "Fridge" or category == "Laundry":
+            elif category == "Garage" or category == "Fridge" or category == "Laundry" or category == "Junk drawer":
                 item_type = "item"
             elif category == "Sports":
                 item_type = "action shot"
@@ -672,12 +706,30 @@ def show_grid_view(category="Movies", initial_scroll_y=0):
         filename = get_filename(item)
         file_path = save_dir / filename
 
-        # Fallback for "The X" -> "x.jpg"
+        # Check for both .jpg and .png extensions
+        if not file_path.exists():
+            # Try .png instead of .jpg
+            png_filename = filename.replace('.jpg', '.png')
+            png_path = save_dir / png_filename
+            if png_path.exists():
+                file_path = png_path
+                filename = png_filename
+
+        # Fallback for "The X" -> "x.jpg" or "x.png"
         if not file_path.exists() and filename.startswith("the-"):
             alt_filename = filename[4:]
             alt_path = save_dir / alt_filename
             if alt_path.exists():
                 file_path = alt_path
+            else:
+                # Try with opposite extension
+                if alt_filename.endswith('.jpg'):
+                    alt_png = alt_filename.replace('.jpg', '.png')
+                else:
+                    alt_png = alt_filename.replace('.png', '.jpg')
+                alt_path = save_dir / alt_png
+                if alt_path.exists():
+                    file_path = alt_path
 
         has_file = file_path.exists()
         img = None
@@ -862,18 +914,27 @@ def show_grid_view(category="Movies", initial_scroll_y=0):
                 break
 
         elif event == cv2.EVENT_MOUSEWHEEL:
-            # Handle scrolling
+            # Handle scrolling - improved for macOS trackpad
             current_time = time.time()
-            wheel_delta = (flags >> 16) & 0xFFFF
-            if wheel_delta > 32768:
-                wheel_delta = wheel_delta - 65536
-
-            if wheel_delta == 0 and last_wheel_time > 0 and current_time - last_wheel_time < 0.2:
+            wheel_delta = 0
+            
+            # Method 1: Extract from high 16 bits (Windows/Linux)
+            delta_from_flags = (flags >> 16) & 0xFFFF
+            if delta_from_flags > 32768:
+                delta_from_flags = delta_from_flags - 65536
+            if delta_from_flags != 0:
+                wheel_delta = delta_from_flags
+            
+            # Method 2: For macOS trackpad, compare flags values over time
+            if wheel_delta == 0:
                 last_flags = param.get('last_flags', 0) if isinstance(param, dict) else 0
-                if flags > last_flags:
-                    wheel_delta = 120
-                elif flags < last_flags:
-                    wheel_delta = -120
+                if last_wheel_time > 0 and current_time - last_wheel_time < 0.3:
+                    if flags > last_flags:
+                        wheel_delta = 120  # Scroll up
+                    elif flags < last_flags:
+                        wheel_delta = -120  # Scroll down
+                if isinstance(param, dict):
+                    param['last_flags'] = flags
 
             if wheel_delta != 0:
                 # Calculate max scroll
@@ -885,10 +946,10 @@ def show_grid_view(category="Movies", initial_scroll_y=0):
                 cell_height = thumb_sz + 50 + base_padding * 2
                 max_scroll = max(0, ((len(items) + cols - 1) // cols) * cell_height - win_h)
 
-                scroll_y = max(0, min(max_scroll, scroll_y - wheel_delta))
+                # Scale scroll speed for smoother trackpad experience
+                scroll_amount = wheel_delta * 0.5  # Make scrolling smoother
+                scroll_y = max(0, min(max_scroll, scroll_y - int(scroll_amount)))
                 last_wheel_time = current_time
-                if isinstance(param, dict):
-                    param['last_flags'] = flags
 
     cv2.setMouseCallback(window_name, grid_mouse_callback, {'last_flags': 0})
 
@@ -896,7 +957,7 @@ def show_grid_view(category="Movies", initial_scroll_y=0):
     print("  [Click SAVE]: Download and save new image", flush=True)
     print("  [Click NEW]: Download new image for existing file", flush=True)
     print("  [Click EDIT]: Edit existing image", flush=True)
-    print("  [Mouse Wheel]: Scroll up/down", flush=True)
+    print("  [Mouse Wheel] or [W/S keys]: Scroll up/down", flush=True)
     print("  [ESC]: Exit grid view", flush=True)
     print("  [R]: Refresh grid (re-download missing images)", flush=True)
 
@@ -935,6 +996,12 @@ def show_grid_view(category="Movies", initial_scroll_y=0):
 
         if key == 27:  # ESC
             break
+        
+        # Keyboard scrolling (for trackpad users) - use W/S keys
+        if key == ord('w') or key == ord('W'):
+            scroll_y = max(0, scroll_y - 100)
+        elif key == ord('s') or key == ord('S'):
+            scroll_y = min(max_scroll, scroll_y + 100)
 
         # Handle click action
         if click_action[0] is not None:
@@ -1008,7 +1075,7 @@ def show_grid_view(category="Movies", initial_scroll_y=0):
                     query = f"{item} dog breed photo high resolution"
                 elif category == "Horses":
                     query = f"{item} horse equestrian photo high resolution"
-                elif category == "Garage" or category == "Fridge" or category == "Laundry":
+                elif category == "Garage" or category == "Fridge" or category == "Laundry" or category == "Junk drawer":
                     query = f"{item} isolated white background product photo high resolution"
                 elif category == "Sports":
                     query = f"{item} sports action shot high resolution"
@@ -1020,6 +1087,10 @@ def show_grid_view(category="Movies", initial_scroll_y=0):
                     query = f"{item} amusement park photo high resolution"
                 elif category == "Fast food chains":
                     query = f"{item} logo fast food restaurant high resolution"
+                elif category == "MLB teams":
+                    query = f"{item} MLB baseball team logo high resolution"
+                elif category == "States":
+                    query = f"{item} state outline map USA high resolution"
                 elif category == "Holidays":
                     query = f"people celebrating {item} photo high resolution"
                 elif category == "Chicago tourist stuff":
@@ -1152,13 +1223,32 @@ def run_batch_mode(category="Movies", amount_to_process=2, replace=False):
         filename = get_filename(item)
         file_path = save_dir / filename
 
-        # Fallback for "The X" -> "x.jpg"
+        # Check for both .jpg and .png extensions
+        if not file_path.exists():
+            # Try .png instead of .jpg
+            png_filename = filename.replace('.jpg', '.png')
+            png_path = save_dir / png_filename
+            if png_path.exists():
+                file_path = png_path
+                filename = png_filename
+
+        # Fallback for "The X" -> "x.jpg" or "x.png"
         if not file_path.exists() and filename.startswith("the-"):
             alt_filename = filename[4:] # Remove "the-"
             alt_path = save_dir / alt_filename
             if alt_path.exists():
                 print(f"  Found alternative local file: {alt_filename}", flush=True)
                 file_path = alt_path
+            else:
+                # Try with opposite extension
+                if alt_filename.endswith('.jpg'):
+                    alt_png = alt_filename.replace('.jpg', '.png')
+                else:
+                    alt_png = alt_filename.replace('.png', '.jpg')
+                alt_path = save_dir / alt_png
+                if alt_path.exists():
+                    print(f"  Found alternative local file: {alt_png}", flush=True)
+                    file_path = alt_path
 
         # SKIP if file already exists (unless in replace mode)
         if file_path.exists() and not replace:
