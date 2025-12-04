@@ -52,19 +52,32 @@ def setup_pipeline():
     print("Loading Stable Diffusion Inpainting model...")
     model_id = "runwayml/stable-diffusion-inpainting"
     try:
+        # Determine device and dtype
+        device = "cpu"
+        dtype = torch.float32  # Default to float32 for better compatibility
+        
+        if torch.cuda.is_available():
+            device = "cuda"
+            dtype = torch.float16
+            print("    [INFO] CUDA detected, using GPU (CUDA)")
+        elif hasattr(torch.backends, 'mps') and torch.backends.mps.is_available():
+            device = "mps"
+            dtype = torch.float32  # MPS works better with float32
+            print("    [INFO] MPS (Metal) detected, using GPU (Apple Silicon/AMD)")
+        else:
+            print("    [WARNING] No GPU available! Using CPU (this will be slow).")
+        
         pipe = StableDiffusionInpaintPipeline.from_pretrained(
             model_id,
-            torch_dtype=torch.float16,
+            torch_dtype=dtype,
             safety_checker=None
         )
-        if torch.cuda.is_available():
-            pipe = pipe.to("cuda")
-            print("    [OK] Model loaded on GPU (CUDA)")
-        else:
-            print("    [WARNING] CUDA not available! Using CPU.")
-            pipe = pipe.to("cpu")
+        pipe = pipe.to(device)
+        print(f"    [OK] Model loaded on {device.upper()}")
     except Exception as e:
         print(f"Failed to load AI model: {e}")
+        import traceback
+        traceback.print_exc()
         return None
     return pipe
 
@@ -142,6 +155,206 @@ def get_filename(movie_name):
     name = re.sub(r'[^\w\s-]', '', name)
     name = re.sub(r'\s+', '-', name)
     return name.strip('-') + ".jpg"
+
+def remove_item_from_csv(category, item_name):
+    """Remove an item from the CSV file - only removes exact matches"""
+    csv_path = Path(__file__).parent / 'app' / 'The Floor - Categories - Categories + Examples.csv'
+    
+    # Create backup first
+    backup_path = csv_path.with_suffix('.csv.backup')
+    import shutil
+    shutil.copy2(csv_path, backup_path)
+    
+    # Read all rows
+    rows = []
+    removed_count = 0
+    with open(csv_path, 'r', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        fieldnames = reader.fieldnames
+        
+        if not fieldnames or 'Category' not in fieldnames or 'Example' not in fieldnames:
+            print(f"  ERROR: CSV file is malformed. Expected 'Category' and 'Example' columns.", flush=True)
+            return False
+        
+        for row in reader:
+            # Filter out any fields not in fieldnames (handle malformed CSV)
+            filtered_row = {k: v for k, v in row.items() if k in fieldnames}
+            
+            # Ensure all fieldnames are present (fill missing with empty string)
+            for field in fieldnames:
+                if field not in filtered_row:
+                    filtered_row[field] = ''
+            
+            # Strip whitespace and compare exactly
+            row_category = filtered_row.get('Category', '').strip()
+            row_example = filtered_row.get('Example', '').strip()
+            
+            # Only skip if BOTH category and example match exactly
+            if row_category == category.strip() and row_example == item_name.strip():
+                removed_count += 1
+                continue
+            rows.append(filtered_row)
+    
+    if removed_count == 0:
+        print(f"  WARNING: No matching row found to delete (Category: '{category}', Example: '{item_name}')", flush=True)
+        return False
+    
+    if removed_count > 1:
+        print(f"  WARNING: Found {removed_count} matching rows! Only expected 1. Not deleting to prevent data loss.", flush=True)
+        print(f"  Backup saved to: {backup_path}", flush=True)
+        return False
+    
+    # Write back to CSV
+    try:
+        with open(csv_path, 'w', encoding='utf-8', newline='') as f:
+            writer = csv.DictWriter(f, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(rows)
+        print(f"  Backup saved to: {backup_path}", flush=True)
+        return True
+    except Exception as e:
+        print(f"  ERROR: Failed to write CSV: {e}", flush=True)
+        print(f"  Backup available at: {backup_path}", flush=True)
+        # Restore from backup
+        try:
+            shutil.copy2(backup_path, csv_path)
+            print(f"  Restored from backup", flush=True)
+        except:
+            pass
+        return False
+
+def get_clipboard_text():
+    """Get text from clipboard - cross-platform"""
+    try:
+        import subprocess
+        if sys.platform == 'darwin':  # macOS
+            result = subprocess.run(['pbpaste'], capture_output=True, text=True, timeout=1)
+            return result.stdout.strip() if result.returncode == 0 else None
+        elif sys.platform == 'win32':  # Windows
+            result = subprocess.run(['powershell', '-command', 'Get-Clipboard'], capture_output=True, text=True, timeout=1)
+            return result.stdout.strip() if result.returncode == 0 else None
+        else:  # Linux
+            try:
+                result = subprocess.run(['xclip', '-selection', 'clipboard', '-o'], capture_output=True, text=True, timeout=1)
+                return result.stdout.strip() if result.returncode == 0 else None
+            except:
+                try:
+                    result = subprocess.run(['xsel', '-b'], capture_output=True, text=True, timeout=1)
+                    return result.stdout.strip() if result.returncode == 0 else None
+                except:
+                    return None
+    except:
+        return None
+
+def get_text_input(window_name, prompt_text, initial_text=""):
+    """Get text input from user using OpenCV window with keyboard input"""
+    text = initial_text
+    cursor_pos = len(text)
+    show_cursor = True
+    last_cursor_time = time.time()
+    last_paste_check = time.time()
+    
+    # Create input window
+    input_width = 800
+    input_height = 150
+    input_img = np.ones((input_height, input_width, 3), dtype=np.uint8) * 240
+    
+    input_window = "URL Input"
+    cv2.namedWindow(input_window, cv2.WINDOW_NORMAL)
+    cv2.setWindowProperty(input_window, cv2.WND_PROP_TOPMOST, 1)
+    cv2.resizeWindow(input_window, input_width, input_height)
+    
+    while True:
+        display_img = input_img.copy()
+        
+        # Draw prompt
+        cv2.putText(display_img, prompt_text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 0), 2)
+        
+        # Draw text input box
+        cv2.rectangle(display_img, (10, 50), (input_width - 10, 100), (255, 255, 255), 2)
+        cv2.rectangle(display_img, (10, 50), (input_width - 10, 100), (200, 200, 200), 1)
+        
+        # Draw text (truncate if too long to fit)
+        max_chars = 90
+        display_text = text if len(text) <= max_chars else "..." + text[-(max_chars-3):]
+        if display_text:
+            cv2.putText(display_img, display_text, (15, 85), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 0), 2)
+        
+        # Draw cursor
+        current_time = time.time()
+        if current_time - last_cursor_time > 0.5:
+            show_cursor = not show_cursor
+            last_cursor_time = current_time
+        
+        if show_cursor:
+            # Calculate cursor position
+            text_before_cursor = display_text[:max(0, cursor_pos - (len(text) - len(display_text)) if len(text) > max_chars else cursor_pos)]
+            if text_before_cursor:
+                text_width = cv2.getTextSize(text_before_cursor, cv2.FONT_HERSHEY_SIMPLEX, 0.6, 2)[0][0]
+            else:
+                text_width = 0
+            cursor_x = 15 + text_width
+            cv2.line(display_img, (cursor_x, 70), (cursor_x, 95), (0, 0, 0), 2)
+        
+        # Draw instructions
+        cv2.putText(display_img, "Press ENTER to confirm, ESC to cancel, P to paste, CMD+V also works", (10, 130), 
+                   cv2.FONT_HERSHEY_SIMPLEX, 0.4, (100, 100, 100), 1)
+        
+        cv2.imshow(input_window, display_img)
+        key_code = cv2.waitKey(30)
+        
+        # Store previous clipboard to detect changes
+        if not hasattr(get_text_input, 'last_clipboard'):
+            get_text_input.last_clipboard = ""
+        
+        # Periodically check clipboard for changes (for CMD+V detection)
+        current_time = time.time()
+        if current_time - last_paste_check > 0.05:  # Check clipboard every 50ms
+            clipboard_text = get_clipboard_text()
+            if clipboard_text and clipboard_text != get_text_input.last_clipboard:
+                # Clipboard changed - might be a paste
+                get_text_input.last_clipboard = clipboard_text
+            last_paste_check = current_time
+        
+        key = key_code & 0xFF
+        
+        if key == 13 or key == 10:  # ENTER
+            cv2.destroyWindow(input_window)
+            return text.strip() if text.strip() else None
+        elif key == 27:  # ESC
+            cv2.destroyWindow(input_window)
+            return None
+        elif key == 8 or key == 127:  # BACKSPACE
+            if cursor_pos > 0:
+                text = text[:cursor_pos-1] + text[cursor_pos:]
+                cursor_pos -= 1
+        elif key == ord('p') or key == ord('P'):  # P for paste
+            clipboard_text = get_clipboard_text()
+            if clipboard_text:
+                text = text[:cursor_pos] + clipboard_text + text[cursor_pos:]
+                cursor_pos += len(clipboard_text)
+                get_text_input.last_clipboard = clipboard_text
+        elif key == ord('v') or key == ord('V'):
+            # When 'v' is pressed, check if clipboard has new content (might be CMD+V)
+            clipboard_text = get_clipboard_text()
+            if clipboard_text and clipboard_text != get_text_input.last_clipboard:
+                # Likely a paste - insert clipboard content
+                text = text[:cursor_pos] + clipboard_text + text[cursor_pos:]
+                cursor_pos += len(clipboard_text)
+                get_text_input.last_clipboard = clipboard_text
+            elif clipboard_text:
+                # Clipboard exists but might be same - still try to paste if it's different from current text
+                if clipboard_text not in text or len(clipboard_text) > 10:  # If it's a long URL or not in text, paste it
+                    text = text[:cursor_pos] + clipboard_text + text[cursor_pos:]
+                    cursor_pos += len(clipboard_text)
+                    get_text_input.last_clipboard = clipboard_text
+        elif 32 <= key <= 126:  # Printable ASCII characters
+            char = chr(key)
+            text = text[:cursor_pos] + char + text[cursor_pos:]
+            cursor_pos += 1
+        elif key == 0:  # Special key, check for arrow keys
+            # Handle arrow keys if needed (would need to check waitKey return value differently)
+            pass
 
 def load_image_with_alpha(file_path):
     """Load an image, handling transparency by compositing onto white background"""
@@ -283,6 +496,45 @@ def search_and_download(item_name, category="Movies", skip_urls=None):
     elif category == "Spirit Halloween Catalogue":
         # Spirit Halloween Catalogue category searches for Halloween costume photos
         query = f"{item_name} Halloween costume photo high resolution"
+    elif category == "Airport codes":
+        # Airport codes category searches for airport logos or signage
+        query = f"{item_name} airport logo code high resolution"
+    elif category == "Apps":
+        # Apps category searches for app icons/logos
+        query = f"{item_name} app icon logo mobile high resolution"
+    elif category == "Board games":
+        # Board games category searches for board game box covers
+        query = f"{item_name} board game box cover high resolution"
+    elif category == "Brand slogans":
+        # Brand slogans category searches for brand logos or advertisements
+        query = f"{item_name} brand logo advertisement high resolution"
+    elif category == "Broadway shows":
+        # Broadway shows category searches for Broadway show posters
+        query = f"{item_name} Broadway show poster musical theater high resolution"
+    elif category == "Chicago neighborhoods":
+        # Chicago neighborhoods category searches for neighborhood photos
+        query = f"{item_name} Chicago neighborhood photo high resolution"
+    elif category == "City skylines":
+        # City skylines category searches for city skyline photos
+        query = f"{item_name} city skyline photo high resolution"
+    elif category == "Disney Characters":
+        # Disney Characters category searches for Disney character photos
+        query = f"{item_name} Disney character photo portrait high resolution"
+    elif category == "Fair Foods":
+        # Fair Foods category searches for fair food photos
+        query = f"{item_name} fair food photo high resolution"
+    elif category == "Kitchen gadgets":
+        # Kitchen gadgets category searches for kitchen gadget product photos
+        query = f"{item_name} kitchen gadget product photo isolated white background high resolution"
+    elif category == "Pokemon":
+        # Pokemon category searches for Pokemon character art
+        query = f"{item_name} Pokemon character art official high resolution"
+    elif category == "Pop divas":
+        # Pop divas category searches for pop singer photos/portraits
+        query = f"{item_name} pop singer photo portrait high resolution"
+    elif category == "Taylor Swift Lyrics":
+        # Taylor Swift Lyrics category searches for Taylor Swift photos or album art
+        query = f"{item_name} Taylor Swift photo album art high resolution"
     else:
         # Generic search for other categories
         query = f"{item_name} {category.lower()} high resolution"
@@ -550,6 +802,32 @@ def process_image(image_source, output_path, item_title="Image", category="Movie
                 item_type = "tourist attraction photo"
             elif category == "Spirit Halloween Catalogue":
                 item_type = "Halloween costume photo"
+            elif category == "Airport codes":
+                item_type = "airport logo"
+            elif category == "Apps":
+                item_type = "app icon"
+            elif category == "Board games":
+                item_type = "board game box"
+            elif category == "Brand slogans":
+                item_type = "brand logo"
+            elif category == "Broadway shows":
+                item_type = "Broadway poster"
+            elif category == "Chicago neighborhoods":
+                item_type = "neighborhood photo"
+            elif category == "City skylines":
+                item_type = "skyline photo"
+            elif category == "Disney Characters":
+                item_type = "character photo"
+            elif category == "Fair Foods":
+                item_type = "food photo"
+            elif category == "Kitchen gadgets":
+                item_type = "item"
+            elif category == "Pokemon":
+                item_type = "Pokemon character"
+            elif category == "Pop divas":
+                item_type = "photo"
+            elif category == "Taylor Swift Lyrics":
+                item_type = "photo"
             else:
                 item_type = "image"
 
@@ -577,10 +855,8 @@ def process_image(image_source, output_path, item_title="Image", category="Movie
             else:
                 print(f"Failed to download a new {item_type}. Keeping current image.")
         elif key == ord('u'): # Load from URL
-            cv2.destroyAllWindows()
-            print("\nEnter image URL (or press Enter to cancel):", flush=True)
-            url_input = input().strip()
-
+            url_input = get_text_input("URL Input", "Enter image URL:", "")
+            
             if url_input:
                 window_name = f"Cleaning: {item_title}"
                 cv2.namedWindow(window_name)
@@ -652,6 +928,258 @@ def process_image(image_source, output_path, item_title="Image", category="Movie
     cv2.destroyAllWindows()
     return action
 
+def show_category_menu():
+    """Display a menu grid of all categories with image counts"""
+    csv_path = Path(__file__).parent / 'app' / 'The Floor - Categories - Categories + Examples.csv'
+    categories_data = {}
+    
+    print("Loading categories...")
+    with open(csv_path, 'r', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            cat = row['Category']
+            if cat not in categories_data:
+                categories_data[cat] = []
+            categories_data[cat].append(row['Example'])
+    
+    categories = sorted(categories_data.keys())
+    print(f"Found {len(categories)} categories.", flush=True)
+    
+    # Grid settings
+    base_thumb_size = 200
+    base_padding = 15
+    min_cols = 2
+    max_cols = 6
+    
+    # Window state
+    scroll_y = 0
+    window_width = 1400
+    window_height = 900
+    
+    window_name = "Category Menu"
+    cv2.namedWindow(window_name, cv2.WINDOW_NORMAL)
+    cv2.setWindowProperty(window_name, cv2.WND_PROP_TOPMOST, 1)
+    cv2.resizeWindow(window_name, window_width, window_height)
+    
+    click_action = [None]
+    scroll_speed = 50
+    last_wheel_time = 0
+    
+    def count_category_images(category):
+        """Count how many images exist for a category"""
+        folder_name = category.lower().replace(' ', '-')
+        save_dir = Path(__file__).parent / 'public' / 'images' / folder_name
+        if not save_dir.exists():
+            return 0
+        
+        # Count .jpg, .jpeg, and .png files (case-insensitive)
+        jpg_count = len(list(save_dir.glob('*.jpg'))) + len(list(save_dir.glob('*.JPG'))) + len(list(save_dir.glob('*.Jpg')))
+        jpeg_count = len(list(save_dir.glob('*.jpeg'))) + len(list(save_dir.glob('*.JPEG'))) + len(list(save_dir.glob('*.Jpeg')))
+        png_count = len(list(save_dir.glob('*.png'))) + len(list(save_dir.glob('*.PNG'))) + len(list(save_dir.glob('*.Png')))
+        return jpg_count + jpeg_count + png_count
+    
+    def get_category_image_count(category):
+        """Get cached or calculate image count for category"""
+        if not hasattr(get_category_image_count, 'cache'):
+            get_category_image_count.cache = {}
+        
+        if category not in get_category_image_count.cache:
+            get_category_image_count.cache[category] = count_category_images(category)
+        
+        return get_category_image_count.cache[category]
+    
+    def menu_mouse_callback(event, x, y, flags, param):
+        nonlocal scroll_y, last_wheel_time
+        
+        if event == cv2.EVENT_LBUTTONDOWN:
+            win_w = cv2.getWindowImageRect(window_name)[2]
+            win_h = cv2.getWindowImageRect(window_name)[3]
+            
+            cols = max(min_cols, min(max_cols, win_w // 300))
+            thumb_size = min(base_thumb_size, (win_w - base_padding * (cols + 1)) // cols - 30)
+            padding = base_padding
+            cell_width = thumb_size + padding * 2
+            cell_height = thumb_size + 80 + padding * 2
+            
+            start_row = max(0, scroll_y // cell_height - 1)
+            visible_rows = (win_h // cell_height) + 2
+            end_row = min((len(categories) + cols - 1) // cols, start_row + visible_rows)
+            
+            for row in range(start_row, end_row):
+                for col in range(cols):
+                    idx = row * cols + col
+                    if idx >= len(categories):
+                        continue
+                    
+                    rect_x = col * cell_width + padding
+                    rect_y = row * cell_height + padding - scroll_y
+                    
+                    if rect_x <= x <= rect_x + thumb_size and rect_y <= y <= rect_y + thumb_size + 80:
+                        category = categories[idx]
+                        click_action[0] = category
+                        break
+                else:
+                    continue
+                break
+        
+        elif event == cv2.EVENT_MOUSEWHEEL:
+            current_time = time.time()
+            wheel_delta = 0
+            
+            delta_from_flags = (flags >> 16) & 0xFFFF
+            if delta_from_flags > 32768:
+                delta_from_flags = delta_from_flags - 65536
+            if delta_from_flags != 0:
+                wheel_delta = delta_from_flags
+            
+            if wheel_delta == 0:
+                last_flags = param.get('last_flags', 0) if isinstance(param, dict) else 0
+                if last_wheel_time > 0 and current_time - last_wheel_time < 0.3:
+                    if flags > last_flags:
+                        wheel_delta = 120
+                    elif flags < last_flags:
+                        wheel_delta = -120
+                if isinstance(param, dict):
+                    param['last_flags'] = flags
+            
+            if wheel_delta != 0:
+                win_rect = cv2.getWindowImageRect(window_name)
+                win_w = win_rect[2] if win_rect[2] > 0 else window_width
+                win_h = win_rect[3] if win_rect[3] > 0 else window_height
+                cols = max(min_cols, min(max_cols, win_w // 300))
+                thumb_sz = min(base_thumb_size, (win_w - base_padding * (cols + 1)) // cols - 30)
+                cell_height = thumb_sz + 80 + base_padding * 2
+                max_scroll = max(0, ((len(categories) + cols - 1) // cols) * cell_height - win_h)
+                
+                scroll_amount = wheel_delta * 0.5
+                scroll_y = max(0, min(max_scroll, scroll_y - int(scroll_amount)))
+                last_wheel_time = current_time
+    
+    cv2.setMouseCallback(window_name, menu_mouse_callback, {'last_flags': 0})
+    
+    print("\nCategory Menu Controls:", flush=True)
+    print("  [Click Category]: Open category grid view", flush=True)
+    print("  [Mouse Wheel] or [W/S keys]: Scroll up/down", flush=True)
+    print("  [ESC]: Exit", flush=True)
+    
+    while True:
+        win_rect = cv2.getWindowImageRect(window_name)
+        if win_rect[2] > 0 and win_rect[3] > 0:
+            window_width = win_rect[2]
+            window_height = win_rect[3]
+        
+        cols = max(min_cols, min(max_cols, window_width // 300))
+        thumb_size = min(base_thumb_size, (window_width - base_padding * (cols + 1)) // cols - 30)
+        padding = base_padding
+        cell_width = thumb_size + padding * 2
+        cell_height = thumb_size + 80 + padding * 2
+        
+        max_scroll = max(0, ((len(categories) + cols - 1) // cols) * cell_height - window_height)
+        scroll_y = min(scroll_y, max_scroll)
+        
+        display_img = np.ones((window_height, window_width, 3), dtype=np.uint8) * 240
+        
+        # Render categories
+        start_row = max(0, scroll_y // cell_height - 1)
+        visible_rows = (window_height // cell_height) + 2
+        end_row = min((len(categories) + cols - 1) // cols, start_row + visible_rows)
+        
+        for row in range(start_row, end_row):
+            for col in range(cols):
+                idx = row * cols + col
+                if idx >= len(categories):
+                    continue
+                
+                x = col * cell_width + padding
+                y = row * cell_height + padding - scroll_y
+                
+                if y + cell_height < 0 or y > window_height:
+                    continue
+                
+                category = categories[idx]
+                item_count = len(categories_data[category])
+                image_count = get_category_image_count(category)
+                
+                # Draw category box
+                cv2.rectangle(display_img, (x, y), (x + thumb_size, y + thumb_size), (150, 150, 150), 2)
+                
+                # Draw category name (truncate if too long)
+                max_name_len = 20
+                cat_display = category[:max_name_len] + "..." if len(category) > max_name_len else category
+                cv2.putText(display_img, cat_display, (x, y + thumb_size + 15),
+                           cv2.FONT_HERSHEY_SIMPLEX, 0.4, (0, 0, 0), 1)
+                
+                # Draw item count and image count
+                items_text = f"{item_count} items"
+                cv2.putText(display_img, items_text, (x, y + thumb_size + 30),
+                           cv2.FONT_HERSHEY_SIMPLEX, 0.3, (100, 100, 100), 1)
+                
+                # Draw image count with color coding
+                if image_count == 0:
+                    img_color = (0, 0, 255)  # Red - no images
+                    img_text = f"0/{item_count} images"
+                elif image_count < item_count:
+                    img_color = (0, 165, 255)  # Orange - partial
+                    img_text = f"{image_count}/{item_count} images"
+                else:
+                    img_color = (0, 200, 0)  # Green - complete
+                    img_text = f"{image_count}/{item_count} images"
+                
+                cv2.putText(display_img, img_text, (x, y + thumb_size + 45),
+                           cv2.FONT_HERSHEY_SIMPLEX, 0.3, img_color, 1)
+                
+                # Draw progress bar
+                if item_count > 0:
+                    progress = image_count / item_count
+                    bar_width = thumb_size
+                    bar_height = 4
+                    bar_x = x
+                    bar_y = y + thumb_size + 55
+                    
+                    # Background
+                    cv2.rectangle(display_img, (bar_x, bar_y), (bar_x + bar_width, bar_y + bar_height), (200, 200, 200), -1)
+                    # Progress
+                    if progress > 0:
+                        progress_width = int(bar_width * progress)
+                        cv2.rectangle(display_img, (bar_x, bar_y), (bar_x + progress_width, bar_y + bar_height), img_color, -1)
+        
+        cv2.imshow(window_name, display_img)
+        key = cv2.waitKey(1) & 0xFF
+        
+        if key == 27:  # ESC
+            break
+        
+        # Keyboard scrolling
+        if key == ord('w') or key == ord('W'):
+            scroll_y = max(0, scroll_y - 100)
+        elif key == ord('s') or key == ord('S'):
+            scroll_y = min(max_scroll, scroll_y + 100)
+        
+        # Handle click action
+        if click_action[0] is not None:
+            selected_category = click_action[0]
+            click_action[0] = None
+            
+            print(f"\nOpening category: {selected_category}", flush=True)
+            cv2.destroyAllWindows()
+            result = show_grid_view(selected_category, initial_scroll_y=0)
+            
+            if result == "quit":
+                break
+            # If result is "menu" or anything else, show menu again
+            # Recreate window
+            window_name = "Category Menu"
+            cv2.namedWindow(window_name, cv2.WINDOW_NORMAL)
+            cv2.setWindowProperty(window_name, cv2.WND_PROP_TOPMOST, 1)
+            cv2.resizeWindow(window_name, window_width, window_height)
+            cv2.setMouseCallback(window_name, menu_mouse_callback, {'last_flags': 0})
+            # Clear cache to refresh counts
+            if hasattr(get_category_image_count, 'cache'):
+                get_category_image_count.cache.clear()
+    
+    cv2.destroyAllWindows()
+    return "quit"
+
 def show_grid_view(category="Movies", initial_scroll_y=0):
     """Display a scrollable, resizable grid view of all images in a category with Save/Edit/New Image options"""
     csv_path = Path(__file__).parent / 'app' / 'The Floor - Categories - Categories + Examples.csv'
@@ -706,30 +1234,33 @@ def show_grid_view(category="Movies", initial_scroll_y=0):
         filename = get_filename(item)
         file_path = save_dir / filename
 
-        # Check for both .jpg and .png extensions
+        # Check for .jpg, .jpeg, and .png extensions (case-insensitive)
         if not file_path.exists():
-            # Try .png instead of .jpg
-            png_filename = filename.replace('.jpg', '.png')
-            png_path = save_dir / png_filename
-            if png_path.exists():
-                file_path = png_path
-                filename = png_filename
+            base_name = filename.rsplit('.', 1)[0] if '.' in filename else filename
+            # Try different extensions
+            for ext in ['.jpeg', '.png', '.JPG', '.JPEG', '.PNG', '.Jpg', '.Jpeg', '.Png']:
+                alt_filename = base_name + ext
+                alt_path = save_dir / alt_filename
+                if alt_path.exists():
+                    file_path = alt_path
+                    filename = alt_filename
+                    break
 
-        # Fallback for "The X" -> "x.jpg" or "x.png"
+        # Fallback for "The X" -> "x.jpg" or "x.jpeg" or "x.png" (case-insensitive)
         if not file_path.exists() and filename.startswith("the-"):
             alt_filename = filename[4:]
             alt_path = save_dir / alt_filename
             if alt_path.exists():
                 file_path = alt_path
             else:
-                # Try with opposite extension
-                if alt_filename.endswith('.jpg'):
-                    alt_png = alt_filename.replace('.jpg', '.png')
-                else:
-                    alt_png = alt_filename.replace('.png', '.jpg')
-                alt_path = save_dir / alt_png
-                if alt_path.exists():
-                    file_path = alt_path
+                # Try with different extensions (case-insensitive)
+                base_name = alt_filename.rsplit('.', 1)[0] if '.' in alt_filename else alt_filename
+                for ext in ['.jpg', '.jpeg', '.png', '.JPG', '.JPEG', '.PNG', '.Jpg', '.Jpeg', '.Png']:
+                    alt_file = base_name + ext
+                    alt_path = save_dir / alt_file
+                    if alt_path.exists():
+                        file_path = alt_path
+                        break
 
         has_file = file_path.exists()
         img = None
@@ -824,6 +1355,13 @@ def show_grid_view(category="Movies", initial_scroll_y=0):
                 cv2.putText(display_img, img_dims, (x, y + thumb_size + 25),
                            cv2.FONT_HERSHEY_SIMPLEX, 0.3, dim_color, 1)
 
+                # Draw X button in top-right corner
+                x_button_size = 20
+                x_button_x = x + thumb_size - x_button_size - 2
+                x_button_y = y + 2
+                cv2.rectangle(display_img, (x_button_x, x_button_y), (x + thumb_size - 2, x_button_y + x_button_size), (0, 0, 255), -1)
+                cv2.putText(display_img, "X", (x_button_x + 6, x_button_y + 15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
+
                 # Draw buttons - always show Edit button
                 button_y = y + thumb_size + 32
                 button_height = 18
@@ -850,8 +1388,8 @@ def show_grid_view(category="Movies", initial_scroll_y=0):
                     cv2.putText(display_img, "EDIT", (x + button_width + 5 + button_width // 2 - 15, button_y + 13),
                                cv2.FONT_HERSHEY_SIMPLEX, 0.4, (255, 255, 255), 1)
 
-                # Store rect for click detection
-                item_rects.append((idx, x, y, thumb_size, thumb_size + 50, has_file, item, file_path, button_y, button_height, button_width if has_file else thumb_size))
+                # Store rect for click detection (including X button)
+                item_rects.append((idx, x, y, thumb_size, thumb_size + 50, has_file, item, file_path, button_y, button_height, button_width if has_file else thumb_size, x_button_x, x_button_y, x_button_size))
 
         return item_rects
 
@@ -888,6 +1426,14 @@ def show_grid_view(category="Movies", initial_scroll_y=0):
                         if item_data is None:
                             continue
                         _, _, has_file, item, file_path = item_data
+
+                        # Check if clicked on X button (top-right corner)
+                        x_button_size = 20
+                        x_button_x = rect_x + thumb_size - x_button_size - 2
+                        x_button_y = rect_y + 2
+                        if x_button_x <= x <= rect_x + thumb_size - 2 and x_button_y <= y <= x_button_y + x_button_size:
+                            click_action[0] = ("delete", item, file_path)
+                            break
 
                         # Check if clicked on button area
                         button_y = rect_y + thumb_size + 32
@@ -957,7 +1503,9 @@ def show_grid_view(category="Movies", initial_scroll_y=0):
     print("  [Click SAVE]: Download and save new image", flush=True)
     print("  [Click NEW]: Download new image for existing file", flush=True)
     print("  [Click EDIT]: Edit existing image", flush=True)
+    print("  [Click X]: Delete item and remove from CSV", flush=True)
     print("  [Mouse Wheel] or [W/S keys]: Scroll up/down", flush=True)
+    print("  [M]: Return to category menu", flush=True)
     print("  [ESC]: Exit grid view", flush=True)
     print("  [R]: Refresh grid (re-download missing images)", flush=True)
 
@@ -996,6 +1544,11 @@ def show_grid_view(category="Movies", initial_scroll_y=0):
 
         if key == 27:  # ESC
             break
+        
+        # Return to menu
+        if key == ord('m') or key == ord('M'):
+            cv2.destroyAllWindows()
+            return "menu"
         
         # Keyboard scrolling (for trackpad users) - use W/S keys
         if key == ord('w') or key == ord('W'):
@@ -1040,8 +1593,11 @@ def show_grid_view(category="Movies", initial_scroll_y=0):
                 action = process_image(str(file_path), file_path, item_title=item, category=category, from_grid=True)
                 if action == "quit":
                     return "quit"
-                elif action == "grid":
-                    return show_grid_view(category, initial_scroll_y=current_scroll)
+                elif action == "grid" or action == "menu":
+                    result = show_grid_view(category, initial_scroll_y=current_scroll)
+                    if result == "menu":
+                        return "menu"
+                    return result
                 return show_grid_view(category, initial_scroll_y=current_scroll)
             elif action_type == "new":
                 # Download new image (different from current)
@@ -1097,6 +1653,32 @@ def show_grid_view(category="Movies", initial_scroll_y=0):
                     query = f"{item} Chicago tourist attraction landmark photo high resolution"
                 elif category == "Spirit Halloween Catalogue":
                     query = f"{item} Halloween costume photo high resolution"
+                elif category == "Airport codes":
+                    query = f"{item} airport logo code high resolution"
+                elif category == "Apps":
+                    query = f"{item} app icon logo mobile high resolution"
+                elif category == "Board games":
+                    query = f"{item} board game box cover high resolution"
+                elif category == "Brand slogans":
+                    query = f"{item} brand logo advertisement high resolution"
+                elif category == "Broadway shows":
+                    query = f"{item} Broadway show poster musical theater high resolution"
+                elif category == "Chicago neighborhoods":
+                    query = f"{item} Chicago neighborhood photo high resolution"
+                elif category == "City skylines":
+                    query = f"{item} city skyline daytime photo high resolution"
+                elif category == "Disney Characters":
+                    query = f"{item} Disney character photo portrait high resolution"
+                elif category == "Fair Foods":
+                    query = f"{item} fair food photo high resolution"
+                elif category == "Kitchen gadgets":
+                    query = f"{item} kitchen gadget product photo isolated white background high resolution"
+                elif category == "Pokemon":
+                    query = f"{item} Pokemon character art official high resolution"
+                elif category == "Pop divas":
+                    query = f"{item} pop singer photo portrait high resolution"
+                elif category == "Taylor Swift Lyrics":
+                    query = f"{item} Taylor Swift photo album art high resolution"
                 else:
                     query = f"{item} {category.lower()} high resolution"
 
@@ -1153,7 +1735,10 @@ def show_grid_view(category="Movies", initial_scroll_y=0):
                                 if idx in thumb_cache:
                                     del thumb_cache[idx]
                                 break
-                        return show_grid_view(category, initial_scroll_y=current_scroll)
+                        result = show_grid_view(category, initial_scroll_y=current_scroll)
+                        if result == "menu":
+                            return "menu"
+                        return result
                     except Exception as e:
                         print(f"Save failed: {e}", flush=True)
                 else:
@@ -1176,21 +1761,65 @@ def show_grid_view(category="Movies", initial_scroll_y=0):
                                 if idx in thumb_cache:
                                     del thumb_cache[idx]
                                 break
-                        return show_grid_view(category, initial_scroll_y=current_scroll)
+                        result = show_grid_view(category, initial_scroll_y=current_scroll)
+                        if result == "menu":
+                            return "menu"
+                        return result
                     except Exception as e:
                         print(f"Save failed: {e}", flush=True)
                 else:
                     print(f"Failed to download image for {item}", flush=True)
+            elif action_type == "delete":
+                # Delete item - remove from CSV and delete image file
+                print(f"\nDeleting: {item}", flush=True)
+                current_scroll = scroll_y
+                
+                # Delete image file if it exists
+                if file_path.exists():
+                    try:
+                        file_path.unlink()
+                        print(f"  Deleted image file: {file_path.name}", flush=True)
+                    except Exception as e:
+                        print(f"  Failed to delete image file: {e}", flush=True)
+                
+                # Remove from CSV
+                try:
+                    success = remove_item_from_csv(category, item)
+                    if success:
+                        print(f"  Removed {item} from CSV", flush=True)
+                    else:
+                        print(f"  Did not remove from CSV (see warnings above)", flush=True)
+                        continue  # Don't reload if deletion failed
+                except Exception as e:
+                    print(f"  Failed to remove from CSV: {e}", flush=True)
+                    import traceback
+                    traceback.print_exc()
+                    continue  # Don't reload if deletion failed
+                
+                # Reload items from CSV
+                items = []
+                with open(csv_path, 'r', encoding='utf-8') as f:
+                    reader = csv.DictReader(f)
+                    for row in reader:
+                        if row['Category'] == category:
+                            items.append(row['Example'])
+                
+                # Clear cache
+                thumb_cache.clear()
+                print(f"  Refreshed grid. {len(items)} items remaining.", flush=True)
 
         if key == ord('r'):  # Refresh
             print("Refreshing grid...", flush=True)
             current_scroll = scroll_y
             thumb_cache.clear()
             cv2.destroyAllWindows()
-            return show_grid_view(category, initial_scroll_y=current_scroll)
+            result = show_grid_view(category, initial_scroll_y=current_scroll)
+            if result == "menu":
+                return "menu"
+            return result
 
     cv2.destroyAllWindows()
-    return "next"
+    return "menu"  # Return to menu when exiting grid view
 
 def run_batch_mode(category="Movies", amount_to_process=2, replace=False):
     csv_path = Path(__file__).parent / 'app' / 'The Floor - Categories - Categories + Examples.csv'
@@ -1223,16 +1852,20 @@ def run_batch_mode(category="Movies", amount_to_process=2, replace=False):
         filename = get_filename(item)
         file_path = save_dir / filename
 
-        # Check for both .jpg and .png extensions
+        # Check for .jpg, .jpeg, and .png extensions (case-insensitive)
         if not file_path.exists():
-            # Try .png instead of .jpg
-            png_filename = filename.replace('.jpg', '.png')
-            png_path = save_dir / png_filename
-            if png_path.exists():
-                file_path = png_path
-                filename = png_filename
+            base_name = filename.rsplit('.', 1)[0] if '.' in filename else filename
+            # Try different extensions
+            for ext in ['.jpeg', '.png', '.JPG', '.JPEG', '.PNG', '.Jpg', '.Jpeg', '.Png']:
+                alt_filename = base_name + ext
+                alt_path = save_dir / alt_filename
+                if alt_path.exists():
+                    file_path = alt_path
+                    filename = alt_filename
+                    print(f"  Found alternative local file: {alt_filename}", flush=True)
+                    break
 
-        # Fallback for "The X" -> "x.jpg" or "x.png"
+        # Fallback for "The X" -> "x.jpg" or "x.jpeg" or "x.png" (case-insensitive)
         if not file_path.exists() and filename.startswith("the-"):
             alt_filename = filename[4:] # Remove "the-"
             alt_path = save_dir / alt_filename
@@ -1240,15 +1873,15 @@ def run_batch_mode(category="Movies", amount_to_process=2, replace=False):
                 print(f"  Found alternative local file: {alt_filename}", flush=True)
                 file_path = alt_path
             else:
-                # Try with opposite extension
-                if alt_filename.endswith('.jpg'):
-                    alt_png = alt_filename.replace('.jpg', '.png')
-                else:
-                    alt_png = alt_filename.replace('.png', '.jpg')
-                alt_path = save_dir / alt_png
-                if alt_path.exists():
-                    print(f"  Found alternative local file: {alt_png}", flush=True)
-                    file_path = alt_path
+                # Try with different extensions (case-insensitive)
+                base_name = alt_filename.rsplit('.', 1)[0] if '.' in alt_filename else alt_filename
+                for ext in ['.jpg', '.jpeg', '.png', '.JPG', '.JPEG', '.PNG', '.Jpg', '.Jpeg', '.Png']:
+                    alt_file = base_name + ext
+                    alt_path = save_dir / alt_file
+                    if alt_path.exists():
+                        print(f"  Found alternative local file: {alt_file}", flush=True)
+                        file_path = alt_path
+                        break
 
         # SKIP if file already exists (unless in replace mode)
         if file_path.exists() and not replace:
@@ -1294,7 +1927,9 @@ def main():
             return
 
         category = sys.argv[2]
-        show_grid_view(category)
+        result = show_grid_view(category)
+        if result == "menu":
+            show_category_menu()
     elif len(sys.argv) > 1 and sys.argv[1] == "--batch":
         # Parse arguments: --batch <category> [amount] [--replace]
         if len(sys.argv) < 3:
@@ -1338,14 +1973,8 @@ def main():
             output_path = save_dir / f"{name}.jpg"
             process_image(input_arg, output_path, item_title=input_arg, category=category)
     else:
-        print("Usage:")
-        print("  python manual_cleaner.py --grid <category>")
-        print("  python manual_cleaner.py --batch <category> [amount] [--replace]")
-        print("  python manual_cleaner.py 'Item Name' [category]")
-        print("")
-        print("Examples:")
-        print("  python manual_cleaner.py --grid Books")
-        print("  python manual_cleaner.py --batch Books 2")
+        # Default: Show category menu
+        show_category_menu()
 
 
 if __name__ == "__main__":

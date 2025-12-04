@@ -1,2336 +1,1885 @@
-Category,Example,Picture
-Pop divas,Beyoncé,TRUE
-Pop divas,Lady Gaga,TRUE
-Pop divas,Ariana Grande,TRUE
-Pop divas,Taylor Swift,TRUE
-Pop divas,Rihanna,TRUE
-Pop divas,Katy Perry,TRUE
-Pop divas,Mariah Carey,TRUE
-Pop divas,Whitney Houston,TRUE
-Pop divas,Madonna,TRUE
-Pop divas,Britney Spears,TRUE
-Pop divas,Christina Aguilera,TRUE
-Pop divas,Jennifer Lopez,TRUE
-Pop divas,Shakira,TRUE
-Pop divas,Dua Lipa,TRUE
-Pop divas,Doja Cat,TRUE
-Pop divas,Selena Gomez,TRUE
-Pop divas,Demi Lovato,TRUE
-Pop divas,Sia,TRUE
-Pop divas,Adele,TRUE
-Pop divas,Kesha,TRUE
-Pop divas,Lizzo,TRUE
-Pop divas,Nicki Minaj,TRUE
-Pop divas,Céline Dion,TRUE
-Pop divas,Billie Eilish,TRUE
-Pop divas,Miley Cyrus,TRUE
-Pop divas,Pink,TRUE
-Pop divas,Fergie,TRUE
-Pop divas,Normani,TRUE
-Pop divas,Charli XCX,TRUE
-Pop divas,Kylie Minogue,TRUE
-Pop divas,Camila Cabello,TRUE
-Pop divas,Avril Lavigne,TRUE
-Pop divas,Ashanti,TRUE
-Pop divas,Ellie Goulding,TRUE
-Pop divas,Alicia Keys,TRUE
-Pop divas,Tove Lo,TRUE
-Pop divas,Grimes,TRUE
-Pop divas,Tinashe,TRUE
-Pop divas,Chlöe Bailey,TRUE
-Pop divas,Halsey,TRUE
-Pop divas,Olivia Rodrigo,TRUE
-Pop divas,Rosalía,TRUE
-Pop divas,Florence Welch,TRUE
-Pop divas,Janet Jackson,TRUE
-Pop divas,Janelle Monáe,TRUE
-Pop divas,Hayley Williams,TRUE
-Pop divas,Jessie J,TRUE
-Pop divas,Bonnie Tyler,TRUE
-Pop divas,Chappell Roan,TRUE
-Chicago neighborhoods,The Loop,FALSE
-Chicago neighborhoods,River North,FALSE
-Chicago neighborhoods,Streeterville,FALSE
-Chicago neighborhoods,Gold Coast,FALSE
-Chicago neighborhoods,Lincoln Park,FALSE
-Chicago neighborhoods,Lakeview,FALSE
-Chicago neighborhoods,Wrigleyville,FALSE
-Chicago neighborhoods,Old Town,FALSE
-Chicago neighborhoods,West Loop,FALSE
-Chicago neighborhoods,Fulton Market,FALSE
-Chicago neighborhoods,Pilsen,FALSE
-Chicago neighborhoods,Bridgeport,FALSE
-Chicago neighborhoods,Bronzeville,FALSE
-Chicago neighborhoods,Hyde Park,FALSE
-Chicago neighborhoods,Kenwood,FALSE
-Chicago neighborhoods,Chinatown,FALSE
-Chicago neighborhoods,Uptown,FALSE
-Chicago neighborhoods,Edgewater,FALSE
-Chicago neighborhoods,Rogers Park,FALSE
-Chicago neighborhoods,Andersonville,FALSE
-Chicago neighborhoods,Logan Square,FALSE
-Chicago neighborhoods,Bucktown,FALSE
-Chicago neighborhoods,Avondale,FALSE
-Chicago neighborhoods,Irving Park,FALSE
-Chicago neighborhoods,Albany Park,FALSE
-Chicago neighborhoods,West Town,FALSE
-Chicago neighborhoods,Humboldt Park,FALSE
-Chicago neighborhoods,Garfield Park,FALSE
-Chicago neighborhoods,Austin,FALSE
-Chicago neighborhoods,Englewood,FALSE
-Chicago neighborhoods,South Shore,FALSE
-Chicago neighborhoods,Beverly,FALSE
-Chicago neighborhoods,Morgan Park,FALSE
-Chicago neighborhoods,Portage Park,FALSE
-Chicago neighborhoods,Jefferson Park,FALSE
-Chicago neighborhoods,Edison Park,FALSE
-Chicago neighborhoods,Dunning,FALSE
-Chicago neighborhoods,Hegewisch,FALSE
-Chicago neighborhoods,Pullman,FALSE
-Chicago neighborhoods,Roseland,FALSE
-Chicago neighborhoods,Canaryville,FALSE
-Chicago neighborhoods,Back of the Yards,FALSE
-Chicago neighborhoods,Archer Heights,FALSE
-Chicago neighborhoods,Gage Park,FALSE
-Chicago neighborhoods,Montclare,FALSE
-Chicago neighborhoods,Forest Glen,FALSE
-Chicago neighborhoods,Near North Side,FALSE
-Chicago neighborhoods,Near South Side,FALSE
-Chicago neighborhoods,Near West Side,FALSE
-Chicago tourist stuff,Willis Tower Skydeck,FALSE
-Chicago tourist stuff,Cloud Gate (The Bean),FALSE
-Chicago tourist stuff,Navy Pier,FALSE
-Chicago tourist stuff,Millennium Park,FALSE
-Chicago tourist stuff,Chicago Riverwalk,FALSE
-Chicago tourist stuff,Architectural Boat Tour,FALSE
-Chicago tourist stuff,Shedd Aquarium,FALSE
-Chicago tourist stuff,Field Museum,FALSE
-Chicago tourist stuff,Adler Planetarium,FALSE
-Chicago tourist stuff,Art Institute of Chicago,FALSE
-Chicago tourist stuff,Lincoln Park Zoo,FALSE
-Chicago tourist stuff,Maggie Daley Park,FALSE
-Chicago tourist stuff,Wrigley Field,FALSE
-Chicago tourist stuff,Soldier Field,FALSE
-Chicago tourist stuff,Garfield Park Conservatory,FALSE
-Chicago tourist stuff,Chicago Theatre,FALSE
-Chicago tourist stuff,Grant Park,FALSE
-Chicago tourist stuff,360 Chicago,FALSE
-Chicago tourist stuff,Museum of Science and Industry,FALSE
-Chicago tourist stuff,Chicago Cultural Center,FALSE
-Chicago tourist stuff,The Magnificent Mile,FALSE
-Chicago tourist stuff,Chicago Water Tower,FALSE
-Chicago tourist stuff,Chicago History Museum,FALSE
-Chicago tourist stuff,Promontory Point,FALSE
-Chicago tourist stuff,Ferris wheel at Navy Pier,FALSE
-Chicago tourist stuff,ChinaTown Square,FALSE
-Chicago tourist stuff,Billy Goat Tavern,FALSE
-Chicago tourist stuff,Portillo’s,FALSE
-Chicago tourist stuff,Gino’s East,FALSE
-Chicago tourist stuff,Garrett Popcorn,FALSE
-Chicago tourist stuff,Divvy bikes,FALSE
-Chicago tourist stuff,Metra Electric line,FALSE
-Chicago tourist stuff,Second City,FALSE
-Chicago tourist stuff,Blue Man Group,FALSE
-Chicago tourist stuff,The Green Mill,FALSE
-Chicago tourist stuff,Chicago Botanic Garden,FALSE
-Chicago tourist stuff,Brookfield Zoo,FALSE
-Chicago tourist stuff,Calder’s Flamingo,FALSE
-Chicago tourist stuff,Chicago Lakefront Trail,FALSE
-Chicago tourist stuff,The 606 Trail,FALSE
-Chicago tourist stuff,Chicago Hot Dog stands,FALSE
-Chicago tourist stuff,Buckingham Fountain,FALSE
-Chicago tourist stuff,Shakespeare Theater Navy Pier,FALSE
-Comedians,Jerry Seinfeld
-Comedians,Ellen DeGeneres
-Comedians,Jim Gaffigan
-Comedians,Brian Regan
-Comedians,Nate Bargatze
-Comedians,John Mulaney
-Comedians,Hasan Minhaj
-Comedians,Ali Wong
-Comedians,Tig Notaro
-Comedians,Mike Birbiglia
-Comedians,Iliza Shlesinger
-Comedians,Bo Burnham
-Comedians,Taylor Tomlinson
-Comedians,Kevin Hart
-Comedians,Trevor Noah
-Comedians,Wanda Sykes
-Comedians,Chris Rock
-Comedians,Dave Chappelle
-Comedians,Steve Martin
-Comedians,Martin Short
-Comedians,Amy Poehler
-Comedians,Tina Fey
-Comedians,Seth Meyers
-Comedians,Conan O'Brien
-Comedians,Stephen Colbert
-Comedians,Jimmy Fallon
-Comedians,Jimmy Kimmel
-Comedians,Jay Leno
-Comedians,Brian Posehn
-Comedians,Patton Oswalt
-Comedians,Maria Bamford
-Comedians,Demetri Martin
-Comedians,Russell Peters
-Comedians,Gabriel Iglesias
-Comedians,Ronny Chieng
-Comedians,Jordan Peele
-Comedians,Keegan-Michael Key
-Comedians,Fred Armisen
-Comedians,Bill Hader
-Comedians,Kristen Wiig
-Comedians,Melissa McCarthy
-Comedians,Kenan Thompson
-Comedians,Kate McKinnon
-Comedians,Bowen Yang
-Comedians,John Oliver
-Comedians,Phoebe Robinson
-Comedians,Nicole Byer
-Comedians,Fortune Feimster
-Comedians,Katherine Ryan
-Comedians,Marc Maron
-Comedians,Reggie Watts
-Improv comedians,Tina Fey,FALSE
-Improv comedians,Amy Poehler,FALSE
-Improv comedians,Colin Mochrie,FALSE
-Improv comedians,Ryan Stiles,FALSE
-Improv comedians,Wayne Brady,FALSE
-Improv comedians,Steve Carell,FALSE
-Improv comedians,Stephen Colbert,FALSE
-Improv comedians,Jordan Klepper,FALSE
-Improv comedians,Paul Scheer,FALSE
-Improv comedians,Jessica St. Clair,FALSE
-Improv comedians,Lennon Parham,FALSE
-Improv comedians,Ben Schwartz,FALSE
-Improv comedians,Thomas Middleditch,FALSE
-Improv comedians,Chris Gethard,FALSE
-Improv comedians,Jason Mantzoukas,FALSE
-Improv comedians,Aidy Bryant,FALSE
-Improv comedians,Keegan-Michael Key,FALSE
-Improv comedians,Jordan Peele,FALSE
-Improv comedians,Will Ferrell,FALSE
-Improv comedians,Kristen Wiig,FALSE
-Improv comedians,Fred Armisen,FALSE
-Improv comedians,Bill Hader,FALSE
-Improv comedians,Bobby Moynihan,FALSE
-Improv comedians,John Belushi,FALSE
-Improv comedians,Dan Aykroyd,FALSE
-Improv comedians,Gilda Radner,FALSE
-Improv comedians,Catherine O’Hara,FALSE
-Improv comedians,Eugene Levy,FALSE
-Improv comedians,Mike Myers,FALSE
-Improv comedians,Chris Farley,FALSE
-Improv comedians,Rachel Dratch,FALSE
-Improv comedians,Kate McKinnon,FALSE
-Improv comedians,Maya Rudolph,FALSE
-Improv comedians,Michael Che,FALSE
-Improv comedians,Andy Samberg,FALSE
-Improv comedians,Martin Short,FALSE
-Improv comedians,Tim Robinson,FALSE
-Improv comedians,Cecily Strong,FALSE
-Improv comedians,Scott Adsit,FALSE
-Improv comedians,Jack McBrayer,FALSE
-Improv comedians,Horatio Sanz,FALSE
-Improv comedians,Kenan Thompson,FALSE
-Improv comedians,Phoebe Robinson,FALSE
-Improv comedians,Paul F. Tompkins,FALSE
-Improv comedians,Nicole Byer,FALSE
-Improv comedians,Jenny Slate,FALSE
-Improv comedians,Joe Lo Truglio,FALSE
-Improv comedians,Charna Halpern,FALSE
-Improv comedians,Del Close,FALSE
-Kitchen gadgets,Spatula,TRUE
-Kitchen gadgets,Whisk,TRUE
-Kitchen gadgets,Tongs,TRUE
-Kitchen gadgets,Measuring cups,TRUE
-Kitchen gadgets,Measuring spoons,TRUE
-Kitchen gadgets,Cheese grater,TRUE
-Kitchen gadgets,Potato peeler,TRUE
-Kitchen gadgets,Can opener,TRUE
-Kitchen gadgets,Bottle opener,TRUE
-Kitchen gadgets,Colander,TRUE
-Kitchen gadgets,Cutting board,TRUE
-Kitchen gadgets,Pastry brush,TRUE
-Kitchen gadgets,Garlic press,TRUE
-Kitchen gadgets,Kitchen shears,TRUE
-Kitchen gadgets,Pizza cutter,TRUE
-Kitchen gadgets,Mandoline slicer,TRUE
-Kitchen gadgets,Immersion blender,TRUE
-Kitchen gadgets,Food processor,TRUE
-Kitchen gadgets,Stand mixer,TRUE
-Kitchen gadgets,Hand mixer,TRUE
-Kitchen gadgets,Slow cooker,TRUE
-Kitchen gadgets,Pressure cooker,TRUE
-Kitchen gadgets,Air fryer,TRUE
-Kitchen gadgets,Toaster oven,TRUE
-Kitchen gadgets,Microwave,TRUE
-Kitchen gadgets,Digital thermometer,TRUE
-Kitchen gadgets,Oven mitts,TRUE
-Kitchen gadgets,Baking sheet,TRUE
-Kitchen gadgets,Muffin tin,TRUE
-Kitchen gadgets,Rolling pin,TRUE
-Kitchen gadgets,Mortar and pestle,TRUE
-Kitchen gadgets,Spice grinder,TRUE
-Kitchen gadgets,Juicer,TRUE
-Kitchen gadgets,Citrus zester,TRUE
-Kitchen gadgets,Funnel,TRUE
-Kitchen gadgets,French press,TRUE
-Kitchen gadgets,Coffee grinder,TRUE
-Kitchen gadgets,Cast iron pan,TRUE
-Kitchen gadgets,Meat tenderizer,TRUE
-Kitchen gadgets,Splatter screen,TRUE
-Kitchen gadgets,Strainer,TRUE
-Kitchen gadgets,Rice cooker,TRUE
-Kitchen gadgets,Blender,TRUE
-Kitchen gadgets,Egg separator,TRUE
-Kitchen gadgets,Salad spinner,TRUE
-Kitchen gadgets,Ice cream scoop,TRUE
-Kitchen gadgets,Kitchen scale,TRUE
-Junk drawer,Rubber bands,FALSE
-Junk drawer,Scissors,FALSE
-Junk drawer,Old batteries,FALSE
-Junk drawer,Loose change,FALSE
-Junk drawer,Pens,FALSE
-Junk drawer,Pencils,FALSE
-Junk drawer,Post-it notes,FALSE
-Junk drawer,Thumbtacks,FALSE
-Junk drawer,Paper clips,FALSE
-Junk drawer,Dried-out markers,FALSE
-Junk drawer,Broken phone chargers,FALSE
-Junk drawer,USB cables,FALSE
-Junk drawer,Random keys,FALSE
-Junk drawer,Binder clips,FALSE
-Junk drawer,Safety pins,FALSE
-Junk drawer,Glue sticks,FALSE
-Junk drawer,Duct tape,FALSE
-Junk drawer,Spare buttons,FALSE
-Junk drawer,Twine,FALSE
-Junk drawer,Small flashlight,FALSE
-Junk drawer,Matches,FALSE
-Junk drawer,Lighters,FALSE
-Junk drawer,Screwdriver,FALSE
-Junk drawer,Allen wrenches,FALSE
-Junk drawer,Sticky tack,FALSE
-Junk drawer,Old gift cards,FALSE
-Junk drawer,Candles,FALSE
-Junk drawer,Rubber gloves,FALSE
-Junk drawer,Felt pads,FALSE
-Junk drawer,Coin purse,FALSE
-Junk drawer,Old receipts,FALSE
-Junk drawer,Expired coupons,FALSE
-Junk drawer,Clothespins,FALSE
-Junk drawer,Twist ties,FALSE
-Junk drawer,Plastic utensils,FALSE
-Junk drawer,Loose screws,FALSE
-Junk drawer,Spare fuses,FALSE
-Junk drawer,Old sunglasses,FALSE
-Junk drawer,Chip clips,FALSE
-Junk drawer,Swiss army knife,FALSE
-Junk drawer,Flash drives,FALSE
-Junk drawer,Playing cards,FALSE
-Junk drawer,Bottle opener,FALSE
-Junk drawer,Old magnets,FALSE
-Junk drawer,Keychains,FALSE
-Junk drawer,Notepad,FALSE
-Junk drawer,Coasters,FALSE
-Laundry,Laundry detergent,FALSE
-Laundry,Fabric softener,FALSE
-Laundry,Dryer sheets,FALSE
-Laundry,Stain remover,FALSE
-Laundry,Delicates bag,FALSE
-Laundry,Laundry basket,FALSE
-Laundry,Hamper,FALSE
-Laundry,Folded towels,FALSE
-Laundry,Clothesline,FALSE
-Laundry,Clothespins,FALSE
-Laundry,Washing machine,FALSE
-Laundry,Dryer,FALSE
-Laundry,Iron,FALSE
-Laundry,Ironing board,FALSE
-Laundry,Wrinkle releaser spray,FALSE
-Laundry,Bleach,FALSE
-Laundry,Color catcher sheets,FALSE
-Laundry,Wool dryer balls,FALSE
-Laundry,Dry cleaning bag,FALSE
-Laundry,Lint roller,FALSE
-Laundry,Lint trap,FALSE
-Laundry,Mesh laundry bag,FALSE
-Laundry,Soaking basin,FALSE
-Laundry,Detergent pods,FALSE
-Laundry,Laundry sanitizer,FALSE
-Laundry,Pre-treatment spray,FALSE
-Laundry,Fabric refresher,FALSE
-Laundry,Hand-wash soap,FALSE
-Laundry,Drying rack,FALSE
-Laundry,Steamer,FALSE
-Laundry,Clothing hangers,FALSE
-Laundry,Scent boosters,FALSE
-Laundry,Laundry marker,FALSE
-Laundry,Clothes brush,FALSE
-Laundry,Spot remover pen,FALSE
-Laundry,Laundry scoop,FALSE
-Laundry,Folding board,FALSE
-Laundry,Static guard,FALSE
-Laundry,Laundry basket wheels,FALSE
-Laundry,Delicate detergent,FALSE
-Laundry,Baby detergent,FALSE
-Laundry,Down detergent,FALSE
-Laundry,Starch spray,FALSE
-Laundry,Laundry timer,FALSE
-Laundry,Clothing repair kit,FALSE
-Laundry,Spare buttons,FALSE
-Laundry,Detergent measuring cup,FALSE
-Laundry,Terry cloth rags,FALSE
-Laundry,Clothing clips,FALSE
-New England establishments,Dunkin',FALSE
-New England establishments,Legal Sea Foods,FALSE
-New England establishments,Wegmans,FALSE
-New England establishments,Market Basket,FALSE
-New England establishments,Stop & Shop,FALSE
-New England establishments,Shaw’s,FALSE
-New England establishments,Cumberland Farms,FALSE
-New England establishments,Friendly’s,FALSE
-New England establishments,Pizza Regina,FALSE
-New England establishments,Bertucci’s,FALSE
-New England establishments,Star Market,FALSE
-New England establishments,Yankee Candle Village,FALSE
-New England establishments,Newbury Comics,FALSE
-New England establishments,LL Bean,FALSE
-New England establishments,Salem Witch Museum,FALSE
-New England establishments,Mystic Aquarium,FALSE
-New England establishments,Ben & Jerry’s Factory,FALSE
-New England establishments,Clam Shack (Kennebunkport),FALSE
-New England establishments,The Black Dog,FALSE
-New England establishments,Mike’s Pastry,FALSE
-New England establishments,Modern Pastry,FALSE
-New England establishments,Flour Bakery,FALSE
-New England establishments,Tatte Bakery,FALSE
-New England establishments,Union Oyster House,FALSE
-New England establishments,Cheers Bar (Boston),FALSE
-New England establishments,Cape Cod Potato Chips Factory,FALSE
-New England establishments,Boston Athenaeum,FALSE
-New England establishments,Quincy Market,FALSE
-New England establishments,Faneuil Hall,FALSE
-New England establishments,Gillette Stadium,FALSE
-New England establishments,Foxwoods Casino,FALSE
-New England establishments,Mohegan Sun,FALSE
-New England establishments,Red Arrow Diner,FALSE
-New England establishments,Almond Joy Factory (original),FALSE
-New England establishments,Portland Head Light,FALSE
-New England establishments,Boston Harbor Hotel,FALSE
-New England establishments,Copley Place,FALSE
-New England establishments,The North End,FALSE
-New England establishments,Patriot Place,FALSE
-New England establishments,WaterFire Providence,FALSE
-New England establishments,Amherst Coffee,FALSE
-New England establishments,South Station,FALSE
-New England establishments,MBTA,FALSE
-New England establishments,Old Sturbridge Village,FALSE
-New England establishments,Plimoth Patuxet Museums,FALSE
-New England establishments,Hampton Beach Casino Ballroom,FALSE
-New England establishments,House of Seven Gables,FALSE
-New England establishments,Blackstone Valley,FALSE
-New England establishments,Old Port Portland,FALSE
-UMass Amherst,Frank Dining Hall,FALSE
-UMass Amherst,Berk Dining Hall,FALSE
-UMass Amherst,Worcester Dining Commons,FALSE
-UMass Amherst,Hampshire Dining Hall (closed but iconic),FALSE
-UMass Amherst,Campus Center,FALSE
-UMass Amherst,Student Union,FALSE
-UMass Amherst,Library (W.E.B. Du Bois),FALSE
-UMass Amherst,Isenberg School of Management,FALSE
-UMass Amherst,Old Chapel,FALSE
-UMass Amherst,Mullins Center,FALSE
-UMass Amherst,Recreation Center,FALSE
-UMass Amherst,Southwest Residential Area,FALSE
-UMass Amherst,Northeast Residential Area,FALSE
-UMass Amherst,Central Residential Area,FALSE
-UMass Amherst,Orchard Hill,FALSE
-UMass Amherst,Honors College,FALSE
-UMass Amherst,Blue Wall,FALSE
-UMass Amherst,Hampshire Mailroom,FALSE
-UMass Amherst,UMass Store,FALSE
-UMass Amherst,Herter Hall,FALSE
-UMass Amherst,Marston Hall,FALSE
-UMass Amherst,Goessmann Lab,FALSE
-UMass Amherst,Machmer Hall,FALSE
-UMass Amherst,Fine Arts Center,FALSE
-UMass Amherst,Studio Arts Building,FALSE
-UMass Amherst,Stockbridge School,FALSE
-UMass Amherst,UMass Pond,FALSE
-UMass Amherst,Puffton Village,FALSE
-UMass Amherst,North Apartments,FALSE
-UMass Amherst,Sylvan Residential Area,FALSE
-UMass Amherst,JQA Dorms,FALSE
-UMass Amherst,Grayson Hall,FALSE
-UMass Amherst,Lot 33,FALSE
-UMass Amherst,Haigis Mall,FALSE
-UMass Amherst,UMass Bus System,FALSE
-UMass Amherst,Bluebike stations,FALSE
-UMass Amherst,UMass Police,FALSE
-UMass Amherst,The Hatch,FALSE
-UMass Amherst,UMass Permaculture Garden,FALSE
-UMass Amherst,Unity Park,FALSE
-UMass Amherst,UMass Observatory,FALSE
-UMass Amherst,Curry Hicks Cage,FALSE
-UMass Amherst,Old Southwest towers,FALSE
-UMass Amherst,Hampden Gallery,FALSE
-UMass Amherst,Springfield Hall,FALSE
-UMass Amherst,Patterson Hall,FALSE
-UMass Amherst,Gorbachev Dorm rumor,FALSE
-UMass Amherst,Durfee Conservatory,FALSE
-UMass Amherst,UMass Minuteman statue,FALSE
-UMass Amherst,The Spoke (bar),FALSE
-UMass Amherst,Amherst Cinema,FALSE
-UMass Amherst,People’s Market,FALSE
-Board games,Monopoly,TRUE
-Board games,Scrabble,TRUE
-Board games,Clue,TRUE
-Board games,Operation,TRUE
-Board games,Candy Land,TRUE
-Board games,Risk,TRUE
-Board games,The Game of Life,TRUE
-Board games,Trivial Pursuit,TRUE
-Board games,Pictionary,TRUE
-Board games,Scattergories,TRUE
-Board games,Catan,TRUE
-Board games,Carcassonne,TRUE
-Board games,Ticket to Ride,TRUE
-Board games,Pandemic,TRUE
-Board games,7 Wonders,TRUE
-Board games,Chess,TRUE
-Board games,Secret Hitler,TRUE
-Board games,Backgammon,TRUE
-Board games,Stratego,TRUE
-Board games,Battleship,TRUE
-Board games,Guess Who?,TRUE
-Board games,Connect Four,TRUE
-Board games,Taboo,TRUE
-Board games,Apples to Apples,TRUE
-Board games,Cards Against Humanity,TRUE
-Board games,Gloomhaven,TRUE
-Board games,Azul,TRUE
-Board games,Five Tribes,TRUE
-Board games,Spirit Island,TRUE
-Board games,Forbidden Island,TRUE
-Board games,Villainous,TRUE
-Board games,Arkham Horror,TRUE
-Board games,Hues and Clues,TRUE
-Board games,Wingspan,TRUE
-Board games,Wavelength,TRUE
-Board games,Fluxx,TRUE
-Board games,Chutes and Ladders,TRUE
-Board games,Labyrinth,TRUE
-Board games,Blokus,TRUE
-Board games,Othello,TRUE
-Board games,Hungry Hungry Hippos,TRUE
-Board games,Aggravation,TRUE
-Board games,Mouse Trap,TRUE
-Board games,Bananagrams,TRUE
-Board games,Yahtzee,TRUE
-Board games,Trouble,TRUE
-Board games,Sorry!,TRUE
-Board games,Shadows Over Camelot,TRUE
-Board games,Dominion,TRUE
-Board games,Decrypto,TRUE
-Pokemon,Bulbasaur,TRUE
-Pokemon,Ivysaur,TRUE
-Pokemon,Venusaur,TRUE
-Pokemon,Charmander,TRUE
-Pokemon,Charmeleon,TRUE
-Pokemon,Charizard,TRUE
-Pokemon,Squirtle,TRUE
-Pokemon,Wartortle,TRUE
-Pokemon,Blastoise,TRUE
-Pokemon,Caterpie,TRUE
-Pokemon,Weedle,TRUE
-Pokemon,Pidgey,TRUE
-Pokemon,Rattata,TRUE
-Pokemon,Pikachu,TRUE
-Pokemon,Raichu,TRUE
-Pokemon,Sandshrew,TRUE
-Pokemon,Clefairy,TRUE
-Pokemon,Vulpix,TRUE
-Pokemon,Jigglypuff,TRUE
-Pokemon,Zubat,TRUE
-Pokemon,Oddish,TRUE
-Pokemon,Paras,TRUE
-Pokemon,Geodude,TRUE
-Pokemon,Ponyta,TRUE
-Pokemon,Slowpoke,TRUE
-Pokemon,Magnemite,TRUE
-Pokemon,Doduo,TRUE
-Pokemon,Grimer,TRUE
-Pokemon,Shellder,TRUE
-Pokemon,Onix,TRUE
-Pokemon,Gastly,TRUE
-Pokemon,Drowzee,TRUE
-Pokemon,Krabby,TRUE
-Pokemon,Voltorb,TRUE
-Pokemon,Exeggcute,TRUE
-Pokemon,Koffing,TRUE
-Pokemon,Rhyhorn,TRUE
-Pokemon,Horsea,TRUE
-Pokemon,Goldeen,TRUE
-Pokemon,Staryu,TRUE
-Pokemon,Magikarp,TRUE
-Pokemon,Eevee,TRUE
-Pokemon,Vaporeon,TRUE
-Pokemon,Jolteon,TRUE
-Pokemon,Flareon,TRUE
-Pokemon,Dratini,TRUE
-Pokemon,Dragonair,TRUE
-Pokemon,Dragonite,TRUE
-Pokemon,Mewtwo,TRUE
-Pokemon,Mew,TRUE
-Broadway shows,Hamilton,TRUE
-Broadway shows,Wicked,TRUE
-Broadway shows,The Lion King,TRUE
-Broadway shows,Chicago,FALSE
-Broadway shows,Rent,TRUE
-Broadway shows,Into the Woods,TRUE
-Broadway shows,West Side Story,FALSE
-Broadway shows,Les Misérables,TRUE
-Broadway shows,The Phantom of the Opera,TRUE
-Broadway shows,Dear Evan Hansen,TRUE
-Broadway shows,The Book of Mormon,TRUE
-Broadway shows,Mean Girls,TRUE
-Broadway shows,Heathers,TRUE
-Broadway shows,Beetlejuice,TRUE
-Broadway shows,Hairspray,TRUE
-Broadway shows,"Hello, Dolly!",TRUE
-Broadway shows,Oklahoma!,TRUE
-Broadway shows,Cats,TRUE
-Broadway shows,Company,TRUE
-Broadway shows,Waitress,TRUE
-Broadway shows,Hadestown,TRUE
-Broadway shows,Six,TRUE
-Broadway shows,Aladdin,TRUE
-Broadway shows,Frozen,TRUE
-Broadway shows,Anastasia,TRUE
-Broadway shows,Shrek: The Musical,TRUE
-Broadway shows,A Chorus Line,TRUE
-Broadway shows,Evita,TRUE
-Broadway shows,Jesus Christ Superstar,TRUE
-Broadway shows,Joseph and the Amazing Technicolor Dreamcoat,TRUE
-Broadway shows,The Sound of Music,TRUE
-Broadway shows,My Fair Lady,TRUE
-Broadway shows,Fiddler on the Roof,TRUE
-Broadway shows,Sweeney Todd,TRUE
-Broadway shows,Avenue Q,TRUE
-Broadway shows,Spamalot,TRUE
-Broadway shows,Oliver!,TRUE
-Broadway shows,Beauty and the Beast,TRUE
-Broadway shows,Moulin Rouge!,TRUE
-Broadway shows,Once,TRUE
-Broadway shows,The Color Purple,TRUE
-Broadway shows,Parade,TRUE
-Broadway shows,Spring Awakening,TRUE
-Broadway shows,Fun Home,TRUE
-Broadway shows,Next to Normal,TRUE
-Broadway shows,Legally Blonde,TRUE
-Broadway shows,Matilda,TRUE
-Broadway shows,Jersey Boys,TRUE
-Broadway shows,Kinky Boots,FALSE
-Spirit Halloween Catalogue,Angel,FALSE
-Spirit Halloween Catalogue,Astronaut,FALSE
-Spirit Halloween Catalogue,Banana suit,FALSE
-Spirit Halloween Catalogue,Barbie,FALSE
-Spirit Halloween Catalogue,Batman,FALSE
-Spirit Halloween Catalogue,Beetlejuice,FALSE
-Spirit Halloween Catalogue,Cat costume,FALSE
-Spirit Halloween Catalogue,Cheerleader,FALSE
-Spirit Halloween Catalogue,Chucky,FALSE
-Spirit Halloween Catalogue,Clown,FALSE
-Spirit Halloween Catalogue,Cowboy,FALSE
-Spirit Halloween Catalogue,Darth Vader,FALSE
-Spirit Halloween Catalogue,Devil,FALSE
-Spirit Halloween Catalogue,Doctor,FALSE
-Spirit Halloween Catalogue,Dog costume,FALSE
-Spirit Halloween Catalogue,Fairy,FALSE
-Spirit Halloween Catalogue,Firefighter,FALSE
-Spirit Halloween Catalogue,Football player,FALSE
-Spirit Halloween Catalogue,Freddy Krueger,FALSE
-Spirit Halloween Catalogue,Ghost,FALSE
-Spirit Halloween Catalogue,Ghostface,FALSE
-Spirit Halloween Catalogue,Grim Reaper,FALSE
-Spirit Halloween Catalogue,Harley Quinn,FALSE
-Spirit Halloween Catalogue,Hot dog suit,FALSE
-Spirit Halloween Catalogue,Inflatable dinosaur,FALSE
-Spirit Halloween Catalogue,Jason Voorhees,FALSE
-Spirit Halloween Catalogue,Joker,FALSE
-Spirit Halloween Catalogue,Ken,FALSE
-Spirit Halloween Catalogue,Mad scientist,FALSE
-Spirit Halloween Catalogue,Mario,FALSE
-Spirit Halloween Catalogue,Mermaid,FALSE
-Spirit Halloween Catalogue,Michael Myers,FALSE
-Spirit Halloween Catalogue,Minion,FALSE
-Spirit Halloween Catalogue,Mummy,FALSE
-Spirit Halloween Catalogue,Nurse,FALSE
-Spirit Halloween Catalogue,Pennywise,FALSE
-Spirit Halloween Catalogue,Pirate,FALSE
-Spirit Halloween Catalogue,Police officer,FALSE
-Spirit Halloween Catalogue,Pumpkin costume,FALSE
-Spirit Halloween Catalogue,Skeleton,FALSE
-Spirit Halloween Catalogue,Spider-Man,FALSE
-Spirit Halloween Catalogue,Stormtrooper,FALSE
-Spirit Halloween Catalogue,Supergirl,FALSE
-Spirit Halloween Catalogue,Vampire,FALSE
-Spirit Halloween Catalogue,Wednesday Addams,FALSE
-Spirit Halloween Catalogue,Werewolf,FALSE
-Spirit Halloween Catalogue,Witch,FALSE
-Spirit Halloween Catalogue,Wonder Woman,FALSE
-Spirit Halloween Catalogue,Zombie,FALSE
-Reality tv shows,Survivor
-Reality tv shows,Big Brother
-Reality tv shows,The Bachelor
-Reality tv shows,The Bachelorette
-Reality tv shows,Keeping Up with the Kardashians
-Reality tv shows,The Real Housewives of Beverly Hills
-Reality tv shows,The Real Housewives of New York City
-Reality tv shows,RuPaul's Drag Race
-Reality tv shows,The Amazing Race
-Reality tv shows,American Idol
-Reality tv shows,The Voice
-Reality tv shows,Top Chef
-Reality tv shows,MasterChef
-Reality tv shows,Hell's Kitchen
-Reality tv shows,The Great British Bake Off
-Reality tv shows,Love Island
-Reality tv shows,The Circle
-Reality tv shows,Too Hot to Handle
-Reality tv shows,Queer Eye
-Reality tv shows,The Real World
-Reality tv shows,90 Day Fiancé
-Reality tv shows,Married at First Sight
-Reality tv shows,Jersey Shore
-Reality tv shows,The Apprentice
-Reality tv shows,Shark Tank
-Reality tv shows,Project Runway
-Reality tv shows,Dance Moms
-Reality tv shows,So You Think You Can Dance
-Reality tv shows,America's Next Top Model
-Reality tv shows,Ink Master
-Reality tv shows,Deadliest Catch
-Reality tv shows,Pawn Stars
-Reality tv shows,Storage Wars
-Reality tv shows,The Simple Life
-Reality tv shows,The Osbournes
-Reality tv shows,The Hills
-Reality tv shows,Laguna Beach
-Reality tv shows,My Super Sweet 16
-Reality tv shows,Catfish
-Reality tv shows,Undercover Boss
-Reality tv shows,Kitchen Nightmares
-Reality tv shows,Love Is Blind
-Reality tv shows,Below Deck
-Reality tv shows,Vanderpump Rules
-Reality tv shows,The Great Race (The Amazing Race Australia)
-Reality tv shows,Fear Factor
-Reality tv shows,Wife Swap
-Reality tv shows,Bar Rescue
-Reality tv shows,Dancing with the Stars
-Fair Foods,Corn Dog,FALSE
-Fair Foods,Funnel Cake,FALSE
-Fair Foods,Fried Oreos,FALSE
-Fair Foods,Turkey Leg,FALSE
-Fair Foods,Cotton Candy,FALSE
-Fair Foods,Lemonade Shake-Up,FALSE
-Fair Foods,Fried Pickles,FALSE
-Fair Foods,Curly Fries,FALSE
-Fair Foods,Caramel Apples,FALSE
-Fair Foods,Fried Twinkies,FALSE
-Fair Foods,Elephant Ear,FALSE
-Fair Foods,Giant Pretzel,FALSE
-Fair Foods,Fried Cheese Curds,FALSE
-Fair Foods,Deep-Fried Butter,FALSE
-Fair Foods,Churros,FALSE
-Fair Foods,Sausage On a Stick,FALSE
-Fair Foods,Fried Cookie Dough,FALSE
-Fair Foods,Soft Serve Ice Cream,FALSE
-Fair Foods,Kettle Corn,FALSE
-Fair Foods,Italian Sausage Sandwich,FALSE
-Fair Foods,Fried Mac and Cheese,FALSE
-Fair Foods,Smoked Brisket Sandwich,FALSE
-Fair Foods,Fried PB&J,FALSE
-Fair Foods,Snow Cone,FALSE
-Fair Foods,Fried Avocado,FALSE
-Fair Foods,Corn on the Cob,FALSE
-Fair Foods,Deep-Fried Brownie,FALSE
-Fair Foods,Fried Banana,FALSE
-Fair Foods,Loaded Nachos,FALSE
-Fair Foods,Fried Green Tomatoes,FALSE
-Fair Foods,Popcorn,FALSE
-Fair Foods,Walking Taco,FALSE
-Fair Foods,Fried Coconut Shrimp,FALSE
-Fair Foods,Blooming Onion,FALSE
-Fair Foods,Fruit Cup,FALSE
-Fair Foods,Fried Ice Cream,FALSE
-Fair Foods,Fried Snickers,FALSE
-Fair Foods,Chocolate-Dipped Bacon,FALSE
-Fair Foods,Pretzel Bites,FALSE
-Fair Foods,Gyro,FALSE
-Fair Foods,Mini Donuts,FALSE
-Fair Foods,Baked Potato,FALSE
-Fair Foods,Fried Jalapeño Slices,FALSE
-Fair Foods,BBQ Pork Sandwich,FALSE
-Fair Foods,Deep-Fried Pie,FALSE
-Fair Foods,Waffle Stick,FALSE
-Fair Foods,Fried Mushrooms,FALSE
-Fair Foods,Buffalo Wings,FALSE
-Fair Foods,Mozzarella Sticks,FALSE
-Apps,Facebook,TRUE
-Apps,Instagram,TRUE
-Apps,Twitter,TRUE
-Apps,TikTok,TRUE
-Apps,Snapchat,TRUE
-Apps,YouTube,TRUE
-Apps,Spotify,TRUE
-Apps,Netflix,TRUE
-Apps,United Airlines,TRUE
-Apps,Disney+,TRUE
-Apps,Amazon,TRUE
-Apps,Uber,TRUE
-Apps,Southwest,TRUE
-Apps,Doordash,TRUE
-Apps,Grubhub,TRUE
-Apps,Venmo,TRUE
-Apps,Cash App,TRUE
-Apps,PayPal,TRUE
-Apps,LinkedIn,TRUE
-Apps,Reddit,TRUE
-Apps,Pinterest,TRUE
-Apps,Partiful,TRUE
-Apps,WhatsApp,TRUE
-Apps,Messenger,TRUE
-Apps,Gmail,TRUE
-Apps,Google Maps,TRUE
-Apps,Apple Maps,TRUE
-Apps,Zoom,TRUE
-Apps,Microsoft Teams,TRUE
-Apps,Slack,TRUE
-Apps,Notion,TRUE
-Apps,Trello,TRUE
-Apps,Twitch,TRUE
-Apps,Discord,TRUE
-Apps,Kindle,TRUE
-Apps,Shazam,TRUE
-Apps,Roku,TRUE
-Apps,Prime Video,TRUE
-Apps,Pandora,TRUE
-Apps,Telegram,TRUE
-Apps,WeChat,TRUE
-Apps,Signal,TRUE
-Apps,Robinhood,TRUE
-Apps,Fidelity,TRUE
-Apps,ESPN,TRUE
-Apps,Strava,TRUE
-Apps,Instacart,TRUE
-Apps,Target,TRUE
-Apps,Walmart,TRUE
-States,Alabama,FALSE
-States,Alaska,FALSE
-States,Arizona,FALSE
-States,Arkansas,FALSE
-States,California,FALSE
-States,Colorado,FALSE
-States,Connecticut,FALSE
-States,Delaware,FALSE
-States,Florida,FALSE
-States,Georgia,FALSE
-States,Hawaii,FALSE
-States,Idaho,FALSE
-States,Illinois,FALSE
-States,Indiana,FALSE
-States,Iowa,FALSE
-States,Kansas,FALSE
-States,Kentucky,FALSE
-States,Louisiana,FALSE
-States,Maine,FALSE
-States,Maryland,FALSE
-States,Massachusetts,FALSE
-States,Michigan,FALSE
-States,Minnesota,FALSE
-States,Mississippi,FALSE
-States,Missouri,FALSE
-States,Montana,FALSE
-States,Nebraska,FALSE
-States,Nevada,FALSE
-States,New Hampshire,FALSE
-States,New Jersey,FALSE
-States,New Mexico,FALSE
-States,New York,FALSE
-States,North Carolina,FALSE
-States,North Dakota,FALSE
-States,Ohio,FALSE
-States,Oklahoma,FALSE
-States,Oregon,FALSE
-States,Pennsylvania,FALSE
-States,Rhode Island,FALSE
-States,South Carolina,FALSE
-States,South Dakota,FALSE
-States,Tennessee,FALSE
-States,Texas,FALSE
-States,Utah,FALSE
-States,Vermont,FALSE
-States,Virginia,FALSE
-States,Washington,FALSE
-States,West Virginia,FALSE
-States,Wisconsin,FALSE
-States,Wyoming,FALSE
-Sports,Football,FALSE
-Sports,Basketball,FALSE
-Sports,Baseball,FALSE
-Sports,Hockey,FALSE
-Sports,Soccer,FALSE
-Sports,Tennis,FALSE
-Sports,Golf,FALSE
-Sports,Swimming,FALSE
-Sports,Track and Field,FALSE
-Sports,Volleyball,FALSE
-Sports,Softball,FALSE
-Sports,Wrestling,FALSE
-Sports,Boxing,FALSE
-Sports,MMA,FALSE
-Sports,Rugby,FALSE
-Sports,Cricket,FALSE
-Sports,Table Tennis,FALSE
-Sports,Badminton,FALSE
-Sports,Skiing,FALSE
-Sports,Snowboarding,FALSE
-Sports,Skateboarding,FALSE
-Sports,Surfing,FALSE
-Sports,Rowing,FALSE
-Sports,Cycling,FALSE
-Sports,Fencing,FALSE
-Sports,Lacrosse,FALSE
-Sports,Field Hockey,FALSE
-Sports,Handball,FALSE
-Sports,Water Polo,FALSE
-Sports,Powerlifting,FALSE
-Sports,Bodybuilding,FALSE
-Sports,Broomball
-Sports,Gymnastics,FALSE
-Sports,Curling,FALSE
-Sports,Archery,FALSE
-Sports,Bowling,FALSE
-Sports,Auto Racing,FALSE
-Sports,Horse Racing,FALSE
-Sports,Billiards,FALSE
-Sports,Darts,FALSE
-Sports,Ultimate Frisbee,FALSE
-Sports,Dodgeball,FALSE
-Sports,Cheerleading,FALSE
-Sports,Marathon,FALSE
-Sports,Triathlon,FALSE
-Sports,Climbing,FALSE
-Sports,Pickleball,FALSE
-Sports,Polo,FALSE
-Sports,Kickball,FALSE
-Sports,Disc Golf,FALSE
-Disney Characters,Mickey Mouse,TRUE
-Disney Characters,Minnie Mouse,TRUE
-Disney Characters,Donald Duck,TRUE
-Disney Characters,Goofy,TRUE
-Disney Characters,Pluto,TRUE
-Disney Characters,Chip and Dale,TRUE
-Disney Characters,Snow White,TRUE
-Disney Characters,Cinderella,TRUE
-Disney Characters,Aurora,TRUE
-Disney Characters,Ariel,TRUE
-Disney Characters,Belle,TRUE
-Disney Characters,Jasmine,TRUE
-Disney Characters,Pocahontas,TRUE
-Disney Characters,Mulan,TRUE
-Disney Characters,Tiana,TRUE
-Disney Characters,Rapunzel,TRUE
-Disney Characters,Merida,TRUE
-Disney Characters,Moana,TRUE
-Disney Characters,Anna,TRUE
-Disney Characters,Elsa,TRUE
-Disney Characters,Kristoff,TRUE
-Disney Characters,Olaf,TRUE
-Disney Characters,Sven,TRUE
-Disney Characters,Simba,TRUE
-Disney Characters,Nala,TRUE
-Disney Characters,Mufasa,TRUE
-Disney Characters,Scar,TRUE
-Disney Characters,Timon,TRUE
-Disney Characters,Pumbaa,TRUE
-Disney Characters,Aladdin,TRUE
-Disney Characters,Genie,TRUE
-Disney Characters,Abu,TRUE
-Disney Characters,Jafar,TRUE
-Disney Characters,Tinker Bell,TRUE
-Disney Characters,Peter Pan,TRUE
-Disney Characters,Wendy,TRUE
-Disney Characters,Captain Hook,TRUE
-Disney Characters,Tarzan,TRUE
-Disney Characters,Jane,TRUE
-Disney Characters,Hercules,TRUE
-Disney Characters,Megara,TRUE
-Disney Characters,Phil,TRUE
-Disney Characters,Hades,TRUE
-Disney Characters,Stitch,TRUE
-Disney Characters,Lilo,TRUE
-Disney Characters,Gaston,TRUE
-Disney Characters,Beast,TRUE
-Disney Characters,Fairy Godmother,TRUE
-Sauces,Ketchup,FALSE
-Sauces,Mustard,FALSE
-Sauces,Mayonnaise,FALSE
-Sauces,BBQ Sauce,FALSE
-Sauces,Ranch,FALSE
-Sauces,Honey Mustard,FALSE
-Sauces,Sriracha,FALSE
-Sauces,Hot Sauce,FALSE
-Sauces,Buffalo Sauce,FALSE
-Sauces,Soy Sauce,FALSE
-Sauces,Teriyaki Sauce,FALSE
-Sauces,Hoisin,FALSE
-Sauces,Ponzu,FALSE
-Sauces,Sweet and Sour Sauce,FALSE
-Sauces,Chimichurri,FALSE
-Sauces,Pesto,FALSE
-Sauces,Marinara,FALSE
-Sauces,Alfredo,FALSE
-Sauces,Carbonara Sauce,FALSE
-Sauces,Tzatziki,FALSE
-Sauces,Hummus,FALSE
-Sauces,Guacamole,FALSE
-Sauces,Salsa,FALSE
-Sauces,Pico de Gallo,FALSE
-Sauces,Chipotle Mayo,FALSE
-Sauces,Cheese Sauce,FALSE
-Sauces,Mole Sauce,FALSE
-Sauces,Curry Sauce,FALSE
-Sauces,Tartar Sauce,FALSE
-Sauces,Remoulade,FALSE
-Sauces,Gravy,FALSE
-Sauces,Béarnaise,FALSE
-Sauces,Hollandaise,FALSE
-Sauces,Cocktail Sauce,FALSE
-Sauces,Worcestershire,FALSE
-Sauces,Fish Sauce,FALSE
-Sauces,Peanut Sauce,FALSE
-Sauces,Gochujang,FALSE
-Sauces,White Sauce,FALSE
-Sauces,Bechamel,FALSE
-Sauces,Chili Crisp,FALSE
-Sauces,Garlic Aioli,FALSE
-Sauces,Sesame Dressing,FALSE
-Sauces,Blue Cheese Dressing,FALSE
-Sauces,Thousand Island,FALSE
-Sauces,Caesar Dressing,FALSE
-Sauces,Vinaigrette,FALSE
-Sauces,Plum Sauce,FALSE
-Sauces,Orange Sauce,FALSE
-Sauces,Schezwan Sauce,FALSE
-Café Drinks,Latte,FALSE
-Café Drinks,Cappuccino,FALSE
-Café Drinks,Americano,FALSE
-Café Drinks,Espresso,FALSE
-Café Drinks,Mocha,FALSE
-Café Drinks,Macchiato,FALSE
-Café Drinks,Flat White,FALSE
-Café Drinks,Cold Brew,FALSE
-Café Drinks,Iced Coffee,FALSE
-Café Drinks,Affogato,FALSE
-Café Drinks,Chai Latte,FALSE
-Café Drinks,Matcha Latte,FALSE
-Café Drinks,Hot Chocolate,FALSE
-Café Drinks,Frappuccino,FALSE
-Café Drinks,Nitro Cold Brew,FALSE
-Café Drinks,Irish Coffee,FALSE
-Café Drinks,Cortado,FALSE
-Café Drinks,Ristretto,FALSE
-Café Drinks,Red Eye,FALSE
-Café Drinks,Black Coffee,FALSE
-Café Drinks,Café au Lait,FALSE
-Café Drinks,Café Bombón,FALSE
-Café Drinks,Café Cubano,FALSE
-Café Drinks,Turkish Coffee,FALSE
-Café Drinks,French Press,FALSE
-Café Drinks,Pumpkin Spice Latte,FALSE
-Café Drinks,Caramel Macchiato,FALSE
-Café Drinks,Drip Coffee,FALSE
-Café Drinks,Tea Latte,FALSE
-Café Drinks,Earl Grey Tea,FALSE
-Café Drinks,Jasmine Tea,FALSE
-Café Drinks,Chai Tea,FALSE
-Café Drinks,Herbal Tea,FALSE
-Café Drinks,Hot Tea,FALSE
-Café Drinks,Thai Iced Tea,FALSE
-Café Drinks,Dirty Chai,FALSE
-Café Drinks,Mint Tea,FALSE
-Café Drinks,Iced Latte,FALSE
-Café Drinks,Iced Matcha,FALSE
-Café Drinks,Iced Chai,FALSE
-Café Drinks,Iced Mocha,FALSE
-Café Drinks,Blended Latte,FALSE
-Café Drinks,Smoothie,FALSE
-Café Drinks,Strawberry Refresher,FALSE
-Café Drinks,Lemonade,FALSE
-Café Drinks,Arnold Palmer,FALSE
-Café Drinks,Protein Shake,FALSE
-Café Drinks,Kombucha,FALSE
-Café Drinks,Steamer,FALSE
-Brand Slogans,Just Do It,FALSE
-Brand Slogans,I’m Lovin’ It,FALSE
-Brand Slogans,Think Different,FALSE
-Brand Slogans,Because You’re Worth It,FALSE
-Brand Slogans,Have It Your Way,FALSE
-Brand Slogans,The Happiest Place on Earth,FALSE
-Brand Slogans,Open Happiness,FALSE
-Brand Slogans,What’s in Your Wallet?,FALSE
-Brand Slogans,Save Money. Live Better.,FALSE
-Brand Slogans,The Quicker Picker Upper,FALSE
-Brand Slogans,Betcha Can’t Eat Just One,FALSE
-Brand Slogans,Can You Hear Me Now?,FALSE
-Brand Slogans,"Melt in Your Mouth, Not in Your Hands",FALSE
-Brand Slogans,Maybe She’s Born With It,FALSE
-Brand Slogans,Think Outside the Bun,FALSE
-Brand Slogans,Eat Fresh,FALSE
-Brand Slogans,The King of Beers,FALSE
-Brand Slogans,Red Bull Gives You Wings,FALSE
-Brand Slogans,"Have a Break, Have a Kit Kat",FALSE
-Brand Slogans,Obey Your Thirst,FALSE
-Brand Slogans,The Snack That Smiles Back,FALSE
-Brand Slogans,America Runs on Dunkin’,FALSE
-Brand Slogans,The Best a Man Can Get,FALSE
-Brand Slogans,Stronger Than Dirt,FALSE
-Brand Slogans,Quality Never Goes Out of Style,FALSE
-Brand Slogans,Good to the Last Drop,FALSE
-Brand Slogans,Finger Lickin’ Good,FALSE
-Brand Slogans,Let’s Go Places,FALSE
-Brand Slogans,Zoom Zoom,FALSE
-Brand Slogans,The Ultimate Driving Machine,FALSE
-Brand Slogans,Like a Good Neighbor,FALSE
-Brand Slogans,Live Más,FALSE
-Brand Slogans,Every Kiss Begins With Kay,FALSE
-Brand Slogans,Shave Time. Shave Money.,FALSE
-Brand Slogans,Think Small,FALSE
-Brand Slogans,Designed for Driving Pleasure,FALSE
-Brand Slogans,Challenge Everything,FALSE
-Brand Slogans,Nothing Runs Like a Deere,FALSE
-Brand Slogans,Connecting People,FALSE
-Brand Slogans,The Breakfast of Champions,FALSE
-Brand Slogans,Do the Dew,FALSE
-Brand Slogans,Always Coca-Cola,FALSE
-Brand Slogans,Magically Delicious,FALSE
-Brand Slogans,The Taste of a New Generation,FALSE
-Brand Slogans,Live in Your World. Play in Ours.,FALSE
-Brand Slogans,"Easy, Breezy, Beautiful",FALSE
-Brand Slogans,Maybe It’s Time for a Huggies Change,FALSE
-Brand Slogans,We Bring Good Things to Life,FALSE
-Brand Slogans,Stronger Than Ever,FALSE
-Brand Slogans,Don’t Leave Home Without It,FALSE
-Brand Slogans,Every Little Helps,FALSE
-Fast food chains,McDonald's,FALSE
-Fast food chains,Burger King,FALSE
-Fast food chains,Wendy's,FALSE
-Fast food chains,Taco Bell,FALSE
-Fast food chains,Chick-fil-A,FALSE
-Fast food chains,KFC,FALSE
-Fast food chains,Popeyes,FALSE
-Fast food chains,Subway,FALSE
-Fast food chains,Chipotle,FALSE
-Fast food chains,Panda Express,FALSE
-Fast food chains,Five Guys,FALSE
-Fast food chains,Shake Shack,FALSE
-Fast food chains,Arby's,FALSE
-Fast food chains,Jimmy John's,FALSE
-Fast food chains,Jersey Mike's,FALSE
-Fast food chains,Culver's,FALSE
-Fast food chains,In-N-Out,FALSE
-Fast food chains,Sonic,FALSE
-Fast food chains,Pizza Hut,FALSE
-Fast food chains,Domino's,FALSE
-Fast food chains,Papa John's,FALSE
-Fast food chains,Whataburger,FALSE
-Fast food chains,Raising Cane's,FALSE
-Fast food chains,Qdoba,FALSE
-Fast food chains,Blaze Pizza,FALSE
-Fast food chains,Firehouse Subs,FALSE
-Fast food chains,Potbelly,FALSE
-Fast food chains,Del Taco,FALSE
-Fast food chains,Torchy's Tacos,FALSE
-Fast food chains,Checkers,FALSE
-Fast food chains,Rally's,FALSE
-Fast food chains,White Castle,FALSE
-Fast food chains,Church's Chicken,FALSE
-Fast food chains,Einstein Bros. Bagels,FALSE
-Fast food chains,Smashburger,FALSE
-Fast food chains,Bojangles,FALSE
-Fast food chains,Jack in the Box,FALSE
-Fast food chains,El Pollo Loco,FALSE
-Fast food chains,Krystal,FALSE
-Fast food chains,Red Robin (fast-casual),FALSE
-Fast food chains,Noodles & Company,FALSE
-Fast food chains,Swenson's,FALSE
-Fast food chains,Boston Market,FALSE
-Fast food chains,Moe's Southwest Grill,FALSE
-Fast food chains,Wingstop,FALSE
-Fast food chains,Dairy Queen,FALSE
-Fast food chains,Carl's Jr.,FALSE
-Fast food chains,Hardee's,FALSE
-Fast food chains,Cava,FALSE
-Closet,T-Shirt,FALSE
-Closet,Jeans,FALSE
-Closet,Socks,FALSE
-Closet,Underwear,FALSE
-Closet,Sweatshirt,FALSE
-Closet,Hoodie,FALSE
-Closet,Jacket,FALSE
-Closet,Coat,FALSE
-Closet,Scarf,FALSE
-Closet,Gloves,FALSE
-Closet,Beanie,FALSE
-Closet,Shorts,FALSE
-Closet,Skirt,FALSE
-Closet,Dress,FALSE
-Closet,Blouse,FALSE
-Closet,Button-down shirt,FALSE
-Closet,Polo shirt,FALSE
-Closet,Tank top,FALSE
-Closet,Suit jacket,FALSE
-Closet,Tie,FALSE
-Closet,Belt,FALSE
-Closet,Bra,FALSE
-Closet,Leggings,FALSE
-Closet,Sweatpants,FALSE
-Closet,Pajamas,FALSE
-Closet,Fancy dress,FALSE
-Closet,Overalls,FALSE
-Closet,Cardigan,FALSE
-Closet,Vest,FALSE
-Closet,Raincoat,FALSE
-Closet,Slides,FALSE
-Closet,Snow pants,FALSE
-Closet,Thermal shirt,FALSE
-Closet,Turtleneck,FALSE
-Closet,Sports jersey,FALSE
-Closet,Swimsuit,FALSE
-Closet,Cover-up,FALSE
-Closet,Hat,FALSE
-Closet,Sneakers,FALSE
-Closet,Dress shoes,FALSE
-Closet,Cowboy boots,FALSE
-Closet,Flip-flops,FALSE
-Closet,Robe,FALSE
-Closet,Workout shorts,FALSE
-Closet,Blazer,FALSE
-Closet,Graphic tee,FALSE
-Closet,Anorak,FALSE
-Closet,Windbreaker,FALSE
-Closet,Poncho,FALSE
-Fridge,Milk,FALSE
-Fridge,Eggs,FALSE
-Fridge,Stick of butter,FALSE
-Fridge,Cheddar cheese,FALSE
-Fridge,Mozzarella,FALSE
-Fridge,Yogurt,FALSE
-Fridge,Sour cream,FALSE
-Fridge,Cream cheese,FALSE
-Fridge,Orange juice,FALSE
-Fridge,Apple juice,FALSE
-Fridge,Cold brew coffee,FALSE
-Fridge,Lettuce,FALSE
-Fridge,Spinach,FALSE
-Fridge,Carrots,FALSE
-Fridge,Celery,FALSE
-Fridge,Broccoli,FALSE
-Fridge,Brita,FALSE
-Fridge,Ketchup,FALSE
-Fridge,Mustard,FALSE
-Fridge,Bottle of Mayonnaise,FALSE
-Fridge,Pickles,FALSE
-Fridge,Bacon,FALSE
-Fridge,Ham,FALSE
-Fridge,Turkey slices,FALSE
-Fridge,Grapes,FALSE
-Fridge,Strawberries,FALSE
-Fridge,Applesauce cup,FALSE
-Fridge,Protein shake,FALSE
-Fridge,Salad dressing,FALSE
-Fridge,Hummus,FALSE
-Fridge,Guacamole,FALSE
-Fridge,Salsa,FALSE
-Fridge,Bottled water,FALSE
-Fridge,Soda,FALSE
-Fridge,Iced tea,FALSE
-Fridge,Beer,FALSE
-Fridge,White wine,FALSE
-Fridge,Marinara sauce,FALSE
-Fridge,Butter chicken sauce,FALSE
-Fridge,Hot sauce,FALSE
-Fridge,Pesto,FALSE
-Fridge,Fruit cup,FALSE
-Fridge,Tortillas,FALSE
-Fridge,Hash browns,FALSE
-Fridge,Waffles,FALSE
-Fridge,Blueberries,FALSE
-Fridge,Tofu,FALSE
-Fridge,Miso paste,FALSE
-Fridge,Fresh herbs,FALSE
-Garage,Hammer,FALSE
-Garage,Screwdriver,FALSE
-Garage,Wrench,FALSE
-Garage,Power drill,FALSE
-Garage,Nail,FALSE
-Garage,Screws,FALSE
-Garage,Paint can,FALSE
-Garage,Paintbrush,FALSE
-Garage,Garden hose,FALSE
-Garage,Rake,FALSE
-Garage,Shovel,FALSE
-Garage,Lawn mower,FALSE
-Garage,Leaf blower,FALSE
-Garage,Socket set,FALSE
-Garage,Workbench,FALSE
-Garage,Extension cord,FALSE
-Garage,Toolbox,FALSE
-Garage,Air pump,FALSE
-Garage,Bicycle,FALSE
-Garage,Bike helmet,FALSE
-Garage,Car jack,FALSE
-Garage,Jumper cables,FALSE
-Garage,Spare tire,FALSE
-Garage,Motor oil,FALSE
-Garage,Antifreeze,FALSE
-Garage,WD-40,FALSE
-Garage,Saw,FALSE
-Garage,Hedge trimmer,FALSE
-Garage,Weed whacker,FALSE
-Garage,Chainsaw,FALSE
-Garage,Folding chair,FALSE
-Garage,Camp stove,FALSE
-Garage,Cooler,FALSE
-Garage,Home Depot Bucket,FALSE
-Garage,Luggage,FALSE
-Garage,Sports equipment,FALSE
-Garage,Snow shovel,FALSE
-Garage,Ratchet straps,FALSE
-Garage,Shop vac,FALSE
-Garage,Work gloves,FALSE
-Garage,Roller skates,FALSE
-Garage,Paint roller,FALSE
-Garage,Cordless drill,FALSE
-Garage,Drill bits,FALSE
-Garage,Step ladder,FALSE
-Garage,Tarp,FALSE
-Camping,Tent,FALSE
-Camping,Sleeping bag,FALSE
-Camping,Sleeping pad,FALSE
-Camping,Camp stove,FALSE
-Camping,Propane canister,FALSE
-Camping,Flashlight,FALSE
-Camping,Headlamp,FALSE
-Camping,Lantern,FALSE
-Camping,Firestarter,FALSE
-Camping,Matches,FALSE
-Camping,First aid kit,FALSE
-Camping,Map,FALSE
-Camping,Compass,FALSE
-Camping,Portable water filter,FALSE
-Camping,Hiking boots,FALSE
-Camping,Backpack,FALSE
-Camping,Folding chair,FALSE
-Camping,Cooler,FALSE
-Camping,Hatchet,FALSE
-Camping,Pocket knife,FALSE
-Camping,Rope,FALSE
-Camping,Tarp,FALSE
-Camping,Camp mug,FALSE
-Camping,Metal plate,FALSE
-Camping,Spork,FALSE
-Camping,Canteen,FALSE
-Camping,Bear spray,FALSE
-Camping,Trail mix,FALSE
-Camping,Marshmallows,FALSE
-Camping,Graham crackers,FALSE
-Camping,Chocolate bar,FALSE
-Camping,Bug spray,FALSE
-Camping,Sunscreen,FALSE
-Camping,Portable charger,FALSE
-Camping,Whistle,FALSE
-Camping,Binoculars,FALSE
-Camping,Hammock,FALSE
-Camping,Fire gloves,FALSE
-Camping,Dry bag,FALSE
-Camping,Poncho,FALSE
-Camping,Rain fly,FALSE
-Camping,Camp table,FALSE
-Camping,Pillow,FALSE
-Camping,Portable shower,FALSE
-Camping,Camp shovel,FALSE
-Camping,Wood bundle,FALSE
-Camping,Carabiners,FALSE
-Camping,Water bottle,FALSE
-Camping,Extra socks,FALSE
-Shoe brands,Nike,FALSE
-Shoe brands,Adidas,FALSE
-Shoe brands,Puma,FALSE
-Shoe brands,Reebok,FALSE
-Shoe brands,New Balance,FALSE
-Shoe brands,Asics,FALSE
-Shoe brands,Brooks,FALSE
-Shoe brands,Converse,FALSE
-Shoe brands,Vans,FALSE
-Shoe brands,Under Armour,FALSE
-Shoe brands,Skechers,FALSE
-Shoe brands,Merrell,FALSE
-Shoe brands,Timberland,FALSE
-Shoe brands,Doc Martens,FALSE
-Shoe brands,Crocs,FALSE
-Shoe brands,Salomon,FALSE
-Shoe brands,Clarks,FALSE
-Shoe brands,UGG,FALSE
-Shoe brands,Fila,FALSE
-Shoe brands,Champion,FALSE
-Shoe brands,Hoka,FALSE
-Shoe brands,On Running,FALSE
-Shoe brands,K-Swiss,FALSE
-Shoe brands,Saucony,FALSE
-Shoe brands,Altra,FALSE
-Shoe brands,La Sportiva,FALSE
-Shoe brands,Columbia,FALSE
-Shoe brands,Hey Dude,FALSE
-Shoe brands,Birkenstock,FALSE
-Shoe brands,Red Wing,FALSE
-Shoe brands,Allen Edmonds,FALSE
-Shoe brands,Steve Madden,FALSE
-Shoe brands,Gucci,FALSE
-Shoe brands,Balenciaga,FALSE
-Shoe brands,Prada,FALSE
-Shoe brands,Chanel,FALSE
-Shoe brands,Louis Vuitton,FALSE
-Shoe brands,Christian Louboutin,FALSE
-Shoe brands,Frye,FALSE
-Shoe brands,Chaco,FALSE
-Shoe brands,Keen,FALSE
-Shoe brands,Toms,FALSE
-Shoe brands,Sorel,FALSE
-Shoe brands,Ariat,FALSE
-Shoe brands,Rothy’s,FALSE
-Shoe brands,Sperry,FALSE
-Shoe brands,Teva,FALSE
-Shoe brands,Blundstone,FALSE
-Shoe brands,Oliver Cabell,FALSE
-Harry Potter characters,Harry Potter
-Harry Potter characters,Hermione Granger
-Harry Potter characters,Ron Weasley
-Harry Potter characters,Albus Dumbledore
-Harry Potter characters,Severus Snape
-Harry Potter characters,Rubeus Hagrid
-Harry Potter characters,Draco Malfoy
-Harry Potter characters,Minerva McGonagall
-Harry Potter characters,Sirius Black
-Harry Potter characters,Remus Lupin
-Harry Potter characters,Lord Voldemort
-Harry Potter characters,Bellatrix Lestrange
-Harry Potter characters,Neville Longbottom
-Harry Potter characters,Luna Lovegood
-Harry Potter characters,Ginny Weasley
-Harry Potter characters,Fred Weasley
-Harry Potter characters,George Weasley
-Harry Potter characters,Molly Weasley
-Harry Potter characters,Arthur Weasley
-Harry Potter characters,Percy Weasley
-Harry Potter characters,Charlie Weasley
-Harry Potter characters,Bill Weasley
-Harry Potter characters,Cedric Diggory
-Harry Potter characters,Cho Chang
-Harry Potter characters,Dean Thomas
-Harry Potter characters,Seamus Finnigan
-Harry Potter characters,Lavender Brown
-Harry Potter characters,Parvati Patil
-Harry Potter characters,Padma Patil
-Harry Potter characters,Alastor Moody
-Harry Potter characters,Nymphadora Tonks
-Harry Potter characters,Kingsley Shacklebolt
-Harry Potter characters,Dolores Umbridge
-Harry Potter characters,Gilderoy Lockhart
-Harry Potter characters,Pomona Sprout
-Harry Potter characters,Sybil Trelawney
-Harry Potter characters,Argus Filch
-Harry Potter characters,Dobby
-Harry Potter characters,Kreacher
-Harry Potter characters,Lucius Malfoy
-Harry Potter characters,Narcissa Malfoy
-Harry Potter characters,Horace Slughorn
-Harry Potter characters,Barty Crouch Jr.
-Harry Potter characters,Peter Pettigrew
-Harry Potter characters,Viktor Krum
-Harry Potter characters,Igor Karkaroff
-Harry Potter characters,Rita Skeeter
-Harry Potter characters,Cornelius Fudge
-Harry Potter characters,Fenrir Greyback
-MLB teams,Arizona Diamondbacks
-MLB teams,Atlanta Braves
-MLB teams,Baltimore Orioles
-MLB teams,Boston Red Sox
-MLB teams,Chicago Cubs
-MLB teams,Chicago White Sox
-MLB teams,Cincinnati Reds
-MLB teams,Cleveland Guardians
-MLB teams,Colorado Rockies
-MLB teams,Detroit Tigers
-MLB teams,Houston Astros
-MLB teams,Kansas City Royals
-MLB teams,Los Angeles Angels
-MLB teams,Los Angeles Dodgers
-MLB teams,Miami Marlins
-MLB teams,Milwaukee Brewers
-MLB teams,Minnesota Twins
-MLB teams,New York Mets
-MLB teams,New York Yankees
-MLB teams,Oakland Athletics
-MLB teams,Philadelphia Phillies
-MLB teams,Pittsburgh Pirates
-MLB teams,San Diego Padres
-MLB teams,San Francisco Giants
-MLB teams,Seattle Mariners
-MLB teams,St. Louis Cardinals
-MLB teams,Tampa Bay Rays
-MLB teams,Texas Rangers
-MLB teams,Toronto Blue Jays
-MLB teams,Washington Nationals
-MLB teams,Brooklyn Dodgers
-MLB teams,Montreal Expos
-MLB teams,St. Louis Browns
-MLB teams,Washington Senators
-MLB teams,Boston Braves
-MLB teams,New York Giants
-MLB teams,Philadelphia Athletics
-MLB teams,Seattle Pilots
-MLB teams,Kansas City Athletics
-MLB teams,Milwaukee Braves
-MLB teams,Cleveland Naps
-MLB teams,Pittsburgh Rebels
-Superheros,Superman
-Superheros,Batman
-Superheros,Wonder Woman
-Superheros,Spider-Man
-Superheros,Iron Man
-Superheros,Captain America
-Superheros,Thor
-Superheros,Hulk
-Superheros,Black Widow
-Superheros,Wolverine
-Superheros,The Flash
-Superheros,Green Lantern
-Superheros,Aquaman
-Superheros,Cyborg
-Superheros,Deadpool
-Superheros,Daredevil
-Superheros,Black Panther
-Superheros,Doctor Strange
-Superheros,Scarlet Witch
-Superheros,Vision
-Superheros,Ant-Man
-Superheros,The Wasp
-Superheros,Captain Marvel
-Superheros,Star-Lord
-Superheros,Gamora
-Superheros,Drax
-Superheros,Rocket Raccoon
-Superheros,Groot
-Superheros,Shazam
-Superheros,Green Arrow
-Superheros,Supergirl
-Superheros,Batgirl
-Superheros,Nightwing
-Superheros,Robin
-Superheros,Beast Boy
-Superheros,Raven
-Superheros,Starfire
-Superheros,Cyclops
-Superheros,Jean Grey
-Superheros,Storm
-Superheros,Rogue
-Superheros,Gambit
-Superheros,Professor X
-Superheros,Silver Surfer
-Superheros,The Thing
-Superheros,Mr. Fantastic
-Superheros,Invisible Woman
-Superheros,Human Torch
-Superheros,Hawkeye
-Superheros,Martian Manhunter
-Video game characters,Mario
-Video game characters,Luigi
-Video game characters,Princess Peach
-Video game characters,Bowser
-Video game characters,Link
-Video game characters,Zelda
-Video game characters,Ganondorf
-Video game characters,Donkey Kong
-Video game characters,Pikachu
-Video game characters,Sonic the Hedgehog
-Video game characters,Tails
-Video game characters,Knuckles
-Video game characters,Dr. Eggman
-Video game characters,Samus Aran
-Video game characters,Kirby
-Video game characters,Mega Man
-Video game characters,Pac-Man
-Video game characters,Ryu
-Video game characters,Ken Masters
-Video game characters,Chun-Li
-Video game characters,Cloud Strife
-Video game characters,Sephiroth
-Video game characters,Solid Snake
-Video game characters,Master Chief
-Video game characters,Kratos
-Video game characters,Nathan Drake
-Video game characters,Lara Croft
-Video game characters,Geralt of Rivia
-Video game characters,Ellie
-Video game characters,Joel Miller
-Video game characters,Arthur Morgan
-Video game characters,Charizard
-Video game characters,Steve
-Video game characters,Crash Bandicoot
-Video game characters,Spyro the Dragon
-Video game characters,Rayman
-Video game characters,Sora
-Video game characters,Joker
-Video game characters,Tracer
-Video game characters,Doom Slayer
-Video game characters,Gordon Freeman
-Video game characters,Agent 47
-Video game characters,Ezio Auditore
-Video game characters,Altaïr Ibn-La'Ahad
-Video game characters,Scorpion
-Video game characters,Sub-Zero
-Video game characters,Jill Valentine
-Video game characters,Leon S. Kennedy
-Video game characters,Yoshi
-City skylines,New York City
-City skylines,London
-City skylines,Paris
-City skylines,Tokyo
-City skylines,Shanghai
-City skylines,Dubai
-City skylines,Chicago
-City skylines,Hong Kong
-City skylines,Singapore
-City skylines,Sydney
-City skylines,Toronto
-City skylines,Kuala Lumpur
-City skylines,Frankfurt
-City skylines,Seoul
-City skylines,Los Angeles
-City skylines,San Francisco
-City skylines,Seattle
-City skylines,Moscow
-City skylines,Istanbul
-City skylines,Rio de Janeiro
-City skylines,Bangkok
-City skylines,Taipei
-City skylines,Melbourne
-City skylines,Vancouver
-City skylines,Panama City
-City skylines,Miami
-City skylines,Boston
-City skylines,Philadelphia
-City skylines,Dallas
-City skylines,Houston
-City skylines,Atlanta
-City skylines,Las Vegas
-City skylines,Madrid
-City skylines,Barcelona
-City skylines,Berlin
-City skylines,Rome
-City skylines,Athens
-City skylines,Cairo
-City skylines,Johannesburg
-City skylines,Mumbai
-City skylines,Delhi
-City skylines,Beijing
-City skylines,Osaka
-City skylines,Jakarta
-City skylines,Manila
-City skylines,Mexico City
-City skylines,Buenos Aires
-City skylines,Sao Paulo
-City skylines,Santiago
-City skylines,Bogota
-Movies,Star Wars: A New Hope
-Movies,The Empire Strikes Back
-Movies,The Wizard of Oz
-Movies,Casablanca
-Movies,Gone With the Wind
-Movies,Jaws
-Movies,The Sound of Music
-Movies,Jurassic Park
-Movies,E.T. the Extra-Terrestrial
-Movies,Back to the Future
-Movies,Titanic
-Movies,Avatar
-Movies,The Lord of the Rings: The Fellowship of the Ring
-Movies,The Lord of the Rings: The Return of the King
-Movies,The Matrix
-Movies,Forrest Gump
-Movies,The Lion King (1994)
-Movies,Harry Potter and the Sorcerer’s Stone
-Movies,The Dark Knight
-Movies,Pirates of the Caribbean: The Curse of the Black Pearl
-Movies,Iron Man
-Movies,Avengers: Endgame
-Movies,The Avengers (2012)
-Movies,Spider-Man (2002)
-Movies,Black Panther
-Movies,Superman (1978)
-Movies,Toy Story
-Movies,Finding Nemo
-Movies,Frozen
-Movies,Shrek
-Movies,Despicable Me
-Movies,Spirited Away
-Movies,The Exorcist
-Movies,Halloween (1978)
-Movies,Psycho
-Movies,The Shining
-Movies,It (2017)
-Movies,The Godfather
-Movies,Rocky
-Movies,Ghostbusters
-Movies,Indiana Jones: Raiders of the Lost Ark
-Movies,Terminator 2: Judgment Day
-Movies,Alien
-Movies,Top Gun
-Movies,The Breakfast Club
-Movies,Home Alone
-Movies,The Shawshank Redemption
-Movies,Barbie (2023)
-Movies,Oppenheimer (2023)
-Movies,Joker (2019)
-Movies,Frozen II
-Books,Harry Potter and the Sorcerer’s Stone
-Books,The Hobbit
-Books,The Lord of the Rings
-Books,The Catcher in the Rye
-Books,To Kill a Mockingbird
-Books,1984
-Books,Animal Farm
-Books,The Great Gatsby
-Books,The Da Vinci Code
-Books,The Alchemist
-Books,The Hunger Games
-Books,Pride and Prejudice
-Books,Jane Eyre
-Books,Wuthering Heights
-Books,The Lion the Witch and the Wardrobe
-Books,War and Peace
-Books,The Odyssey
-Books,The Iliad
-Books,Moby-Dick
-Books,The Adventures of Huckleberry Finn
-Books,The Chronicles of Narnia
-Books,The Girl with the Dragon Tattoo
-Books,The Fault in Our Stars
-Books,The Shining
-Books,It
-Books,The Hitchhiker’s Guide to the Galaxy
-Books,Dune
-Books,Dracula
-Books,Frankenstein
-Books,The Lord of the Flies
-Books,The Little Prince
-Books,Charlotte’s Web
-Books,Green Eggs and Ham
-Books,The Cat in the Hat
-Books,A Game of Thrones
-Books,Fahrenheit 451
-Books,Brave New World
-Books,The Kite Runner
-Books,The Book Thief
-Books,Life of Pi
-Books,The Outsiders
-Books,The Giver
-Books,The Handmaid’s Tale
-Books,Twilight
-Books,The Color Purple
-Books,The Very Hungry Caterpillar
-Books,Where the Wild Things Are
-Books,The Old Man and the Sea
-Books,The Silence of the Lambs
-Disney Channel Original Movies,High School Musical
-Disney Channel Original Movies,High School Musical 2
-Disney Channel Original Movies,High School Musical 3: Senior Year
-Disney Channel Original Movies,Camp Rock
-Disney Channel Original Movies,Camp Rock 2: The Final Jam
-Disney Channel Original Movies,The Cheetah Girls
-Disney Channel Original Movies,The Cheetah Girls 2
-Disney Channel Original Movies,The Cheetah Girls: One World
-Disney Channel Original Movies,Halloweentown
-Disney Channel Original Movies,Halloweentown II: Kalabar's Revenge
-Disney Channel Original Movies,Halloweentown High
-Disney Channel Original Movies,Return to Halloweentown
-Disney Channel Original Movies,Zenon: Girl of the 21st Century
-Disney Channel Original Movies,Zenon: The Zequel
-Disney Channel Original Movies,Zenon: Z3
-Disney Channel Original Movies,Smart House
-Disney Channel Original Movies,Johnny Tsunami
-Disney Channel Original Movies,Johnny Kapahala: Back on Board
-Disney Channel Original Movies,Cadet Kelly
-Disney Channel Original Movies,The Luck of the Irish
-Disney Channel Original Movies,Eddie's Million Dollar Cook-Off
-Disney Channel Original Movies,The Thirteenth Year
-Disney Channel Original Movies,The Color of Friendship
-Disney Channel Original Movies,Pixel Perfect
-Disney Channel Original Movies,Stuck in the Suburbs
-Disney Channel Original Movies,Wendy Wu: Homecoming Warrior
-Disney Channel Original Movies,Read It and Weep
-Disney Channel Original Movies,Twitches
-Disney Channel Original Movies,Twitches Too
-Disney Channel Original Movies,Let It Shine
-Disney Channel Original Movies,Lemonade Mouth
-Disney Channel Original Movies,Jump In!
-Disney Channel Original Movies,Minutemen
-Disney Channel Original Movies,Geek Charming
-Disney Channel Original Movies,Radio Rebel
-Disney Channel Original Movies,Princess Protection Program
-Disney Channel Original Movies,The Proud Family Movie
-Disney Channel Original Movies,Kim Possible Movie: So the Drama
-Disney Channel Original Movies,Teen Beach Movie
-Disney Channel Original Movies,Teen Beach 2
-Disney Channel Original Movies,Descendants
-Disney Channel Original Movies,Descendants 2
-Disney Channel Original Movies,Descendants 3
-Disney Channel Original Movies,Zapped
-Disney Channel Original Movies,How to Build a Better Boy
-Disney Channel Original Movies,Girl vs. Monster
-Disney Channel Original Movies,Invisible Sister
-Disney Channel Original Movies,Up, Up and Away
-Disney Channel Original Movies,Dadnapped
-Disney Channel Original Movies,Gotta Kick It Up!
-Airport codes,ATL,Hartsfield–Jackson Atlanta International Airport
-Airport codes,DFW,Dallas/Fort Worth International Airport
-Airport codes,DEN,Denver International Airport
-Airport codes,LAX,Los Angeles International Airport
-Airport codes,ORD,O’Hare International Airport
-Airport codes,JFK,John F. Kennedy International Airport
-Airport codes,MCO,Orlando International Airport
-Airport codes,LAS,Harry Reid International Airport (Las Vegas)
-Airport codes,CLT,Charlotte Douglas International Airport
-Airport codes,MIA,Miami International Airport
-Airport codes,SEA,Seattle–Tacoma International Airport
-Airport codes,SFO,San Francisco International Airport
-Airport codes,EWR,Newark Liberty International Airport
-Airport codes,PHX,Phoenix Sky Harbor International Airport
-Airport codes,IAH,George Bush Intercontinental Airport (Houston)
-Airport codes,BOS,Logan International Airport (Boston)
-Airport codes,FLL,Fort Lauderdale–Hollywood International Airport
-Airport codes,MSP,Minneapolis–Saint Paul International Airport
-Airport codes,LGA,LaGuardia Airport
-Airport codes,BWI,Baltimore/Washington International Airport
-Airport codes,TPA,Tampa International Airport
-Airport codes,PDX,Portland International Airport
-Airport codes,DTW,Detroit Metropolitan Wayne County Airport
-Airport codes,SAN,San Diego International Airport
-Airport codes,SLC,Salt Lake City International Airport
-Airport codes,PHL,Philadelphia International Airport
-Airport codes,AUS,Austin–Bergstrom International Airport
-Airport codes,IAD,Washington Dulles International Airport
-Airport codes,MDW,Chicago Midway International Airport
-Airport codes,BNA,Nashville International Airport
-Airport codes,RDU,Raleigh–Durham International Airport
-Airport codes,SJC,San Jose International Airport
-Airport codes,SMF,Sacramento International Airport
-Airport codes,STL,St. Louis Lambert International Airport
-Airport codes,MKE,Milwaukee Mitchell International Airport
-Airport codes,MSY,Louis Armstrong New Orleans International Airport
-Airport codes,CMH,John Glenn Columbus International Airport
-Airport codes,PBI,Palm Beach International Airport
-Airport codes,RNO,Reno–Tahoe International Airport
-Airport codes,BDL,Bradley International Airport (Hartford)
-Airport codes,BHM,Birmingham–Shuttlesworth International Airport
-Airport codes,OMA,Omaha Eppley Airfield
-Airport codes,IND,Indianapolis International Airport
-Airport codes,OKC,Will Rogers World Airport (Oklahoma City)
-Airport codes,SDF,Louisville Muhammad Ali International Airport
-Airport codes,BUF,Buffalo Niagara International Airport
-Airport codes,ORF,Norfolk International Airport
-Airport codes,DAY,Dayton International Airport
-Airport codes,SAT,San Antonio International Airport
-Brand slogans,Just Do It,Nike
-Brand slogans,I'm Lovin' It,McDonald's
-Brand slogans,Think Different,Apple
-Brand slogans,Because You're Worth It,L’Oréal
-Brand slogans,The Quicker Picker Upper,Bounty
-Brand slogans,Melts in Your Mouth Not in Your Hands,M&M’s
-Brand slogans,Have It Your Way,Burger King
-Brand slogans,The Best a Man Can Get,Gillette
-Brand slogans,Taste the Feeling,Coca-Cola
-Brand slogans,The Ultimate Driving Machine,BMW
-Brand slogans,Save Money Live Better,Walmart
-Brand slogans,What's in Your Wallet?,Capital One
-Brand slogans,Think Outside the Bun,Taco Bell
-Brand slogans,Can You Hear Me Now?,Verizon
-Brand slogans,Betcha Can’t Eat Just One,Lay’s
-Brand slogans,America Runs on ________,Dunkin’
-Brand slogans,It Gives You Wings,Red Bull
-Brand slogans,Everywhere You Want to Be,Visa
-Brand slogans,Maybe She’s Born With It Maybe It’s _______,Maybelline
-Brand slogans,Eat Fresh,Subway
-Brand slogans,The King of Beers,Budweiser
-Brand slogans,The Few The Proud The Marines,US Marine Corps
-Brand slogans,You’re Not You When You’re Hungry,Snickers
-Brand slogans,Obey Your Thirst,Sprite
-Brand slogans,Have a Break Have a ________,Kit Kat
-Brand slogans,The Snack That Smiles Back,Goldfish
-Brand slogans,Finger Lickin’ Good,KFC
-Brand slogans,Hot Eats Cool Treats,Dairy Queen
-Brand slogans,It Keeps Going and Going…,Energizer
-Brand slogans,Expect More Pay Less,Target
-Brand slogans,Like a Good Neighbor ________ Is There,State Farm
-Brand slogans,The Best Part of Wakin’ Up Is ________ in Your Cup,Folgers
-Brand slogans,Is It in You?,Gatorade
-Brand slogans,Zoom Zoom,Mazda
-Brand slogans,Challenge Everything,EA Games
-Brand slogans,Let Your Fingers Do the Walking,Yellow Pages
-Brand slogans,Don’t Leave Home Without It,American Express
-Brand slogans,Imagination at Work,GE
-Brand slogans,Connecting People,Nokia
-Brand slogans,Made From the Best Stuff on Earth,Snapple
-Brand slogans,Live in Your World Play in Ours,PlayStation
-Brand slogans,Think Small,Volkswagen
-Brand slogans,Ideas for Life,Panasonic
-Brand slogans,Better Ingredients Better Pizza,Papa John’s
-Brand slogans,The Relentless Pursuit of Perfection,Lexus
-Brand slogans,Impossible Is Nothing,Adidas
-Brand slogans,We Try Harder,Avis
-Brand slogans,Move Fast and Break Things,Facebook
-Taylor Swift Lyrics,"I don't know about you but I'm feeling _____","22","22"
-Taylor Swift Lyrics,"It feels like a perfect night to dress up like _____","hipsters","22"
-Taylor Swift Lyrics,"We're happy, free, ______, and lonely at the same time","confused","22"
-Taylor Swift Lyrics,"You call me up again just to break me like a _____","promise","All Too Well"
-Taylor Swift Lyrics,"And I forget about you long enough to forget why I _____ to","needed","All Too Well"
-Taylor Swift Lyrics,"I remember it all too _____","well","All Too Well"
-Taylor Swift Lyrics,"Oh, your sweet _____ and my wide-eyed gaze","disposition","All Too Well"
-Taylor Swift Lyrics,"I'm a crumpled up piece of paper _____ here","lyin'","All Too Well (10 Minute Version)"
-Taylor Swift Lyrics,"I'll get older, but your ______ stay my age","lovers","All Too Well (10 Minute Version)"
-Taylor Swift Lyrics,"It's me, hi, I'm the ______, it's me","problem","Anti-Hero"
-Taylor Swift Lyrics,"Cause baby now we've got _____ blood","bad","Bad Blood"
-Taylor Swift Lyrics,"Band-Aids don't fix _____ holes","bullet","Bad Blood"
-Taylor Swift Lyrics,"On a Wednesday in a ______, I watched it begin again","cafe","Begin Again"
-Taylor Swift Lyrics,"Darling I'm a nightmare dressed like a _____","daydream","Blank Space"
-Taylor Swift Lyrics,"I've got a blank _____ baby and I'll write your name","space","Blank Space"
-Taylor Swift Lyrics,"I could show you incredible _____","things","Blank Space"
-Taylor Swift Lyrics,"I'm shining like fireworks over your _____ empty town","sad","Dear John"
-Taylor Swift Lyrics,"Say my name and everything just stops; I don't want you like a ____ _____","best friend","Dress"
-Taylor Swift Lyrics,"Please don't be in love with someone _____","else","Enchanted"
-Taylor Swift Lyrics,"'Cause all I know is we said, ______ And your eyes look like coming home","Hello","Everything Has Changed"
-Taylor Swift Lyrics,"All I know since yesterday is everything has _____","changed","Everything Has Changed"
-Taylor Swift Lyrics,"You take my hand and drag me headfirst, _____","fearless","Fearless"
-Taylor Swift Lyrics,"I never trust a _______, but they love me","narcissist","I Did Something Bad"
-Taylor Swift Lyrics,"I knew you were _____ when you walked in","trouble","I Knew You Were Trouble"
-Taylor Swift Lyrics,"Long live the walls we _____ through","crashed","Long Live"
-Taylor Swift Lyrics,"It's a love story, baby just say _____","yes","Love Story"
-Taylor Swift Lyrics,"This love is difficult but it's _____","real","Love Story"
-Taylor Swift Lyrics,"See the lights, see the ______, the ball gowns","party","Love Story"
-Taylor Swift Lyrics,"You were Romeo, I was a scarlet _____","letter","Love Story"
-Taylor Swift Lyrics,"Romeo, save me, I've been feeling so _____","alone","Love Story"
-Taylor Swift Lyrics,"Can I go where _____ go?","you","Lover"
-Taylor Swift Lyrics,"Look at how my tears ______","ricochet","my tears ricochet"
-Taylor Swift Lyrics,"I want your midnights, but I'll be cleanin' up bottles with you on ____ ____ ____","New Year's Day","New Year’s Day"
-Taylor Swift Lyrics,"People throw rocks at things that shine but they can't take what's _____","ours","Ours"
-Taylor Swift Lyrics,"Loving him is like driving a new Maserati down a _______ street","dead-end","Red"
-Taylor Swift Lyrics,"Shake it _____","off","Shake It Off"
-Taylor Swift Lyrics,"I'm captivated by you, baby, like a _____ show","firework","Sparks Fly"
-Taylor Swift Lyrics,"Cause I see sparks fly whenever you _____","smile","Sparks Fly"
-Taylor Swift Lyrics,"I'm walking fast through the traffic lights, busy _____ and busy lives","streets","State of Grace"
-Taylor Swift Lyrics,"You come around and the armor falls, Pierce the room like a ________","cannonball","State of Grace"
-Taylor Swift Lyrics,"We never go out of _____","style","Style"
-Taylor Swift Lyrics,"You got that ______ _____ daydream look in your eye","James Dean","Style"
-Taylor Swift Lyrics,"I've been the ______, I've been the prey","archer","The Archer"
-Taylor Swift Lyrics,"Now, I'm standin' alone in a ______ room and we're not speakin'","crowded","The Story of Us"
-Taylor Swift Lyrics,"Two headlights shine through the _______ night and I will get you, get you alone","sleepless","Treacherous"
-Taylor Swift Lyrics,"We are never ever getting _____ together","back","We Are Never Ever Getting Back Together"
-Taylor Swift Lyrics,"Welcome to ______, it's been waiting for you","New York","Welcome to New York"
-Taylor Swift Lyrics,"Say you'll remember me standing in a nice dress staring at the _____ babe","sunset","Wildest Dreams"
-Taylor Swift Lyrics,"You can feel it on the way _____","home","You Are In Love"
-Taylor Swift Lyrics,"Think I know where you _____, think I know it's with me","belong","You Belong With Me"
-The Office,Michael Scott
-The Office,Dwight Schrute
-The Office,Jim Halpert
-The Office,Pam Beesly
-The Office,Angela Martin
-The Office,Kevin Malone
-The Office,Oscar Martinez
-The Office,Stanley Hudson
-The Office,Phyllis Vance
-The Office,Ryan Howard
-The Office,Kelly Kapoor
-The Office,Creed Bratton
-The Office,Meredith Palmer
-The Office,Toby Flenderson
-The Office,Darryl Philbin
-The Office,Andy Bernard
-The Office,Erin Hannon
-The Office,Gabe Lewis
-The Office,Jan Levinson
-The Office,David Wallace
-The Office,Holly Flax
-The Office,Roy Anderson
-The Office,Clark Green
-The Office,Pete Miller
-The Office,Nellie Bertram
-The Office,Deangelo Vickers
-The Office,Robert California
-The Office,Karen Filippelli
-The Office,Jo Bennett
-The Office,Todd Packer
-The Office,Charles Miner
-The Office,Mose Schrute
-The Office,Hank Tate
-The Office,Josh Porter
-The Office,Kathy Simms
-The Office,Helene Beesly
-The Office,Bob Vance
-The Office,Ben Franklin
-The Office,Senator Robert Lipton
-The Office,Val Johnson
-The Office,Donna Newton
-The Office,AJ (Holly's boyfriend)
-The Office,Sasha Flenderson
-The Office,Esther Bruegger
-The Office,Trevor Bortmen
-The Office,Isabel Poreba
-The Office,Jessica (Andy's girlfriend)
-Thanksgiving,Turkey
-Thanksgiving,Stuffing
-Thanksgiving,Mashed Potatoes
-Thanksgiving,Gravy
-Thanksgiving,Cranberry Sauce
-Thanksgiving,Green Bean Casserole
-Thanksgiving,Mac and Cheese
-Thanksgiving,Pumpkin Pie
-Thanksgiving,Apple Pie
-Thanksgiving,Sweet Potato Casserole
-Thanksgiving,Cornbread
-Thanksgiving,Roasted Vegetables
-Thanksgiving,Dinner Rolls
-Thanksgiving,Turkey Carving
-Thanksgiving,Friendsgiving
-Thanksgiving,Family
-Thanksgiving,Watching Football
-Thanksgiving,Macy’s Thanksgiving Day Parade
-Thanksgiving,Black Friday Shopping
-Thanksgiving,Leftovers
-Thanksgiving,Kid’s Table
-Thanksgiving,Cornucopia
-Thanksgiving,Tablecloth
-Thanksgiving,Wishbone Tradition
-Thanksgiving,Post-Dinner Nap
-Thanksgiving,Board Games
-Thanksgiving,Watching Holiday Movies
-Thanksgiving,Baked Ham
-Thanksgiving,Butternut Squash Soup
-Thanksgiving,Brussels Sprouts
-Thanksgiving,Pecan Pie
-Thanksgiving,Autumn Candles
-Thanksgiving,Table Setting Prep
-Thanksgiving,Cider
-Thanksgiving,Seasonal Cocktails
-Thanksgiving,Traveling
-Thanksgiving,Checking the Turkey
-Thanksgiving,Kitchen
-Thanksgiving,Turkey Trot Races
-Thanksgiving,Gratitude Lists
-Thanksgiving,Cozy Sweaters
-Thanksgiving,Fireplace Time
-Thanksgiving,Fall Wreaths
-Thanksgiving,Stuffing Balls
-Thanksgiving,Maple-Glazed Carrots
-Thanksgiving,Charcuterie Boards
-Thanksgiving,Deviled Eggs
-Dogs,Labrador Retriever
-Dogs,Golden Retriever
-Dogs,German Shepherd
-Dogs,French Bulldog
-Dogs,Poodle
-Dogs,Bulldog
-Dogs,Beagle
-Dogs,Rottweiler
-Dogs,Yorkshire Terrier
-Dogs,Dachshund
-Dogs,Boxer
-Dogs,Siberian Husky
-Dogs,Australian Shepherd
-Dogs,Shih Tzu
-Dogs,Doberman Pinscher
-Dogs,Great Dane
-Dogs,Pembroke Welsh Corgi
-Dogs,Miniature Schnauzer
-Dogs,Havanese
-Dogs,Bernese Mountain Dog
-Dogs,Cavalier King Charles Spaniel
-Dogs,Shetland Sheepdog
-Dogs,Boston Terrier
-Dogs,Pomeranian
-Dogs,Border Collie
-Dogs,Bichon Frise
-Dogs,Shiba Inu
-Dogs,Maltese
-Dogs,Cocker Spaniel
-Dogs,Chihuahua
-Dogs,English Springer Spaniel
-Dogs,Vizsla
-Dogs,Cane Corso
-Dogs,Newfoundland
-Dogs,Weimaraner
-Dogs,Akita
-Dogs,Samoyed
-Dogs,Irish Setter
-Dogs,Greyhound
-Dogs,Whippet
-Dogs,Australian Cattle Dog
-Dogs,Bloodhound
-Dogs,Alaskan Malamute
-Dogs,Saint Bernard
-Dogs,Portuguese Water Dog
-Dogs,Italian Greyhound
-Dogs,Rhodesian Ridgeback
-Dogs,American Eskimo Dog
-Dogs,Goldendoodle
-Horses,Appaloosa
-Horses,Cowboy
-Horses,Blanket
-Horses,Paint Horse
-Horses,Friesian
-Horses,Clydesdale
-Horses,Mustang
-Horses,Percheron
-Horses,Miniature Horse
-Horses,Horse Racing
-Horses,Show Jumping
-Horses,Dressage
-Horses,Barrel Racing
-Horses,Rodeo Riding
-Horses,Trail Riding
-Horses,Horseback Riding Lessons
-Horses,Mounted Police Horses
-Horses,Carriage Horses
-Horses,Saddles
-Horses,Reins
-Horses,Stirrups
-Horses,Bridles
-Horses,Horseshoes
-Horses,Horse Grooming
-Horses,Hoof Picks
-Horses,Stables
-Horses,Barns
-Horses,Horse Trailers
-Horses,Horse Feed
-Horses,Hay Bales
-Horses,Pastures
-Horses,Riding Helmets
-Horses,Saddle Pads
-Horses,Bit
-Horses,Mane Braiding
-Horses,Equine Vets
-Horses,Hoof
-Horses,Blinker
-Horses,Foal
-Horses,Statue
-Horses,Spirit
-Horses,Maximus
-Horses,Bullseye
-Horses,Bojack Horseman
-Horses,Pegasus
-Horses,My Little Pony
-Horses,Unicorn
-Rom Coms,When Harry Met Sally
-Rom Coms,Notting Hill
-Rom Coms,10 Things I Hate About You
-Rom Coms,Pretty Woman
-Rom Coms,The Princess Bride
-Rom Coms,Sleepless in Seattle
-Rom Coms,You've Got Mail
-Rom Coms,Crazy Rich Asians
-Rom Coms,The Holiday
-Rom Coms,Love Actually
-Rom Coms,Bridget Jones's Diary
-Rom Coms,My Big Fat Greek Wedding
-Rom Coms,How to Lose a Guy in 10 Days
-Rom Coms,13 Going on 30
-Rom Coms,Silver Linings Playbook
-Rom Coms,The Proposal
-Rom Coms,La La Land
-Rom Coms,Clueless
-Rom Coms,Legally Blonde
-Rom Coms,About Time
-Rom Coms,50 First Dates
-Rom Coms,Forgetting Sarah Marshall
-Rom Coms,The Wedding Singer
-Rom Coms,Mamma Mia!
-Rom Coms,Always Be My Maybe
-Rom Coms,To All the Boys I've Loved Before
-Rom Coms,The Big Sick
-Rom Coms,Crazy, Stupid, Love
-Rom Coms,Pretty in Pink
-Rom Coms,Sixteen Candles
-Rom Coms,Roman Holiday
-Rom Coms,Breakfast at Tiffany's
-Rom Coms,Amélie
-Rom Coms,While You Were Sleeping
-Rom Coms,Four Weddings and a Funeral
-Rom Coms,Hitch
-Rom Coms,Set It Up
-Rom Coms,Jerry Maguire
-Rom Coms,Shakespeare in Love
-Rom Coms,Music and Lyrics
-Rom Coms,The American President
-Rom Coms,The Decoy Bride
-Rom Coms,Nappily Ever After
-Rom Coms,The Half of It
-Rom Coms,Moonstruck
-Rom Coms,Splash
-Holidays,New Year’s Day
-Holidays,Valentine’s Day
-Holidays,St. Patrick’s Day
-Holidays,Easter
-Holidays,Mother’s Day
-Holidays,Father’s Day
-Holidays,Independence Day
-Holidays,Halloween
-Holidays,Thanksgiving
-Holidays,Christmas
-Holidays,Hanukkah
-Holidays,Kwanzaa
-Holidays,New Year’s Eve
-Holidays,Lunar New Year
-Holidays,Diwali
-Holidays,Ramadan
-Holidays,Eid al-Fitr
-Holidays,Eid al-Adha
-Holidays,Passover
-Holidays,Rosh Hashanah
-Holidays,Yom Kippur
-Holidays,Veterans Day
-Holidays,Memorial Day
-Holidays,Labor Day
-Holidays,Martin Luther King Jr. Day
-Holidays,Cinco de Mayo
-Holidays,Mardi Gras
-Holidays,Groundhog Day
-Holidays,Arbor Day
-Holidays,Earth Day
-Holidays,Flag Day
-Holidays,Patriot Day
-Holidays,Columbus Day / Indigenous Peoples’ Day
-Holidays,Boxing Day
-Holidays,Oktoberfest
-Holidays,Carnival
-Holidays,Good Friday
-Holidays,All Saints’ Day
-Holidays,Day of the Dead
-Holidays,Victoria Day
-Holidays,Canada Day
-Holidays,Bastille Day
-Holidays,Guy Fawkes Night
-Holidays,Mid-Autumn Festival
-Holidays,International Women’s Day
-Holidays,Teacher Appreciation Day
-Holidays,Pride Day
-Holidays,Black Friday
-Holidays,Pi Day
-Famous People Under 30,Tupac Shakur,25
-Famous People Under 30,The Notorious B.I.G.,24
-Famous People Under 30,Anne Frank,15
-Famous People Under 30,Kurt Cobain,27
-Famous People Under 30,Amy Winehouse,27
-Famous People Under 30,Avicii,28
-Famous People Under 30,XXXTentacion,20
-Famous People Under 30,Juice WRLD,21
-Famous People Under 30,Joan of Arc,19
-Famous People Under 30,Tutankhamun,18
-Famous People Under 30,Pocahontas,21
-Famous People Under 30,Jimi Hendrix,27
-Famous People Under 30,James Dean,24
-Famous People Under 30,Jim Morrison,27
-Famous People Under 30,Janis Joplin,27
-Famous People Under 30,Aaliyah,22
-Famous People Under 30,River Phoenix,23
-Famous People Under 30,Otis Redding,26
-Famous People Under 30,Buddy Holly,22
-Famous People Under 30,Hank Williams,29
-Famous People Under 30,Lil Peep,21
-Famous People Under 30,Christina Grimmie,22
-Famous People Under 30,Anton Yelchin,27
-Famous People Under 30,Brandon Lee,28
-Famous People Under 30,Sid Vicious,21
-Famous People Under 30,Ritchie Valens,17
-Famous People Under 30,Robert Johnson,27
-Famous People Under 30,Brian Jones,27
-Famous People Under 30,Nick Drake,26
-Famous People Under 30,Stuart Sutcliffe,21
-Famous People Under 30,Jonathan Brandis,27
-Famous People Under 30,Brad Renfro,25
-Famous People Under 30,Heather O'Rourke,12
-Famous People Under 30,Gia Carangi,26
-Famous People Under 30,Peaches Geldof,25
-Famous People Under 30,Bobby Fuller,23
-Famous People Under 30,Jean Harlow,26
-Famous People Under 30,John Keats,25
-Famous People Under 30,Percy Bysshe Shelley,29
-Famous People Under 30,Camoflauge,21
-Famous People Under 30,Lil Snupe,18
-Famous People Under 30,Heather Bratton,19
-Famous People Under 30,Leslie Harvey,27
-Famous People Under 30,Stephen Foster,29
-Famous People Under 30,Edward VI,15
-Famous People Under 30,Lady Jane Grey,16
-Famous People Under 30,Princess Charlotte of Wales,21
-Famous People Under 30,David Rizzio,28
-Famous People Under 30,Henry Moseley,27
-Famous People Under 30,Évariste Galois,20
-Amusement Parks,Roller Coaster
-Amusement Parks,Ferris Wheel
-Amusement Parks,Bumper Cars
-Amusement Parks,Log Flume
-Amusement Parks,Drop Tower
-Amusement Parks,Carousel
-Amusement Parks,Swing Ride
-Amusement Parks,Water Slide
-Amusement Parks,Go-Karts
-Amusement Parks,Cotton Candy
-Amusement Parks,Popcorn
-Amusement Parks,Funnel Cake
-Amusement Parks,Churros
-Amusement Parks,Hot Dogs
-Amusement Parks,Pretzels
-Amusement Parks,Ice Cream
-Amusement Parks,Lemonade Stand
-Amusement Parks,Turkey Legs
-Amusement Parks,Soda Fountain
-Amusement Parks,Haunted House
-Amusement Parks,Funhouse Mirrors
-Amusement Parks,Arcade Games
-Amusement Parks,Mini Golf
-Amusement Parks,Parades
-Amusement Parks,Character Meet-and-Greets
-Amusement Parks,4D Theater
-Amusement Parks,Fireworks Show
-Amusement Parks,Petting Zoo
-Amusement Parks,Ride Operators
-Amusement Parks,Park Mascots
-Amusement Parks,Security Guards
-Amusement Parks,Food Vendors
-Amusement Parks,Maintenance Crew
-Amusement Parks,Park Maps
-Amusement Parks,Stuffed Animals
-Amusement Parks,Lockers
-Amusement Parks,Gift Shop
-Amusement Parks,Tea cups
-Amusement Parks,Lines
-Amusement Parks,Bumper boats
-Amusement Parks,Caterpillar
-Amusement Parks,Hayride
-Amusement Parks,Train Ride
-
+Category,Example,Additional,Additional 2
+Pop divas,Beyoncé,TRUE,
+Pop divas,Lady Gaga,TRUE,
+Pop divas,Ariana Grande,TRUE,
+Pop divas,Taylor Swift,TRUE,
+Pop divas,Rihanna,TRUE,
+Pop divas,Katy Perry,TRUE,
+Pop divas,Mariah Carey,TRUE,
+Pop divas,Whitney Houston,TRUE,
+Pop divas,Madonna,TRUE,
+Pop divas,Britney Spears,TRUE,
+Pop divas,Christina Aguilera,TRUE,
+Pop divas,Jennifer Lopez,TRUE,
+Pop divas,Shakira,TRUE,
+Pop divas,Dua Lipa,TRUE,
+Pop divas,Doja Cat,TRUE,
+Pop divas,Selena Gomez,TRUE,
+Pop divas,Demi Lovato,TRUE,
+Pop divas,Sia,TRUE,
+Pop divas,Adele,TRUE,
+Pop divas,Kesha,TRUE,
+Pop divas,Lizzo,TRUE,
+Pop divas,Nicki Minaj,TRUE,
+Pop divas,Céline Dion,TRUE,
+Pop divas,Billie Eilish,TRUE,
+Pop divas,Miley Cyrus,TRUE,
+Pop divas,Pink,TRUE,
+Pop divas,Fergie,TRUE,
+Pop divas,Normani,TRUE,
+Pop divas,Charli XCX,TRUE,
+Pop divas,Kylie Minogue,TRUE,
+Pop divas,Camila Cabello,TRUE,
+Pop divas,Avril Lavigne,TRUE,
+Pop divas,Ashanti,TRUE,
+Pop divas,Ellie Goulding,TRUE,
+Pop divas,Alicia Keys,TRUE,
+Pop divas,Tove Lo,TRUE,
+Pop divas,Grimes,TRUE,
+Pop divas,Tinashe,TRUE,
+Pop divas,Chlöe Bailey,TRUE,
+Pop divas,Halsey,TRUE,
+Pop divas,Olivia Rodrigo,TRUE,
+Pop divas,Rosalía,TRUE,
+Pop divas,Florence Welch,TRUE,
+Pop divas,Janet Jackson,TRUE,
+Pop divas,Janelle Monáe,TRUE,
+Pop divas,Hayley Williams,TRUE,
+Pop divas,Jessie J,TRUE,
+Pop divas,Bonnie Tyler,TRUE,
+Pop divas,Chappell Roan,TRUE,
+Chicago tourist stuff,Willis Tower Skydeck,FALSE,
+Chicago tourist stuff,Cloud Gate (The Bean),FALSE,
+Chicago tourist stuff,Navy Pier,FALSE,
+Chicago tourist stuff,Millennium Park,FALSE,
+Chicago tourist stuff,Chicago Riverwalk,FALSE,
+Chicago tourist stuff,Architectural Boat Tour,FALSE,
+Chicago tourist stuff,Shedd Aquarium,FALSE,
+Chicago tourist stuff,Field Museum,FALSE,
+Chicago tourist stuff,Adler Planetarium,FALSE,
+Chicago tourist stuff,Art Institute of Chicago,FALSE,
+Chicago tourist stuff,Lincoln Park Zoo,FALSE,
+Chicago tourist stuff,Maggie Daley Park,FALSE,
+Chicago tourist stuff,Wrigley Field,FALSE,
+Chicago tourist stuff,Soldier Field,FALSE,
+Chicago tourist stuff,Garfield Park Conservatory,FALSE,
+Chicago tourist stuff,Chicago Theatre,FALSE,
+Chicago tourist stuff,Grant Park,FALSE,
+Chicago tourist stuff,360 Chicago,FALSE,
+Chicago tourist stuff,Museum of Science and Industry,FALSE,
+Chicago tourist stuff,Chicago Cultural Center,FALSE,
+Chicago tourist stuff,The Magnificent Mile,FALSE,
+Chicago tourist stuff,Chicago Water Tower,FALSE,
+Chicago tourist stuff,Chicago History Museum,FALSE,
+Chicago tourist stuff,Promontory Point,FALSE,
+Chicago tourist stuff,Ferris wheel at Navy Pier,FALSE,
+Chicago tourist stuff,ChinaTown Square,FALSE,
+Chicago tourist stuff,Billy Goat Tavern,FALSE,
+Chicago tourist stuff,Portillo’s,FALSE,
+Chicago tourist stuff,Gino’s East,FALSE,
+Chicago tourist stuff,Garrett Popcorn,FALSE,
+Chicago tourist stuff,Divvy bikes,FALSE,
+Chicago tourist stuff,Metra Electric line,FALSE,
+Chicago tourist stuff,Second City,FALSE,
+Chicago tourist stuff,Blue Man Group,FALSE,
+Chicago tourist stuff,The Green Mill,FALSE,
+Chicago tourist stuff,Chicago Botanic Garden,FALSE,
+Chicago tourist stuff,Brookfield Zoo,FALSE,
+Chicago tourist stuff,Calder’s Flamingo,FALSE,
+Chicago tourist stuff,Chicago Lakefront Trail,FALSE,
+Chicago tourist stuff,The 606 Trail,FALSE,
+Chicago tourist stuff,Buckingham Fountain,FALSE,
+Chicago tourist stuff,Shakespeare Theater Navy Pier,FALSE,
+Comedians,Jerry Seinfeld,,
+Comedians,Ellen DeGeneres,,
+Comedians,Jim Gaffigan,,
+Comedians,Brian Regan,,
+Comedians,Nate Bargatze,,
+Comedians,John Mulaney,,
+Comedians,Hasan Minhaj,,
+Comedians,Ali Wong,,
+Comedians,Tig Notaro,,
+Comedians,Mike Birbiglia,,
+Comedians,Iliza Shlesinger,,
+Comedians,Bo Burnham,,
+Comedians,Taylor Tomlinson,,
+Comedians,Kevin Hart,,
+Comedians,Trevor Noah,,
+Comedians,Wanda Sykes,,
+Comedians,Chris Rock,,
+Comedians,Dave Chappelle,,
+Comedians,Steve Martin,,
+Comedians,Martin Short,,
+Comedians,Amy Poehler,,
+Comedians,Tina Fey,,
+Comedians,Seth Meyers,,
+Comedians,Conan O'Brien,,
+Comedians,Stephen Colbert,,
+Comedians,Jimmy Fallon,,
+Comedians,Jimmy Kimmel,,
+Comedians,Jay Leno,,
+Comedians,Brian Posehn,,
+Comedians,Patton Oswalt,,
+Comedians,Maria Bamford,,
+Comedians,Demetri Martin,,
+Comedians,Russell Peters,,
+Comedians,Gabriel Iglesias,,
+Comedians,Ronny Chieng,,
+Comedians,Jordan Peele,,
+Comedians,Keegan-Michael Key,,
+Comedians,Fred Armisen,,
+Comedians,Bill Hader,,
+Comedians,Kristen Wiig,,
+Comedians,Melissa McCarthy,,
+Comedians,Kenan Thompson,,
+Comedians,Kate McKinnon,,
+Comedians,Bowen Yang,,
+Comedians,John Oliver,,
+Comedians,Phoebe Robinson,,
+Comedians,Nicole Byer,,
+Comedians,Fortune Feimster,,
+Comedians,Katherine Ryan,,
+Comedians,Marc Maron,,
+Comedians,Reggie Watts,,
+Kitchen gadgets,Spatula,TRUE,
+Kitchen gadgets,Whisk,TRUE,
+Kitchen gadgets,Tongs,TRUE,
+Kitchen gadgets,Measuring cups,TRUE,
+Kitchen gadgets,Measuring spoons,TRUE,
+Kitchen gadgets,Cheese grater,TRUE,
+Kitchen gadgets,Potato peeler,TRUE,
+Kitchen gadgets,Can opener,TRUE,
+Kitchen gadgets,Bottle opener,TRUE,
+Kitchen gadgets,Colander,TRUE,
+Kitchen gadgets,Cutting board,TRUE,
+Kitchen gadgets,Pastry brush,TRUE,
+Kitchen gadgets,Garlic press,TRUE,
+Kitchen gadgets,Kitchen shears,TRUE,
+Kitchen gadgets,Pizza cutter,TRUE,
+Kitchen gadgets,Mandoline slicer,TRUE,
+Kitchen gadgets,Immersion blender,TRUE,
+Kitchen gadgets,Food processor,TRUE,
+Kitchen gadgets,Stand mixer,TRUE,
+Kitchen gadgets,Hand mixer,TRUE,
+Kitchen gadgets,Slow cooker,TRUE,
+Kitchen gadgets,Pressure cooker,TRUE,
+Kitchen gadgets,Air fryer,TRUE,
+Kitchen gadgets,Toaster oven,TRUE,
+Kitchen gadgets,Microwave,TRUE,
+Kitchen gadgets,Digital thermometer,TRUE,
+Kitchen gadgets,Oven mitts,TRUE,
+Kitchen gadgets,Baking sheet,TRUE,
+Kitchen gadgets,Muffin tin,TRUE,
+Kitchen gadgets,Rolling pin,TRUE,
+Kitchen gadgets,Mortar and pestle,TRUE,
+Kitchen gadgets,Spice grinder,TRUE,
+Kitchen gadgets,Juicer,TRUE,
+Kitchen gadgets,Citrus zester,TRUE,
+Kitchen gadgets,Funnel,TRUE,
+Kitchen gadgets,French press,TRUE,
+Kitchen gadgets,Coffee grinder,TRUE,
+Kitchen gadgets,Cast iron pan,TRUE,
+Kitchen gadgets,Meat tenderizer,TRUE,
+Kitchen gadgets,Splatter screen,TRUE,
+Kitchen gadgets,Strainer,TRUE,
+Kitchen gadgets,Rice cooker,TRUE,
+Kitchen gadgets,Blender,TRUE,
+Kitchen gadgets,Egg separator,TRUE,
+Kitchen gadgets,Salad spinner,TRUE,
+Kitchen gadgets,Ice cream scoop,TRUE,
+Kitchen gadgets,Kitchen scale,TRUE,
+Junk drawer,Rubber bands,FALSE,
+Junk drawer,Scissors,FALSE,
+Junk drawer,Old batteries,FALSE,
+Junk drawer,Loose change,FALSE,
+Junk drawer,Pens,FALSE,
+Junk drawer,Pencils,FALSE,
+Junk drawer,Post-it notes,FALSE,
+Junk drawer,Thumbtacks,FALSE,
+Junk drawer,Paper clips,FALSE,
+Junk drawer,Dried-out markers,FALSE,
+Junk drawer,Broken phone chargers,FALSE,
+Junk drawer,USB cables,FALSE,
+Junk drawer,Random keys,FALSE,
+Junk drawer,Binder clips,FALSE,
+Junk drawer,Safety pins,FALSE,
+Junk drawer,Glue sticks,FALSE,
+Junk drawer,Duct tape,FALSE,
+Junk drawer,Spare buttons,FALSE,
+Junk drawer,Twine,FALSE,
+Junk drawer,Small flashlight,FALSE,
+Junk drawer,Matches,FALSE,
+Junk drawer,Lighters,FALSE,
+Junk drawer,Screwdriver,FALSE,
+Junk drawer,Allen wrenches,FALSE,
+Junk drawer,Sticky tack,FALSE,
+Junk drawer,Old gift cards,FALSE,
+Junk drawer,Candles,FALSE,
+Junk drawer,Rubber gloves,FALSE,
+Junk drawer,Felt pads,FALSE,
+Junk drawer,Coin purse,FALSE,
+Junk drawer,Old receipts,FALSE,
+Junk drawer,Expired coupons,FALSE,
+Junk drawer,Clothespins,FALSE,
+Junk drawer,Twist ties,FALSE,
+Junk drawer,Plastic utensils,FALSE,
+Junk drawer,Loose screws,FALSE,
+Junk drawer,Spare fuses,FALSE,
+Junk drawer,Old sunglasses,FALSE,
+Junk drawer,Chip clips,FALSE,
+Junk drawer,Swiss army knife,FALSE,
+Junk drawer,Flash drives,FALSE,
+Junk drawer,Playing cards,FALSE,
+Junk drawer,Bottle opener,FALSE,
+Junk drawer,Old magnets,FALSE,
+Junk drawer,Keychains,FALSE,
+Junk drawer,Notepad,FALSE,
+Junk drawer,Coasters,FALSE,
+Laundry,Laundry detergent,FALSE,
+Laundry,Fabric softener,FALSE,
+Laundry,Dryer sheets,FALSE,
+Laundry,Delicates bag,FALSE,
+Laundry,Laundry basket,FALSE,
+Laundry,Folded towels,FALSE,
+Laundry,Clothesline,FALSE,
+Laundry,Clothespins,FALSE,
+Laundry,Washing machine,FALSE,
+Laundry,Dryer,FALSE,
+Laundry,Iron,FALSE,
+Laundry,Ironing board,FALSE,
+Laundry,Wrinkle releaser spray,FALSE,
+Laundry,Bleach,FALSE,
+Laundry,Color catcher sheets,FALSE,
+Laundry,Wool dryer balls,FALSE,
+Laundry,Dry cleaning bag,FALSE,
+Laundry,Lint roller,FALSE,
+Laundry,Lint trap,FALSE,
+Laundry,Mesh laundry bag,FALSE,
+Laundry,Soaking basin,FALSE,
+Laundry,Detergent pods,FALSE,
+Laundry,Hand-wash soap,FALSE,
+Laundry,Drying rack,FALSE,
+Laundry,Steamer,FALSE,
+Laundry,Clothing hangers,FALSE,
+Laundry,Scent boosters,FALSE,
+Laundry,Laundry marker,FALSE,
+Laundry,Clothes brush,FALSE,
+Laundry,Spot remover pen,FALSE,
+Laundry,Laundry scoop,FALSE,
+Laundry,Folding board,FALSE,
+Laundry,Static guard,FALSE,
+Laundry,Laundry timer,FALSE,
+Laundry,Clothing repair kit,FALSE,
+Laundry,Spare buttons,FALSE,
+Laundry,Detergent measuring cup,FALSE,
+Laundry,Terry cloth rags,FALSE,
+Laundry,Clothing clips,FALSE,
+Board games,Monopoly,TRUE,
+Board games,Scrabble,TRUE,
+Board games,Clue,TRUE,
+Board games,Operation,TRUE,
+Board games,Candy Land,TRUE,
+Board games,Risk,TRUE,
+Board games,The Game of Life,TRUE,
+Board games,Trivial Pursuit,TRUE,
+Board games,Pictionary,TRUE,
+Board games,Scattergories,TRUE,
+Board games,Catan,TRUE,
+Board games,Carcassonne,TRUE,
+Board games,Ticket to Ride,TRUE,
+Board games,Pandemic,TRUE,
+Board games,7 Wonders,TRUE,
+Board games,Chess,TRUE,
+Board games,Secret Hitler,TRUE,
+Board games,Backgammon,TRUE,
+Board games,Stratego,TRUE,
+Board games,Battleship,TRUE,
+Board games,Guess Who?,TRUE,
+Board games,Connect Four,TRUE,
+Board games,Taboo,TRUE,
+Board games,Apples to Apples,TRUE,
+Board games,Cards Against Humanity,TRUE,
+Board games,Gloomhaven,TRUE,
+Board games,Azul,TRUE,
+Board games,Five Tribes,TRUE,
+Board games,Spirit Island,TRUE,
+Board games,Forbidden Island,TRUE,
+Board games,Villainous,TRUE,
+Board games,Arkham Horror,TRUE,
+Board games,Hues and Clues,TRUE,
+Board games,Wingspan,TRUE,
+Board games,Wavelength,TRUE,
+Board games,Fluxx,TRUE,
+Board games,Chutes and Ladders,TRUE,
+Board games,Labyrinth,TRUE,
+Board games,Blokus,TRUE,
+Board games,Othello,TRUE,
+Board games,Hungry Hungry Hippos,TRUE,
+Board games,Aggravation,TRUE,
+Board games,Mouse Trap,TRUE,
+Board games,Bananagrams,TRUE,
+Board games,Yahtzee,TRUE,
+Board games,Trouble,TRUE,
+Board games,Sorry!,TRUE,
+Board games,Shadows Over Camelot,TRUE,
+Board games,Dominion,TRUE,
+Board games,Decrypto,TRUE,
+Pokemon,Bulbasaur,TRUE,
+Pokemon,Ivysaur,TRUE,
+Pokemon,Venusaur,TRUE,
+Pokemon,Charmander,TRUE,
+Pokemon,Charmeleon,TRUE,
+Pokemon,Charizard,TRUE,
+Pokemon,Squirtle,TRUE,
+Pokemon,Wartortle,TRUE,
+Pokemon,Blastoise,TRUE,
+Pokemon,Caterpie,TRUE,
+Pokemon,Weedle,TRUE,
+Pokemon,Pidgey,TRUE,
+Pokemon,Rattata,TRUE,
+Pokemon,Pikachu,TRUE,
+Pokemon,Raichu,TRUE,
+Pokemon,Sandshrew,TRUE,
+Pokemon,Clefairy,TRUE,
+Pokemon,Vulpix,TRUE,
+Pokemon,Jigglypuff,TRUE,
+Pokemon,Zubat,TRUE,
+Pokemon,Oddish,TRUE,
+Pokemon,Paras,TRUE,
+Pokemon,Geodude,TRUE,
+Pokemon,Ponyta,TRUE,
+Pokemon,Slowpoke,TRUE,
+Pokemon,Magnemite,TRUE,
+Pokemon,Doduo,TRUE,
+Pokemon,Grimer,TRUE,
+Pokemon,Shellder,TRUE,
+Pokemon,Onix,TRUE,
+Pokemon,Gastly,TRUE,
+Pokemon,Drowzee,TRUE,
+Pokemon,Krabby,TRUE,
+Pokemon,Voltorb,TRUE,
+Pokemon,Exeggcute,TRUE,
+Pokemon,Koffing,TRUE,
+Pokemon,Rhyhorn,TRUE,
+Pokemon,Horsea,TRUE,
+Pokemon,Goldeen,TRUE,
+Pokemon,Staryu,TRUE,
+Pokemon,Magikarp,TRUE,
+Pokemon,Eevee,TRUE,
+Pokemon,Vaporeon,TRUE,
+Pokemon,Jolteon,TRUE,
+Pokemon,Flareon,TRUE,
+Pokemon,Dratini,TRUE,
+Pokemon,Dragonair,TRUE,
+Pokemon,Dragonite,TRUE,
+Pokemon,Mewtwo,TRUE,
+Pokemon,Mew,TRUE,
+Broadway shows,Hamilton,TRUE,
+Broadway shows,Wicked,TRUE,
+Broadway shows,The Lion King,TRUE,
+Broadway shows,Chicago,FALSE,
+Broadway shows,Rent,TRUE,
+Broadway shows,Into the Woods,TRUE,
+Broadway shows,West Side Story,FALSE,
+Broadway shows,Les Misérables,TRUE,
+Broadway shows,The Phantom of the Opera,TRUE,
+Broadway shows,Dear Evan Hansen,TRUE,
+Broadway shows,The Book of Mormon,TRUE,
+Broadway shows,Mean Girls,TRUE,
+Broadway shows,Heathers,TRUE,
+Broadway shows,Beetlejuice,TRUE,
+Broadway shows,Hairspray,TRUE,
+Broadway shows,"Hello, Dolly!",TRUE,
+Broadway shows,Oklahoma!,TRUE,
+Broadway shows,Cats,TRUE,
+Broadway shows,Company,TRUE,
+Broadway shows,Waitress,TRUE,
+Broadway shows,Hadestown,TRUE,
+Broadway shows,Six,TRUE,
+Broadway shows,Aladdin,TRUE,
+Broadway shows,Frozen,TRUE,
+Broadway shows,Anastasia,TRUE,
+Broadway shows,Shrek: The Musical,TRUE,
+Broadway shows,A Chorus Line,TRUE,
+Broadway shows,Evita,TRUE,
+Broadway shows,Jesus Christ Superstar,TRUE,
+Broadway shows,Joseph and the Amazing Technicolor Dreamcoat,TRUE,
+Broadway shows,The Sound of Music,TRUE,
+Broadway shows,My Fair Lady,TRUE,
+Broadway shows,Fiddler on the Roof,TRUE,
+Broadway shows,Sweeney Todd,TRUE,
+Broadway shows,Avenue Q,TRUE,
+Broadway shows,Spamalot,TRUE,
+Broadway shows,Oliver!,TRUE,
+Broadway shows,Beauty and the Beast,TRUE,
+Broadway shows,Moulin Rouge!,TRUE,
+Broadway shows,Once,TRUE,
+Broadway shows,The Color Purple,TRUE,
+Broadway shows,Parade,TRUE,
+Broadway shows,Spring Awakening,TRUE,
+Broadway shows,Fun Home,TRUE,
+Broadway shows,Next to Normal,TRUE,
+Broadway shows,Legally Blonde,TRUE,
+Broadway shows,Matilda,TRUE,
+Broadway shows,Jersey Boys,TRUE,
+Broadway shows,Kinky Boots,FALSE,
+Spirit Halloween Catalogue,Angel,FALSE,
+Spirit Halloween Catalogue,Astronaut,FALSE,
+Spirit Halloween Catalogue,Banana suit,FALSE,
+Spirit Halloween Catalogue,Barbie,FALSE,
+Spirit Halloween Catalogue,Batman,FALSE,
+Spirit Halloween Catalogue,Beetlejuice,FALSE,
+Spirit Halloween Catalogue,Cat costume,FALSE,
+Spirit Halloween Catalogue,Cheerleader,FALSE,
+Spirit Halloween Catalogue,Chucky,FALSE,
+Spirit Halloween Catalogue,Clown,FALSE,
+Spirit Halloween Catalogue,Cowboy,FALSE,
+Spirit Halloween Catalogue,Darth Vader,FALSE,
+Spirit Halloween Catalogue,Devil,FALSE,
+Spirit Halloween Catalogue,Doctor,FALSE,
+Spirit Halloween Catalogue,Dog costume,FALSE,
+Spirit Halloween Catalogue,Fairy,FALSE,
+Spirit Halloween Catalogue,Firefighter,FALSE,
+Spirit Halloween Catalogue,Football player,FALSE,
+Spirit Halloween Catalogue,Freddy Krueger,FALSE,
+Spirit Halloween Catalogue,Ghost,FALSE,
+Spirit Halloween Catalogue,Ghostface,FALSE,
+Spirit Halloween Catalogue,Grim Reaper,FALSE,
+Spirit Halloween Catalogue,Harley Quinn,FALSE,
+Spirit Halloween Catalogue,Hot dog suit,FALSE,
+Spirit Halloween Catalogue,Inflatable dinosaur,FALSE,
+Spirit Halloween Catalogue,Jason Voorhees,FALSE,
+Spirit Halloween Catalogue,Joker,FALSE,
+Spirit Halloween Catalogue,Ken,FALSE,
+Spirit Halloween Catalogue,Mad scientist,FALSE,
+Spirit Halloween Catalogue,Mario,FALSE,
+Spirit Halloween Catalogue,Mermaid,FALSE,
+Spirit Halloween Catalogue,Michael Myers,FALSE,
+Spirit Halloween Catalogue,Minion,FALSE,
+Spirit Halloween Catalogue,Mummy,FALSE,
+Spirit Halloween Catalogue,Nurse,FALSE,
+Spirit Halloween Catalogue,Pennywise,FALSE,
+Spirit Halloween Catalogue,Pirate,FALSE,
+Spirit Halloween Catalogue,Police officer,FALSE,
+Spirit Halloween Catalogue,Pumpkin costume,FALSE,
+Spirit Halloween Catalogue,Skeleton,FALSE,
+Spirit Halloween Catalogue,Spider-Man,FALSE,
+Spirit Halloween Catalogue,Stormtrooper,FALSE,
+Spirit Halloween Catalogue,Supergirl,FALSE,
+Spirit Halloween Catalogue,Vampire,FALSE,
+Spirit Halloween Catalogue,Wednesday Addams,FALSE,
+Spirit Halloween Catalogue,Werewolf,FALSE,
+Spirit Halloween Catalogue,Witch,FALSE,
+Spirit Halloween Catalogue,Wonder Woman,FALSE,
+Spirit Halloween Catalogue,Zombie,FALSE,
+Reality tv shows,Survivor,,
+Reality tv shows,Big Brother,,
+Reality tv shows,The Bachelor,,
+Reality tv shows,The Bachelorette,,
+Reality tv shows,Keeping Up with the Kardashians,,
+Reality tv shows,The Real Housewives of Beverly Hills,,
+Reality tv shows,The Real Housewives of New York City,,
+Reality tv shows,RuPaul's Drag Race,,
+Reality tv shows,The Amazing Race,,
+Reality tv shows,American Idol,,
+Reality tv shows,The Voice,,
+Reality tv shows,Top Chef,,
+Reality tv shows,MasterChef,,
+Reality tv shows,Hell's Kitchen,,
+Reality tv shows,The Great British Bake Off,,
+Reality tv shows,Love Island,,
+Reality tv shows,The Circle,,
+Reality tv shows,Too Hot to Handle,,
+Reality tv shows,Queer Eye,,
+Reality tv shows,The Real World,,
+Reality tv shows,Married at First Sight,,
+Reality tv shows,Jersey Shore,,
+Reality tv shows,Shark Tank,,
+Reality tv shows,Project Runway,,
+Reality tv shows,Dance Moms,,
+Reality tv shows,So You Think You Can Dance,,
+Reality tv shows,America's Next Top Model,,
+Reality tv shows,Ink Master,,
+Reality tv shows,Deadliest Catch,,
+Reality tv shows,Pawn Stars,,
+Reality tv shows,Storage Wars,,
+Reality tv shows,The Simple Life,,
+Reality tv shows,The Osbournes,,
+Reality tv shows,The Hills,,
+Reality tv shows,Laguna Beach,,
+Reality tv shows,My Super Sweet 16,,
+Reality tv shows,Catfish,,
+Reality tv shows,Undercover Boss,,
+Reality tv shows,Kitchen Nightmares,,
+Reality tv shows,Love Is Blind,,
+Reality tv shows,Below Deck,,
+Reality tv shows,Vanderpump Rules,,
+Reality tv shows,Fear Factor,,
+Reality tv shows,Wife Swap,,
+Reality tv shows,Bar Rescue,,
+Reality tv shows,Dancing with the Stars,,
+Fair Foods,Corn Dog,FALSE,
+Fair Foods,Funnel Cake,FALSE,
+Fair Foods,Fried Oreos,FALSE,
+Fair Foods,Turkey Leg,FALSE,
+Fair Foods,Cotton Candy,FALSE,
+Fair Foods,Lemonade Shake-Up,FALSE,
+Fair Foods,Fried Pickles,FALSE,
+Fair Foods,Curly Fries,FALSE,
+Fair Foods,Caramel Apples,FALSE,
+Fair Foods,Fried Twinkies,FALSE,
+Fair Foods,Elephant Ear,FALSE,
+Fair Foods,Giant Pretzel,FALSE,
+Fair Foods,Fried Cheese Curds,FALSE,
+Fair Foods,Churros,FALSE,
+Fair Foods,Sausage On a Stick,FALSE,
+Fair Foods,Fried Cookie Dough,FALSE,
+Fair Foods,Soft Serve Ice Cream,FALSE,
+Fair Foods,Kettle Corn,FALSE,
+Fair Foods,Italian Sausage Sandwich,FALSE,
+Fair Foods,Fried Mac and Cheese,FALSE,
+Fair Foods,Smoked Brisket Sandwich,FALSE,
+Fair Foods,Fried PB&J,FALSE,
+Fair Foods,Snow Cone,FALSE,
+Fair Foods,Fried Avocado,FALSE,
+Fair Foods,Corn on the Cob,FALSE,
+Fair Foods,Deep-Fried Brownie,FALSE,
+Fair Foods,Fried Banana,FALSE,
+Fair Foods,Loaded Nachos,FALSE,
+Fair Foods,Fried Green Tomatoes,FALSE,
+Fair Foods,Popcorn,FALSE,
+Fair Foods,Walking Taco,FALSE,
+Fair Foods,Fried Coconut Shrimp,FALSE,
+Fair Foods,Blooming Onion,FALSE,
+Fair Foods,Fried Ice Cream,FALSE,
+Fair Foods,Fried Snickers,FALSE,
+Fair Foods,Chocolate-Dipped Bacon,FALSE,
+Fair Foods,Pretzel Bites,FALSE,
+Fair Foods,Gyro,FALSE,
+Fair Foods,Mini Donuts,FALSE,
+Fair Foods,Baked Potato,FALSE,
+Fair Foods,Fried Jalapeño Slices,FALSE,
+Fair Foods,Pickle on a Stick,FALSE,
+Fair Foods,Deep-Fried Pie,FALSE,
+Fair Foods,Waffle Stick,FALSE,
+Fair Foods,Fried Mushrooms,FALSE,
+Fair Foods,Buffalo Wings,FALSE,
+Fair Foods,Mozzarella Sticks,FALSE,
+Apps,Facebook,TRUE,
+Apps,Instagram,TRUE,
+Apps,Twitter,TRUE,
+Apps,TikTok,TRUE,
+Apps,Snapchat,TRUE,
+Apps,YouTube,TRUE,
+Apps,Spotify,TRUE,
+Apps,Netflix,TRUE,
+Apps,United Airlines,TRUE,
+Apps,Disney+,TRUE,
+Apps,Amazon,TRUE,
+Apps,Uber,TRUE,
+Apps,Southwest,TRUE,
+Apps,Doordash,TRUE,
+Apps,Grubhub,TRUE,
+Apps,Venmo,TRUE,
+Apps,Cash App,TRUE,
+Apps,PayPal,TRUE,
+Apps,LinkedIn,TRUE,
+Apps,Reddit,TRUE,
+Apps,Pinterest,TRUE,
+Apps,Partiful,TRUE,
+Apps,WhatsApp,TRUE,
+Apps,Messenger,TRUE,
+Apps,Gmail,TRUE,
+Apps,Google Maps,TRUE,
+Apps,Apple Maps,TRUE,
+Apps,Zoom,TRUE,
+Apps,Microsoft Teams,TRUE,
+Apps,Slack,TRUE,
+Apps,Notion,TRUE,
+Apps,Trello,TRUE,
+Apps,Twitch,TRUE,
+Apps,Discord,TRUE,
+Apps,Kindle,TRUE,
+Apps,Shazam,TRUE,
+Apps,Roku,TRUE,
+Apps,Prime Video,TRUE,
+Apps,Pandora,TRUE,
+Apps,Telegram,TRUE,
+Apps,WeChat,TRUE,
+Apps,Signal,TRUE,
+Apps,Robinhood,TRUE,
+Apps,Fidelity,TRUE,
+Apps,ESPN,TRUE,
+Apps,Strava,TRUE,
+Apps,Instacart,TRUE,
+Apps,Target,TRUE,
+Apps,Walmart,TRUE,
+States,Alabama,FALSE,
+States,Alaska,FALSE,
+States,Arizona,FALSE,
+States,Arkansas,FALSE,
+States,California,FALSE,
+States,Colorado,FALSE,
+States,Connecticut,FALSE,
+States,Delaware,FALSE,
+States,Florida,FALSE,
+States,Georgia,FALSE,
+States,Hawaii,FALSE,
+States,Idaho,FALSE,
+States,Illinois,FALSE,
+States,Indiana,FALSE,
+States,Iowa,FALSE,
+States,Kansas,FALSE,
+States,Kentucky,FALSE,
+States,Louisiana,FALSE,
+States,Maine,FALSE,
+States,Maryland,FALSE,
+States,Massachusetts,FALSE,
+States,Michigan,FALSE,
+States,Minnesota,FALSE,
+States,Mississippi,FALSE,
+States,Missouri,FALSE,
+States,Montana,FALSE,
+States,Nebraska,FALSE,
+States,Nevada,FALSE,
+States,New Hampshire,FALSE,
+States,New Jersey,FALSE,
+States,New Mexico,FALSE,
+States,New York,FALSE,
+States,North Carolina,FALSE,
+States,North Dakota,FALSE,
+States,Ohio,FALSE,
+States,Oklahoma,FALSE,
+States,Oregon,FALSE,
+States,Pennsylvania,FALSE,
+States,Rhode Island,FALSE,
+States,South Carolina,FALSE,
+States,South Dakota,FALSE,
+States,Tennessee,FALSE,
+States,Texas,FALSE,
+States,Utah,FALSE,
+States,Vermont,FALSE,
+States,Virginia,FALSE,
+States,Washington,FALSE,
+States,West Virginia,FALSE,
+States,Wisconsin,FALSE,
+States,Wyoming,FALSE,
+Sports,Football,FALSE,
+Sports,Basketball,FALSE,
+Sports,Baseball,FALSE,
+Sports,Hockey,FALSE,
+Sports,Soccer,FALSE,
+Sports,Tennis,FALSE,
+Sports,Golf,FALSE,
+Sports,Swimming,FALSE,
+Sports,Track and Field,FALSE,
+Sports,Volleyball,FALSE,
+Sports,Softball,FALSE,
+Sports,Wrestling,FALSE,
+Sports,Boxing,FALSE,
+Sports,MMA,FALSE,
+Sports,Rugby,FALSE,
+Sports,Cricket,FALSE,
+Sports,Table Tennis,FALSE,
+Sports,Badminton,FALSE,
+Sports,Skiing,FALSE,
+Sports,Snowboarding,FALSE,
+Sports,Skateboarding,FALSE,
+Sports,Surfing,FALSE,
+Sports,Rowing,FALSE,
+Sports,Cycling,FALSE,
+Sports,Fencing,FALSE,
+Sports,Lacrosse,FALSE,
+Sports,Field Hockey,FALSE,
+Sports,Handball,FALSE,
+Sports,Water Polo,FALSE,
+Sports,Powerlifting,FALSE,
+Sports,Bodybuilding,FALSE,
+Sports,Broomball,,
+Sports,Gymnastics,FALSE,
+Sports,Curling,FALSE,
+Sports,Archery,FALSE,
+Sports,Bowling,FALSE,
+Sports,Auto Racing,FALSE,
+Sports,Horse Racing,FALSE,
+Sports,Billiards,FALSE,
+Sports,Darts,FALSE,
+Sports,Ultimate Frisbee,FALSE,
+Sports,Dodgeball,FALSE,
+Sports,Cheerleading,FALSE,
+Sports,Marathon,FALSE,
+Sports,Triathlon,FALSE,
+Sports,Climbing,FALSE,
+Sports,Pickleball,FALSE,
+Sports,Polo,FALSE,
+Sports,Kickball,FALSE,
+Sports,Disc Golf,FALSE,
+Disney Characters,Mickey Mouse,TRUE,
+Disney Characters,Minnie Mouse,TRUE,
+Disney Characters,Donald Duck,TRUE,
+Disney Characters,Goofy,TRUE,
+Disney Characters,Pluto,TRUE,
+Disney Characters,Chip and Dale,TRUE,
+Disney Characters,Snow White,TRUE,
+Disney Characters,Cinderella,TRUE,
+Disney Characters,Aurora,TRUE,
+Disney Characters,Ariel,TRUE,
+Disney Characters,Belle,TRUE,
+Disney Characters,Jasmine,TRUE,
+Disney Characters,Pocahontas,TRUE,
+Disney Characters,Mulan,TRUE,
+Disney Characters,Tiana,TRUE,
+Disney Characters,Rapunzel,TRUE,
+Disney Characters,Merida,TRUE,
+Disney Characters,Moana,TRUE,
+Disney Characters,Anna,TRUE,
+Disney Characters,Elsa,TRUE,
+Disney Characters,Kristoff,TRUE,
+Disney Characters,Olaf,TRUE,
+Disney Characters,Sven,TRUE,
+Disney Characters,Simba,TRUE,
+Disney Characters,Nala,TRUE,
+Disney Characters,Mufasa,TRUE,
+Disney Characters,Scar,TRUE,
+Disney Characters,Timon,TRUE,
+Disney Characters,Pumbaa,TRUE,
+Disney Characters,Aladdin,TRUE,
+Disney Characters,Genie,TRUE,
+Disney Characters,Abu,TRUE,
+Disney Characters,Jafar,TRUE,
+Disney Characters,Tinker Bell,TRUE,
+Disney Characters,Peter Pan,TRUE,
+Disney Characters,Wendy,TRUE,
+Disney Characters,Captain Hook,TRUE,
+Disney Characters,Tarzan,TRUE,
+Disney Characters,Jane,TRUE,
+Disney Characters,Hercules,TRUE,
+Disney Characters,Megara,TRUE,
+Disney Characters,Phil,TRUE,
+Disney Characters,Hades,TRUE,
+Disney Characters,Stitch,TRUE,
+Disney Characters,Lilo,TRUE,
+Disney Characters,Gaston,TRUE,
+Disney Characters,Beast,TRUE,
+Disney Characters,Fairy Godmother,TRUE,
+Fast food chains,McDonald's,FALSE,
+Fast food chains,Burger King,FALSE,
+Fast food chains,Wendy's,FALSE,
+Fast food chains,Taco Bell,FALSE,
+Fast food chains,Chick-fil-A,FALSE,
+Fast food chains,KFC,FALSE,
+Fast food chains,Popeyes,FALSE,
+Fast food chains,Subway,FALSE,
+Fast food chains,Chipotle,FALSE,
+Fast food chains,Panda Express,FALSE,
+Fast food chains,Shake Shack,FALSE,
+Fast food chains,Arby's,FALSE,
+Fast food chains,Jimmy John's,FALSE,
+Fast food chains,Jersey Mike's,FALSE,
+Fast food chains,Culver's,FALSE,
+Fast food chains,In-N-Out,FALSE,
+Fast food chains,Sonic,FALSE,
+Fast food chains,Pizza Hut,FALSE,
+Fast food chains,Domino's,FALSE,
+Fast food chains,Papa John's,FALSE,
+Fast food chains,Whataburger,FALSE,
+Fast food chains,Blaze Pizza,FALSE,
+Fast food chains,Potbelly,FALSE,
+Fast food chains,Torchy's Tacos,FALSE,
+Fast food chains,White Castle,FALSE,
+Fast food chains,Einstein Bros. Bagels,FALSE,
+Fast food chains,Smashburger,FALSE,
+Fast food chains,Jack in the Box,FALSE,
+Fast food chains,El Pollo Loco,FALSE,
+Fast food chains,Red Robin,FALSE,
+Fast food chains,Noodles & Company,FALSE,
+Fast food chains,Boston Market,FALSE,
+Fast food chains,Wingstop,FALSE,
+Fast food chains,Dairy Queen,FALSE,
+Fridge,Milk,FALSE,
+Fridge,Eggs,FALSE,
+Fridge,Stick of butter,FALSE,
+Fridge,Cheddar cheese,FALSE,
+Fridge,Mozzarella,FALSE,
+Fridge,Yogurt,FALSE,
+Fridge,Sour cream,FALSE,
+Fridge,Cream cheese,FALSE,
+Fridge,Orange juice,FALSE,
+Fridge,Apple juice,FALSE,
+Fridge,Cold brew coffee,FALSE,
+Fridge,Lettuce,FALSE,
+Fridge,Spinach,FALSE,
+Fridge,Carrots,FALSE,
+Fridge,Celery,FALSE,
+Fridge,Broccoli,FALSE,
+Fridge,Brita,FALSE,
+Fridge,Ketchup,FALSE,
+Fridge,Mustard,FALSE,
+Fridge,Bottle of Mayonnaise,FALSE,
+Fridge,Pickles,FALSE,
+Fridge,Bacon,FALSE,
+Fridge,Ham,FALSE,
+Fridge,Turkey slices,FALSE,
+Fridge,Grapes,FALSE,
+Fridge,Strawberries,FALSE,
+Fridge,Applesauce cup,FALSE,
+Fridge,Protein shake,FALSE,
+Fridge,Salad dressing,FALSE,
+Fridge,Hummus,FALSE,
+Fridge,Guacamole,FALSE,
+Fridge,Salsa,FALSE,
+Fridge,Bottled water,FALSE,
+Fridge,Soda,FALSE,
+Fridge,Iced tea,FALSE,
+Fridge,Beer,FALSE,
+Fridge,White wine,FALSE,
+Fridge,Marinara sauce,FALSE,
+Fridge,Butter chicken sauce,FALSE,
+Fridge,Hot sauce,FALSE,
+Fridge,Pesto,FALSE,
+Fridge,Fruit cup,FALSE,
+Fridge,Tortillas,FALSE,
+Fridge,Hash browns,FALSE,
+Fridge,Waffles,FALSE,
+Fridge,Blueberries,FALSE,
+Fridge,Tofu,FALSE,
+Fridge,Miso paste,FALSE,
+Fridge,Fresh herbs,FALSE,
+Garage,Hammer,FALSE,
+Garage,Screwdriver,FALSE,
+Garage,Wrench,FALSE,
+Garage,Power drill,FALSE,
+Garage,Nail,FALSE,
+Garage,Screws,FALSE,
+Garage,Paint can,FALSE,
+Garage,Paintbrush,FALSE,
+Garage,Garden hose,FALSE,
+Garage,Rake,FALSE,
+Garage,Shovel,FALSE,
+Garage,Lawn mower,FALSE,
+Garage,Leaf blower,FALSE,
+Garage,Socket set,FALSE,
+Garage,Workbench,FALSE,
+Garage,Extension cord,FALSE,
+Garage,Toolbox,FALSE,
+Garage,Air pump,FALSE,
+Garage,Bicycle,FALSE,
+Garage,Bike helmet,FALSE,
+Garage,Car jack,FALSE,
+Garage,Jumper cables,FALSE,
+Garage,Spare tire,FALSE,
+Garage,Motor oil,FALSE,
+Garage,Antifreeze,FALSE,
+Garage,WD-40,FALSE,
+Garage,Saw,FALSE,
+Garage,Hedge trimmer,FALSE,
+Garage,Weed whacker,FALSE,
+Garage,Chainsaw,FALSE,
+Garage,Folding chair,FALSE,
+Garage,Camp stove,FALSE,
+Garage,Cooler,FALSE,
+Garage,Home Depot Bucket,FALSE,
+Garage,Luggage,FALSE,
+Garage,Sports equipment,FALSE,
+Garage,Snow shovel,FALSE,
+Garage,Ratchet straps,FALSE,
+Garage,Shop vac,FALSE,
+Garage,Work gloves,FALSE,
+Garage,Roller skates,FALSE,
+Garage,Paint roller,FALSE,
+Garage,Cordless drill,FALSE,
+Garage,Drill bits,FALSE,
+Garage,Step ladder,FALSE,
+Garage,Tarp,FALSE,
+Camping,Tent,FALSE,
+Camping,Sleeping bag,FALSE,
+Camping,Sleeping pad,FALSE,
+Camping,Camp stove,FALSE,
+Camping,Propane canister,FALSE,
+Camping,Flashlight,FALSE,
+Camping,Headlamp,FALSE,
+Camping,Lantern,FALSE,
+Camping,Firestarter,FALSE,
+Camping,Matches,FALSE,
+Camping,First aid kit,FALSE,
+Camping,Map,FALSE,
+Camping,Compass,FALSE,
+Camping,Portable water filter,FALSE,
+Camping,Hiking boots,FALSE,
+Camping,Backpack,FALSE,
+Camping,Folding chair,FALSE,
+Camping,Cooler,FALSE,
+Camping,Hatchet,FALSE,
+Camping,Pocket knife,FALSE,
+Camping,Rope,FALSE,
+Camping,Tarp,FALSE,
+Camping,Camp mug,FALSE,
+Camping,Metal plate,FALSE,
+Camping,Spork,FALSE,
+Camping,Canteen,FALSE,
+Camping,Bear spray,FALSE,
+Camping,Trail mix,FALSE,
+Camping,Marshmallows,FALSE,
+Camping,Graham crackers,FALSE,
+Camping,Chocolate bar,FALSE,
+Camping,Bug spray,FALSE,
+Camping,Sunscreen,FALSE,
+Camping,Portable charger,FALSE,
+Camping,Whistle,FALSE,
+Camping,Binoculars,FALSE,
+Camping,Hammock,FALSE,
+Camping,Fire gloves,FALSE,
+Camping,Dry bag,FALSE,
+Camping,Poncho,FALSE,
+Camping,Rain fly,FALSE,
+Camping,Camp table,FALSE,
+Camping,Pillow,FALSE,
+Camping,Portable shower,FALSE,
+Camping,Camp shovel,FALSE,
+Camping,Wood bundle,FALSE,
+Camping,Carabiners,FALSE,
+Camping,Water bottle,FALSE,
+Camping,Extra socks,FALSE,
+Shoe brands,Nike,FALSE,
+Shoe brands,Adidas,FALSE,
+Shoe brands,Puma,FALSE,
+Shoe brands,Reebok,FALSE,
+Shoe brands,New Balance,FALSE,
+Shoe brands,Asics,FALSE,
+Shoe brands,Brooks,FALSE,
+Shoe brands,Converse,FALSE,
+Shoe brands,Vans,FALSE,
+Shoe brands,Under Armour,FALSE,
+Shoe brands,Skechers,FALSE,
+Shoe brands,Merrell,FALSE,
+Shoe brands,Timberland,FALSE,
+Shoe brands,Doc Martens,FALSE,
+Shoe brands,Crocs,FALSE,
+Shoe brands,Salomon,FALSE,
+Shoe brands,Clarks,FALSE,
+Shoe brands,UGG,FALSE,
+Shoe brands,Fila,FALSE,
+Shoe brands,Champion,FALSE,
+Shoe brands,Hoka,FALSE,
+Shoe brands,On Running,FALSE,
+Shoe brands,K-Swiss,FALSE,
+Shoe brands,Saucony,FALSE,
+Shoe brands,Altra,FALSE,
+Shoe brands,La Sportiva,FALSE,
+Shoe brands,Columbia,FALSE,
+Shoe brands,Hey Dude,FALSE,
+Shoe brands,Birkenstock,FALSE,
+Shoe brands,Red Wing,FALSE,
+Shoe brands,Allen Edmonds,FALSE,
+Shoe brands,Steve Madden,FALSE,
+Shoe brands,Gucci,FALSE,
+Shoe brands,Balenciaga,FALSE,
+Shoe brands,Prada,FALSE,
+Shoe brands,Chanel,FALSE,
+Shoe brands,Louis Vuitton,FALSE,
+Shoe brands,Christian Louboutin,FALSE,
+Shoe brands,Frye,FALSE,
+Shoe brands,Chaco,FALSE,
+Shoe brands,Keen,FALSE,
+Shoe brands,Toms,FALSE,
+Shoe brands,Sorel,FALSE,
+Shoe brands,Ariat,FALSE,
+Shoe brands,Rothy’s,FALSE,
+Shoe brands,Sperry,FALSE,
+Shoe brands,Teva,FALSE,
+Shoe brands,Blundstone,FALSE,
+Shoe brands,Oliver Cabell,FALSE,
+Harry Potter characters,Harry Potter,,
+Harry Potter characters,Hermione Granger,,
+Harry Potter characters,Ron Weasley,,
+Harry Potter characters,Albus Dumbledore,,
+Harry Potter characters,Severus Snape,,
+Harry Potter characters,Rubeus Hagrid,,
+Harry Potter characters,Draco Malfoy,,
+Harry Potter characters,Minerva McGonagall,,
+Harry Potter characters,Sirius Black,,
+Harry Potter characters,Remus Lupin,,
+Harry Potter characters,Lord Voldemort,,
+Harry Potter characters,Bellatrix Lestrange,,
+Harry Potter characters,Neville Longbottom,,
+Harry Potter characters,Luna Lovegood,,
+Harry Potter characters,Ginny Weasley,,
+Harry Potter characters,Fred Weasley,,
+Harry Potter characters,George Weasley,,
+Harry Potter characters,Molly Weasley,,
+Harry Potter characters,Arthur Weasley,,
+Harry Potter characters,Percy Weasley,,
+Harry Potter characters,Bill Weasley,,
+Harry Potter characters,Cedric Diggory,,
+Harry Potter characters,Cho Chang,,
+Harry Potter characters,Dean Thomas,,
+Harry Potter characters,Seamus Finnigan,,
+Harry Potter characters,Lavender Brown,,
+Harry Potter characters,Parvati Patil,,
+Harry Potter characters,Padma Patil,,
+Harry Potter characters,Alastor Moody,,
+Harry Potter characters,Nymphadora Tonks,,
+Harry Potter characters,Kingsley Shacklebolt,,
+Harry Potter characters,Dolores Umbridge,,
+Harry Potter characters,Gilderoy Lockhart,,
+Harry Potter characters,Pomona Sprout,,
+Harry Potter characters,Sybil Trelawney,,
+Harry Potter characters,Argus Filch,,
+Harry Potter characters,Dobby,,
+Harry Potter characters,Kreacher,,
+Harry Potter characters,Lucius Malfoy,,
+Harry Potter characters,Narcissa Malfoy,,
+Harry Potter characters,Horace Slughorn,,
+Harry Potter characters,Peter Pettigrew,,
+Harry Potter characters,Viktor Krum,,
+Harry Potter characters,Igor Karkaroff,,
+Harry Potter characters,Rita Skeeter,,
+Harry Potter characters,Cornelius Fudge,,
+Harry Potter characters,Fenrir Greyback,,
+MLB teams,Arizona Diamondbacks,,
+MLB teams,Atlanta Braves,,
+MLB teams,Baltimore Orioles,,
+MLB teams,Boston Red Sox,,
+MLB teams,Chicago Cubs,,
+MLB teams,Chicago White Sox,,
+MLB teams,Cincinnati Reds,,
+MLB teams,Cleveland Guardians,,
+MLB teams,Colorado Rockies,,
+MLB teams,Detroit Tigers,,
+MLB teams,Houston Astros,,
+MLB teams,Kansas City Royals,,
+MLB teams,Los Angeles Angels,,
+MLB teams,Los Angeles Dodgers,,
+MLB teams,Miami Marlins,,
+MLB teams,Milwaukee Brewers,,
+MLB teams,Minnesota Twins,,
+MLB teams,New York Mets,,
+MLB teams,New York Yankees,,
+MLB teams,Oakland Athletics,,
+MLB teams,Philadelphia Phillies,,
+MLB teams,Pittsburgh Pirates,,
+MLB teams,San Diego Padres,,
+MLB teams,San Francisco Giants,,
+MLB teams,Seattle Mariners,,
+MLB teams,St. Louis Cardinals,,
+MLB teams,Tampa Bay Rays,,
+MLB teams,Texas Rangers,,
+MLB teams,Toronto Blue Jays,,
+MLB teams,Washington Nationals,,
+MLB teams,Brooklyn Dodgers,,
+MLB teams,Montreal Expos,,
+MLB teams,St. Louis Browns,,
+MLB teams,Washington Senators,,
+MLB teams,Boston Braves,,
+MLB teams,New York Giants,,
+MLB teams,Philadelphia Athletics,,
+MLB teams,Seattle Pilots,,
+MLB teams,Kansas City Athletics,,
+MLB teams,Milwaukee Braves,,
+MLB teams,Cleveland Naps,,
+MLB teams,Pittsburgh Rebels,,
+Superheros,Superman,,
+Superheros,Batman,,
+Superheros,Wonder Woman,,
+Superheros,Spider-Man,,
+Superheros,Iron Man,,
+Superheros,Captain America,,
+Superheros,Thor,,
+Superheros,Hulk,,
+Superheros,Black Widow,,
+Superheros,Wolverine,,
+Superheros,The Flash,,
+Superheros,Green Lantern,,
+Superheros,Aquaman,,
+Superheros,Cyborg,,
+Superheros,Deadpool,,
+Superheros,Daredevil,,
+Superheros,Black Panther,,
+Superheros,Doctor Strange,,
+Superheros,Scarlet Witch,,
+Superheros,Vision,,
+Superheros,Ant-Man,,
+Superheros,The Wasp,,
+Superheros,Captain Marvel,,
+Superheros,Star-Lord,,
+Superheros,Gamora,,
+Superheros,Drax,,
+Superheros,Rocket Raccoon,,
+Superheros,Groot,,
+Superheros,Shazam,,
+Superheros,Green Arrow,,
+Superheros,Supergirl,,
+Superheros,Batgirl,,
+Superheros,Nightwing,,
+Superheros,Robin,,
+Superheros,Beast Boy,,
+Superheros,Raven,,
+Superheros,Starfire,,
+Superheros,Cyclops,,
+Superheros,Jean Grey,,
+Superheros,Storm,,
+Superheros,Rogue,,
+Superheros,Gambit,,
+Superheros,Professor X,,
+Superheros,Silver Surfer,,
+Superheros,The Thing,,
+Superheros,Mr. Fantastic,,
+Superheros,Invisible Woman,,
+Superheros,Human Torch,,
+Superheros,Hawkeye,,
+Superheros,Martian Manhunter,,
+Video game characters,Mario,,
+Video game characters,Luigi,,
+Video game characters,Princess Peach,,
+Video game characters,Bowser,,
+Video game characters,Link,,
+Video game characters,Zelda,,
+Video game characters,Ganondorf,,
+Video game characters,Donkey Kong,,
+Video game characters,Pikachu,,
+Video game characters,Sonic the Hedgehog,,
+Video game characters,Tails,,
+Video game characters,Knuckles,,
+Video game characters,Dr. Eggman,,
+Video game characters,Samus Aran,,
+Video game characters,Kirby,,
+Video game characters,Mega Man,,
+Video game characters,Pac-Man,,
+Video game characters,Ryu,,
+Video game characters,Ken Masters,,
+Video game characters,Chun-Li,,
+Video game characters,Cloud Strife,,
+Video game characters,Sephiroth,,
+Video game characters,Solid Snake,,
+Video game characters,Master Chief,,
+Video game characters,Kratos,,
+Video game characters,Nathan Drake,,
+Video game characters,Lara Croft,,
+Video game characters,Geralt of Rivia,,
+Video game characters,Ellie,,
+Video game characters,Joel Miller,,
+Video game characters,Arthur Morgan,,
+Video game characters,Charizard,,
+Video game characters,Steve,,
+Video game characters,Crash Bandicoot,,
+Video game characters,Spyro the Dragon,,
+Video game characters,Rayman,,
+Video game characters,Sora,,
+Video game characters,Joker,,
+Video game characters,Tracer,,
+Video game characters,Doom Slayer,,
+Video game characters,Gordon Freeman,,
+Video game characters,Agent 47,,
+Video game characters,Ezio Auditore,,
+Video game characters,Altaïr Ibn-La'Ahad,,
+Video game characters,Scorpion,,
+Video game characters,Sub-Zero,,
+Video game characters,Jill Valentine,,
+Video game characters,Leon S. Kennedy,,
+Video game characters,Yoshi,,
+City skylines,New York City,,
+City skylines,London,,
+City skylines,Paris,,
+City skylines,Tokyo,,
+City skylines,Shanghai,,
+City skylines,Dubai,,
+City skylines,Chicago,,
+City skylines,Hong Kong,,
+City skylines,Singapore,,
+City skylines,Sydney,,
+City skylines,Toronto,,
+City skylines,Kuala Lumpur,,
+City skylines,Frankfurt,,
+City skylines,Seoul,,
+City skylines,Los Angeles,,
+City skylines,San Francisco,,
+City skylines,Seattle,,
+City skylines,Moscow,,
+City skylines,Istanbul,,
+City skylines,Rio de Janeiro,,
+City skylines,Bangkok,,
+City skylines,Taipei,,
+City skylines,Melbourne,,
+City skylines,Vancouver,,
+City skylines,Panama City,,
+City skylines,Miami,,
+City skylines,Boston,,
+City skylines,Philadelphia,,
+City skylines,Dallas,,
+City skylines,Houston,,
+City skylines,Atlanta,,
+City skylines,Las Vegas,,
+City skylines,Madrid,,
+City skylines,Barcelona,,
+City skylines,Berlin,,
+City skylines,Rome,,
+City skylines,Athens,,
+City skylines,Cairo,,
+City skylines,Johannesburg,,
+City skylines,Mumbai,,
+City skylines,Delhi,,
+City skylines,Beijing,,
+City skylines,Osaka,,
+City skylines,Jakarta,,
+City skylines,Manila,,
+City skylines,Mexico City,,
+City skylines,Buenos Aires,,
+City skylines,Sao Paulo,,
+City skylines,Santiago,,
+City skylines,Bogota,,
+Movies,Star Wars: A New Hope,,
+Movies,The Empire Strikes Back,,
+Movies,The Wizard of Oz,,
+Movies,Casablanca,,
+Movies,Gone With the Wind,,
+Movies,Jaws,,
+Movies,The Sound of Music,,
+Movies,Jurassic Park,,
+Movies,E.T. the Extra-Terrestrial,,
+Movies,Back to the Future,,
+Movies,Titanic,,
+Movies,Avatar,,
+Movies,The Lord of the Rings: The Fellowship of the Ring,,
+Movies,The Lord of the Rings: The Return of the King,,
+Movies,The Matrix,,
+Movies,Forrest Gump,,
+Movies,The Lion King (1994),,
+Movies,Harry Potter and the Sorcerer’s Stone,,
+Movies,The Dark Knight,,
+Movies,Pirates of the Caribbean: The Curse of the Black Pearl,,
+Movies,Iron Man,,
+Movies,Avengers: Endgame,,
+Movies,The Avengers (2012),,
+Movies,Spider-Man (2002),,
+Movies,Black Panther,,
+Movies,Superman (1978),,
+Movies,Toy Story,,
+Movies,Finding Nemo,,
+Movies,Frozen,,
+Movies,Shrek,,
+Movies,Despicable Me,,
+Movies,Spirited Away,,
+Movies,The Exorcist,,
+Movies,Halloween (1978),,
+Movies,Psycho,,
+Movies,The Shining,,
+Movies,It (2017),,
+Movies,The Godfather,,
+Movies,Rocky,,
+Movies,Ghostbusters,,
+Movies,Indiana Jones: Raiders of the Lost Ark,,
+Movies,Terminator 2: Judgment Day,,
+Movies,Alien,,
+Movies,Top Gun,,
+Movies,The Breakfast Club,,
+Movies,Home Alone,,
+Movies,The Shawshank Redemption,,
+Movies,Barbie (2023),,
+Movies,Oppenheimer (2023),,
+Movies,Joker (2019),,
+Movies,Frozen II,,
+Books,Harry Potter and the Sorcerer’s Stone,,
+Books,The Hobbit,,
+Books,The Lord of the Rings,,
+Books,The Catcher in the Rye,,
+Books,To Kill a Mockingbird,,
+Books,1984,,
+Books,Animal Farm,,
+Books,The Great Gatsby,,
+Books,The Da Vinci Code,,
+Books,The Alchemist,,
+Books,The Hunger Games,,
+Books,Pride and Prejudice,,
+Books,Jane Eyre,,
+Books,Wuthering Heights,,
+Books,The Lion the Witch and the Wardrobe,,
+Books,War and Peace,,
+Books,The Odyssey,,
+Books,The Iliad,,
+Books,Moby-Dick,,
+Books,The Adventures of Huckleberry Finn,,
+Books,The Chronicles of Narnia,,
+Books,The Girl with the Dragon Tattoo,,
+Books,The Fault in Our Stars,,
+Books,The Shining,,
+Books,It,,
+Books,The Hitchhiker’s Guide to the Galaxy,,
+Books,Dune,,
+Books,Dracula,,
+Books,Frankenstein,,
+Books,The Lord of the Flies,,
+Books,The Little Prince,,
+Books,Charlotte’s Web,,
+Books,Green Eggs and Ham,,
+Books,The Cat in the Hat,,
+Books,A Game of Thrones,,
+Books,Fahrenheit 451,,
+Books,Brave New World,,
+Books,The Kite Runner,,
+Books,The Book Thief,,
+Books,Life of Pi,,
+Books,The Outsiders,,
+Books,The Giver,,
+Books,The Handmaid’s Tale,,
+Books,Twilight,,
+Books,The Color Purple,,
+Books,The Very Hungry Caterpillar,,
+Books,Where the Wild Things Are,,
+Books,The Old Man and the Sea,,
+Books,The Silence of the Lambs,,
+Disney Channel Original Movies,High School Musical,,
+Disney Channel Original Movies,High School Musical 2,,
+Disney Channel Original Movies,High School Musical 3: Senior Year,,
+Disney Channel Original Movies,Camp Rock,,
+Disney Channel Original Movies,Camp Rock 2: The Final Jam,,
+Disney Channel Original Movies,The Cheetah Girls,,
+Disney Channel Original Movies,The Cheetah Girls 2,,
+Disney Channel Original Movies,The Cheetah Girls: One World,,
+Disney Channel Original Movies,Halloweentown,,
+Disney Channel Original Movies,Halloweentown II: Kalabar's Revenge,,
+Disney Channel Original Movies,Halloweentown High,,
+Disney Channel Original Movies,Return to Halloweentown,,
+Disney Channel Original Movies,Zenon: Girl of the 21st Century,,
+Disney Channel Original Movies,Zenon: The Zequel,,
+Disney Channel Original Movies,Zenon: Z3,,
+Disney Channel Original Movies,Smart House,,
+Disney Channel Original Movies,Johnny Tsunami,,
+Disney Channel Original Movies,Johnny Kapahala: Back on Board,,
+Disney Channel Original Movies,Cadet Kelly,,
+Disney Channel Original Movies,The Luck of the Irish,,
+Disney Channel Original Movies,Eddie's Million Dollar Cook-Off,,
+Disney Channel Original Movies,The Thirteenth Year,,
+Disney Channel Original Movies,The Color of Friendship,,
+Disney Channel Original Movies,Pixel Perfect,,
+Disney Channel Original Movies,Stuck in the Suburbs,,
+Disney Channel Original Movies,Wendy Wu: Homecoming Warrior,,
+Disney Channel Original Movies,Read It and Weep,,
+Disney Channel Original Movies,Twitches,,
+Disney Channel Original Movies,Twitches Too,,
+Disney Channel Original Movies,Let It Shine,,
+Disney Channel Original Movies,Lemonade Mouth,,
+Disney Channel Original Movies,Jump In!,,
+Disney Channel Original Movies,Minutemen,,
+Disney Channel Original Movies,Geek Charming,,
+Disney Channel Original Movies,Radio Rebel,,
+Disney Channel Original Movies,Princess Protection Program,,
+Disney Channel Original Movies,The Proud Family Movie,,
+Disney Channel Original Movies,Kim Possible Movie: So the Drama,,
+Disney Channel Original Movies,Teen Beach Movie,,
+Disney Channel Original Movies,Teen Beach 2,,
+Disney Channel Original Movies,Descendants,,
+Disney Channel Original Movies,Descendants 2,,
+Disney Channel Original Movies,Descendants 3,,
+Disney Channel Original Movies,Zapped,,
+Disney Channel Original Movies,How to Build a Better Boy,,
+Disney Channel Original Movies,Girl vs. Monster,,
+Disney Channel Original Movies,Invisible Sister,,
+Disney Channel Original Movies,Dadnapped,,
+Disney Channel Original Movies,Gotta Kick It Up!,,
+Airport codes,ATL,Hartsfield–Jackson Atlanta International Airport,
+Airport codes,DFW,Dallas/Fort Worth International Airport,
+Airport codes,DEN,Denver International Airport,
+Airport codes,LAX,Los Angeles International Airport,
+Airport codes,ORD,O’Hare International Airport,
+Airport codes,JFK,John F. Kennedy International Airport,
+Airport codes,MCO,Orlando International Airport,
+Airport codes,LAS,Harry Reid International Airport (Las Vegas),
+Airport codes,CLT,Charlotte Douglas International Airport,
+Airport codes,MIA,Miami International Airport,
+Airport codes,SEA,Seattle–Tacoma International Airport,
+Airport codes,SFO,San Francisco International Airport,
+Airport codes,EWR,Newark Liberty International Airport,
+Airport codes,PHX,Phoenix Sky Harbor International Airport,
+Airport codes,IAH,George Bush Intercontinental Airport (Houston),
+Airport codes,BOS,Logan International Airport (Boston),
+Airport codes,FLL,Fort Lauderdale–Hollywood International Airport,
+Airport codes,MSP,Minneapolis–Saint Paul International Airport,
+Airport codes,LGA,LaGuardia Airport,
+Airport codes,BWI,Baltimore/Washington International Airport,
+Airport codes,TPA,Tampa International Airport,
+Airport codes,PDX,Portland International Airport,
+Airport codes,DTW,Detroit Metropolitan Wayne County Airport,
+Airport codes,SAN,San Diego International Airport,
+Airport codes,SLC,Salt Lake City International Airport,
+Airport codes,PHL,Philadelphia International Airport,
+Airport codes,AUS,Austin–Bergstrom International Airport,
+Airport codes,IAD,Washington Dulles International Airport,
+Airport codes,MDW,Chicago Midway International Airport,
+Airport codes,BNA,Nashville International Airport,
+Airport codes,RDU,Raleigh–Durham International Airport,
+Airport codes,SJC,San Jose International Airport,
+Airport codes,SMF,Sacramento International Airport,
+Airport codes,STL,St. Louis Lambert International Airport,
+Airport codes,MKE,Milwaukee Mitchell International Airport,
+Airport codes,MSY,Louis Armstrong New Orleans International Airport,
+Airport codes,CMH,John Glenn Columbus International Airport,
+Airport codes,PBI,Palm Beach International Airport,
+Airport codes,RNO,Reno–Tahoe International Airport,
+Airport codes,BDL,Bradley International Airport (Hartford),
+Airport codes,BHM,Birmingham–Shuttlesworth International Airport,
+Airport codes,OMA,Omaha Eppley Airfield,
+Airport codes,IND,Indianapolis International Airport,
+Airport codes,OKC,Will Rogers World Airport (Oklahoma City),
+Airport codes,SDF,Louisville Muhammad Ali International Airport,
+Airport codes,BUF,Buffalo Niagara International Airport,
+Airport codes,ORF,Norfolk International Airport,
+Airport codes,DAY,Dayton International Airport,
+Airport codes,SAT,San Antonio International Airport,
+Brand slogans,Just Do It,Nike,
+Brand slogans,I'm Lovin' It,McDonald's,
+Brand slogans,Think Different,Apple,
+Brand slogans,Because You're Worth It,L’Oréal,
+Brand slogans,The Quicker Picker Upper,Bounty,
+Brand slogans,Melts in Your Mouth Not in Your Hands,M&M’s,
+Brand slogans,Have It Your Way,Burger King,
+Brand slogans,The Best a Man Can Get,Gillette,
+Brand slogans,Taste the Feeling,Coca-Cola,
+Brand slogans,The Ultimate Driving Machine,BMW,
+Brand slogans,Save Money Live Better,Walmart,
+Brand slogans,What's in Your Wallet?,Capital One,
+Brand slogans,Think Outside the Bun,Taco Bell,
+Brand slogans,Can You Hear Me Now?,Verizon,
+Brand slogans,Betcha Can’t Eat Just One,Lay’s,
+Brand slogans,America Runs on ________,Dunkin’,
+Brand slogans,It Gives You Wings,Red Bull,
+Brand slogans,Everywhere You Want to Be,Visa,
+Brand slogans,Maybe She’s Born With It Maybe It’s _______,Maybelline,
+Brand slogans,Eat Fresh,Subway,
+Brand slogans,The King of Beers,Budweiser,
+Brand slogans,The Few The Proud The Marines,US Marine Corps,
+Brand slogans,You’re Not You When You’re Hungry,Snickers,
+Brand slogans,Obey Your Thirst,Sprite,
+Brand slogans,Have a Break Have a ________,Kit Kat,
+Brand slogans,The Snack That Smiles Back,Goldfish,
+Brand slogans,Finger Lickin’ Good,KFC,
+Brand slogans,Hot Eats Cool Treats,Dairy Queen,
+Brand slogans,It Keeps Going and Going…,Energizer,
+Brand slogans,Expect More Pay Less,Target,
+Brand slogans,Like a Good Neighbor ________ Is There,State Farm,
+Brand slogans,The Best Part of Wakin’ Up Is ________ in Your Cup,Folgers,
+Brand slogans,Is It in You?,Gatorade,
+Brand slogans,Zoom Zoom,Mazda,
+Brand slogans,Challenge Everything,EA Games,
+Brand slogans,Let Your Fingers Do the Walking,Yellow Pages,
+Brand slogans,Don’t Leave Home Without It,American Express,
+Brand slogans,Imagination at Work,GE,
+Brand slogans,Connecting People,Nokia,
+Brand slogans,Made From the Best Stuff on Earth,Snapple,
+Brand slogans,Live in Your World Play in Ours,PlayStation,
+Brand slogans,Think Small,Volkswagen,
+Brand slogans,Ideas for Life,Panasonic,
+Brand slogans,Better Ingredients Better Pizza,Papa John’s,
+Brand slogans,The Relentless Pursuit of Perfection,Lexus,
+Brand slogans,Impossible Is Nothing,Adidas,
+Brand slogans,We Try Harder,Avis,
+Brand slogans,Move Fast and Break Things,Facebook,
+Taylor Swift Lyrics,I don't know about you but I'm feeling _____,22,22
+Taylor Swift Lyrics,It feels like a perfect night to dress up like _____,hipsters,22
+Taylor Swift Lyrics,"We're happy, free, ______, and lonely at the same time",confused,22
+Taylor Swift Lyrics,You call me up again just to break me like a _____,promise,All Too Well
+Taylor Swift Lyrics,And I forget about you long enough to forget why I _____ to,needed,All Too Well
+Taylor Swift Lyrics,I remember it all too _____,well,All Too Well
+Taylor Swift Lyrics,"Oh, your sweet _____ and my wide-eyed gaze",disposition,All Too Well
+Taylor Swift Lyrics,I'm a crumpled up piece of paper _____ here,lyin',All Too Well (10 Minute Version)
+Taylor Swift Lyrics,"I'll get older, but your ______ stay my age",lovers,All Too Well (10 Minute Version)
+Taylor Swift Lyrics,"It's me, hi, I'm the ______, it's me",problem,Anti-Hero
+Taylor Swift Lyrics,Cause baby now we've got _____ blood,bad,Bad Blood
+Taylor Swift Lyrics,Band-Aids don't fix _____ holes,bullet,Bad Blood
+Taylor Swift Lyrics,"On a Wednesday in a ______, I watched it begin again",cafe,Begin Again
+Taylor Swift Lyrics,Darling I'm a nightmare dressed like a _____,daydream,Blank Space
+Taylor Swift Lyrics,I've got a blank _____ baby and I'll write your name,space,Blank Space
+Taylor Swift Lyrics,I could show you incredible _____,things,Blank Space
+Taylor Swift Lyrics,I'm shining like fireworks over your _____ empty town,sad,Dear John
+Taylor Swift Lyrics,Say my name and everything just stops; I don't want you like a ____ _____,best friend,Dress
+Taylor Swift Lyrics,Please don't be in love with someone _____,else,Enchanted
+Taylor Swift Lyrics,"'Cause all I know is we said, ______ And your eyes look like coming home",Hello,Everything Has Changed
+Taylor Swift Lyrics,All I know since yesterday is everything has _____,changed,Everything Has Changed
+Taylor Swift Lyrics,"You take my hand and drag me headfirst, _____",fearless,Fearless
+Taylor Swift Lyrics,"I never trust a _______, but they love me",narcissist,I Did Something Bad
+Taylor Swift Lyrics,I knew you were _____ when you walked in,trouble,I Knew You Were Trouble
+Taylor Swift Lyrics,Long live the walls we _____ through,crashed,Long Live
+Taylor Swift Lyrics,"It's a love story, baby just say _____",yes,Love Story
+Taylor Swift Lyrics,This love is difficult but it's _____,real,Love Story
+Taylor Swift Lyrics,"See the lights, see the ______, the ball gowns",party,Love Story
+Taylor Swift Lyrics,"You were Romeo, I was a scarlet _____",letter,Love Story
+Taylor Swift Lyrics,"Romeo, save me, I've been feeling so _____",alone,Love Story
+Taylor Swift Lyrics,Can I go where _____ go?,you,Lover
+Taylor Swift Lyrics,Look at how my tears ______,ricochet,my tears ricochet
+Taylor Swift Lyrics,"I want your midnights, but I'll be cleanin' up bottles with you on ____ ____ ____",New Year's Day,New Year’s Day
+Taylor Swift Lyrics,People throw rocks at things that shine but they can't take what's _____,ours,Ours
+Taylor Swift Lyrics,Loving him is like driving a new Maserati down a _______ street,dead-end,Red
+Taylor Swift Lyrics,Shake it _____,off,Shake It Off
+Taylor Swift Lyrics,"I'm captivated by you, baby, like a _____ show",firework,Sparks Fly
+Taylor Swift Lyrics,Cause I see sparks fly whenever you _____,smile,Sparks Fly
+Taylor Swift Lyrics,"I'm walking fast through the traffic lights, busy _____ and busy lives",streets,State of Grace
+Taylor Swift Lyrics,"You come around and the armor falls, Pierce the room like a ________",cannonball,State of Grace
+Taylor Swift Lyrics,We never go out of _____,style,Style
+Taylor Swift Lyrics,You got that ______ _____ daydream look in your eye,James Dean,Style
+Taylor Swift Lyrics,"I've been the ______, I've been the prey",archer,The Archer
+Taylor Swift Lyrics,"Now, I'm standin' alone in a ______ room and we're not speakin'",crowded,The Story of Us
+Taylor Swift Lyrics,"Two headlights shine through the _______ night and I will get you, get you alone",sleepless,Treacherous
+Taylor Swift Lyrics,We are never ever getting _____ together,back,We Are Never Ever Getting Back Together
+Taylor Swift Lyrics,"Welcome to ______, it's been waiting for you",New York,Welcome to New York
+Taylor Swift Lyrics,Say you'll remember me standing in a nice dress staring at the _____ babe,sunset,Wildest Dreams
+Taylor Swift Lyrics,You can feel it on the way _____,home,You Are In Love
+Taylor Swift Lyrics,"Think I know where you _____, think I know it's with me",belong,You Belong With Me
+The Office,Michael Scott,,
+The Office,Dwight Schrute,,
+The Office,Jim Halpert,,
+The Office,Pam Beesly,,
+The Office,Angela Martin,,
+The Office,Kevin Malone,,
+The Office,Oscar Martinez,,
+The Office,Stanley Hudson,,
+The Office,Phyllis Vance,,
+The Office,Ryan Howard,,
+The Office,Kelly Kapoor,,
+The Office,Creed Bratton,,
+The Office,Meredith Palmer,,
+The Office,Toby Flenderson,,
+The Office,Darryl Philbin,,
+The Office,Andy Bernard,,
+The Office,Erin Hannon,,
+The Office,Gabe Lewis,,
+The Office,Jan Levinson,,
+The Office,David Wallace,,
+The Office,Holly Flax,,
+The Office,Roy Anderson,,
+The Office,Clark Green,,
+The Office,Pete Miller,,
+The Office,Nellie Bertram,,
+The Office,Deangelo Vickers,,
+The Office,Robert California,,
+The Office,Karen Filippelli,,
+The Office,Jo Bennett,,
+The Office,Todd Packer,,
+The Office,Charles Miner,,
+The Office,Mose Schrute,,
+The Office,Hank Tate,,
+The Office,Josh Porter,,
+The Office,Kathy Simms,,
+The Office,Helene Beesly,,
+The Office,Bob Vance,,
+The Office,Ben Franklin,,
+The Office,Senator Robert Lipton,,
+The Office,Val Johnson,,
+The Office,Donna Newton,,
+The Office,AJ (Holly's boyfriend),,
+The Office,Sasha Flenderson,,
+The Office,Esther Bruegger,,
+The Office,Trevor Bortmen,,
+The Office,Isabel Poreba,,
+The Office,Jessica (Andy's girlfriend),,
+Thanksgiving,Turkey,,
+Thanksgiving,Stuffing,,
+Thanksgiving,Mashed Potatoes,,
+Thanksgiving,Gravy,,
+Thanksgiving,Cranberry Sauce,,
+Thanksgiving,Green Bean Casserole,,
+Thanksgiving,Mac and Cheese,,
+Thanksgiving,Pumpkin Pie,,
+Thanksgiving,Apple Pie,,
+Thanksgiving,Sweet Potato Casserole,,
+Thanksgiving,Cornbread,,
+Thanksgiving,Roasted Vegetables,,
+Thanksgiving,Dinner Rolls,,
+Thanksgiving,Turkey Carving,,
+Thanksgiving,Friendsgiving,,
+Thanksgiving,Family,,
+Thanksgiving,Watching Football,,
+Thanksgiving,Macy’s Thanksgiving Day Parade,,
+Thanksgiving,Black Friday Shopping,,
+Thanksgiving,Leftovers,,
+Thanksgiving,Kid’s Table,,
+Thanksgiving,Cornucopia,,
+Thanksgiving,Tablecloth,,
+Thanksgiving,Wishbone Tradition,,
+Thanksgiving,Post-Dinner Nap,,
+Thanksgiving,Board Games,,
+Thanksgiving,Watching Holiday Movies,,
+Thanksgiving,Baked Ham,,
+Thanksgiving,Butternut Squash Soup,,
+Thanksgiving,Brussels Sprouts,,
+Thanksgiving,Pecan Pie,,
+Thanksgiving,Autumn Candles,,
+Thanksgiving,Table Setting Prep,,
+Thanksgiving,Cider,,
+Thanksgiving,Seasonal Cocktails,,
+Thanksgiving,Traveling,,
+Thanksgiving,Checking the Turkey,,
+Thanksgiving,Kitchen,,
+Thanksgiving,Turkey Trot Races,,
+Thanksgiving,Gratitude Lists,,
+Thanksgiving,Cozy Sweaters,,
+Thanksgiving,Fireplace Time,,
+Thanksgiving,Fall Wreaths,,
+Thanksgiving,Stuffing Balls,,
+Thanksgiving,Maple-Glazed Carrots,,
+Thanksgiving,Charcuterie Boards,,
+Thanksgiving,Deviled Eggs,,
+Dogs,Labrador Retriever,,
+Dogs,Golden Retriever,,
+Dogs,German Shepherd,,
+Dogs,French Bulldog,,
+Dogs,Poodle,,
+Dogs,Bulldog,,
+Dogs,Beagle,,
+Dogs,Rottweiler,,
+Dogs,Yorkshire Terrier,,
+Dogs,Dachshund,,
+Dogs,Boxer,,
+Dogs,Siberian Husky,,
+Dogs,Australian Shepherd,,
+Dogs,Shih Tzu,,
+Dogs,Doberman Pinscher,,
+Dogs,Great Dane,,
+Dogs,Pembroke Welsh Corgi,,
+Dogs,Miniature Schnauzer,,
+Dogs,Havanese,,
+Dogs,Bernese Mountain Dog,,
+Dogs,Cavalier King Charles Spaniel,,
+Dogs,Shetland Sheepdog,,
+Dogs,Boston Terrier,,
+Dogs,Pomeranian,,
+Dogs,Border Collie,,
+Dogs,Bichon Frise,,
+Dogs,Shiba Inu,,
+Dogs,Maltese,,
+Dogs,Cocker Spaniel,,
+Dogs,Chihuahua,,
+Dogs,English Springer Spaniel,,
+Dogs,Vizsla,,
+Dogs,Cane Corso,,
+Dogs,Newfoundland,,
+Dogs,Weimaraner,,
+Dogs,Akita,,
+Dogs,Samoyed,,
+Dogs,Irish Setter,,
+Dogs,Greyhound,,
+Dogs,Whippet,,
+Dogs,Australian Cattle Dog,,
+Dogs,Bloodhound,,
+Dogs,Alaskan Malamute,,
+Dogs,Saint Bernard,,
+Dogs,Portuguese Water Dog,,
+Dogs,Italian Greyhound,,
+Dogs,Rhodesian Ridgeback,,
+Dogs,American Eskimo Dog,,
+Dogs,Goldendoodle,,
+Horses,Appaloosa,,
+Horses,Cowboy,,
+Horses,Blanket,,
+Horses,Paint Horse,,
+Horses,Friesian,,
+Horses,Clydesdale,,
+Horses,Mustang,,
+Horses,Percheron,,
+Horses,Miniature Horse,,
+Horses,Horse Racing,,
+Horses,Show Jumping,,
+Horses,Dressage,,
+Horses,Barrel Racing,,
+Horses,Rodeo Riding,,
+Horses,Trail Riding,,
+Horses,Horseback Riding Lessons,,
+Horses,Mounted Police Horses,,
+Horses,Carriage Horses,,
+Horses,Saddles,,
+Horses,Reins,,
+Horses,Stirrups,,
+Horses,Bridles,,
+Horses,Horseshoes,,
+Horses,Horse Grooming,,
+Horses,Hoof Picks,,
+Horses,Stables,,
+Horses,Barns,,
+Horses,Horse Trailers,,
+Horses,Horse Feed,,
+Horses,Hay Bales,,
+Horses,Pastures,,
+Horses,Riding Helmets,,
+Horses,Saddle Pads,,
+Horses,Bit,,
+Horses,Mane Braiding,,
+Horses,Equine Vets,,
+Horses,Hoof,,
+Horses,Blinker,,
+Horses,Foal,,
+Horses,Statue,,
+Horses,Spirit,,
+Horses,Maximus,,
+Horses,Bullseye,,
+Horses,Bojack Horseman,,
+Horses,Pegasus,,
+Horses,My Little Pony,,
+Horses,Unicorn,,
+Rom Coms,When Harry Met Sally,,
+Rom Coms,Notting Hill,,
+Rom Coms,10 Things I Hate About You,,
+Rom Coms,Pretty Woman,,
+Rom Coms,The Princess Bride,,
+Rom Coms,Sleepless in Seattle,,
+Rom Coms,You've Got Mail,,
+Rom Coms,Crazy Rich Asians,,
+Rom Coms,The Holiday,,
+Rom Coms,Love Actually,,
+Rom Coms,Bridget Jones's Diary,,
+Rom Coms,My Big Fat Greek Wedding,,
+Rom Coms,How to Lose a Guy in 10 Days,,
+Rom Coms,13 Going on 30,,
+Rom Coms,Silver Linings Playbook,,
+Rom Coms,The Proposal,,
+Rom Coms,La La Land,,
+Rom Coms,Clueless,,
+Rom Coms,Legally Blonde,,
+Rom Coms,About Time,,
+Rom Coms,50 First Dates,,
+Rom Coms,Forgetting Sarah Marshall,,
+Rom Coms,The Wedding Singer,,
+Rom Coms,Mamma Mia!,,
+Rom Coms,Always Be My Maybe,,
+Rom Coms,To All the Boys I've Loved Before,,
+Rom Coms,The Big Sick,,
+Rom Coms,Pretty in Pink,,
+Rom Coms,Sixteen Candles,,
+Rom Coms,Roman Holiday,,
+Rom Coms,Breakfast at Tiffany's,,
+Rom Coms,While You Were Sleeping,,
+Rom Coms,Four Weddings and a Funeral,,
+Rom Coms,Hitch,,
+Rom Coms,Set It Up,,
+Rom Coms,Jerry Maguire,,
+Rom Coms,Shakespeare in Love,,
+Rom Coms,Music and Lyrics,,
+Rom Coms,The American President,,
+Rom Coms,The Decoy Bride,,
+Rom Coms,Nappily Ever After,,
+Rom Coms,The Half of It,,
+Rom Coms,Moonstruck,,
+Rom Coms,Splash,,
+Holidays,Valentine’s Day,,
+Holidays,St. Patrick’s Day,,
+Holidays,Easter,,
+Holidays,Mother’s Day,,
+Holidays,Father’s Day,,
+Holidays,Independence Day,,
+Holidays,Halloween,,
+Holidays,Thanksgiving,,
+Holidays,Christmas,,
+Holidays,Hanukkah,,
+Holidays,Kwanzaa,,
+Holidays,New Year’s Eve,,
+Holidays,Lunar New Year,,
+Holidays,Diwali,,
+Holidays,Ramadan,,
+Holidays,Eid al-Fitr,,
+Holidays,Passover,,
+Holidays,Rosh Hashanah,,
+Holidays,Yom Kippur,,
+Holidays,Veterans Day,,
+Holidays,Memorial Day,,
+Holidays,Labor Day,,
+Holidays,Martin Luther King Jr. Day,,
+Holidays,Cinco de Mayo,,
+Holidays,Mardi Gras,,
+Holidays,Groundhog Day,,
+Holidays,Arbor Day,,
+Holidays,Earth Day,,
+Holidays,Columbus Day / Indigenous Peoples’ Day,,
+Holidays,Oktoberfest,,
+Holidays,Good Friday,,
+Holidays,Day of the Dead,,
+Holidays,Canada Day,,
+Holidays,Bastille Day,,
+Holidays,Mid-Autumn Festival,,
+Holidays,Pride Day,,
+Holidays,Pi Day,,
+Famous People Under 30,Tupac Shakur,25,
+Famous People Under 30,The Notorious B.I.G.,24,
+Famous People Under 30,Anne Frank,15,
+Famous People Under 30,Kurt Cobain,27,
+Famous People Under 30,Amy Winehouse,27,
+Famous People Under 30,Avicii,28,
+Famous People Under 30,XXXTentacion,20,
+Famous People Under 30,Juice WRLD,21,
+Famous People Under 30,Joan of Arc,19,
+Famous People Under 30,Tutankhamun,18,
+Famous People Under 30,Pocahontas,21,
+Famous People Under 30,Jimi Hendrix,27,
+Famous People Under 30,James Dean,24,
+Famous People Under 30,Jim Morrison,27,
+Famous People Under 30,Janis Joplin,27,
+Famous People Under 30,Aaliyah,22,
+Famous People Under 30,River Phoenix,23,
+Famous People Under 30,Otis Redding,26,
+Famous People Under 30,Buddy Holly,22,
+Famous People Under 30,Hank Williams,29,
+Famous People Under 30,Lil Peep,21,
+Famous People Under 30,Christina Grimmie,22,
+Famous People Under 30,Anton Yelchin,27,
+Famous People Under 30,Brandon Lee,28,
+Famous People Under 30,Sid Vicious,21,
+Famous People Under 30,Ritchie Valens,17,
+Famous People Under 30,Robert Johnson,27,
+Famous People Under 30,Brian Jones,27,
+Famous People Under 30,Nick Drake,26,
+Famous People Under 30,Stuart Sutcliffe,21,
+Famous People Under 30,Jonathan Brandis,27,
+Famous People Under 30,Heather O'Rourke,12,
+Famous People Under 30,Gia Carangi,26,
+Famous People Under 30,Peaches Geldof,25,
+Famous People Under 30,Bobby Fuller,23,
+Famous People Under 30,Jean Harlow,26,
+Famous People Under 30,John Keats,25,
+Famous People Under 30,Percy Bysshe Shelley,29,
+Famous People Under 30,Lil Snupe,18,
+Famous People Under 30,Leslie Harvey,27,
+Famous People Under 30,Stephen Foster,29,
+Famous People Under 30,Edward VI,15,
+Famous People Under 30,Lady Jane Grey,16,
+Famous People Under 30,Princess Charlotte of Wales,21,
+Famous People Under 30,David Rizzio,28,
+Famous People Under 30,Henry Moseley,27,
+Amusement Parks,Roller Coaster,,
+Amusement Parks,Ferris Wheel,,
+Amusement Parks,Bumper Cars,,
+Amusement Parks,Log Flume,,
+Amusement Parks,Drop Tower,,
+Amusement Parks,Carousel,,
+Amusement Parks,Swing Ride,,
+Amusement Parks,Water Slide,,
+Amusement Parks,Go-Karts,,
+Amusement Parks,Cotton Candy,,
+Amusement Parks,Popcorn,,
+Amusement Parks,Funnel Cake,,
+Amusement Parks,Churros,,
+Amusement Parks,Hot Dogs,,
+Amusement Parks,Pretzels,,
+Amusement Parks,Ice Cream,,
+Amusement Parks,Lemonade Stand,,
+Amusement Parks,Turkey Legs,,
+Amusement Parks,Soda Fountain,,
+Amusement Parks,Haunted House,,
+Amusement Parks,Funhouse Mirrors,,
+Amusement Parks,Arcade Games,,
+Amusement Parks,Mini Golf,,
+Amusement Parks,Parades,,
+Amusement Parks,Character Meet-and-Greets,,
+Amusement Parks,4D Theater,,
+Amusement Parks,Fireworks Show,,
+Amusement Parks,Petting Zoo,,
+Amusement Parks,Ride Operators,,
+Amusement Parks,Park Mascots,,
+Amusement Parks,Security Guards,,
+Amusement Parks,Food Vendors,,
+Amusement Parks,Maintenance Crew,,
+Amusement Parks,Park Maps,,
+Amusement Parks,Stuffed Animals,,
+Amusement Parks,Lockers,,
+Amusement Parks,Gift Shop,,
+Amusement Parks,Tea cups,,
+Amusement Parks,Lines,,
+Amusement Parks,Bumper boats,,
+Amusement Parks,Caterpillar,,
+Amusement Parks,Hayride,,
+Amusement Parks,Train Ride,,
