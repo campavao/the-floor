@@ -26,7 +26,7 @@ export default function PresenterPage() {
   const channel = new BroadcastChannel("the-floor-projector");
 
   const openProjector = () => {
-    const win = window.open("/projector", "projector", "width=1280,height=720");
+    window.open("/projector", "projector", "fullscreen=yes");
   };
 
   const triggerRandomizer = () => {
@@ -122,13 +122,13 @@ export default function PresenterPage() {
             Finish Round
           </button>
           <button
-            className="bg-blue-500 text-white p-2 rounded-md"
+            className="bg-red-500 text-white p-2 rounded-md"
             onClick={() => triggerPassRound()}
           >
             Pass Round
           </button>
           <button
-            className="bg-blue-500 text-white p-2 rounded-md"
+            className="bg-green-500 text-white p-2 rounded-md"
             onClick={() => triggerRevealRound()}
           >
             Reveal Round

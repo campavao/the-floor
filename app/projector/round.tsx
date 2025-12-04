@@ -13,6 +13,7 @@ import {
   PRESENTER_MESSAGE_TYPE,
   PROJECTOR_MESSAGE_TYPE,
 } from "../presenter/page";
+import { useSound } from "../hooks/useSound";
 
 enum REVEAL_STATE {
   NOT_REVEALED = "NOT_REVEALED",
@@ -34,6 +35,7 @@ export default function Round({
 }) {
   const { folder, examples } = CATEGORY_METADATA[category];
   const channel = new BroadcastChannel("the-floor-presenter");
+  const { playSound, preloadSounds } = useSound();
 
   const [selectedExampleIndex, setSelectedExampleIndex] = useState(0);
 
@@ -41,6 +43,8 @@ export default function Round({
   const [defenderTimeLeft, setDefenderTimeLeft] = useState(45);
 
   const [currentTurn, setCurrentTurn] = useState<"challenger" | "defender">();
+
+  const [countdown, setCountdown] = useState<number | null>(null);
 
   const [revealExampleName, setRevealExampleName] = useState<REVEAL_STATE>(
     REVEAL_STATE.NOT_REVEALED
@@ -61,12 +65,23 @@ export default function Round({
   );
 
   const onRoundFinish = useCallback(() => {
+    if (revealExampleName !== REVEAL_STATE.FINISHED) {
+      return;
+    }
+
     const winner =
       challengerTimeLeft > defenderTimeLeft ? challenger : defender;
     const loser = challengerTimeLeft > defenderTimeLeft ? defender : challenger;
 
     onFinish(winner, loser);
-  }, [challenger, challengerTimeLeft, defender, defenderTimeLeft, onFinish]);
+  }, [
+    challenger,
+    challengerTimeLeft,
+    defender,
+    defenderTimeLeft,
+    onFinish,
+    revealExampleName,
+  ]);
 
   const onNext = useCallback(
     async (timeout: number = 1000) => {
@@ -83,15 +98,43 @@ export default function Round({
   );
 
   const onPass = useCallback(async () => {
+    if (revealExampleName !== REVEAL_STATE.NOT_REVEALED) {
+      return;
+    }
+
     setRevealExampleName(REVEAL_STATE.PASSED);
+    playSound("incorrect-buzz");
     await onNext(3000);
-  }, [onNext]);
+  }, [onNext, playSound, revealExampleName]);
 
   const onReveal = useCallback(async () => {
+    if (revealExampleName !== REVEAL_STATE.NOT_REVEALED) {
+      return;
+    }
+
     setRevealExampleName(REVEAL_STATE.REVEALED);
+    playSound("correct-ding");
     await onNext();
     setCurrentTurn(currentTurn === "challenger" ? "defender" : "challenger");
-  }, [currentTurn, onNext]);
+  }, [currentTurn, onNext, revealExampleName]);
+
+  useEffect(() => {
+    if (countdown === null) {
+      return;
+    }
+
+    if (countdown === 0) {
+      setCurrentTurn("challenger");
+      setCountdown(null);
+      return;
+    }
+
+    const timer = setTimeout(() => {
+      setCountdown(countdown - 1);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, [countdown]);
 
   useEffect(() => {
     if (!currentTurn) {
@@ -131,17 +174,13 @@ export default function Round({
     return () => clearInterval(interval);
   }, [currentTurn]);
 
-  const isTimeUp =
-    challengerTimeLeft <= 0 ||
-    defenderTimeLeft <= 0 ||
-    revealExampleName === REVEAL_STATE.FINISHED;
-
   useEffect(() => {
     const channel = new BroadcastChannel("the-floor-projector");
     channel.addEventListener("message", (event) => {
       switch (event.data.type) {
         case PROJECTOR_MESSAGE_TYPE.START_ROUND:
-          setCurrentTurn("challenger");
+          setCountdown(3);
+          playSound("countdown");
           break;
         case PROJECTOR_MESSAGE_TYPE.FINISH_ROUND:
           onRoundFinish();
@@ -157,7 +196,11 @@ export default function Round({
           break;
       }
     });
-  }, [onRoundFinish, onPass, onReveal]);
+  }, [onRoundFinish, onPass, onReveal, playSound]);
+
+  useEffect(() => {
+    preloadSounds();
+  }, [preloadSounds]);
 
   useEffect(() => {
     const example = randomizedExamples[selectedExampleIndex];
@@ -169,17 +212,31 @@ export default function Round({
   }, [selectedExampleIndex, randomizedExamples, channel]);
 
   if (currentTurn == null) {
-    return <div className='p-20 text-white'>Waiting for start...</div>;
+    return (
+      <div className="fixed inset-0 bg-opacity-75 flex items-center justify-center z-50">
+        <p className="text-[12rem] font-bold text-yellow-500">
+          {countdown !== null ? countdown : "THE FLOOR"}
+        </p>
+      </div>
+    );
   }
 
   return (
-    <div className='p-20'>
-      <div className='flex flex-col items-center justify-center bg-white h-[75vh] mx-auto'>
+    <div className="p-20 relative">
+      <div className="flex flex-col items-center justify-center bg-white h-[75vh] mx-auto">
         {randomizedExamples.map((example, index) => {
           const isSelected = index === selectedExampleIndex;
           if ("text" in example) {
             return (
-              <p className='text-4xl font-bold text-white' key={index}>
+              <p
+                className={classNames(
+                  "text-8xl text-wrap text-center font-bold text-black",
+                  {
+                    hidden: !isSelected,
+                  }
+                )}
+                key={index}
+              >
                 {example.text}
               </p>
             );
@@ -196,20 +253,20 @@ export default function Round({
           );
         })}
       </div>
-      <div className='flex flex-col gap-2 w-full'>
-        <div className='flex flex-row gap-2 w-full justify-between p-2'>
-          <div className='bg-blue-500 outline outline-4 outline-yellow-500 px-6 py-3 transform skew-x-[15deg] flex items-center justify-center min-w-[120px] min-h-[60px]'>
-            <p className='text-2xl font-bold text-white uppercase transform skew-x-[-15deg]'>
+      <div className="flex flex-col gap-2 w-full">
+        <div className="flex flex-row gap-2 w-full justify-between p-2">
+          <div className="bg-blue-500 outline outline-4 outline-yellow-500 px-6 py-3 transform skew-x-[15deg] flex items-center justify-center min-w-[120px] min-h-[60px]">
+            <p className="text-2xl font-bold text-white uppercase transform skew-x-[-15deg]">
               {challenger.person}
             </p>
           </div>
-          <div className='bg-blue-500 outline outline-4 outline-yellow-500 px-6 py-3 transform skew-x-[-15deg] flex items-center justify-center min-w-[120px] min-h-[60px]'>
-            <p className='text-2xl font-bold text-white uppercase transform skew-x-[15deg]'>
+          <div className="bg-blue-500 outline outline-4 outline-yellow-500 px-6 py-3 transform skew-x-[-15deg] flex items-center justify-center min-w-[120px] min-h-[60px]">
+            <p className="text-2xl font-bold text-white uppercase transform skew-x-[15deg]">
               {defender.person}
             </p>
           </div>
         </div>
-        <div className='flex flex-row gap-2 w-full'>
+        <div className="flex flex-row gap-2 w-full">
           <div
             className={classNames(
               "bg-blue-600 px-6 py-4 rounded flex items-center justify-center min-w-[120px]",
@@ -233,8 +290,17 @@ export default function Round({
               {challengerTimeLeft}
             </p>
           </div>
-          <div className='flex-1 bg-blue-600 px-6 py-4 rounded flex items-center justify-center'>
-            <p className='text-4xl font-bold text-white'>
+          <div className="flex-1 bg-blue-600 px-6 py-4 rounded flex items-center justify-center">
+            <p
+              className={classNames("text-4xl font-bold uppercase", {
+                "text-white":
+                  revealExampleName !== REVEAL_STATE.PASSED &&
+                  revealExampleName !== REVEAL_STATE.FINISHED,
+                "text-red-500":
+                  revealExampleName === REVEAL_STATE.PASSED ||
+                  revealExampleName === REVEAL_STATE.FINISHED,
+              })}
+            >
               {revealExampleName !== REVEAL_STATE.NOT_REVEALED
                 ? randomizedExamples[selectedExampleIndex]?.name || ""
                 : ""}

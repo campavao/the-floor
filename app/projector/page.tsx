@@ -121,7 +121,7 @@ export default function Home() {
 
   return (
     <main className="w-full h-screen">
-      <div className="grid grid-cols-4 grid-rows-8 h-full p-20">
+      <div className="grid grid-cols-4 grid-rows-10 h-full p-20">
         {floorPieces.map((floorPiece, index) => (
           <FloorPiece
             key={floorPiece.category + "-" + index}
@@ -175,8 +175,8 @@ function FloorPiece({
       onClick={onClick}
     >
       <p>{floorPiece.person}</p>
-      <p>{floorPiece.category}</p>
-      {/* {(isSelected || isHighlighted) && <p>{floorPiece.category}</p>} */}
+      {/* <p>{floorPiece.category}</p> */}
+      {(isSelected || isHighlighted) && <p>{floorPiece.category}</p>}
     </button>
   );
 }
