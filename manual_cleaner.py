@@ -55,7 +55,7 @@ def setup_pipeline():
         # Determine device and dtype
         device = "cpu"
         dtype = torch.float32  # Default to float32 for better compatibility
-        
+
         if torch.cuda.is_available():
             device = "cuda"
             dtype = torch.float16
@@ -66,7 +66,7 @@ def setup_pipeline():
             print("    [INFO] MPS (Metal) detected, using GPU (Apple Silicon/AMD)")
         else:
             print("    [WARNING] No GPU available! Using CPU (this will be slow).")
-        
+
         pipe = StableDiffusionInpaintPipeline.from_pretrained(
             model_id,
             torch_dtype=dtype,
@@ -122,21 +122,21 @@ def mouse_callback(event, x, y, flags, param):
             # On macOS, OpenCV may encode scroll differently
             # Try multiple methods to detect scroll direction
             wheel_delta = 0
-            
+
             # Method 1: Extract from high 16 bits (Windows/Linux)
             delta_from_flags = (flags >> 16) & 0xFFFF
             if delta_from_flags > 32768:
                 delta_from_flags = delta_from_flags - 65536
             if delta_from_flags != 0:
                 wheel_delta = delta_from_flags
-            
+
             # Method 2: For macOS trackpad, compare flags values over time
             if wheel_delta == 0 and last_wheel_time > 0 and current_time - last_wheel_time < 0.3:
                 if flags > last_wheel_flags:
                     wheel_delta = 120  # Scroll up
                 elif flags < last_wheel_flags:
                     wheel_delta = -120  # Scroll down
-            
+
             # Method 3: For macOS, sometimes the y coordinate changes indicate scroll
             # (This is a fallback - OpenCV on macOS is tricky)
 
@@ -159,51 +159,51 @@ def get_filename(movie_name):
 def remove_item_from_csv(category, item_name):
     """Remove an item from the CSV file - only removes exact matches"""
     csv_path = Path(__file__).parent / 'app' / 'The Floor - Categories - Categories + Examples.csv'
-    
+
     # Create backup first
     backup_path = csv_path.with_suffix('.csv.backup')
     import shutil
     shutil.copy2(csv_path, backup_path)
-    
+
     # Read all rows
     rows = []
     removed_count = 0
     with open(csv_path, 'r', encoding='utf-8') as f:
         reader = csv.DictReader(f)
         fieldnames = reader.fieldnames
-        
+
         if not fieldnames or 'Category' not in fieldnames or 'Example' not in fieldnames:
             print(f"  ERROR: CSV file is malformed. Expected 'Category' and 'Example' columns.", flush=True)
             return False
-        
+
         for row in reader:
             # Filter out any fields not in fieldnames (handle malformed CSV)
             filtered_row = {k: v for k, v in row.items() if k in fieldnames}
-            
+
             # Ensure all fieldnames are present (fill missing with empty string)
             for field in fieldnames:
                 if field not in filtered_row:
                     filtered_row[field] = ''
-            
+
             # Strip whitespace and compare exactly
             row_category = filtered_row.get('Category', '').strip()
             row_example = filtered_row.get('Example', '').strip()
-            
+
             # Only skip if BOTH category and example match exactly
             if row_category == category.strip() and row_example == item_name.strip():
                 removed_count += 1
                 continue
             rows.append(filtered_row)
-    
+
     if removed_count == 0:
         print(f"  WARNING: No matching row found to delete (Category: '{category}', Example: '{item_name}')", flush=True)
         return False
-    
+
     if removed_count > 1:
         print(f"  WARNING: Found {removed_count} matching rows! Only expected 1. Not deleting to prevent data loss.", flush=True)
         print(f"  Backup saved to: {backup_path}", flush=True)
         return False
-    
+
     # Write back to CSV
     try:
         with open(csv_path, 'w', encoding='utf-8', newline='') as f:
@@ -253,39 +253,39 @@ def get_text_input(window_name, prompt_text, initial_text=""):
     show_cursor = True
     last_cursor_time = time.time()
     last_paste_check = time.time()
-    
+
     # Create input window
     input_width = 800
     input_height = 150
     input_img = np.ones((input_height, input_width, 3), dtype=np.uint8) * 240
-    
+
     input_window = "URL Input"
     cv2.namedWindow(input_window, cv2.WINDOW_NORMAL)
     cv2.setWindowProperty(input_window, cv2.WND_PROP_TOPMOST, 1)
     cv2.resizeWindow(input_window, input_width, input_height)
-    
+
     while True:
         display_img = input_img.copy()
-        
+
         # Draw prompt
         cv2.putText(display_img, prompt_text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 0), 2)
-        
+
         # Draw text input box
         cv2.rectangle(display_img, (10, 50), (input_width - 10, 100), (255, 255, 255), 2)
         cv2.rectangle(display_img, (10, 50), (input_width - 10, 100), (200, 200, 200), 1)
-        
+
         # Draw text (truncate if too long to fit)
         max_chars = 90
         display_text = text if len(text) <= max_chars else "..." + text[-(max_chars-3):]
         if display_text:
             cv2.putText(display_img, display_text, (15, 85), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 0), 2)
-        
+
         # Draw cursor
         current_time = time.time()
         if current_time - last_cursor_time > 0.5:
             show_cursor = not show_cursor
             last_cursor_time = current_time
-        
+
         if show_cursor:
             # Calculate cursor position
             text_before_cursor = display_text[:max(0, cursor_pos - (len(text) - len(display_text)) if len(text) > max_chars else cursor_pos)]
@@ -295,18 +295,18 @@ def get_text_input(window_name, prompt_text, initial_text=""):
                 text_width = 0
             cursor_x = 15 + text_width
             cv2.line(display_img, (cursor_x, 70), (cursor_x, 95), (0, 0, 0), 2)
-        
+
         # Draw instructions
-        cv2.putText(display_img, "Press ENTER to confirm, ESC to cancel, P to paste, CMD+V also works", (10, 130), 
+        cv2.putText(display_img, "Press ENTER to confirm, ESC to cancel, P to paste, CMD+V also works", (10, 130),
                    cv2.FONT_HERSHEY_SIMPLEX, 0.4, (100, 100, 100), 1)
-        
+
         cv2.imshow(input_window, display_img)
         key_code = cv2.waitKey(30)
-        
+
         # Store previous clipboard to detect changes
         if not hasattr(get_text_input, 'last_clipboard'):
             get_text_input.last_clipboard = ""
-        
+
         # Periodically check clipboard for changes (for CMD+V detection)
         current_time = time.time()
         if current_time - last_paste_check > 0.05:  # Check clipboard every 50ms
@@ -315,9 +315,9 @@ def get_text_input(window_name, prompt_text, initial_text=""):
                 # Clipboard changed - might be a paste
                 get_text_input.last_clipboard = clipboard_text
             last_paste_check = current_time
-        
+
         key = key_code & 0xFF
-        
+
         if key == 13 or key == 10:  # ENTER
             cv2.destroyWindow(input_window)
             return text.strip() if text.strip() else None
@@ -856,7 +856,7 @@ def process_image(image_source, output_path, item_title="Image", category="Movie
                 print(f"Failed to download a new {item_type}. Keeping current image.")
         elif key == ord('u'): # Load from URL
             url_input = get_text_input("URL Input", "Enter image URL:", "")
-            
+
             if url_input:
                 window_name = f"Cleaning: {item_title}"
                 cv2.namedWindow(window_name)
@@ -932,7 +932,7 @@ def show_category_menu():
     """Display a menu grid of all categories with image counts"""
     csv_path = Path(__file__).parent / 'app' / 'The Floor - Categories - Categories + Examples.csv'
     categories_data = {}
-    
+
     print("Loading categories...")
     with open(csv_path, 'r', encoding='utf-8') as f:
         reader = csv.DictReader(f)
@@ -941,79 +941,79 @@ def show_category_menu():
             if cat not in categories_data:
                 categories_data[cat] = []
             categories_data[cat].append(row['Example'])
-    
+
     categories = sorted(categories_data.keys())
     print(f"Found {len(categories)} categories.", flush=True)
-    
+
     # Grid settings
     base_thumb_size = 200
     base_padding = 15
     min_cols = 2
     max_cols = 6
-    
+
     # Window state
     scroll_y = 0
     window_width = 1400
     window_height = 900
-    
+
     window_name = "Category Menu"
     cv2.namedWindow(window_name, cv2.WINDOW_NORMAL)
     cv2.setWindowProperty(window_name, cv2.WND_PROP_TOPMOST, 1)
     cv2.resizeWindow(window_name, window_width, window_height)
-    
+
     click_action = [None]
     scroll_speed = 50
     last_wheel_time = 0
-    
+
     def count_category_images(category):
         """Count how many images exist for a category"""
         folder_name = category.lower().replace(' ', '-')
         save_dir = Path(__file__).parent / 'public' / 'images' / folder_name
         if not save_dir.exists():
             return 0
-        
+
         # Count .jpg, .jpeg, and .png files (case-insensitive)
         jpg_count = len(list(save_dir.glob('*.jpg'))) + len(list(save_dir.glob('*.JPG'))) + len(list(save_dir.glob('*.Jpg')))
         jpeg_count = len(list(save_dir.glob('*.jpeg'))) + len(list(save_dir.glob('*.JPEG'))) + len(list(save_dir.glob('*.Jpeg')))
         png_count = len(list(save_dir.glob('*.png'))) + len(list(save_dir.glob('*.PNG'))) + len(list(save_dir.glob('*.Png')))
         return jpg_count + jpeg_count + png_count
-    
+
     def get_category_image_count(category):
         """Get cached or calculate image count for category"""
         if not hasattr(get_category_image_count, 'cache'):
             get_category_image_count.cache = {}
-        
+
         if category not in get_category_image_count.cache:
             get_category_image_count.cache[category] = count_category_images(category)
-        
+
         return get_category_image_count.cache[category]
-    
+
     def menu_mouse_callback(event, x, y, flags, param):
         nonlocal scroll_y, last_wheel_time
-        
+
         if event == cv2.EVENT_LBUTTONDOWN:
             win_w = cv2.getWindowImageRect(window_name)[2]
             win_h = cv2.getWindowImageRect(window_name)[3]
-            
+
             cols = max(min_cols, min(max_cols, win_w // 300))
             thumb_size = min(base_thumb_size, (win_w - base_padding * (cols + 1)) // cols - 30)
             padding = base_padding
             cell_width = thumb_size + padding * 2
             cell_height = thumb_size + 80 + padding * 2
-            
+
             start_row = max(0, scroll_y // cell_height - 1)
             visible_rows = (win_h // cell_height) + 2
             end_row = min((len(categories) + cols - 1) // cols, start_row + visible_rows)
-            
+
             for row in range(start_row, end_row):
                 for col in range(cols):
                     idx = row * cols + col
                     if idx >= len(categories):
                         continue
-                    
+
                     rect_x = col * cell_width + padding
                     rect_y = row * cell_height + padding - scroll_y
-                    
+
                     if rect_x <= x <= rect_x + thumb_size and rect_y <= y <= rect_y + thumb_size + 80:
                         category = categories[idx]
                         click_action[0] = category
@@ -1021,17 +1021,17 @@ def show_category_menu():
                 else:
                     continue
                 break
-        
+
         elif event == cv2.EVENT_MOUSEWHEEL:
             current_time = time.time()
             wheel_delta = 0
-            
+
             delta_from_flags = (flags >> 16) & 0xFFFF
             if delta_from_flags > 32768:
                 delta_from_flags = delta_from_flags - 65536
             if delta_from_flags != 0:
                 wheel_delta = delta_from_flags
-            
+
             if wheel_delta == 0:
                 last_flags = param.get('last_flags', 0) if isinstance(param, dict) else 0
                 if last_wheel_time > 0 and current_time - last_wheel_time < 0.3:
@@ -1041,7 +1041,7 @@ def show_category_menu():
                         wheel_delta = -120
                 if isinstance(param, dict):
                     param['last_flags'] = flags
-            
+
             if wheel_delta != 0:
                 win_rect = cv2.getWindowImageRect(window_name)
                 win_w = win_rect[2] if win_rect[2] > 0 else window_width
@@ -1050,70 +1050,70 @@ def show_category_menu():
                 thumb_sz = min(base_thumb_size, (win_w - base_padding * (cols + 1)) // cols - 30)
                 cell_height = thumb_sz + 80 + base_padding * 2
                 max_scroll = max(0, ((len(categories) + cols - 1) // cols) * cell_height - win_h)
-                
+
                 scroll_amount = wheel_delta * 0.5
                 scroll_y = max(0, min(max_scroll, scroll_y - int(scroll_amount)))
                 last_wheel_time = current_time
-    
+
     cv2.setMouseCallback(window_name, menu_mouse_callback, {'last_flags': 0})
-    
+
     print("\nCategory Menu Controls:", flush=True)
     print("  [Click Category]: Open category grid view", flush=True)
     print("  [Mouse Wheel] or [W/S keys]: Scroll up/down", flush=True)
     print("  [ESC]: Exit", flush=True)
-    
+
     while True:
         win_rect = cv2.getWindowImageRect(window_name)
         if win_rect[2] > 0 and win_rect[3] > 0:
             window_width = win_rect[2]
             window_height = win_rect[3]
-        
+
         cols = max(min_cols, min(max_cols, window_width // 300))
         thumb_size = min(base_thumb_size, (window_width - base_padding * (cols + 1)) // cols - 30)
         padding = base_padding
         cell_width = thumb_size + padding * 2
         cell_height = thumb_size + 80 + padding * 2
-        
+
         max_scroll = max(0, ((len(categories) + cols - 1) // cols) * cell_height - window_height)
         scroll_y = min(scroll_y, max_scroll)
-        
+
         display_img = np.ones((window_height, window_width, 3), dtype=np.uint8) * 240
-        
+
         # Render categories
         start_row = max(0, scroll_y // cell_height - 1)
         visible_rows = (window_height // cell_height) + 2
         end_row = min((len(categories) + cols - 1) // cols, start_row + visible_rows)
-        
+
         for row in range(start_row, end_row):
             for col in range(cols):
                 idx = row * cols + col
                 if idx >= len(categories):
                     continue
-                
+
                 x = col * cell_width + padding
                 y = row * cell_height + padding - scroll_y
-                
+
                 if y + cell_height < 0 or y > window_height:
                     continue
-                
+
                 category = categories[idx]
                 item_count = len(categories_data[category])
                 image_count = get_category_image_count(category)
-                
+
                 # Draw category box
                 cv2.rectangle(display_img, (x, y), (x + thumb_size, y + thumb_size), (150, 150, 150), 2)
-                
+
                 # Draw category name (truncate if too long)
                 max_name_len = 20
                 cat_display = category[:max_name_len] + "..." if len(category) > max_name_len else category
                 cv2.putText(display_img, cat_display, (x, y + thumb_size + 15),
                            cv2.FONT_HERSHEY_SIMPLEX, 0.4, (0, 0, 0), 1)
-                
+
                 # Draw item count and image count
                 items_text = f"{item_count} items"
                 cv2.putText(display_img, items_text, (x, y + thumb_size + 30),
                            cv2.FONT_HERSHEY_SIMPLEX, 0.3, (100, 100, 100), 1)
-                
+
                 # Draw image count with color coding
                 if image_count == 0:
                     img_color = (0, 0, 255)  # Red - no images
@@ -1124,10 +1124,10 @@ def show_category_menu():
                 else:
                     img_color = (0, 200, 0)  # Green - complete
                     img_text = f"{image_count}/{item_count} images"
-                
+
                 cv2.putText(display_img, img_text, (x, y + thumb_size + 45),
                            cv2.FONT_HERSHEY_SIMPLEX, 0.3, img_color, 1)
-                
+
                 # Draw progress bar
                 if item_count > 0:
                     progress = image_count / item_count
@@ -1135,35 +1135,35 @@ def show_category_menu():
                     bar_height = 4
                     bar_x = x
                     bar_y = y + thumb_size + 55
-                    
+
                     # Background
                     cv2.rectangle(display_img, (bar_x, bar_y), (bar_x + bar_width, bar_y + bar_height), (200, 200, 200), -1)
                     # Progress
                     if progress > 0:
                         progress_width = int(bar_width * progress)
                         cv2.rectangle(display_img, (bar_x, bar_y), (bar_x + progress_width, bar_y + bar_height), img_color, -1)
-        
+
         cv2.imshow(window_name, display_img)
         key = cv2.waitKey(1) & 0xFF
-        
+
         if key == 27:  # ESC
             break
-        
+
         # Keyboard scrolling
         if key == ord('w') or key == ord('W'):
             scroll_y = max(0, scroll_y - 100)
         elif key == ord('s') or key == ord('S'):
             scroll_y = min(max_scroll, scroll_y + 100)
-        
+
         # Handle click action
         if click_action[0] is not None:
             selected_category = click_action[0]
             click_action[0] = None
-            
+
             print(f"\nOpening category: {selected_category}", flush=True)
             cv2.destroyAllWindows()
             result = show_grid_view(selected_category, initial_scroll_y=0)
-            
+
             if result == "quit":
                 break
             # If result is "menu" or anything else, show menu again
@@ -1176,7 +1176,7 @@ def show_category_menu():
             # Clear cache to refresh counts
             if hasattr(get_category_image_count, 'cache'):
                 get_category_image_count.cache.clear()
-    
+
     cv2.destroyAllWindows()
     return "quit"
 
@@ -1463,14 +1463,14 @@ def show_grid_view(category="Movies", initial_scroll_y=0):
             # Handle scrolling - improved for macOS trackpad
             current_time = time.time()
             wheel_delta = 0
-            
+
             # Method 1: Extract from high 16 bits (Windows/Linux)
             delta_from_flags = (flags >> 16) & 0xFFFF
             if delta_from_flags > 32768:
                 delta_from_flags = delta_from_flags - 65536
             if delta_from_flags != 0:
                 wheel_delta = delta_from_flags
-            
+
             # Method 2: For macOS trackpad, compare flags values over time
             if wheel_delta == 0:
                 last_flags = param.get('last_flags', 0) if isinstance(param, dict) else 0
@@ -1544,12 +1544,12 @@ def show_grid_view(category="Movies", initial_scroll_y=0):
 
         if key == 27:  # ESC
             break
-        
+
         # Return to menu
         if key == ord('m') or key == ord('M'):
             cv2.destroyAllWindows()
             return "menu"
-        
+
         # Keyboard scrolling (for trackpad users) - use W/S keys
         if key == ord('w') or key == ord('W'):
             scroll_y = max(0, scroll_y - 100)
@@ -1773,7 +1773,7 @@ def show_grid_view(category="Movies", initial_scroll_y=0):
                 # Delete item - remove from CSV and delete image file
                 print(f"\nDeleting: {item}", flush=True)
                 current_scroll = scroll_y
-                
+
                 # Delete image file if it exists
                 if file_path.exists():
                     try:
@@ -1781,7 +1781,7 @@ def show_grid_view(category="Movies", initial_scroll_y=0):
                         print(f"  Deleted image file: {file_path.name}", flush=True)
                     except Exception as e:
                         print(f"  Failed to delete image file: {e}", flush=True)
-                
+
                 # Remove from CSV
                 try:
                     success = remove_item_from_csv(category, item)
@@ -1795,7 +1795,7 @@ def show_grid_view(category="Movies", initial_scroll_y=0):
                     import traceback
                     traceback.print_exc()
                     continue  # Don't reload if deletion failed
-                
+
                 # Reload items from CSV
                 items = []
                 with open(csv_path, 'r', encoding='utf-8') as f:
@@ -1803,7 +1803,7 @@ def show_grid_view(category="Movies", initial_scroll_y=0):
                     for row in reader:
                         if row['Category'] == category:
                             items.append(row['Example'])
-                
+
                 # Clear cache
                 thumb_cache.clear()
                 print(f"  Refreshed grid. {len(items)} items remaining.", flush=True)
