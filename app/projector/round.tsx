@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 import classNames from "classnames";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   Category,
   CATEGORY_METADATA,
@@ -14,8 +14,10 @@ import {
   PROJECTOR_MESSAGE_TYPE,
 } from "../presenter/page";
 import { useSound } from "../hooks/useSound";
+import { useSearchParams } from "next/navigation";
 
-enum REVEAL_STATE {
+export enum REVEAL_STATE {
+  NOT_STARTED = "NOT_STARTED",
   NOT_REVEALED = "NOT_REVEALED",
   REVEALED = "REVEALED",
   PASSED = "PASSED",
@@ -33,8 +35,9 @@ export default function Round({
   defender: FloorData;
   onFinish: (winner: FloorData, loser: FloorData) => void;
 }) {
-  const { folder, examples } = CATEGORY_METADATA[category];
+  const { folder, examples: rawExamples } = CATEGORY_METADATA[category];
   const channel = new BroadcastChannel("the-floor-presenter");
+  const searchParams = useSearchParams();
   const { playSound, preloadSounds } = useSound();
 
   const [selectedExampleIndex, setSelectedExampleIndex] = useState(0);
@@ -47,22 +50,26 @@ export default function Round({
   const [countdown, setCountdown] = useState<number | null>(null);
 
   const [revealExampleName, setRevealExampleName] = useState<REVEAL_STATE>(
-    REVEAL_STATE.NOT_REVEALED
+    REVEAL_STATE.NOT_STARTED
   );
 
   const revealExampleNameRef = useRef(revealExampleName);
 
+  const shuffle = (items: any[]) => {
+    return items.sort(() => Math.random() - 0.5);
+  };
+
+  const examples = useMemo(() => {
+    if (searchParams.get("debug") === "true") {
+      return shuffle(rawExamples);
+    }
+
+    return rawExamples;
+  }, [rawExamples, searchParams]);
+
   useEffect(() => {
     revealExampleNameRef.current = revealExampleName;
   }, [revealExampleName]);
-
-  function shuffle<T extends { name: string }[]>(array: T): T {
-    return array.sort(() => Math.random() - 0.5);
-  }
-
-  const [randomizedExamples] = useState<ImageExample[] | TextExample[]>(() =>
-    shuffle(examples)
-  );
 
   const onRoundFinish = useCallback(() => {
     if (revealExampleName !== REVEAL_STATE.FINISHED) {
@@ -74,6 +81,15 @@ export default function Round({
     const loser = challengerTimeLeft > defenderTimeLeft ? defender : challenger;
 
     onFinish(winner, loser);
+
+    channel.postMessage({
+      type: PRESENTER_MESSAGE_TYPE.SET_CURRENT_ROUND_EXAMPLE,
+      category: undefined,
+      example: undefined,
+      selectedExampleIndex: 0,
+      state: REVEAL_STATE.NOT_STARTED,
+      debugExamples: undefined,
+    });
   }, [
     challenger,
     challengerTimeLeft,
@@ -81,12 +97,13 @@ export default function Round({
     defenderTimeLeft,
     onFinish,
     revealExampleName,
+    channel,
   ]);
 
   const onNext = useCallback(
     async (timeout: number = 1000) => {
       await new Promise((resolve) => setTimeout(resolve, timeout));
-      if (randomizedExamples.length - 1 === selectedExampleIndex) {
+      if (examples.length - 1 === selectedExampleIndex) {
         setRevealExampleName(REVEAL_STATE.FINISHED);
         return;
       }
@@ -94,7 +111,7 @@ export default function Round({
       setRevealExampleName(REVEAL_STATE.NOT_REVEALED);
       setSelectedExampleIndex(selectedExampleIndex + 1);
     },
-    [randomizedExamples, selectedExampleIndex]
+    [examples, selectedExampleIndex]
   );
 
   const onPass = useCallback(async () => {
@@ -116,7 +133,7 @@ export default function Round({
     playSound("correct-ding");
     await onNext();
     setCurrentTurn(currentTurn === "challenger" ? "defender" : "challenger");
-  }, [currentTurn, onNext, revealExampleName]);
+  }, [currentTurn, onNext, playSound, revealExampleName]);
 
   useEffect(() => {
     if (countdown === null) {
@@ -141,7 +158,7 @@ export default function Round({
       return;
     }
 
-    const interval = setInterval(() => {
+    const interval = setInterval(async () => {
       // Check the ref value to avoid needing revealExampleName in dependencies
       if (
         // If the answer is revealed, don't count down
@@ -154,19 +171,22 @@ export default function Round({
 
       if (currentTurn === "challenger") {
         setChallengerTimeLeft((prev) => {
-          if (prev <= 0) {
+          const newTime = prev - 1;
+          if (newTime <= 0) {
             setRevealExampleName(REVEAL_STATE.FINISHED);
             return 0;
           }
-          return prev - 1;
+          return newTime;
         });
       } else {
         setDefenderTimeLeft((prev) => {
-          if (prev <= 0) {
+          const newTime = prev - 1;
+          if (newTime <= 0) {
             setRevealExampleName(REVEAL_STATE.FINISHED);
+
             return 0;
           }
-          return prev - 1;
+          return newTime;
         });
       }
     }, 1000);
@@ -180,6 +200,7 @@ export default function Round({
       switch (event.data.type) {
         case PROJECTOR_MESSAGE_TYPE.START_ROUND:
           setCountdown(3);
+          setRevealExampleName(REVEAL_STATE.NOT_REVEALED);
           playSound("countdown");
           break;
         case PROJECTOR_MESSAGE_TYPE.FINISH_ROUND:
@@ -203,13 +224,21 @@ export default function Round({
   }, [preloadSounds]);
 
   useEffect(() => {
-    const example = randomizedExamples[selectedExampleIndex];
+    const example = examples[selectedExampleIndex];
     channel.postMessage({
       type: PRESENTER_MESSAGE_TYPE.SET_CURRENT_ROUND_EXAMPLE,
+      category,
       example,
       selectedExampleIndex,
+      state: revealExampleName,
+      debugExamples: examples,
     });
-  }, [selectedExampleIndex, randomizedExamples, channel]);
+  }, [selectedExampleIndex, examples, channel, category, revealExampleName]);
+
+  const isFinished = revealExampleName === REVEAL_STATE.FINISHED;
+  const isBad =
+    revealExampleName === REVEAL_STATE.PASSED ||
+    revealExampleName === REVEAL_STATE.FINISHED;
 
   if (currentTurn == null) {
     return (
@@ -222,87 +251,73 @@ export default function Round({
   }
 
   return (
-    <div className="p-20 relative">
-      <div className="flex flex-col items-center justify-center bg-white h-[75vh] mx-auto">
-        {randomizedExamples.map((example, index) => {
-          const isSelected = index === selectedExampleIndex;
-          if ("text" in example) {
-            return (
-              <p
-                className={classNames(
-                  "text-8xl text-wrap text-center font-bold text-black",
-                  {
-                    hidden: !isSelected,
-                  }
-                )}
-                key={index}
-              >
-                {example.text}
-              </p>
-            );
-          }
-
-          return (
-            <img
-              src={`/images/${folder}/${example.image}`}
-              className={classNames("max-h-full max-w-full object-contain", {
-                hidden: !isSelected,
-              })}
-              key={example.name}
-            />
-          );
-        })}
+    <div className="p-10 relative">
+      <div className="flex flex-col items-center justify-center bg-white h-[75vh] mx-auto rounded-lg p-4">
+        <RoundDisplay
+          examples={examples}
+          selectedExampleIndex={selectedExampleIndex}
+          folder={folder}
+        />
       </div>
       <div className="flex flex-col gap-2 w-full">
         <div className="flex flex-row gap-2 w-full justify-between p-2">
-          <div className="bg-blue-500 outline outline-4 outline-yellow-500 px-6 py-3 transform skew-x-[15deg] flex items-center justify-center min-w-[120px] min-h-[60px]">
+          <div
+            className={classNames(
+              "bg-blue-500 outline outline-4 outline-yellow-500 px-6 py-3 transform skew-x-[15deg] flex items-center justify-center min-w-[120px] min-h-[60px] rounded",
+              {
+                "bg-red-500": currentTurn === "challenger" && isBad,
+                "bg-gray-500": currentTurn !== "challenger" && !isFinished,
+                "bg-green-500": currentTurn !== "challenger" && isFinished,
+              }
+            )}
+          >
             <p className="text-2xl font-bold text-white uppercase transform skew-x-[-15deg]">
               {challenger.person}
             </p>
           </div>
-          <div className="bg-blue-500 outline outline-4 outline-yellow-500 px-6 py-3 transform skew-x-[-15deg] flex items-center justify-center min-w-[120px] min-h-[60px]">
+          <div
+            className={classNames(
+              "bg-blue-500 outline outline-4 outline-yellow-500 px-6 py-3 transform skew-x-[-15deg] flex items-center justify-center min-w-[120px] min-h-[60px] rounded",
+              {
+                "bg-red-500": currentTurn === "defender" && isBad,
+                "bg-gray-500": currentTurn !== "defender" && !isFinished,
+                "bg-green-500": currentTurn !== "defender" && isFinished,
+              }
+            )}
+          >
             <p className="text-2xl font-bold text-white uppercase transform skew-x-[15deg]">
               {defender.person}
             </p>
           </div>
         </div>
-        <div className="flex flex-row gap-2 w-full">
+        <div className="flex flex-row gap-2 w-full px-4">
           <div
             className={classNames(
               "bg-blue-600 px-6 py-4 rounded flex items-center justify-center min-w-[120px]",
               {
                 "outline outline-4 outline-yellow-500":
                   currentTurn === "challenger",
+                "bg-green-500": currentTurn !== "challenger" && isFinished,
+                "bg-red-500": currentTurn === "challenger" && isBad,
+                "bg-gray-500": currentTurn !== "challenger" && !isFinished,
               }
             )}
           >
-            <p
-              className={classNames("text-4xl font-bold ", {
-                "text-white":
-                  currentTurn === "challenger" &&
-                  revealExampleName !== REVEAL_STATE.PASSED,
-                "text-red-500":
-                  currentTurn === "challenger" &&
-                  revealExampleName === REVEAL_STATE.PASSED,
-                "text-gray-500": currentTurn !== "challenger",
-              })}
-            >
+            <p className="text-4xl font-bold text-white">
               {challengerTimeLeft}
             </p>
           </div>
-          <div className="flex-1 bg-blue-600 px-6 py-4 rounded flex items-center justify-center">
-            <p
-              className={classNames("text-4xl font-bold uppercase", {
-                "text-white":
-                  revealExampleName !== REVEAL_STATE.PASSED &&
-                  revealExampleName !== REVEAL_STATE.FINISHED,
-                "text-red-500":
-                  revealExampleName === REVEAL_STATE.PASSED ||
-                  revealExampleName === REVEAL_STATE.FINISHED,
-              })}
-            >
+          <div
+            className={classNames(
+              "flex-1 bg-blue-600 px-6 py-4 rounded flex items-center justify-center",
+              {
+                "bg-red-500": isBad,
+              }
+            )}
+          >
+            <p className="text-4xl font-bold uppercase text-white">
               {revealExampleName !== REVEAL_STATE.NOT_REVEALED
-                ? randomizedExamples[selectedExampleIndex]?.name || ""
+                ? examples[selectedExampleIndex]?.name || ""
                 : ""}
             </p>
           </div>
@@ -312,61 +327,89 @@ export default function Round({
               {
                 "outline outline-4 outline-yellow-500":
                   currentTurn === "defender",
+                "bg-green-500": currentTurn !== "defender" && isFinished,
+                "bg-red-500": currentTurn === "defender" && isBad,
+                "bg-gray-500": currentTurn !== "defender" && !isFinished,
               }
             )}
           >
-            <p
-              className={classNames("text-4xl font-bold ", {
-                "text-white":
-                  currentTurn === "defender" &&
-                  revealExampleName !== REVEAL_STATE.PASSED,
-                "text-red-500":
-                  currentTurn === "defender" &&
-                  revealExampleName === REVEAL_STATE.PASSED,
-                "text-gray-500": currentTurn !== "defender",
-              })}
-            >
+            <p className={"text-4xl font-bold text-white"}>
               {defenderTimeLeft}
             </p>
           </div>
         </div>
       </div>
-      {/* <div className="flex flex-row gap-2 w-full justify-center p-2">
-        {!isTimeUp && currentTurn && (
-          <>
-            <button
-              className="bg-blue-500 text-white p-2 rounded-md"
-              onClick={onPass}
-            >
-              Pass
-            </button>
-            <button
-              className="bg-blue-500 text-white p-2 rounded-md"
-              onClick={onReveal}
-            >
-              Reveal
-            </button>
-          </>
-        )}
+    </div>
+  );
+}
 
-        {!isTimeUp && !currentTurn && (
-          <button
-            className="bg-blue-500 text-white p-2 rounded-md"
-            onClick={() => setCurrentTurn("challenger")}
-          >
-            Start
-          </button>
-        )}
+export function RoundDisplay({
+  examples,
+  selectedExampleIndex,
+  folder,
+}: {
+  examples: ImageExample[] | TextExample[];
+  selectedExampleIndex: number;
+  folder: string;
+}) {
+  const example = examples[selectedExampleIndex];
 
-        {isTimeUp && (
-          <button
-            className="bg-blue-500 text-white p-2 rounded-md"
-            onClick={onRoundFinish}
-          >
-            Finish
-          </button>
-        )}
-      </div> */}
+  // Preload upcoming images to prevent flashing
+  useEffect(() => {
+    const preloadImages = () => {
+      // Preload the next 3 images
+      for (let i = 1; i <= 3; i++) {
+        const nextIndex = selectedExampleIndex + i;
+        if (nextIndex < examples.length) {
+          const nextExample = examples[nextIndex];
+          if (nextExample && "image" in nextExample) {
+            const img = new Image();
+            img.src = `/images/${folder}/${nextExample.image}`;
+          }
+        }
+      }
+    };
+
+    preloadImages();
+  }, [selectedExampleIndex, examples, folder]);
+
+  return (
+    <div className="relative w-full h-full flex items-center justify-center">
+      {examples.map((example, index) => {
+        const isSelected = index === selectedExampleIndex;
+        if ("text" in example) {
+          return (
+            <p
+              className={classNames(
+                "text-8xl text-wrap text-center font-bold text-black absolute",
+                {
+                  "opacity-0 pointer-events-none": !isSelected,
+                  "opacity-100": isSelected,
+                }
+              )}
+              key={index}
+            >
+              {example.text}
+            </p>
+          );
+        }
+
+        return (
+          <img
+            src={`/images/${folder}/${example.image}`}
+            className={classNames(
+              "absolute max-h-full max-w-full object-contain rounded transition-opacity duration-200",
+              {
+                "opacity-0 pointer-events-none": !isSelected,
+                "opacity-100": isSelected,
+              }
+            )}
+            key={`${folder}-${example.image}-${index}`}
+            loading="eager"
+            decoding="sync"
+          />
+        );
+      })}
     </div>
   );
 }

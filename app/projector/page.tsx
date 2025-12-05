@@ -1,9 +1,19 @@
 "use client";
-import { useEffect, useMemo, useState } from "react";
-import { Category, FLOOR_DATA, FloorData } from "../data";
+import {
+  useCallback,
+  useEffect,
+  useId,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import { useSearchParams } from "next/navigation";
+import { Category, DEBUG_FLOOR_DATA, FLOOR_DATA, FloorData } from "../data";
 import classNames from "classnames";
 import { PROJECTOR_MESSAGE_TYPE } from "../presenter/page";
 import Round from "./round";
+import { useLocalStorage } from "usehooks-ts";
+import confetti from "canvas-confetti";
 
 interface Round {
   category: Category;
@@ -11,61 +21,144 @@ interface Round {
   defender: FloorData;
 }
 
-export default function Home() {
-  const [floorPieces, setFloorPieces] = useState<FloorData[]>(FLOOR_DATA);
+export default function Home({ params }: { params: Promise<any> }) {
+  const searchParams = useSearchParams();
+  const isDebug = searchParams.get("debug") === "true" || false;
+  const [mounted, setMounted] = useState(false);
+  const storageKeyPrefix = "floor-pieces." + (isDebug ? "debug" : "data");
+  const [floorPieces, setFloorPieces, removeFloorPieces] = useLocalStorage<
+    FloorData[]
+  >(
+    storageKeyPrefix + ".floor-pieces",
+    isDebug ? DEBUG_FLOOR_DATA : FLOOR_DATA
+  );
 
-  // Randomize after mount to avoid hydration mismatch
+  const [selectedFloorPiece, setSelectedFloorPiece] = useLocalStorage<
+    FloorData | undefined
+  >(storageKeyPrefix + ".selected-floor-piece", undefined);
+
+  const [round, setRound] = useLocalStorage<Round | undefined>(
+    storageKeyPrefix + ".round",
+    undefined
+  );
+
+  // Ensure we only render after hydration to avoid mismatch
   useEffect(() => {
-    setFloorPieces([...FLOOR_DATA].sort(() => Math.random() - 0.5));
+    setMounted(true);
   }, []);
 
-  const [selectedFloorPiece, setSelectedFloorPiece] =
-    useState<FloorData | null>(null);
+  const onRestart = useCallback(() => {
+    removeFloorPieces();
+    setFloorPieces(isDebug ? DEBUG_FLOOR_DATA : FLOOR_DATA);
+    setSelectedFloorPiece(undefined);
+    setRound(undefined);
+  }, [
+    removeFloorPieces,
+    setFloorPieces,
+    setSelectedFloorPiece,
+    setRound,
+    isDebug,
+  ]);
 
-  const [round, setRound] = useState<Round>();
+  const randomizeIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const randomizeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const finalSelectedPieceRef = useRef<FloorData | null>(null);
+
+  const onRandomize = useCallback(() => {
+    // Clear any existing randomize timers
+    if (randomizeIntervalRef.current) {
+      clearInterval(randomizeIntervalRef.current);
+    }
+    if (randomizeTimeoutRef.current) {
+      clearTimeout(randomizeTimeoutRef.current);
+    }
+
+    const unrandomizedPieces = floorPieces.filter(
+      (piece) => !piece.hasBeenRandomized
+    );
+
+    if (unrandomizedPieces.length === 0) {
+      return;
+    }
+
+    // Start interval that picks a random piece every second
+    randomizeIntervalRef.current = setInterval(() => {
+      const randomFloorPiece =
+        unrandomizedPieces[
+          Math.floor(Math.random() * unrandomizedPieces.length)
+        ];
+      if (randomFloorPiece) {
+        finalSelectedPieceRef.current = randomFloorPiece;
+        setSelectedFloorPiece(randomFloorPiece);
+      }
+    }, 250);
+
+    // Random duration between 4 and 6 seconds
+    const randomDuration = 2000 + Math.random() * 2000; // 4000-6000ms
+
+    // After random duration, stop the interval and mark the final piece as randomized
+    randomizeTimeoutRef.current = setTimeout(() => {
+      if (randomizeIntervalRef.current) {
+        clearInterval(randomizeIntervalRef.current);
+        randomizeIntervalRef.current = null;
+      }
+
+      const finalPiece = finalSelectedPieceRef.current;
+      if (finalPiece) {
+        setFloorPieces((prev) => {
+          return prev.map((piece) => ({
+            ...piece,
+            hasBeenRandomized:
+              piece.category === finalPiece.category &&
+              piece.person === finalPiece.person
+                ? true
+                : piece.hasBeenRandomized,
+          }));
+        });
+      }
+    }, randomDuration);
+  }, [floorPieces, setSelectedFloorPiece, setFloorPieces]);
 
   useEffect(() => {
     const channel = new BroadcastChannel("the-floor-projector");
     channel.addEventListener("message", (event) => {
       switch (event.data.type) {
         case PROJECTOR_MESSAGE_TYPE.RANDOMIZER:
-          const randomFloorPiece = [...floorPieces]
-            .filter((piece) => !piece.hasBeenRandomized)
-            .sort(() => Math.random() - 0.5)[0];
-
-          setSelectedFloorPiece(randomFloorPiece);
-          setFloorPieces((prev) => {
-            // If all pieces have been randomized, reset them
-            if (prev.every((piece) => piece.hasBeenRandomized)) {
-              return [...prev].map((piece) => ({
-                ...piece,
-                hasBeenRandomized: false,
-              }));
-            } else {
-              // Otherwise, mark the random piece as randomized
-              return [...prev].map((piece) =>
-                piece.category === randomFloorPiece.category
-                  ? { ...piece, hasBeenRandomized: true }
-                  : piece
-              );
-            }
-          });
+          onRandomize();
           break;
         case PROJECTOR_MESSAGE_TYPE.GO_BACK_TO_FLOOR:
-          setSelectedFloorPiece(null);
+          setSelectedFloorPiece(undefined);
+          break;
+        case PROJECTOR_MESSAGE_TYPE.RESTART:
+          onRestart();
           break;
         default:
           console.warn("Unknown message type", event.data.type);
           break;
       }
     });
-  }, [floorPieces]);
+
+    // Cleanup on unmount
+    return () => {
+      if (randomizeIntervalRef.current) {
+        clearInterval(randomizeIntervalRef.current);
+      }
+      if (randomizeTimeoutRef.current) {
+        clearTimeout(randomizeTimeoutRef.current);
+      }
+    };
+  }, [onRestart, onRandomize]);
 
   const highlightedFloorPieceCategories = useMemo(() => {
     const allSelectedFloorPieces = floorPieces
-      .map((piece, index) =>
-        piece.category === selectedFloorPiece?.category ? index : null
-      )
+      .map((piece, index) => {
+        const isSameCategory = piece.category === selectedFloorPiece?.category;
+        const isSamePerson = piece.person === selectedFloorPiece?.person;
+        const isValid =
+          isSameCategory && isSamePerson && piece.hasBeenRandomized;
+
+        return isValid ? index : null;
+      })
       .filter((index) => index !== null);
 
     if (allSelectedFloorPieces.length === 0) return [];
@@ -83,7 +176,7 @@ export default function Home() {
   const onSelectOrMerge = (winner: FloorData, loser: FloorData) => {
     const newFloorPieces = floorPieces.map((piece) => {
       // Overwrite the newly selected floor piece with the winning one (existing piece for now)
-      if (piece.category === loser.category) {
+      if (piece.category === loser.category && piece.person === loser.person) {
         return winner;
       }
 
@@ -95,18 +188,62 @@ export default function Home() {
     setRound(undefined);
   };
 
-  const onStartRound = (floorPiece: FloorData) => {
-    if (selectedFloorPiece == null) {
-      setSelectedFloorPiece(floorPiece);
-      return;
-    }
+  const onStartRound = useCallback(
+    (floorPiece: FloorData) => {
+      if (selectedFloorPiece == null) {
+        setSelectedFloorPiece(floorPiece);
+        return;
+      }
 
-    setRound({
-      category: floorPiece.category,
-      challenger: selectedFloorPiece,
-      defender: floorPiece,
-    });
-  };
+      setRound({
+        category: floorPiece.category,
+        challenger: selectedFloorPiece,
+        defender: floorPiece,
+      });
+    },
+    [selectedFloorPiece, setSelectedFloorPiece, setRound]
+  );
+
+  const whoIsRemaining = useMemo(
+    () => new Set(floorPieces.map((piece) => piece.person)),
+    [floorPieces]
+  );
+
+  useEffect(() => {
+    if (whoIsRemaining.size === 1) {
+      const timeout = setInterval(() => {
+        // Confetti
+        confetti({
+          particleCount: 100,
+          spread: 300,
+          origin: { y: 0.5 },
+        });
+      }, 2000);
+
+      return () => clearInterval(timeout);
+    }
+  }, [whoIsRemaining]);
+
+  // Don't render until after hydration to avoid mismatch
+  if (!mounted) {
+    return (
+      <main className="w-full h-screen">
+        <div className="grid grid-cols-4 grid-rows-10 h-full p-20" />
+      </main>
+    );
+  }
+
+  console.log(whoIsRemaining);
+
+  if (whoIsRemaining.size === 1) {
+    return (
+      <main className="w-full h-screen">
+        <div className="flex flex-col items-center justify-center h-full text-white text-9xl font-bold">
+          <p className="text-center">{Array.from(whoIsRemaining)[0]} wins!</p>
+        </div>
+      </main>
+    );
+  }
 
   if (round) {
     return (
@@ -122,18 +259,33 @@ export default function Home() {
   return (
     <main className="w-full h-screen">
       <div className="grid grid-cols-4 grid-rows-10 h-full p-20">
-        {floorPieces.map((floorPiece, index) => (
-          <FloorPiece
-            key={floorPiece.category + "-" + index}
-            floorPiece={floorPiece}
-            isSelected={selectedFloorPiece?.category === floorPiece.category}
-            isHighlighted={highlightedFloorPieceCategories.includes(
-              floorPiece.category
-            )}
-            onSelect={onStartRound}
-            selectedFloorPiece={selectedFloorPiece}
-          />
-        ))}
+        {floorPieces.map((floorPiece, index) => {
+          const isSameCategoryAndPerson =
+            selectedFloorPiece?.category === floorPiece.category &&
+            selectedFloorPiece?.person === floorPiece.person;
+
+          const isRandomizing =
+            isSameCategoryAndPerson && !floorPiece?.hasBeenRandomized;
+
+          const isSelected =
+            isSameCategoryAndPerson && floorPiece?.hasBeenRandomized;
+
+          const isHighlighted = highlightedFloorPieceCategories.includes(
+            floorPiece.category
+          );
+
+          return (
+            <FloorPiece
+              key={floorPiece.category + "-" + index}
+              floorPiece={floorPiece}
+              isSelected={isSelected}
+              isHighlighted={isRandomizing || isHighlighted}
+              isRandomizing={isRandomizing}
+              onSelect={onStartRound}
+              selectedFloorPiece={selectedFloorPiece}
+            />
+          );
+        })}
       </div>
     </main>
   );
@@ -142,7 +294,8 @@ export default function Home() {
 function FloorPiece({
   floorPiece,
   isSelected,
-  isHighlighted,
+  isRandomizing = false,
+  isHighlighted = isRandomizing,
   onSelect,
   selectedFloorPiece,
 }: {
@@ -152,8 +305,9 @@ function FloorPiece({
   /** Highlighted floor piece surrounding the selected floor piece */
   isHighlighted: boolean;
 
+  isRandomizing: boolean;
   onSelect: (floorPiece: FloorData) => void;
-  selectedFloorPiece: FloorData | null;
+  selectedFloorPiece?: FloorData;
 }) {
   const onClick = () => {
     if (!isHighlighted && selectedFloorPiece) return;
@@ -176,7 +330,9 @@ function FloorPiece({
     >
       <p>{floorPiece.person}</p>
       {/* <p>{floorPiece.category}</p> */}
-      {(isSelected || isHighlighted) && <p>{floorPiece.category}</p>}
+      {(isSelected || isHighlighted) && !isRandomizing && (
+        <p>{floorPiece.category}</p>
+      )}
     </button>
   );
 }

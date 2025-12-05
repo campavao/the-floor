@@ -1,193 +1,7 @@
 const FLOOR_DATA_CONST = [
   {
-    person: "Aimee",
-    category: "Airport Codes",
-    hasBeenRandomized: true,
-    isStillInTheGame: true,
-  },
-  {
-    person: "Aimee",
-    category: "Chicago tourist stuff",
-    hasBeenRandomized: true,
-    isStillInTheGame: true,
-  },
-  {
-    person: "Andrea",
-    category: "Broadway shows",
-    hasBeenRandomized: true,
-    isStillInTheGame: true,
-  },
-  {
-    person: "Andrea",
-    category: "Disney characters",
-    hasBeenRandomized: true,
-    isStillInTheGame: true,
-  },
-  {
-    person: "Beth",
-    category: "Disney Channel Original Movies",
-    hasBeenRandomized: true,
-    isStillInTheGame: true,
-  },
-  {
-    person: "Beth",
-    category: "Reality tv shows",
-    hasBeenRandomized: true,
-    isStillInTheGame: true,
-  },
-  {
-    person: "Courtney",
-    category: "Apps",
-    hasBeenRandomized: true,
-    isStillInTheGame: true,
-  },
-  {
-    person: "Courtney",
-    category: "Chilis",
-    hasBeenRandomized: false,
-    isStillInTheGame: true,
-  },
-  {
-    person: "Devin",
-    category: "Pop divas",
-    hasBeenRandomized: true,
-    isStillInTheGame: true,
-  },
-  {
-    person: "Devin",
-    category: "Spirit Halloween Catalogue",
-    hasBeenRandomized: true,
-    isStillInTheGame: true,
-  },
-  {
-    person: "Ellie",
-    category: "Books",
-    hasBeenRandomized: true,
-    isStillInTheGame: true,
-  },
-  {
-    person: "Ellie",
-    category: "Rom Coms",
-    hasBeenRandomized: true,
-    isStillInTheGame: true,
-  },
-  {
-    person: "Emma",
-    category: "Horses",
-    hasBeenRandomized: true,
-    isStillInTheGame: true,
-  },
-  {
-    person: "Emma",
-    category: "Thanksgiving",
-    hasBeenRandomized: true,
-    isStillInTheGame: true,
-  },
-  {
-    person: "Frankie",
-    category: "Amusement Parks",
-    hasBeenRandomized: true,
-    isStillInTheGame: true,
-  },
-  {
-    person: "Frankie",
-    category: "Harry Potter characters",
-    hasBeenRandomized: true,
-    isStillInTheGame: true,
-  },
-  {
-    person: "Gabe",
-    category: "Comedians",
-    hasBeenRandomized: true,
-    isStillInTheGame: true,
-  },
-  {
-    person: "Gabe",
-    category: "Junk drawer",
-    hasBeenRandomized: true,
-    isStillInTheGame: true,
-  },
-  {
-    person: "Joey",
-    category: "Pokemon",
-    hasBeenRandomized: true,
-    isStillInTheGame: true,
-  },
-  {
-    person: "Joey",
-    category: "MLB Teams",
-    hasBeenRandomized: true,
-    isStillInTheGame: true,
-  },
-  {
-    person: "John",
-    category: "Garage",
-    hasBeenRandomized: true,
-    isStillInTheGame: true,
-  },
-  {
-    person: "John",
-    category: "Sports",
-    hasBeenRandomized: true,
-    isStillInTheGame: true,
-  },
-  {
-    person: "Josh",
-    category: "Brand slogans",
-    hasBeenRandomized: true,
-    isStillInTheGame: true,
-  },
-  {
-    person: "Josh",
-    category: "Fast food chains",
-    hasBeenRandomized: true,
-    isStillInTheGame: true,
-  },
-  {
-    person: "Layne",
-    category: "Board games",
-    hasBeenRandomized: true,
-    isStillInTheGame: true,
-  },
-  {
-    person: "Layne",
-    category: "Taylor Swift Lyrics",
-    hasBeenRandomized: true,
-    isStillInTheGame: true,
-  },
-  {
-    person: "Nic",
-    category: "Kitchen gadgets",
-    hasBeenRandomized: true,
-    isStillInTheGame: true,
-  },
-  {
-    person: "Nic",
-    category: "Fair foods",
-    hasBeenRandomized: true,
-    isStillInTheGame: true,
-  },
-  {
-    person: "Nolan",
-    category: "States",
-    hasBeenRandomized: true,
-    isStillInTheGame: true,
-  },
-  {
-    person: "Nolan",
-    category: "Math",
-    hasBeenRandomized: true,
-    isStillInTheGame: true,
-  },
-  {
-    person: "Pat",
-    category: "The Office",
-    hasBeenRandomized: true,
-    isStillInTheGame: true,
-  },
-  {
-    person: "Pat",
-    category: "City Skylines",
+    person: "Zoey",
+    category: "Laundry",
     hasBeenRandomized: true,
     isStillInTheGame: true,
   },
@@ -198,32 +12,20 @@ const FLOOR_DATA_CONST = [
     isStillInTheGame: true,
   },
   {
-    person: "Rachel",
-    category: "Holidays",
+    person: "Gabe",
+    category: "Junk drawer",
     hasBeenRandomized: true,
     isStillInTheGame: true,
   },
   {
-    person: "Syd",
-    category: "Dogs",
+    person: "Josh",
+    category: "Fast food chains",
     hasBeenRandomized: true,
     isStillInTheGame: true,
   },
   {
-    person: "Syd",
-    category: "Famous people who died before turning 30",
-    hasBeenRandomized: true,
-    isStillInTheGame: true,
-  },
-  {
-    person: "Tanner",
-    category: "Superheros",
-    hasBeenRandomized: true,
-    isStillInTheGame: true,
-  },
-  {
-    person: "Tanner",
-    category: "Video Game Characters",
+    person: "Ellie",
+    category: "Rom Coms",
     hasBeenRandomized: true,
     isStillInTheGame: true,
   },
@@ -234,14 +36,253 @@ const FLOOR_DATA_CONST = [
     isStillInTheGame: true,
   },
   {
-    person: "Zoey",
-    category: "Laundry",
+    person: "Andrea",
+    category: "Disney characters",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Tanner",
+    category: "Superheros",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Layne",
+    category: "Taylor Swift Lyrics",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Nolan",
+    category: "States",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Nic",
+    category: "Kitchen gadgets",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Syd",
+    category: "Famous people who died before turning 30",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Pat",
+    category: "The Office",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Emma",
+    category: "Thanksgiving",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "John",
+    category: "Garage",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Rachel",
+    category: "Holidays",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Nic",
+    category: "Fair foods",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Aimee",
+    category: "Chicago tourist stuff",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Devin",
+    category: "Pop divas",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "John",
+    category: "Sports",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Ellie",
+    category: "Books",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Beth",
+    category: "Reality tv shows",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Joey",
+    category: "MLB Teams",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Nolan",
+    category: "Math",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Aimee",
+    category: "Airport Codes",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Syd",
+    category: "Dogs",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Beth",
+    category: "Disney Channel Original Movies",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Josh",
+    category: "Brand slogans",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Emma",
+    category: "Horses",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Pat",
+    category: "City Skylines",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Tanner",
+    category: "Video Game Characters",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Andrea",
+    category: "Broadway shows",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Frankie",
+    category: "Harry Potter characters",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Layne",
+    category: "Board games",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Gabe",
+    category: "Comedians",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Frankie",
+    category: "Amusement Parks",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Devin",
+    category: "Spirit Halloween Catalogue",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Joey",
+    category: "Pokemon",
     hasBeenRandomized: true,
     isStillInTheGame: true,
   },
 ] as const;
 
-export type Category = (typeof FLOOR_DATA_CONST)[number]["category"];
+// {
+//   person: "Courtney",
+//   category: "Apps",
+//   hasBeenRandomized: true,
+//   isStillInTheGame: true,
+// },
+// {
+//   person: "Courtney",
+//   category: "Chilis",
+//   hasBeenRandomized: false,
+//   isStillInTheGame: true,
+// },
+
+export type Category =
+  | "Pokemon"
+  | "Broadway shows"
+  | "Disney characters"
+  | "Kitchen gadgets"
+  | "Junk drawer"
+  | "Laundry"
+  | "Pop divas"
+  | "Chicago tourist stuff"
+  | "Board games"
+  | "States"
+  | "Harry Potter characters"
+  | "Spirit Halloween Catalogue"
+  | "Superheros"
+  | "Video Game Characters"
+  | "City Skylines"
+  | "Movies"
+  | "Books"
+  | "Disney Channel Original Movies"
+  | "Airport Codes"
+  | "Brand slogans"
+  | "Taylor Swift Lyrics"
+  | "Reality tv shows"
+  | "The Office"
+  | "Thanksgiving"
+  | "Dogs"
+  | "Horses"
+  | "Rom Coms"
+  | "Amusement Parks"
+  | "Comedians"
+  | "Fair foods"
+  | "Famous people who died before turning 30"
+  | "Fast food chains"
+  | "Fridge"
+  | "Garage"
+  | "Holidays"
+  | "MLB Teams"
+  | "Sports"
+  | "Chilis"
+  | "Math"
+  | "Apps";
 
 export interface FloorData {
   person: string;
@@ -1892,11 +1933,6 @@ const LaundryCategory: CategoryMetadata = {
     {
       name: "Laundry sanitizer",
       image: "laundry-sanitizer.jpg",
-      alternatives: [],
-    },
-    {
-      name: "Pre-treatment spray",
-      image: "pre-treatment-spray.jpg",
       alternatives: [],
     },
     {
@@ -6473,7 +6509,7 @@ const ComediansCategory: CategoryMetadata = {
       alternatives: [],
     },
     {
-      name: "Conan Obrien",
+      name: "Conan O'Brien",
       image: "conan-obrien.jpg",
       alternatives: [],
     },
@@ -8565,3 +8601,247 @@ export const CATEGORY_METADATA: Record<Category, CategoryMetadata> = {
   Chilis: ChilisCategory,
   Math: MathCategory,
 };
+
+// DEBUG SPECIFIC DATA
+export const DEBUG_FLOOR_DATA: FloorData[] = [
+  {
+    person: "Aimee",
+    category: "Apps",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Aimee",
+    category: "Apps",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Andrea",
+    category: "Apps",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Andrea",
+    category: "Apps",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Beth",
+    category: "Apps",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Beth",
+    category: "Apps",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  // {
+  //   person: "Courtney",
+  //   category: "Apps",
+  //   hasBeenRandomized: true,
+  //   isStillInTheGame: true,
+  // },
+  // {
+  //   person: "Courtney",
+  //   category: "Chilis",
+  //   hasBeenRandomized: false,
+  //   isStillInTheGame: true,
+  // },
+  {
+    person: "Devin",
+    category: "Apps",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Devin",
+    category: "Apps",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Ellie",
+    category: "Apps",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Ellie",
+    category: "Apps",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Emma",
+    category: "Apps",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Emma",
+    category: "Apps",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Frankie",
+    category: "Apps",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Frankie",
+    category: "Apps",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Gabe",
+    category: "Apps",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Gabe",
+    category: "Apps",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Joey",
+    category: "Apps",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Joey",
+    category: "Apps",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "John",
+    category: "Apps",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "John",
+    category: "Apps",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Josh",
+    category: "Apps",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Josh",
+    category: "Apps",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Layne",
+    category: "Apps",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Layne",
+    category: "Apps",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Nic",
+    category: "Apps",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Nic",
+    category: "Apps",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Nolan",
+    category: "Apps",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Nolan",
+    category: "Apps",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Pat",
+    category: "Apps",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Pat",
+    category: "Apps",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Rachel",
+    category: "Apps",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Rachel",
+    category: "Apps",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Syd",
+    category: "Apps",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Syd",
+    category: "Apps",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Tanner",
+    category: "Apps",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Tanner",
+    category: "Apps",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Zoey",
+    category: "Apps",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+  {
+    person: "Zoey",
+    category: "Apps",
+    hasBeenRandomized: true,
+    isStillInTheGame: true,
+  },
+] as const;

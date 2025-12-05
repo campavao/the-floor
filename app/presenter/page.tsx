@@ -1,10 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { Category, CATEGORY_METADATA } from "../data";
+import { REVEAL_STATE, RoundDisplay } from "../projector/round";
 
 export enum PROJECTOR_MESSAGE_TYPE {
   RANDOMIZER = "RANDOMIZER",
   GO_BACK_TO_FLOOR = "GO_BACK_TO_FLOOR",
+  RESTART = "RESTART",
   START_ROUND = "START_ROUND",
   FINISH_ROUND = "FINISH_ROUND",
   PASS_ROUND = "PASS_ROUND",
@@ -15,18 +18,49 @@ export enum PRESENTER_MESSAGE_TYPE {
   SET_CURRENT_ROUND_EXAMPLE = "SET_CURRENT_ROUND_EXAMPLE",
 }
 
-export default function PresenterPage() {
+export default function PresenterPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<any>;
+  searchParams: Promise<any>;
+}) {
   const [currentRoundExample, setCurrentRoundExample] = useState<{
     name: string;
     image: string;
     alternatives: string[];
   }>();
+  const [selectedCategory, setSelectedCategory] = useState<Category>();
   const [selectedExampleIndex, setSelectedExampleIndex] = useState<number>(0);
+  const [roundState, setRoundState] = useState<REVEAL_STATE | undefined>();
+  const [debugExamples, setDebugExamples] = useState<
+    {
+      name: string;
+      image: string;
+      alternatives: string[];
+    }[]
+  >();
+
+  const examples = useMemo(() => {
+    if (selectedCategory == null) {
+      return [];
+    }
+
+    if (debugExamples) {
+      return debugExamples;
+    }
+
+    return CATEGORY_METADATA[selectedCategory].examples;
+  }, [selectedCategory, debugExamples]);
 
   const channel = new BroadcastChannel("the-floor-projector");
 
   const openProjector = () => {
     window.open("/projector", "projector", "fullscreen=yes");
+  };
+
+  const openDebugWindow = () => {
+    window.open("/projector?debug=true", "debug", "fullscreen=yes");
   };
 
   const triggerRandomizer = () => {
@@ -54,6 +88,10 @@ export default function PresenterPage() {
     channel.postMessage({ type: PROJECTOR_MESSAGE_TYPE.REVEAL_ROUND });
   };
 
+  const triggerRestart = () => {
+    channel.postMessage({ type: PROJECTOR_MESSAGE_TYPE.RESTART });
+  };
+
   useEffect(() => {
     const channel = new BroadcastChannel("the-floor-presenter");
     channel.addEventListener("message", (event) => {
@@ -61,6 +99,9 @@ export default function PresenterPage() {
         case PRESENTER_MESSAGE_TYPE.SET_CURRENT_ROUND_EXAMPLE:
           setCurrentRoundExample(event.data.example);
           setSelectedExampleIndex(event.data.selectedExampleIndex);
+          setSelectedCategory(event.data.category);
+          setRoundState(event.data.state);
+          setDebugExamples(event.data.debugExamples);
           break;
         default:
           console.warn("Unknown message type", event.data.type);
@@ -73,12 +114,26 @@ export default function PresenterPage() {
     <div className="text-white p-20">
       <h1>Presenter Mode</h1>
 
-      <button
-        className="bg-blue-500 text-white p-2 rounded-md"
-        onClick={openProjector}
-      >
-        Open Projector Window
-      </button>
+      <div className="flex flex-row gap-2">
+        <button
+          className="bg-blue-500 text-white p-2 rounded-md"
+          onClick={openProjector}
+        >
+          Open Projector Window
+        </button>
+        <button
+          className="bg-blue-500 text-white p-2 rounded-md"
+          onClick={openDebugWindow}
+        >
+          Open Debug Window
+        </button>
+        <button
+          className="bg-blue-500 text-white p-2 rounded-md"
+          onClick={() => triggerRestart()}
+        >
+          Restart
+        </button>
+      </div>
 
       <div className="flex flex-col gap-2 mt-20">
         <h3 className="text-2xl font-bold">Floor Controls</h3>
@@ -96,45 +151,82 @@ export default function PresenterPage() {
         </button>
       </div>
 
-      <div className="flex flex-col gap-2 mt-20">
-        <h3 className="text-2xl font-bold">Round Controls</h3>
-        <p className="text-lg text-white">
-          Current Answer:{" "}
-          <span className="font-bold">{currentRoundExample?.name}</span>
-        </p>
-        <p className="text-lg text-white">
-          Selected Example Index: {selectedExampleIndex}
-        </p>
-        <p className="text-lg text-white">
-          Alternatives: {currentRoundExample?.alternatives.join(", ")}
-        </p>
-        <div className="flex flex-row gap-2">
-          <button
-            className="bg-blue-500 text-white p-2 rounded-md"
-            onClick={() => triggerStartRound()}
-          >
-            Start Round
-          </button>
-          <button
-            className="bg-blue-500 text-white p-2 rounded-md"
-            onClick={() => triggerFinishRound()}
-          >
-            Finish Round
-          </button>
-          <button
-            className="bg-red-500 text-white p-2 rounded-md"
-            onClick={() => triggerPassRound()}
-          >
-            Pass Round
-          </button>
-          <button
-            className="bg-green-500 text-white p-2 rounded-md"
-            onClick={() => triggerRevealRound()}
-          >
-            Reveal Round
-          </button>
+      {roundState && (
+        <div className="flex flex-col gap-2 mt-20">
+          <h3 className="text-2xl font-bold">Round Controls</h3>
+          <div className="flex flex-row gap-2">
+            {roundState === REVEAL_STATE.NOT_STARTED && (
+              <button
+                className="bg-blue-500 text-white p-2 rounded-md cursor-pointer"
+                onClick={() => triggerStartRound()}
+              >
+                Start Round
+              </button>
+            )}
+            {roundState === REVEAL_STATE.FINISHED && (
+              <button
+                className="bg-blue-500 text-white p-2 rounded-md cursor-pointer"
+                onClick={() => triggerFinishRound()}
+              >
+                Finish Round
+              </button>
+            )}
+            {roundState !== REVEAL_STATE.FINISHED &&
+              roundState !== REVEAL_STATE.NOT_STARTED && (
+                <>
+                  <button
+                    className="bg-red-500 text-white p-2 rounded-md cursor-pointer"
+                    onClick={() => triggerPassRound()}
+                    disabled={
+                      roundState === REVEAL_STATE.PASSED ||
+                      roundState === REVEAL_STATE.REVEALED
+                    }
+                  >
+                    Pass Round
+                  </button>
+                  <button
+                    className="bg-green-500 text-white p-2 rounded-md cursor-pointer"
+                    onClick={() => triggerRevealRound()}
+                    disabled={
+                      roundState === REVEAL_STATE.REVEALED ||
+                      roundState === REVEAL_STATE.PASSED
+                    }
+                  >
+                    Reveal Round
+                  </button>
+                </>
+              )}
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            <div className="flex flex-col gap-2">
+              <p className="text-lg text-white">
+                Current Answer:{" "}
+                <span className="font-bold">{currentRoundExample?.name}</span>
+              </p>
+              <p className="text-lg text-white">
+                Example #: {selectedExampleIndex}
+              </p>
+              <p className="text-lg text-white">
+                Total # of Examples: {examples?.length}
+              </p>
+
+              <p className="text-lg text-white">
+                Alternatives: {currentRoundExample?.alternatives.join(", ")}
+              </p>
+            </div>
+
+            {selectedCategory && (
+              <div className="text-lg text-white max-h-[45vh]">
+                <RoundDisplay
+                  examples={examples}
+                  selectedExampleIndex={selectedExampleIndex}
+                  folder={CATEGORY_METADATA[selectedCategory].folder}
+                />
+              </div>
+            )}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
