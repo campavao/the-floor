@@ -42,6 +42,8 @@ export default function Home({ params }: { params: Promise<any> }) {
     undefined
   );
 
+  const [isRandomizing, setIsRandomizing] = useState(false);
+
   // Ensure we only render after hydration to avoid mismatch
   useEffect(() => {
     setMounted(true);
@@ -65,6 +67,8 @@ export default function Home({ params }: { params: Promise<any> }) {
   const finalSelectedPieceRef = useRef<FloorData | null>(null);
 
   const onRandomize = useCallback(() => {
+    setIsRandomizing(true);
+
     // Clear any existing randomize timers
     if (randomizeIntervalRef.current) {
       clearInterval(randomizeIntervalRef.current);
@@ -77,7 +81,10 @@ export default function Home({ params }: { params: Promise<any> }) {
       (piece) => !piece.hasBeenRandomized
     );
 
+    console.log(unrandomizedPieces);
+
     if (unrandomizedPieces.length === 0) {
+      setIsRandomizing(false);
       return;
     }
 
@@ -105,6 +112,7 @@ export default function Home({ params }: { params: Promise<any> }) {
 
       const finalPiece = finalSelectedPieceRef.current;
       if (finalPiece) {
+        setIsRandomizing(false);
         setFloorPieces((prev) => {
           return prev.map((piece) => ({
             ...piece,
@@ -154,8 +162,7 @@ export default function Home({ params }: { params: Promise<any> }) {
       .map((piece, index) => {
         const isSameCategory = piece.category === selectedFloorPiece?.category;
         const isSamePerson = piece.person === selectedFloorPiece?.person;
-        const isValid =
-          isSameCategory && isSamePerson && piece.hasBeenRandomized;
+        const isValid = isSameCategory && isSamePerson;
 
         return isValid ? index : null;
       })
@@ -165,7 +172,11 @@ export default function Home({ params }: { params: Promise<any> }) {
 
     const highlightedFloorPieceCategories = allSelectedFloorPieces
       .flatMap((index) =>
-        getHighlightedFloorPieceCategories(index, floorPieces)
+        getHighlightedFloorPieceCategories(
+          index,
+          selectedFloorPiece?.person ?? "",
+          floorPieces
+        )
       )
       // Filter out selected piece if it's in the highlighted categories
       .filter((category) => category !== selectedFloorPiece?.category);
@@ -173,18 +184,30 @@ export default function Home({ params }: { params: Promise<any> }) {
     return highlightedFloorPieceCategories;
   }, [selectedFloorPiece, floorPieces]);
 
-  const onSelectOrMerge = (winner: FloorData, loser: FloorData) => {
+  const onSelectOrMerge = (
+    winner: FloorData,
+    loser: FloorData,
+    newCategory: Category
+  ) => {
+    const newWinnerPiece = { ...winner, category: newCategory };
     const newFloorPieces = floorPieces.map((piece) => {
       // Overwrite the newly selected floor piece with the winning one (existing piece for now)
       if (piece.category === loser.category && piece.person === loser.person) {
-        return winner;
+        return newWinnerPiece;
+      }
+
+      if (
+        piece.category === winner.category &&
+        piece.person === winner.person
+      ) {
+        return newWinnerPiece;
       }
 
       return piece;
     });
 
     setFloorPieces(newFloorPieces);
-    setSelectedFloorPiece(winner);
+    setSelectedFloorPiece(newWinnerPiece);
     setRound(undefined);
   };
 
@@ -264,12 +287,6 @@ export default function Home({ params }: { params: Promise<any> }) {
             selectedFloorPiece?.category === floorPiece.category &&
             selectedFloorPiece?.person === floorPiece.person;
 
-          const isRandomizing =
-            isSameCategoryAndPerson && !floorPiece?.hasBeenRandomized;
-
-          const isSelected =
-            isSameCategoryAndPerson && floorPiece?.hasBeenRandomized;
-
           const isHighlighted = highlightedFloorPieceCategories.includes(
             floorPiece.category
           );
@@ -278,8 +295,8 @@ export default function Home({ params }: { params: Promise<any> }) {
             <FloorPiece
               key={floorPiece.category + "-" + index}
               floorPiece={floorPiece}
-              isSelected={isSelected}
-              isHighlighted={isRandomizing || isHighlighted}
+              isSelected={isSameCategoryAndPerson}
+              isHighlighted={!isRandomizing && isHighlighted}
               isRandomizing={isRandomizing}
               onSelect={onStartRound}
               selectedFloorPiece={selectedFloorPiece}
@@ -339,6 +356,7 @@ function FloorPiece({
 
 const getHighlightedFloorPieceCategories = (
   selectedIndex: number,
+  selectedPerson: string,
   floorPieces: FloorData[]
 ): string[] => {
   if (selectedIndex === -1) return [];
@@ -367,6 +385,7 @@ const getHighlightedFloorPieceCategories = (
   }
 
   return adjacentIndices
+    .filter((index) => floorPieces[index].person !== selectedPerson)
     .map((index) => floorPieces[index])
     .map((piece) => piece.category);
 };

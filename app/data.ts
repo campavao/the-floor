@@ -2,245 +2,224 @@ const FLOOR_DATA_CONST = [
   {
     person: "Zoey",
     category: "Laundry",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Rachel",
     category: "Fridge",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Gabe",
     category: "Junk drawer",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Josh",
     category: "Fast food chains",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Ellie",
     category: "Rom Coms",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Zoey",
     category: "Movies",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Andrea",
     category: "Disney characters",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Tanner",
     category: "Superheros",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
-    person: "Layne",
+    person: "Emma",
     category: "Taylor Swift Lyrics",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Nolan",
     category: "States",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Nic",
     category: "Kitchen gadgets",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Syd",
     category: "Famous people who died before turning 30",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Pat",
     category: "The Office",
-    hasBeenRandomized: true,
-    isStillInTheGame: true,
-  },
-  {
-    person: "Emma",
-    category: "Thanksgiving",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "John",
     category: "Garage",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Rachel",
     category: "Holidays",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Nic",
     category: "Fair foods",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Aimee",
     category: "Chicago tourist stuff",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Devin",
     category: "Pop divas",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "John",
     category: "Sports",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Ellie",
     category: "Books",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Beth",
     category: "Reality tv shows",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Joey",
     category: "MLB Teams",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Nolan",
     category: "Math",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Aimee",
     category: "Airport Codes",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Syd",
     category: "Dogs",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Beth",
     category: "Disney Channel Original Movies",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Josh",
     category: "Brand slogans",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Emma",
     category: "Horses",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Pat",
     category: "City Skylines",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Tanner",
     category: "Video Game Characters",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Andrea",
     category: "Broadway shows",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Frankie",
     category: "Harry Potter characters",
-    hasBeenRandomized: true,
-    isStillInTheGame: true,
-  },
-  {
-    person: "Layne",
-    category: "Board games",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Gabe",
     category: "Comedians",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Frankie",
     category: "Amusement Parks",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Devin",
     category: "Spirit Halloween Catalogue",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Joey",
     category: "Pokemon",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
 ] as const;
 
-// {
-//   person: "Courtney",
-//   category: "Apps",
-//   hasBeenRandomized: true,
-//   isStillInTheGame: true,
-// },
-// {
-//   person: "Courtney",
-//   category: "Chilis",
-//   hasBeenRandomized: false,
-//   isStillInTheGame: true,
-// },
+type UsedCategories = (typeof FLOOR_DATA_CONST)[number]["category"];
+
+type UnusedCategoriesFromConst = Exclude<Category, UsedCategories>;
 
 export type Category =
   | "Pokemon"
@@ -612,7 +591,7 @@ const BroadwayShowsCategory: CategoryMetadata = {
     },
     {
       name: "Les Misérables",
-      image: "les-mis.png",
+      image: "les-misérables.jpg",
       alternatives: [],
     },
     {
@@ -651,8 +630,8 @@ const BroadwayShowsCategory: CategoryMetadata = {
       alternatives: [],
     },
     {
-      name: "Shrek",
-      image: "shrek.jpg",
+      name: "Shrek the Musical",
+      image: "shrek-the-musical.jpg",
       alternatives: [],
     },
     {
@@ -777,7 +756,7 @@ const BroadwayShowsCategory: CategoryMetadata = {
     },
     {
       name: "Joseph and the Technicolor Dreamcoat",
-      image: "joseph-and-the-technicolor-dreamcoat.jpg",
+      image: "joseph-and-the-amazing-technicolor-dreamcoat.jpg",
       alternatives: [],
     },
     {
@@ -808,6 +787,16 @@ const BroadwayShowsCategory: CategoryMetadata = {
     {
       name: "Oliver!",
       image: "oliver.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Chicago",
+      image: "chicago.jpg",
+      alternatives: [],
+    },
+    {
+      name: "West Side Story",
+      image: "west-side-story.jpg",
       alternatives: [],
     },
   ],
@@ -1573,16 +1562,16 @@ const JunkDrawerCategory: CategoryMetadata = {
       image: "paper-clips.jpg",
       alternatives: [],
     },
-    {
-      name: "AA batteries",
-      image: "aa-batteries.jpg",
-      alternatives: [],
-    },
-    {
-      name: "AAA batteries",
-      image: "aaa-batteries.jpg",
-      alternatives: [],
-    },
+    // {
+    //   name: "AA batteries",
+    //   image: "aa-batteries.jpg",
+    //   alternatives: [],
+    // },
+    // {
+    //   name: "AAA batteries",
+    //   image: "aaa-batteries.jpg",
+    //   alternatives: [],
+    // },
     {
       name: "Old batteries",
       image: "old-batteries.jpg",
@@ -1618,11 +1607,11 @@ const JunkDrawerCategory: CategoryMetadata = {
       image: "random-keys.jpg",
       alternatives: [],
     },
-    {
-      name: "Adhesive tape",
-      image: "adhesive-tape.jpg",
-      alternatives: [],
-    },
+    // {
+    //   name: "Adhesive tape",
+    //   image: "adhesive-tape.jpg",
+    //   alternatives: [],
+    // },
     {
       name: "Glue sticks",
       image: "glue-sticks.jpg",
@@ -1704,6 +1693,16 @@ const JunkDrawerCategory: CategoryMetadata = {
       alternatives: [],
     },
     {
+      name: "Swiss army knife",
+      image: "swiss-army-knife.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Duct tape",
+      image: "duct-tape.jpg",
+      alternatives: [],
+    },
+    {
       name: "Plastic utensils",
       image: "plastic-utensils.jpg",
       alternatives: [],
@@ -1738,11 +1737,11 @@ const JunkDrawerCategory: CategoryMetadata = {
       image: "old-sunglasses.jpg",
       alternatives: [],
     },
-    {
-      name: "Pocket knife",
-      image: "pocket-knife.jpg",
-      alternatives: [],
-    },
+    // {
+    //   name: "Pocket knife",
+    //   image: "pocket-knife.jpg",
+    //   alternatives: [],
+    // },
     {
       name: "Coin purse",
       image: "coin-purse.jpg",
@@ -1753,11 +1752,11 @@ const JunkDrawerCategory: CategoryMetadata = {
       image: "rubber-gloves.jpg",
       alternatives: [],
     },
-    {
-      name: "Candle stubs",
-      image: "candle-stubs.jpg",
-      alternatives: [],
-    },
+    // {
+    //   name: "Candle stubs",
+    //   image: "candle-stubs.jpg",
+    //   alternatives: [],
+    // },
     {
       name: "Sticky tack",
       image: "sticky-tack.jpg",
@@ -1798,9 +1797,14 @@ const JunkDrawerCategory: CategoryMetadata = {
       image: "felt-pads.jpg",
       alternatives: [],
     },
+    // {
+    //   name: "Rubber stopper",
+    //   image: "rubber-stopper.jpg",
+    //   alternatives: [],
+    // },
     {
-      name: "Rubber stopper",
-      image: "rubber-stopper.jpg",
+      name: "Candles",
+      image: "candles.jpg",
       alternatives: [],
     },
   ],
@@ -1830,11 +1834,11 @@ const LaundryCategory: CategoryMetadata = {
       image: "laundry-basket.jpg",
       alternatives: [],
     },
-    {
-      name: "Hamper",
-      image: "hamper.jpg",
-      alternatives: [],
-    },
+    // {
+    //   name: "Hamper",
+    //   image: "hamper.jpg",
+    //   alternatives: [],
+    // },
     {
       name: "Dryer sheets",
       image: "dryer-sheets.jpg",
@@ -1860,11 +1864,11 @@ const LaundryCategory: CategoryMetadata = {
       image: "bleach.jpg",
       alternatives: [],
     },
-    {
-      name: "Stain remover",
-      image: "stain-remover.jpg",
-      alternatives: [],
-    },
+    // {
+    //   name: "Stain remover",
+    //   image: "stain-remover.jpg",
+    //   alternatives: [],
+    // },
     {
       name: "Lint roller",
       image: "lint-roller.jpg",
@@ -1925,11 +1929,11 @@ const LaundryCategory: CategoryMetadata = {
       image: "wool-dryer-balls.jpg",
       alternatives: [],
     },
-    {
-      name: "Fabric refresher",
-      image: "fabric-refresher.jpg",
-      alternatives: [],
-    },
+    // {
+    //   name: "Fabric refresher",
+    //   image: "fabric-refresher.jpg",
+    //   alternatives: [],
+    // },
     {
       name: "Scent boosters",
       image: "scent-boosters.jpg",
@@ -1950,11 +1954,11 @@ const LaundryCategory: CategoryMetadata = {
       image: "hand-wash-soap.jpg",
       alternatives: [],
     },
-    {
-      name: "Laundry sanitizer",
-      image: "laundry-sanitizer.jpg",
-      alternatives: [],
-    },
+    // {
+    //   name: "Laundry sanitizer",
+    //   image: "laundry-sanitizer.jpg",
+    //   alternatives: [],
+    // },
     {
       name: "Spot remover pen",
       image: "spot-remover-pen.jpg",
@@ -1985,31 +1989,31 @@ const LaundryCategory: CategoryMetadata = {
       image: "static-guard.jpg",
       alternatives: [],
     },
-    {
-      name: "Laundry basket wheels",
-      image: "laundry-basket-wheels.jpg",
-      alternatives: [],
-    },
-    {
-      name: "Delicate detergent",
-      image: "delicate-detergent.jpg",
-      alternatives: [],
-    },
-    {
-      name: "Baby detergent",
-      image: "baby-detergent.jpg",
-      alternatives: [],
-    },
-    {
-      name: "Down detergent",
-      image: "down-detergent.jpg",
-      alternatives: [],
-    },
-    {
-      name: "Starch spray",
-      image: "starch-spray.jpg",
-      alternatives: [],
-    },
+    // {
+    //   name: "Laundry basket wheels",
+    //   image: "laundry-basket-wheels.jpg",
+    //   alternatives: [],
+    // },
+    // {
+    //   name: "Delicate detergent",
+    //   image: "delicate-detergent.jpg",
+    //   alternatives: [],
+    // },
+    // {
+    //   name: "Baby detergent",
+    //   image: "baby-detergent.jpg",
+    //   alternatives: [],
+    // },
+    // {
+    //   name: "Down detergent",
+    //   image: "down-detergent.jpg",
+    //   alternatives: [],
+    // },
+    // {
+    //   name: "Starch spray",
+    //   image: "starch-spray.jpg",
+    //   alternatives: [],
+    // },
     {
       name: "Laundry timer",
       image: "laundry-timer.jpg",
@@ -2426,7 +2430,7 @@ const ChicagoTouristStuffCategory: CategoryMetadata = {
     },
     {
       name: "Blue Man Group",
-      image: "blue-man-group.png",
+      image: "blue-man-group.jpg",
       alternatives: [],
     },
     {
@@ -2449,11 +2453,11 @@ const ChicagoTouristStuffCategory: CategoryMetadata = {
       image: "billy-goat-tavern.jpg",
       alternatives: [],
     },
-    {
-      name: "Chicago Hot Dog stands",
-      image: "chicago-hot-dog-stands.jpg",
-      alternatives: [],
-    },
+    // {
+    //   name: "Chicago Hot Dog stands",
+    //   image: "chicago-hot-dog-stands.jpg",
+    //   alternatives: [],
+    // },
     {
       name: "Ferris wheel at Navy Pier",
       image: "ferris-wheel-at-navy-pier.jpg",
@@ -2484,11 +2488,11 @@ const ChicagoTouristStuffCategory: CategoryMetadata = {
       image: "chinatown-square.jpg",
       alternatives: [],
     },
-    {
-      name: "Maxwell Street Market",
-      image: "maxwell-street-market.jpg",
-      alternatives: [],
-    },
+    // {
+    //   name: "Maxwell Street Market",
+    //   image: "maxwell-street-market.jpg",
+    //   alternatives: [],
+    // },
     {
       name: "Promontory Point",
       image: "promontory-point.jpg",
@@ -2511,42 +2515,47 @@ const ChicagoTouristStuffCategory: CategoryMetadata = {
     },
     {
       name: "Metra Electric line",
-      image: "metra-electric-line.png",
+      image: "metra-electric-line.jpg",
       alternatives: [],
     },
-    {
-      name: "Chicago Pedway",
-      image: "chicago-pedway.jpg",
-      alternatives: [],
-    },
+    // {
+    //   name: "Chicago Pedway",
+    //   image: "chicago-pedway.jpg",
+    //   alternatives: [],
+    // },
     {
       name: "Garfield Park Conservatory",
       image: "garfield-park-conservatory.jpg",
       alternatives: [],
     },
-    {
-      name: "The Robey rooftop",
-      image: "the-robey-rooftop.jpg",
-      alternatives: [],
-    },
-    {
-      name: "The Violet Hour",
-      image: "the-violet-hour.jpg",
-      alternatives: [],
-    },
-    {
-      name: "Andersonville Clark St.",
-      image: "andersonville-clark-st.jpg",
-      alternatives: [],
-    },
-    {
-      name: "Chicago Pizza Museum (former)",
-      image: "chicago-pizza-museum-former.jpg",
-      alternatives: [],
-    },
+    // {
+    //   name: "The Robey rooftop",
+    //   image: "the-robey-rooftop.jpg",
+    //   alternatives: [],
+    // },
+    // {
+    //   name: "The Violet Hour",
+    //   image: "the-violet-hour.jpg",
+    //   alternatives: [],
+    // },
+    // {
+    //   name: "Andersonville Clark St.",
+    //   image: "andersonville-clark-st.jpg",
+    //   alternatives: [],
+    // },
+    // {
+    //   name: "Chicago Pizza Museum (former)",
+    //   image: "chicago-pizza-museum-former.jpg",
+    //   alternatives: [],
+    // },
     {
       name: "Shakespeare Theater Navy Pier",
       image: "shakespeare-theater-navy-pier.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Willis Tower Skydeck",
+      image: "willis-tower-skydeck.jpg",
       alternatives: [],
     },
   ],
@@ -3116,6 +3125,10 @@ const StatesCategory: CategoryMetadata = {
     { name: "Vermont", image: "vermont.jpg", alternatives: [] },
     { name: "Rhode Island", image: "rhode-island.jpg", alternatives: [] },
     { name: "Delaware", image: "delaware.jpg", alternatives: [] },
+    { name: "Hawaii", image: "hawaii.jpg", alternatives: [] },
+    { name: "New Hampshire", image: "new-hampshire.jpg", alternatives: [] },
+    { name: "South Carolina", image: "south-carolina.jpg", alternatives: [] },
+    { name: "Wyoming", image: "wyoming.jpg", alternatives: [] },
   ],
 };
 
@@ -3137,7 +3150,7 @@ const HarryPotterCharactersCategory: CategoryMetadata = {
     },
     { name: "Lord Voldemort", image: "lord-voldemort.jpg", alternatives: [] },
     { name: "Severus Snape", image: "severus-snape.jpg", alternatives: [] },
-    { name: "Rubeus Hagrid", image: "rubeus-hagrid.png", alternatives: [] },
+    { name: "Rubeus Hagrid", image: "rubeus-hagrid.jpg", alternatives: [] },
     { name: "Draco Malfoy", image: "draco-malfoy.jpg", alternatives: [] },
     {
       name: "Minerva McGonagall",
@@ -3201,11 +3214,11 @@ const HarryPotterCharactersCategory: CategoryMetadata = {
     { name: "Alastor Moody", image: "alastor-moody.jpg", alternatives: [] },
     { name: "Percy Weasley", image: "percy-weasley.jpg", alternatives: [] },
     { name: "Bill Weasley", image: "bill-weasley.jpg", alternatives: [] },
-    {
-      name: "Charlie Weasley",
-      image: "charlie-weasley.jpg",
-      alternatives: [],
-    },
+    // {
+    //   name: "Charlie Weasley",
+    //   image: "charlie-weasley.jpg",
+    //   alternatives: [],
+    // },
     { name: "Lavender Brown", image: "lavender-brown.jpg", alternatives: [] },
     {
       name: "Seamus Finnigan",
@@ -3218,11 +3231,11 @@ const HarryPotterCharactersCategory: CategoryMetadata = {
       image: "narcissa-malfoy.jpg",
       alternatives: [],
     },
-    {
-      name: "Barty Crouch Jr.",
-      image: "barty-crouch-jr.png",
-      alternatives: [],
-    },
+    // {
+    //   name: "Barty Crouch Jr.",
+    //   image: "barty-crouch-jr.png",
+    //   alternatives: [],
+    // },
     {
       name: "Cornelius Fudge",
       image: "cornelius-fudge.jpg",
@@ -3259,6 +3272,55 @@ const SpiritHalloweenCatalogueCategory: CategoryMetadata = {
     { name: "Angel", image: "angel.jpg", alternatives: [] },
     { name: "Astronaut", image: "astronaut.jpg", alternatives: [] },
     { name: "Banana suit", image: "banana-suit.jpg", alternatives: [] },
+    { name: "Barbie", image: "barbie.jpg", alternatives: [] },
+    { name: "Clown", image: "clown.jpg", alternatives: [] },
+    { name: "Cowboy", image: "cowboy.jpg", alternatives: [] },
+    { name: "Darth Vader", image: "darth-vader.jpg", alternatives: [] },
+    { name: "Devil", image: "devil.jpg", alternatives: [] },
+    { name: "Doctor", image: "doctor.jpg", alternatives: [] },
+    { name: "Dog costume", image: "dog-costume.jpg", alternatives: [] },
+    { name: "Fairy", image: "fairy.jpg", alternatives: [] },
+    { name: "Firefighter", image: "firefighter.jpg", alternatives: [] },
+    { name: "Football player", image: "football-player.jpg", alternatives: [] },
+    { name: "Freddy Krueger", image: "freddy-krueger.jpg", alternatives: [] },
+    { name: "Ghost", image: "ghost.jpg", alternatives: [] },
+    { name: "Ghostface", image: "ghostface.jpg", alternatives: [] },
+    { name: "Grim Reaper", image: "grim-reaper.jpg", alternatives: [] },
+    { name: "Harley Quinn", image: "harley-quinn.jpg", alternatives: [] },
+    { name: "Hot dog suit", image: "hot-dog-suit.jpg", alternatives: [] },
+    {
+      name: "Inflatable dinosaur",
+      image: "inflatable-dinosaur.jpg",
+      alternatives: [],
+    },
+    { name: "Jason Voorhees", image: "jason-voorhees.jpg", alternatives: [] },
+    { name: "Joker", image: "joker.jpg", alternatives: [] },
+    { name: "Ken", image: "ken.jpg", alternatives: [] },
+    { name: "Mad scientist", image: "mad-scientist.jpg", alternatives: [] },
+    { name: "Mario", image: "mario.jpg", alternatives: [] },
+    { name: "Mermaid", image: "mermaid.jpg", alternatives: [] },
+    { name: "Michael Myers", image: "michael-myers.jpg", alternatives: [] },
+    { name: "Minion", image: "minion.jpg", alternatives: [] },
+    { name: "Mummy", image: "mummy.jpg", alternatives: [] },
+    { name: "Nurse", image: "nurse.jpg", alternatives: [] },
+    { name: "Pennywise", image: "pennywise.jpg", alternatives: [] },
+    { name: "Pirate", image: "pirate.jpg", alternatives: [] },
+    { name: "Police officer", image: "police-officer.jpg", alternatives: [] },
+    { name: "Pumpkin costume", image: "pumpkin-costume.jpg", alternatives: [] },
+    { name: "Skeleton", image: "skeleton.jpg", alternatives: [] },
+    { name: "Spider-Man", image: "spider-man.jpg", alternatives: [] },
+    { name: "Stormtrooper", image: "stormtrooper.jpg", alternatives: [] },
+    { name: "Supergirl", image: "supergirl.jpg", alternatives: [] },
+    { name: "Vampire", image: "vampire.jpg", alternatives: [] },
+    {
+      name: "Wednesday Addams",
+      image: "wednesday-addams.jpg",
+      alternatives: [],
+    },
+    { name: "Werewolf", image: "werewolf.jpg", alternatives: [] },
+    { name: "Witch", image: "witch.jpg", alternatives: [] },
+    { name: "Wonder Woman", image: "wonder-woman.jpg", alternatives: [] },
+    { name: "Zombie", image: "zombie.jpg", alternatives: [] },
   ],
 };
 
@@ -3323,7 +3385,7 @@ const SuperherosCategory: CategoryMetadata = {
     },
     {
       name: "Deadpool",
-      image: "deadpool.png",
+      image: "deadpool.jpg",
       alternatives: [],
     },
     {
@@ -3468,7 +3530,7 @@ const SuperherosCategory: CategoryMetadata = {
     },
     {
       name: "Starfire",
-      image: "starfire.png",
+      image: "starfire.jpg",
       alternatives: [],
     },
     {
@@ -3525,12 +3587,12 @@ const VideoGameCharactersCategory: CategoryMetadata = {
   examples: [
     {
       name: "Mario",
-      image: "mario.png",
+      image: "mario.jpg",
       alternatives: [],
     },
     {
       name: "Pikachu",
-      image: "pikachu.png",
+      image: "pikachu.jpg",
       alternatives: [],
     },
     {
@@ -3545,7 +3607,7 @@ const VideoGameCharactersCategory: CategoryMetadata = {
     },
     {
       name: "Pac-Man",
-      image: "pac-man.png",
+      image: "pac-man.jpg",
       alternatives: [],
     },
     {
@@ -3573,11 +3635,11 @@ const VideoGameCharactersCategory: CategoryMetadata = {
       image: "yoshi.jpg",
       alternatives: [],
     },
-    {
-      name: "Princess Zelda",
-      image: "princess-zelda.jpg",
-      alternatives: [],
-    },
+    // {
+    //   name: "Princess Zelda",
+    //   image: "princess-zelda.jpg",
+    //   alternatives: [],
+    // },
     {
       name: "Zelda",
       image: "zelda.jpg",
@@ -3595,7 +3657,7 @@ const VideoGameCharactersCategory: CategoryMetadata = {
     },
     {
       name: "Master Chief",
-      image: "master-chief.png",
+      image: "master-chief.jpg",
       alternatives: [],
     },
     {
@@ -3700,7 +3762,7 @@ const VideoGameCharactersCategory: CategoryMetadata = {
     },
     {
       name: "Joel Miller",
-      image: "joel-miller.png",
+      image: "joel-miller.jpg",
       alternatives: [],
     },
     {
@@ -3745,7 +3807,7 @@ const VideoGameCharactersCategory: CategoryMetadata = {
     },
     {
       name: "Dr. Eggman",
-      image: "dr-eggman.png",
+      image: "dr-eggman.jpg",
       alternatives: [],
     },
     {
@@ -5677,6 +5739,7 @@ const RealityTvShowsCategory: CategoryMetadata = {
     },
     { name: "Ink Master", image: "ink-master.jpg", alternatives: [] },
     { name: "Below Deck", image: "below-deck.jpg", alternatives: [] },
+    { name: "90 Day Fiancé", image: "90-day-fiance.jpg", alternatives: [] },
   ],
 };
 
@@ -5866,7 +5929,7 @@ const ThanksgivingCategory: CategoryMetadata = {
     { name: "Traveling", image: "traveling.jpg", alternatives: [] },
     {
       name: "Checking the Turkey",
-      image: "checking-the-turkey.jpg",
+      image: "checking-the-turkey.JPG",
       alternatives: [],
     },
     { name: "Kitchen", image: "kitchen.jpg", alternatives: [] },
@@ -5894,6 +5957,13 @@ const ThanksgivingCategory: CategoryMetadata = {
       alternatives: [],
     },
     { name: "Deviled Eggs", image: "deviled-eggs.jpg", alternatives: [] },
+    { name: "Cozy Sweater", image: "cozy-sweater.jpg", alternatives: [] },
+    { name: "Gratitude List", image: "gratitude-list.png", alternatives: [] },
+    {
+      name: "Setting the table",
+      image: "setting-the-table.jpg",
+      alternatives: [],
+    },
   ],
 };
 
@@ -6037,7 +6107,7 @@ const HorsesCategory: CategoryMetadata = {
     { name: "Clydesdale", image: "clydesdale.jpg", alternatives: [] },
     { name: "Friesian", image: "friesian.jpg", alternatives: [] },
     { name: "Cowboy", image: "cowboy.jpg", alternatives: [] },
-    { name: "Blanket", image: "blanket.jpg", alternatives: [] },
+    { name: "Blanket", image: "blanket.JPG", alternatives: [] },
     { name: "Horse Racing", image: "horse-racing.jpg", alternatives: [] },
     { name: "Show Jumping", image: "show-jumping.jpg", alternatives: [] },
     { name: "Dressage", image: "dressage.jpg", alternatives: [] },
@@ -6093,7 +6163,7 @@ const HorsesCategory: CategoryMetadata = {
       image: "carriage-horses.jpg",
       alternatives: [],
     },
-    { name: "Statue", image: "statue.jpg", alternatives: [] },
+    { name: "Statue", image: "statue.JPG", alternatives: [] },
     { name: "Equine Vets", image: "equine-vets.jpg", alternatives: [] },
     { name: "Blinker", image: "blinker.png", alternatives: [] },
   ],
@@ -6239,6 +6309,7 @@ const RomComsCategory: CategoryMetadata = {
       alternatives: [],
     },
     { name: "The Half of It", image: "the-half-of-it.jpg", alternatives: [] },
+    { name: "Amelie", image: "amÃ©lie.jpg", alternatives: [] },
   ],
 };
 
@@ -6704,6 +6775,11 @@ const ComediansCategory: CategoryMetadata = {
       alternatives: [],
     },
     {
+      name: "Wanda Sykes",
+      image: "wanda-sykes.jpg",
+      alternatives: [],
+    },
+    {
       name: "Brian Posehn",
       image: "brian-posehn.jpg",
       alternatives: [],
@@ -6911,8 +6987,8 @@ const FairFoodsCategory: CategoryMetadata = {
       alternatives: [],
     },
     {
-      name: "Fried Jalape±o Slices",
-      image: "fried-jalape±o-slices.jpg",
+      name: "Fried Jalapeño Slices",
+      image: "fried-jalapeño-slices.jpg",
       alternatives: [],
     },
     {
@@ -7198,8 +7274,8 @@ const FamousPeopleWhoDiedBeforeTurning30Category: CategoryMetadata = {
       alternatives: [],
     },
     {
-      name: "├⌐variste Galois",
-      image: "├⌐variste-galois.jpg",
+      name: "Évariste Galois",
+      image: "Ã©variste-galois.jpg",
       alternatives: [],
     },
   ],
@@ -8607,43 +8683,43 @@ export const DEBUG_FLOOR_DATA: FloorData[] = [
   {
     person: "Aimee",
     category: "Apps",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Aimee",
     category: "Apps",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Andrea",
     category: "Apps",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Andrea",
     category: "Apps",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Beth",
     category: "Apps",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Beth",
     category: "Apps",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   // {
   //   person: "Courtney",
   //   category: "Apps",
-  //   hasBeenRandomized: true,
+  //   hasBeenRandomized: false,
   //   isStillInTheGame: true,
   // },
   // {
@@ -8655,193 +8731,193 @@ export const DEBUG_FLOOR_DATA: FloorData[] = [
   {
     person: "Devin",
     category: "Apps",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Devin",
     category: "Apps",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Ellie",
     category: "Apps",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Ellie",
     category: "Apps",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Emma",
     category: "Apps",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Emma",
     category: "Apps",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Frankie",
     category: "Apps",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Frankie",
     category: "Apps",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Gabe",
     category: "Apps",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Gabe",
     category: "Apps",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Joey",
     category: "Apps",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Joey",
     category: "Apps",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "John",
     category: "Apps",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "John",
     category: "Apps",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Josh",
     category: "Apps",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Josh",
     category: "Apps",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Layne",
     category: "Apps",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Layne",
     category: "Apps",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Nic",
     category: "Apps",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Nic",
     category: "Apps",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Nolan",
     category: "Apps",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Nolan",
     category: "Apps",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Pat",
     category: "Apps",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Pat",
     category: "Apps",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Rachel",
     category: "Apps",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Rachel",
     category: "Apps",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Syd",
     category: "Apps",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Syd",
     category: "Apps",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Tanner",
     category: "Apps",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Tanner",
     category: "Apps",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Zoey",
     category: "Apps",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
   {
     person: "Zoey",
     category: "Apps",
-    hasBeenRandomized: true,
+    hasBeenRandomized: false,
     isStillInTheGame: true,
   },
 ] as const;

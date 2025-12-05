@@ -33,7 +33,11 @@ export default function Round({
   category: Category;
   challenger: FloorData;
   defender: FloorData;
-  onFinish: (winner: FloorData, loser: FloorData) => void;
+  onFinish: (
+    winner: FloorData,
+    loser: FloorData,
+    newCategory: Category
+  ) => void;
 }) {
   const { folder, examples: rawExamples } = CATEGORY_METADATA[category];
   const channel = new BroadcastChannel("the-floor-presenter");
@@ -80,7 +84,7 @@ export default function Round({
       challengerTimeLeft > defenderTimeLeft ? challenger : defender;
     const loser = challengerTimeLeft > defenderTimeLeft ? defender : challenger;
 
-    onFinish(winner, loser);
+    onFinish(winner, loser, challenger.category);
 
     channel.postMessage({
       type: PRESENTER_MESSAGE_TYPE.SET_CURRENT_ROUND_EXAMPLE,
@@ -398,7 +402,7 @@ export function RoundDisplay({
           <img
             src={`/images/${folder}/${example.image}`}
             className={classNames(
-              "absolute max-h-full max-w-full object-contain rounded transition-opacity duration-200",
+              "absolute h-full w-auto max-w-full object-contain rounded transition-opacity duration-200",
               {
                 "opacity-0 pointer-events-none": !isSelected,
                 "opacity-100": isSelected,
