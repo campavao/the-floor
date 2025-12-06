@@ -27,7 +27,7 @@ export function Demo() {
         hasPlayed: true,
         isStillInTheGame: true,
       }}
-      onFinish={() => {}}
+      onFinish={() => window.close()}
     />
   );
 }

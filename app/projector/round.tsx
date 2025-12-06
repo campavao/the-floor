@@ -75,34 +75,34 @@ export default function Round({
     revealExampleNameRef.current = revealExampleName;
   }, [revealExampleName]);
 
-  const onRoundFinish = useCallback(() => {
-    if (revealExampleName !== REVEAL_STATE.FINISHED) {
-      return;
-    }
+  const onRoundFinish = useCallback(
+    (forceWin?: "challenger" | "defender") => {
+      let winner =
+        challengerTimeLeft > defenderTimeLeft ? challenger : defender;
 
-    const winner =
-      challengerTimeLeft > defenderTimeLeft ? challenger : defender;
-    const loser = challengerTimeLeft > defenderTimeLeft ? defender : challenger;
+      let loser = challengerTimeLeft > defenderTimeLeft ? defender : challenger;
 
-    onFinish(winner, loser, challenger.category);
+      if (forceWin) {
+        winner = forceWin === "challenger" ? challenger : defender;
+        loser = forceWin === "challenger" ? defender : challenger;
+      }
 
-    channel.postMessage({
-      type: PRESENTER_MESSAGE_TYPE.SET_CURRENT_ROUND_EXAMPLE,
-      category: undefined,
-      example: undefined,
-      selectedExampleIndex: 0,
-      state: REVEAL_STATE.NOT_STARTED,
-      debugExamples: undefined,
-    });
-  }, [
-    challenger,
-    challengerTimeLeft,
-    defender,
-    defenderTimeLeft,
-    onFinish,
-    revealExampleName,
-    channel,
-  ]);
+      onFinish(winner, loser, challenger.category);
+
+      channel.postMessage({
+        type: PRESENTER_MESSAGE_TYPE.END_ROUND,
+      });
+    },
+    [
+      challenger,
+      challengerTimeLeft,
+      defender,
+      defenderTimeLeft,
+      onFinish,
+      revealExampleName,
+      channel,
+    ]
+  );
 
   const onNext = useCallback(
     async (timeout: number = 1000) => {
@@ -208,7 +208,7 @@ export default function Round({
           playSound("countdown");
           break;
         case PROJECTOR_MESSAGE_TYPE.FINISH_ROUND:
-          onRoundFinish();
+          onRoundFinish(event.data.forceWin);
           break;
         case PROJECTOR_MESSAGE_TYPE.PASS_ROUND:
           onPass();
@@ -220,6 +220,10 @@ export default function Round({
           console.warn("Unknown message type", event.data.type);
           break;
       }
+
+      return () => {
+        channel.close();
+      };
     });
   }, [onRoundFinish, onPass, onReveal, playSound]);
 
@@ -236,8 +240,18 @@ export default function Round({
       selectedExampleIndex,
       state: revealExampleName,
       debugExamples: examples,
+      challenger,
+      defender,
     });
-  }, [selectedExampleIndex, examples, channel, category, revealExampleName]);
+  }, [
+    selectedExampleIndex,
+    examples,
+    channel,
+    category,
+    revealExampleName,
+    challenger,
+    defender,
+  ]);
 
   const isFinished = revealExampleName === REVEAL_STATE.FINISHED;
   const isBad =
@@ -247,7 +261,7 @@ export default function Round({
   if (currentTurn == null) {
     return (
       <div className="fixed inset-0 bg-opacity-75 flex items-center justify-center z-50">
-        <p className="text-[12rem] font-bold text-yellow-500">
+        <p className="text-[12rem] font-bold text-yellow-500 text-center">
           {countdown !== null ? countdown : "THE FLOOR"}
         </p>
       </div>

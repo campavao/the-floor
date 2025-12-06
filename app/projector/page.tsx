@@ -9,7 +9,7 @@ import {
   useState,
 } from "react";
 import { useSearchParams } from "next/navigation";
-import { Category, DEBUG_FLOOR_DATA, FLOOR_DATA, FloorData } from "../data";
+import { Category, FLOOR_DATA, FloorData } from "../data";
 import classNames from "classnames";
 import { PROJECTOR_MESSAGE_TYPE } from "../presenter/page";
 import Round from "./round";
@@ -23,16 +23,11 @@ interface Round {
 }
 
 export function Projector() {
-  const searchParams = useSearchParams();
-  const isDebug = searchParams.get("debug") === "true" || false;
   const [mounted, setMounted] = useState(false);
-  const storageKeyPrefix = "floor-pieces." + (isDebug ? "debug" : "data");
+  const storageKeyPrefix = "floor-pieces." + "data";
   const [floorPieces, setFloorPieces, removeFloorPieces] = useLocalStorage<
     FloorData[]
-  >(
-    storageKeyPrefix + ".floor-pieces",
-    isDebug ? DEBUG_FLOOR_DATA : FLOOR_DATA
-  );
+  >(storageKeyPrefix + ".floor-pieces", FLOOR_DATA);
 
   const [selectedFloorPiece, setSelectedFloorPiece] = useLocalStorage<
     FloorData | undefined
@@ -52,16 +47,10 @@ export function Projector() {
 
   const onRestart = useCallback(() => {
     removeFloorPieces();
-    setFloorPieces(isDebug ? DEBUG_FLOOR_DATA : FLOOR_DATA);
+    setFloorPieces(FLOOR_DATA);
     setSelectedFloorPiece(undefined);
     setRound(undefined);
-  }, [
-    removeFloorPieces,
-    setFloorPieces,
-    setSelectedFloorPiece,
-    setRound,
-    isDebug,
-  ]);
+  }, [removeFloorPieces, setFloorPieces, setSelectedFloorPiece, setRound]);
 
   const randomizeIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const randomizeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -148,6 +137,8 @@ export function Projector() {
       if (randomizeTimeoutRef.current) {
         clearTimeout(randomizeTimeoutRef.current);
       }
+
+      channel.close();
     };
   }, [onRestart, onRandomize]);
 
@@ -183,7 +174,12 @@ export function Projector() {
     loser: FloorData,
     newCategory: Category
   ) => {
-    const newWinnerPiece = { ...winner, category: newCategory };
+    const newWinnerPiece = {
+      ...winner,
+      hasPlayed: true,
+      category: newCategory,
+    };
+
     const newFloorPieces = floorPieces.map((piece) => {
       // Overwrite the newly selected floor piece with the winning one (existing piece for now)
       if (piece.category === loser.category && piece.person === loser.person) {
@@ -249,8 +245,6 @@ export function Projector() {
       </main>
     );
   }
-
-  console.log(whoIsRemaining);
 
   if (whoIsRemaining.size === 1) {
     return (
