@@ -156,6 +156,46 @@ export default function PresenterPage({
     };
   }, []);
 
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      // Only handle keyboard shortcuts when in round mode
+      if (!roundDetails) return;
+
+      // Check if we're in a state where buttons are visible
+      if (
+        roundDetails.roundState === REVEAL_STATE.FINISHED ||
+        roundDetails.roundState === REVEAL_STATE.NOT_STARTED
+      ) {
+        return;
+      }
+
+      // Handle "1" key for Pass
+      if (event.key === "1") {
+        const isDisabled =
+          roundDetails.roundState === REVEAL_STATE.PASSED ||
+          roundDetails.roundState === REVEAL_STATE.REVEALED;
+        if (!isDisabled) {
+          triggerPassRound();
+        }
+      }
+
+      // Handle "2" key for Correct
+      if (event.key === "2") {
+        const isDisabled =
+          roundDetails.roundState === REVEAL_STATE.REVEALED ||
+          roundDetails.roundState === REVEAL_STATE.PASSED;
+        if (!isDisabled) {
+          triggerRevealRound();
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyPress);
+    return () => {
+      window.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [roundDetails]);
+
   // DEMO SETUP
   if (demoDetails) {
     return (
@@ -221,28 +261,33 @@ export default function PresenterPage({
           )}
           {roundDetails.roundState !== REVEAL_STATE.FINISHED &&
             roundDetails.roundState !== REVEAL_STATE.NOT_STARTED && (
-              <>
-                <button
-                  className="bg-red-500 text-white p-2 rounded-md cursor-pointer"
-                  onClick={() => triggerPassRound()}
-                  disabled={
-                    roundDetails.roundState === REVEAL_STATE.PASSED ||
-                    roundDetails.roundState === REVEAL_STATE.REVEALED
-                  }
-                >
-                  Pass Round
-                </button>
-                <button
-                  className="bg-green-500 text-white p-2 rounded-md cursor-pointer"
-                  onClick={() => triggerRevealRound()}
-                  disabled={
-                    roundDetails.roundState === REVEAL_STATE.REVEALED ||
-                    roundDetails.roundState === REVEAL_STATE.PASSED
-                  }
-                >
-                  Reveal Round
-                </button>
-              </>
+              <div>
+                <p className="text-lg text-white">
+                  Use the keyboard to pass or correct the round:
+                </p>
+                <div className="flex gap-2">
+                  <button
+                    className="bg-red-500 text-white p-2 rounded-md cursor-pointer"
+                    onClick={() => triggerPassRound()}
+                    disabled={
+                      roundDetails.roundState === REVEAL_STATE.PASSED ||
+                      roundDetails.roundState === REVEAL_STATE.REVEALED
+                    }
+                  >
+                    Pass <code>[1]</code>
+                  </button>
+                  <button
+                    className="bg-green-500 text-white p-2 rounded-md cursor-pointer "
+                    onClick={() => triggerRevealRound()}
+                    disabled={
+                      roundDetails.roundState === REVEAL_STATE.REVEALED ||
+                      roundDetails.roundState === REVEAL_STATE.PASSED
+                    }
+                  >
+                    Correct <code>[2]</code>
+                  </button>
+                </div>
+              </div>
             )}
         </div>
         <div className="grid grid-cols-2 gap-2">
