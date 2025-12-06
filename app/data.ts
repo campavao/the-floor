@@ -2,217 +2,217 @@ const FLOOR_DATA_CONST = [
   {
     person: "Zoey",
     category: "Laundry",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Rachel",
     category: "Fridge",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Gabe",
     category: "Junk drawer",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Josh",
     category: "Fast food chains",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Ellie",
     category: "Rom Coms",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Zoey",
     category: "Movies",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Andrea",
     category: "Disney characters",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Tanner",
     category: "Superheros",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Emma",
     category: "Taylor Swift Lyrics",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Nolan",
     category: "States",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Nic",
     category: "Kitchen gadgets",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Syd",
     category: "Famous people who died before turning 30",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Pat",
     category: "The Office",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "John",
     category: "Garage",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Rachel",
     category: "Holidays",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Nic",
     category: "Fair foods",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Aimee",
     category: "Chicago tourist stuff",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Devin",
     category: "Pop divas",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "John",
     category: "Sports",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Ellie",
     category: "Books",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Beth",
     category: "Reality tv shows",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Joey",
     category: "MLB Teams",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Nolan",
     category: "Math",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Aimee",
     category: "Airport Codes",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Syd",
     category: "Dogs",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Beth",
     category: "Disney Channel Original Movies",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Josh",
     category: "Brand slogans",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Emma",
     category: "Horses",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Pat",
     category: "City Skylines",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Tanner",
     category: "Video Game Characters",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Andrea",
     category: "Broadway shows",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Frankie",
     category: "Harry Potter characters",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Gabe",
     category: "Comedians",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Frankie",
     category: "Amusement Parks",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Devin",
     category: "Spirit Halloween Catalogue",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Joey",
     category: "Pokemon",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
 ] as const;
@@ -266,7 +266,7 @@ export type Category =
 export interface FloorData {
   person: string;
   category: Category;
-  hasBeenRandomized: boolean;
+  hasPlayed: boolean;
   isStillInTheGame: boolean;
 }
 
@@ -2310,7 +2310,7 @@ const PopDivasCategory: CategoryMetadata = {
 };
 
 const ChicagoTouristStuffCategory: CategoryMetadata = {
-  name: "Chicago tourist stuff",
+  name: "Chicago Attractions",
   folder: "chicago-tourist-stuff",
   examples: [
     {
@@ -4104,11 +4104,7 @@ const MoviesCategory: CategoryMetadata = {
       image: "star-wars-a-new-hope.jpg",
       alternatives: [],
     },
-    {
-      name: "The Empire Strikes Back",
-      image: "the-empire-strikes-back.jpg",
-      alternatives: [],
-    },
+
     {
       name: "Titanic",
       image: "titanic.jpg",
@@ -4124,11 +4120,7 @@ const MoviesCategory: CategoryMetadata = {
       image: "the-lord-of-the-rings-the-fellowship-of-the-ring.jpg",
       alternatives: [],
     },
-    {
-      name: "The Lord of the Rings: The Return of the King",
-      image: "the-lord-of-the-rings-the-return-of-the-king.jpg",
-      alternatives: [],
-    },
+
     {
       name: "Avengers: Endgame",
       image: "avengers-endgame.jpg",
@@ -4325,6 +4317,11 @@ const MoviesCategory: CategoryMetadata = {
       alternatives: [],
     },
     {
+      name: "The Empire Strikes Back",
+      image: "the-empire-strikes-back.jpg",
+      alternatives: [],
+    },
+    {
       name: "It (2017)",
       image: "it-2017.jpg",
       alternatives: [],
@@ -4352,6 +4349,11 @@ const MoviesCategory: CategoryMetadata = {
     {
       name: "Frozen II",
       image: "frozen-ii.jpg",
+      alternatives: [],
+    },
+    {
+      name: "The Lord of the Rings: The Return of the King",
+      image: "the-lord-of-the-rings-the-return-of-the-king.jpg",
       alternatives: [],
     },
   ],
@@ -4619,33 +4621,13 @@ const DisneyChannelOriginalMoviesCategory: CategoryMetadata = {
       alternatives: [],
     },
     {
-      name: "High School Musical 2",
-      image: "high-school-musical-2.jpg",
-      alternatives: [],
-    },
-    {
-      name: "High School Musical 3: Senior Year",
-      image: "high-school-musical-3-senior-year.jpg",
-      alternatives: [],
-    },
-    {
       name: "Camp Rock",
       image: "camp-rock.jpg",
       alternatives: [],
     },
     {
-      name: "Camp Rock 2: The Final Jam",
-      image: "camp-rock-2-the-final-jam.jpg",
-      alternatives: [],
-    },
-    {
       name: "The Cheetah Girls",
       image: "the-cheetah-girls.jpg",
-      alternatives: [],
-    },
-    {
-      name: "The Cheetah Girls 2",
-      image: "the-cheetah-girls-2.jpg",
       alternatives: [],
     },
     {
@@ -4659,23 +4641,8 @@ const DisneyChannelOriginalMoviesCategory: CategoryMetadata = {
       alternatives: [],
     },
     {
-      name: "Descendants 2",
-      image: "descendants-2.jpg",
-      alternatives: [],
-    },
-    {
-      name: "Descendants 3",
-      image: "descendants-3.jpg",
-      alternatives: [],
-    },
-    {
       name: "Twitches",
       image: "twitches.jpg",
-      alternatives: [],
-    },
-    {
-      name: "Twitches Too",
-      image: "twitches-too.jpg",
       alternatives: [],
     },
     {
@@ -4686,46 +4653,6 @@ const DisneyChannelOriginalMoviesCategory: CategoryMetadata = {
     {
       name: "Teen Beach Movie",
       image: "teen-beach-movie.jpg",
-      alternatives: [],
-    },
-    {
-      name: "Teen Beach 2",
-      image: "teen-beach-2.jpg",
-      alternatives: [],
-    },
-    {
-      name: "The Cheetah Girls: One World",
-      image: "the-cheetah-girls-one-world.jpg",
-      alternatives: [],
-    },
-    {
-      name: "Halloweentown II: Kalabar's Revenge",
-      image: "halloweentown-ii-kalabars-revenge.jpg",
-      alternatives: [],
-    },
-    {
-      name: "Halloweentown High",
-      image: "halloweentown-high.jpg",
-      alternatives: [],
-    },
-    {
-      name: "Return to Halloweentown",
-      image: "return-to-halloweentown.jpg",
-      alternatives: [],
-    },
-    {
-      name: "Zenon: Girl of the 21st Century",
-      image: "zenon-girl-of-the-21st-century.jpg",
-      alternatives: [],
-    },
-    {
-      name: "Zenon: The Zequel",
-      image: "zenon-the-zequel.jpg",
-      alternatives: [],
-    },
-    {
-      name: "Zenon: Z3",
-      image: "zenon-z3.jpg",
       alternatives: [],
     },
     {
@@ -4809,11 +4736,6 @@ const DisneyChannelOriginalMoviesCategory: CategoryMetadata = {
       alternatives: [],
     },
     {
-      name: "Johnny Kapahala: Back on Board",
-      image: "johnny-kapahala-back-on-board.jpg",
-      alternatives: [],
-    },
-    {
       name: "Eddie's Million Dollar Cook-Off",
       image: "eddies-million-dollar-cook-off.jpg",
       alternatives: [],
@@ -4849,13 +4771,93 @@ const DisneyChannelOriginalMoviesCategory: CategoryMetadata = {
       alternatives: [],
     },
     {
+      name: "Zenon: Girl of the 21st Century",
+      image: "zenon-girl-of-the-21st-century.jpg",
+      alternatives: [],
+    },
+    {
       name: "Gotta Kick It Up!",
       image: "gotta-kick-it-up.jpg",
       alternatives: [],
     },
     {
+      name: "High School Musical 2",
+      image: "high-school-musical-2.jpg",
+      alternatives: [],
+    },
+    {
       name: "Dadnapped",
       image: "dadnapped.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Camp Rock 2: The Final Jam",
+      image: "camp-rock-2-the-final-jam.jpg",
+      alternatives: [],
+    },
+    {
+      name: "The Cheetah Girls 2",
+      image: "the-cheetah-girls-2.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Halloweentown II: Kalabar's Revenge",
+      image: "halloweentown-ii-kalabars-revenge.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Descendants 2",
+      image: "descendants-2.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Twitches Too",
+      image: "twitches-too.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Teen Beach 2",
+      image: "teen-beach-2.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Zenon: The Zequel",
+      image: "zenon-the-zequel.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Johnny Kapahala: Back on Board",
+      image: "johnny-kapahala-back-on-board.jpg",
+      alternatives: [],
+    },
+    {
+      name: "High School Musical 3: Senior Year",
+      image: "high-school-musical-3-senior-year.jpg",
+      alternatives: [],
+    },
+    {
+      name: "The Cheetah Girls: One World",
+      image: "the-cheetah-girls-one-world.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Halloweentown High",
+      image: "halloweentown-high.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Descendants 3",
+      image: "descendants-3.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Return to Halloweentown",
+      image: "return-to-halloweentown.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Zenon: Z3",
+      image: "zenon-z3.jpg",
       alternatives: [],
     },
   ],
@@ -5636,11 +5638,11 @@ const RealityTvShowsCategory: CategoryMetadata = {
       image: "keeping-up-with-the-kardashians.jpg",
       alternatives: [],
     },
-    {
-      name: "The Real Housewives of Beverly Hills",
-      image: "the-real-housewives-of-beverly-hills.jpg",
-      alternatives: [],
-    },
+    // {
+    //   name: "The Real Housewives of Beverly Hills",
+    //   image: "the-real-housewives-of-beverly-hills.jpg",
+    //   alternatives: [],
+    // },
     {
       name: "The Real Housewives of New York City",
       image: "the-real-housewives-of-new-york-city.jpg",
@@ -6099,7 +6101,6 @@ const HorsesCategory: CategoryMetadata = {
   name: "Horses",
   folder: "horses",
   examples: [
-    { name: "Appaloosa", image: "appaloosa.jpg", alternatives: [] },
     { name: "Saddles", image: "saddles.jpg", alternatives: [] },
     { name: "Reins", image: "reins.jpg", alternatives: [] },
     { name: "Paint Horse", image: "paint-horse.jpg", alternatives: [] },
@@ -6113,7 +6114,6 @@ const HorsesCategory: CategoryMetadata = {
     { name: "Dressage", image: "dressage.jpg", alternatives: [] },
     { name: "Barrel Racing", image: "barrel-racing.jpg", alternatives: [] },
     { name: "Rodeo Riding", image: "rodeo-riding.jpg", alternatives: [] },
-    { name: "Trail Riding", image: "trail-riding.jpg", alternatives: [] },
     {
       name: "Horseback Riding Lessons",
       image: "horseback-riding-lessons.jpg",
@@ -6137,6 +6137,7 @@ const HorsesCategory: CategoryMetadata = {
     { name: "Hoof", image: "hoof.png", alternatives: [] },
     { name: "Foal", image: "foal.jpg", alternatives: [] },
     { name: "Spirit", image: "spirit.jpeg", alternatives: [] },
+    { name: "Appaloosa", image: "appaloosa.jpg", alternatives: [] },
     { name: "Maximus", image: "maximus.jpg", alternatives: [] },
     { name: "Bullseye", image: "bullseye.png", alternatives: [] },
     {
@@ -6148,6 +6149,7 @@ const HorsesCategory: CategoryMetadata = {
     { name: "My Little Pony", image: "my-little-pony.jpg", alternatives: [] },
     { name: "Unicorn", image: "unicorn.jpeg", alternatives: [] },
     { name: "Percheron", image: "percheron.jpg", alternatives: [] },
+    { name: "Trail Riding", image: "trail-riding.jpg", alternatives: [] },
     {
       name: "Miniature Horse",
       image: "miniature-horse.jpg",
@@ -6832,13 +6834,8 @@ const FairFoodsCategory: CategoryMetadata = {
       alternatives: [],
     },
     {
-      name: "Fried Twinkies",
-      image: "fried-twinkies.jpg",
-      alternatives: [],
-    },
-    {
-      name: "Fried Snickers",
-      image: "fried-snickers.jpg",
+      name: "Kettle Corn",
+      image: "kettle-corn.jpg",
       alternatives: [],
     },
     {
@@ -6847,18 +6844,13 @@ const FairFoodsCategory: CategoryMetadata = {
       alternatives: [],
     },
     {
-      name: "Fried Cheese Curds",
-      image: "fried-cheese-curds.jpg",
-      alternatives: [],
-    },
-    {
-      name: "Kettle Corn",
-      image: "kettle-corn.jpg",
-      alternatives: [],
-    },
-    {
       name: "Popcorn",
       image: "popcorn.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Fried Cheese Curds",
+      image: "fried-cheese-curds.jpg",
       alternatives: [],
     },
     {
@@ -6867,8 +6859,18 @@ const FairFoodsCategory: CategoryMetadata = {
       alternatives: [],
     },
     {
+      name: "Fried Twinkies",
+      image: "fried-twinkies.jpg",
+      alternatives: [],
+    },
+    {
       name: "Snow Cone",
       image: "snow-cone.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Fried Snickers",
+      image: "fried-snickers.jpg",
       alternatives: [],
     },
     {
@@ -6882,13 +6884,13 @@ const FairFoodsCategory: CategoryMetadata = {
       alternatives: [],
     },
     {
-      name: "Pretzel Bites",
-      image: "pretzel-bites.jpg",
+      name: "Mozzarella Sticks",
+      image: "mozzarella-sticks.jpg",
       alternatives: [],
     },
     {
-      name: "Mozzarella Sticks",
-      image: "mozzarella-sticks.jpg",
+      name: "Pretzel Bites",
+      image: "pretzel-bites.jpg",
       alternatives: [],
     },
     {
@@ -6947,6 +6949,11 @@ const FairFoodsCategory: CategoryMetadata = {
       alternatives: [],
     },
     {
+      name: "Fried Ice Cream",
+      image: "fried-ice-cream.jpg",
+      alternatives: [],
+    },
+    {
       name: "Baked Potato",
       image: "baked-potato.jpg",
       alternatives: [],
@@ -6962,28 +6969,23 @@ const FairFoodsCategory: CategoryMetadata = {
       alternatives: [],
     },
     {
-      name: "Sausage On A Stick",
-      image: "sausage-on-a-stick.jpg",
-      alternatives: [],
-    },
-    {
-      name: "Smoked Brisket Sandwich",
-      image: "smoked-brisket-sandwich.jpg",
-      alternatives: [],
-    },
-    {
-      name: "Fried Ice Cream",
-      image: "fried-ice-cream.jpg",
-      alternatives: [],
-    },
-    {
       name: "Fried Mushrooms",
       image: "fried-mushrooms.jpg",
       alternatives: [],
     },
     {
+      name: "Sausage On A Stick",
+      image: "sausage-on-a-stick.jpg",
+      alternatives: [],
+    },
+    {
       name: "Fried Green Tomatoes",
       image: "fried-green-tomatoes.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Smoked Brisket Sandwich",
+      image: "smoked-brisket-sandwich.jpg",
       alternatives: [],
     },
     {
@@ -8683,241 +8685,241 @@ export const DEBUG_FLOOR_DATA: FloorData[] = [
   {
     person: "Aimee",
     category: "Apps",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Aimee",
     category: "Apps",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Andrea",
     category: "Apps",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Andrea",
     category: "Apps",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Beth",
     category: "Apps",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Beth",
     category: "Apps",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   // {
   //   person: "Courtney",
   //   category: "Apps",
-  //   hasBeenRandomized: false,
+  //   hasPlayed: false,
   //   isStillInTheGame: true,
   // },
   // {
   //   person: "Courtney",
   //   category: "Chilis",
-  //   hasBeenRandomized: false,
+  //   hasPlayed: false,
   //   isStillInTheGame: true,
   // },
   {
     person: "Devin",
     category: "Apps",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Devin",
     category: "Apps",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Ellie",
     category: "Apps",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Ellie",
     category: "Apps",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Emma",
     category: "Apps",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Emma",
     category: "Apps",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Frankie",
     category: "Apps",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Frankie",
     category: "Apps",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Gabe",
     category: "Apps",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Gabe",
     category: "Apps",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Joey",
     category: "Apps",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Joey",
     category: "Apps",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "John",
     category: "Apps",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "John",
     category: "Apps",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Josh",
     category: "Apps",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Josh",
     category: "Apps",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Layne",
     category: "Apps",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Layne",
     category: "Apps",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Nic",
     category: "Apps",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Nic",
     category: "Apps",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Nolan",
     category: "Apps",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Nolan",
     category: "Apps",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Pat",
     category: "Apps",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Pat",
     category: "Apps",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Rachel",
     category: "Apps",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Rachel",
     category: "Apps",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Syd",
     category: "Apps",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Syd",
     category: "Apps",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Tanner",
     category: "Apps",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Tanner",
     category: "Apps",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Zoey",
     category: "Apps",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
   {
     person: "Zoey",
     category: "Apps",
-    hasBeenRandomized: false,
+    hasPlayed: false,
     isStillInTheGame: true,
   },
 ] as const;

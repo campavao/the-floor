@@ -63,6 +63,10 @@ export default function PresenterPage({
     window.open("/projector?debug=true", "debug", "fullscreen=yes");
   };
 
+  const triggerStartDemoRound = () => {
+    window.open("/demo?category=Board games", "debug", "fullscreen=yes");
+  };
+
   const triggerRandomizer = () => {
     channel.postMessage({ type: PROJECTOR_MESSAGE_TYPE.RANDOMIZER });
   };
@@ -126,6 +130,12 @@ export default function PresenterPage({
           onClick={openDebugWindow}
         >
           Open Debug Window
+        </button>
+        <button
+          className="bg-blue-500 text-white p-2 rounded-md"
+          onClick={() => triggerStartDemoRound()}
+        >
+          Start Demo Round
         </button>
         <button
           className="bg-blue-500 text-white p-2 rounded-md"

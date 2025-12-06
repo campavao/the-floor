@@ -1,5 +1,6 @@
 "use client";
 import {
+  Suspense,
   useCallback,
   useEffect,
   useId,
@@ -21,7 +22,7 @@ interface Round {
   defender: FloorData;
 }
 
-export default function Home({ params }: { params: Promise<any> }) {
+export function Projector() {
   const searchParams = useSearchParams();
   const isDebug = searchParams.get("debug") === "true" || false;
   const [mounted, setMounted] = useState(false);
@@ -77,11 +78,7 @@ export default function Home({ params }: { params: Promise<any> }) {
       clearTimeout(randomizeTimeoutRef.current);
     }
 
-    const unrandomizedPieces = floorPieces.filter(
-      (piece) => !piece.hasBeenRandomized
-    );
-
-    console.log(unrandomizedPieces);
+    const unrandomizedPieces = floorPieces.filter((piece) => !piece.hasPlayed);
 
     if (unrandomizedPieces.length === 0) {
       setIsRandomizing(false);
@@ -116,11 +113,8 @@ export default function Home({ params }: { params: Promise<any> }) {
         setFloorPieces((prev) => {
           return prev.map((piece) => ({
             ...piece,
-            hasBeenRandomized:
-              piece.category === finalPiece.category &&
-              piece.person === finalPiece.person
-                ? true
-                : piece.hasBeenRandomized,
+            hasPlayed:
+              piece.person === finalPiece.person ? true : piece.hasPlayed,
           }));
         });
       }
@@ -281,7 +275,7 @@ export default function Home({ params }: { params: Promise<any> }) {
 
   return (
     <main className="w-full h-screen">
-      <div className="grid grid-cols-4 grid-rows-10 h-full p-20">
+      <div className="grid grid-cols-4 grid-rows-9 h-full p-20">
         {floorPieces.map((floorPiece, index) => {
           const isSameCategoryAndPerson =
             selectedFloorPiece?.category === floorPiece.category &&
@@ -389,3 +383,11 @@ const getHighlightedFloorPieceCategories = (
     .map((index) => floorPieces[index])
     .map((piece) => piece.category);
 };
+
+export default function ProjectorPage({ params }: { params: Promise<any> }) {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Projector />
+    </Suspense>
+  );
+}
