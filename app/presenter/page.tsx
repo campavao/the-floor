@@ -811,6 +811,12 @@ export default function PresenterPage({
           >
             View available categories
           </Link>
+          <Link
+            className="font-semibold text-base text-center text-[#ffd700] hover:text-[#ffed4e] transition-colors"
+            href="/community"
+          >
+            🌟 Community Categories
+          </Link>
           <Link className="font-semibold text-base text-center" href="/about">
             About this game
           </Link>

@@ -1,11 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Category,
   CATEGORY_METADATA,
-  ImageExample,
-  TextExample,
 } from "../data";
 import FloorPageLayout from "../components/FloorPageLayout";
 import FloorButton from "../components/FloorButton";
@@ -207,6 +205,11 @@ export default function CategoriesPage() {
           >
             Back to Presenter
           </FloorButton>
+          <Link href="/community">
+            <FloorButton variant="rectangular" className="font-semibold">
+              🌟 Community Categories
+            </FloorButton>
+          </Link>
           <Link href="/about">
             <FloorButton variant="rectangular" className="font-semibold">
               About This Game
