@@ -74,6 +74,19 @@ export default function PresenterPage({
     }[]
   >();
 
+  const desktopPlayWarning = (
+    <div
+      className="w-full bg-yellow-500/10 border-2 border-yellow-400/80 rounded-lg p-4 text-yellow-100"
+      style={{ boxShadow: "0 0 20px rgba(234, 179, 8, 0.15)" }}
+    >
+      <p className="font-bold">Desktop required to play.</p>
+      <p className="text-sm text-yellow-100/90 mt-1">
+        The presenter opens a separate projector window and uses multiple
+        windows/pop-ups, so gameplay isn’t supported on mobile.
+      </p>
+    </div>
+  );
+
   const examples = useMemo(() => {
     if (roundDetails?.category == null) {
       return [];
@@ -316,6 +329,8 @@ export default function PresenterPage({
             Game Setup
           </h3>
 
+          {desktopPlayWarning}
+
           {/* Search Bar */}
           <div className="mb-4">
             <input
@@ -489,17 +504,17 @@ export default function PresenterPage({
           </div>
 
           {/* Action Buttons */}
-          <div className="flex flex-row gap-4 justify-end pt-4 border-t-2 border-[#00d4ff]/30">
+          <div className="flex flex-col sm:flex-row gap-4 justify-end pt-4 border-t-2 border-[#00d4ff]/30">
             <FloorButton
               variant="rectangular"
-              className="font-bold text-lg"
+              className="font-bold text-lg w-full sm:w-auto"
               onClick={() => setGameDetails(undefined)}
             >
               Cancel
             </FloorButton>
             <FloorButton
               variant="rectangular"
-              className="font-bold text-lg"
+              className="font-bold text-lg w-full sm:w-auto"
               onClick={() => {
                 if (gameDetails.data.length === 0) {
                   alert("Please add at least one player to start the game!");
@@ -523,14 +538,15 @@ export default function PresenterPage({
   if (demoDetails) {
     return (
       <FloorPageLayout>
-        <div className="p-20 flex flex-col gap-6">
+        <div className="p-8 md:p-20 flex flex-col gap-6">
           <h3
             className="text-4xl font-bold mb-6 glow-text"
             style={{ color: "#00d4ff" }}
           >
             Demo Details
           </h3>
-          <label className="text-xl font-bold flex flex-row justify-between gap-4 items-center mb-4">
+          {desktopPlayWarning}
+          <label className="text-xl font-bold flex flex-col sm:flex-row justify-between gap-4 items-start sm:items-center mb-4">
             <span className="glow-text" style={{ color: "#00d4ff" }}>
               Category:
             </span>
@@ -539,7 +555,7 @@ export default function PresenterPage({
                 setDemoDetails({ category: e.target.value as Category })
               }
               value={demoDetails?.category}
-              className="bg-gray-900 text-white p-3 rounded-md border-2 border-[#00d4ff] focus:outline-none focus:ring-2 focus:ring-[#00d4ff] focus:ring-offset-2 focus:ring-offset-black"
+              className="w-full sm:w-auto bg-gray-900 text-white p-3 rounded-md border-2 border-[#00d4ff] focus:outline-none focus:ring-2 focus:ring-[#00d4ff] focus:ring-offset-2 focus:ring-offset-black"
               style={{ boxShadow: "0 0 10px rgba(0, 212, 255, 0.3)" }}
             >
               {Object.keys(CATEGORY_METADATA)
@@ -551,17 +567,17 @@ export default function PresenterPage({
                 ))}
             </select>
           </label>
-          <div className="flex flex-row justify-between gap-4 mt-6">
+          <div className="flex flex-col sm:flex-row justify-between gap-4 mt-6">
             <FloorButton
               variant="rectangular"
-              className="font-bold text-lg"
+              className="font-bold text-lg w-full sm:w-auto"
               onClick={() => setDemoDetails(undefined)}
             >
               Cancel
             </FloorButton>
             <FloorButton
               variant="rectangular"
-              className="font-bold text-lg"
+              className="font-bold text-lg w-full sm:w-auto"
               onClick={triggerStartDemoRound}
             >
               Start
@@ -576,14 +592,15 @@ export default function PresenterPage({
   if (roundDetails) {
     return (
       <FloorPageLayout>
-        <div className="p-20 flex flex-col gap-6">
+        <div className="p-8 md:p-20 flex flex-col gap-6">
           <h3
             className="text-4xl font-bold mb-6 glow-text"
             style={{ color: "#00d4ff" }}
           >
             Round Details
           </h3>
-          <div className="flex flex-row gap-4 mb-6">
+          {desktopPlayWarning}
+          <div className="flex flex-col md:flex-row gap-4 mb-6">
             {roundDetails.roundState === REVEAL_STATE.NOT_STARTED && (
               <FloorButton
                 variant="rectangular"
@@ -608,7 +625,7 @@ export default function PresenterPage({
                   <p className="text-xl text-white font-semibold">
                     Use the keyboard to pass or correct the round:
                   </p>
-                  <div className="flex gap-4">
+                  <div className="flex flex-col sm:flex-row gap-4">
                     <FloorButton
                       variant="rectangular"
                       className="cursor-pointer font-bold text-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all"
@@ -641,7 +658,7 @@ export default function PresenterPage({
                 </div>
               )}
           </div>
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div
               className="flex flex-col gap-4 bg-gray-900/50 p-6 rounded-lg border-2 border-[#00d4ff]"
               style={{ boxShadow: "0 0 20px rgba(0, 212, 255, 0.2)" }}
@@ -715,14 +732,15 @@ export default function PresenterPage({
   if (liveGameDetails) {
     return (
       <FloorPageLayout>
-        <div className="p-20 flex flex-col gap-6">
+        <div className="p-8 md:p-20 flex flex-col gap-6">
           <h3
             className="text-4xl font-bold mb-6 glow-text"
             style={{ color: "#00d4ff" }}
           >
             Live Game Details
           </h3>
-          <div className="flex flex-row gap-4 justify-center">
+          {desktopPlayWarning}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <FloorButton
               variant="rectangular"
               className="font-semibold"
@@ -755,13 +773,14 @@ export default function PresenterPage({
 
   return (
     <FloorPageLayout>
-      <div className="flex flex-col items-center justify-center gap-8 p-20">
+      <div className="flex flex-col items-center justify-center gap-6 md:gap-8 p-8 md:p-20">
+        {desktopPlayWarning}
         {/* Logo-style title */}
         <div className="text-center mb-8">
-          <div className="text-9xl font-black metallic-text mb-4">
+          <div className="text-5xl sm:text-7xl md:text-9xl font-black metallic-text mb-4">
             THE FLOOR
           </div>
-          <div className="text-2xl text-white/80 font-light mt-4">
+          <div className="text-base sm:text-lg md:text-2xl text-white/80 font-light mt-4">
             Play The Floor at home
           </div>
         </div>

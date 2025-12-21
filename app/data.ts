@@ -262,7 +262,7 @@ export type Category =
   | "Holidays"
   | "MLB Teams"
   | "Sports"
-  | "Chilis"
+  // | "Chilis" // unused for now
   | "Math"
   | "Apps";
 
@@ -8633,11 +8633,11 @@ const SportsCategory: CategoryMetadata = {
   ],
 };
 
-const ChilisCategory: CategoryMetadata = {
-  name: "Chilis",
-  folder: "chilis",
-  examples: [],
-};
+// const ChilisCategory: CategoryMetadata = {
+//   name: "Chilis",
+//   folder: "chilis",
+//   examples: [],
+// };
 
 export const CATEGORY_METADATA: Record<Category, CategoryMetadata> = {
   "Airport Codes": AirportCodesCategory,
@@ -8648,7 +8648,6 @@ export const CATEGORY_METADATA: Record<Category, CategoryMetadata> = {
   "Brand slogans": BrandSlogansCategory,
   "Broadway shows": BroadwayShowsCategory,
   "Chicago tourist stuff": ChicagoTouristStuffCategory,
-  Chilis: ChilisCategory,
   "City Skylines": CitySkylinesCategory,
   Comedians: ComediansCategory,
   "Disney Channel Original Movies": DisneyChannelOriginalMoviesCategory,
