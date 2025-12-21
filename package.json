@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.89.0",
     "@vercel/analytics": "^1.6.1",
     "canvas-confetti": "^1.9.4",
     "classnames": "^2.5.1",
