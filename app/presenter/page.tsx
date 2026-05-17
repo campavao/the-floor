@@ -808,10 +808,15 @@ export default function PresenterPage({
           <Link
             className="font-semibold text-base text-center"
             href="/categories"
+            prefetch={false}
           >
             View available categories
           </Link>
-          <Link className="font-semibold text-base text-center" href="/about">
+          <Link
+            className="font-semibold text-base text-center"
+            href="/"
+            prefetch={false}
+          >
             About this game
           </Link>
         </div>

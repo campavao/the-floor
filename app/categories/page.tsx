@@ -207,12 +207,12 @@ export default function CategoriesPage() {
           >
             Back to Presenter
           </FloorButton>
-          <Link href="/about">
+          <Link href="/" prefetch={false}>
             <FloorButton variant="rectangular" className="font-semibold">
               About This Game
             </FloorButton>
           </Link>
-          <Link href="/categories/contribute">
+          <Link href="/categories/contribute" prefetch={false}>
             <FloorButton variant="rectangular" className="font-semibold">
               How to Add More Categories
             </FloorButton>

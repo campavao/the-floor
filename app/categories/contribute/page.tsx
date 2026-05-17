@@ -184,7 +184,7 @@ export default function ContributeCategoriesPage() {
             <a href={NEW_ISSUE_URL} target="_blank" rel="noopener noreferrer">
               <FloorButton variant="rectangular">Suggest via Issue</FloorButton>
             </a>
-            <Link href="/categories">
+            <Link href="/categories" prefetch={false}>
               <FloorButton variant="rectangular">Back to Categories</FloorButton>
             </Link>
           </div>
