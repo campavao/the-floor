@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 
-const EXCLUDED_PREFIXES = ["/presenter", "/projector"];
+const EXCLUDED_PREFIXES = ["/presenter", "/projector", "/demo"];
 const BMC_URL = "https://buymeacoffee.com/campavao";
 
 export default function BuyMeACoffeeButton() {

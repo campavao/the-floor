@@ -814,7 +814,7 @@ export default function PresenterPage({
           </Link>
           <Link
             className="font-semibold text-base text-center"
-            href="/"
+            href="/about"
             prefetch={false}
           >
             About this game

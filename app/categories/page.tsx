@@ -207,7 +207,7 @@ export default function CategoriesPage() {
           >
             Back to Presenter
           </FloorButton>
-          <Link href="/" prefetch={false}>
+          <Link href="/about" prefetch={false}>
             <FloorButton variant="rectangular" className="font-semibold">
               About This Game
             </FloorButton>
