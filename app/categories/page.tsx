@@ -212,6 +212,11 @@ export default function CategoriesPage() {
               About This Game
             </FloorButton>
           </Link>
+          <Link href="/categories/contribute">
+            <FloorButton variant="rectangular" className="font-semibold">
+              How to Add More Categories
+            </FloorButton>
+          </Link>
         </div>
       </div>
     </FloorPageLayout>

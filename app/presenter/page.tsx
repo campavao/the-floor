@@ -76,7 +76,7 @@ export default function PresenterPage({
 
   const desktopPlayWarning = (
     <div
-      className="w-full bg-yellow-500/10 border-2 border-yellow-400/80 rounded-lg p-4 text-yellow-100"
+      className="w-full bg-yellow-500/10 border-2 border-yellow-400/80 rounded-lg p-4 text-yellow-100 lg:hidden"
       style={{ boxShadow: "0 0 20px rgba(234, 179, 8, 0.15)" }}
     >
       <p className="font-bold">Desktop required to play.</p>
