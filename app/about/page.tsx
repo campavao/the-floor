@@ -67,6 +67,34 @@ export default function AboutPage() {
 
             <section className="bg-black/60 p-6 md:p-8 border-2 border-white/20">
               <h2 className="text-3xl md:text-4xl font-bold mb-4 glow-text">
+                Support the Project
+              </h2>
+              <p className="mb-4">
+                The Floor: The Game is completely free to play. If you&apos;re
+                enjoying it and want to help cover hosting costs, you can tip
+                the project via Buy Me a Coffee — every bit helps keep the
+                lights on.
+              </p>
+              <p>
+                Tap the{" "}
+                <strong className="glow-text">
+                  Buy me a coffee
+                </strong>{" "}
+                button in the bottom-right corner of the page, or visit{" "}
+                <a
+                  href="https://buymeacoffee.com/campavao"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline glow-text"
+                >
+                  buymeacoffee.com/campavao
+                </a>
+                .
+              </p>
+            </section>
+
+            <section className="bg-black/60 p-6 md:p-8 border-2 border-white/20">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 glow-text">
                 Disclaimer
               </h2>
               <p className="mb-4">

@@ -1,10 +1,16 @@
 import type { Metadata } from "next";
-import { Montserrat } from "next/font/google";
+import { Montserrat, Cookie } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
+import BuyMeACoffeeButton from "./components/BuyMeACoffeeButton";
 const montserrat = Montserrat({
   variable: "--font-montserrat",
+  subsets: ["latin"],
+});
+const cookie = Cookie({
+  variable: "--font-cookie",
+  weight: "400",
   subsets: ["latin"],
 });
 
@@ -127,7 +133,9 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`${montserrat.variable} antialiased`}>
+      <body
+        className={`${montserrat.variable} ${cookie.variable} antialiased`}
+      >
         <Script
           id="structured-data"
           type="application/ld+json"
@@ -135,6 +143,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         {children}
+        <BuyMeACoffeeButton />
         <Analytics />
       </body>
     </html>
