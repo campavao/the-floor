@@ -357,7 +357,7 @@ function FloorPiece({
   return (
     <button
       className={classNames(
-        "flex flex-col items-center justify-center border border-white font-bold",
+        "flex flex-col items-center justify-center border border-white font-bold h-20 min-h-20",
         {
           "bg-blue-100 text-black": isSelected,
           "bg-blue-400": isHighlighted,
