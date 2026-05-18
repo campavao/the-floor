@@ -49,6 +49,7 @@ export default function PresenterPage({
   const [liveGameDetails, setLiveGameDetails] = useLocalStorage<
     GameDetails | undefined
   >("the-floor-data", undefined);
+  const [hasResumedLiveGame, setHasResumedLiveGame] = useState(false);
 
   // Game setup state
   const [searchQuery, setSearchQuery] = useState("");
@@ -729,6 +730,57 @@ export default function PresenterPage({
     );
   }
 
+  if (liveGameDetails && !hasResumedLiveGame) {
+    const players = liveGameDetails.data;
+    return (
+      <FloorPageLayout>
+        <div className="p-8 md:p-20 flex flex-col gap-6 max-w-3xl mx-auto">
+          <h3
+            className="text-4xl font-bold mb-2 glow-text"
+            style={{ color: "#00d4ff" }}
+          >
+            Resume Game in Progress?
+          </h3>
+          <p className="text-white/80">
+            We found a saved game with {players.length}{" "}
+            {players.length === 1 ? "player" : "players"}
+            {players.length > 0 ? ":" : "."}
+          </p>
+          {players.length > 0 && (
+            <ul className="text-white/90 list-disc list-inside">
+              {players.map((p, i) => (
+                <li key={i}>
+                  <span className="font-semibold">{p.person}</span> —{" "}
+                  {p.category}
+                </li>
+              ))}
+            </ul>
+          )}
+          {desktopPlayWarning}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mt-4">
+            <FloorButton
+              variant="rectangular"
+              className="font-semibold"
+              onClick={() => setHasResumedLiveGame(true)}
+            >
+              Resume Game
+            </FloorButton>
+            <FloorButton
+              variant="rectangular"
+              className="font-semibold"
+              onClick={() => {
+                triggerRestart();
+                setLiveGameDetails(undefined);
+              }}
+            >
+              Start New Game
+            </FloorButton>
+          </div>
+        </div>
+      </FloorPageLayout>
+    );
+  }
+
   if (liveGameDetails) {
     return (
       <FloorPageLayout>
@@ -761,6 +813,7 @@ export default function PresenterPage({
               onClick={() => {
                 triggerRestart();
                 setLiveGameDetails(undefined);
+                setHasResumedLiveGame(false);
               }}
             >
               End Game
