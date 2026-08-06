@@ -12,7 +12,7 @@
     "@vercel/analytics": "^1.6.1",
     "canvas-confetti": "^1.9.4",
     "classnames": "^2.5.1",
-    "next": "16.0.7",
+    "next": "^16.0.7",
     "react": "19.2.1",
     "react-dom": "19.2.1",
     "usehooks-ts": "^3.1.1"

@@ -262,6 +262,7 @@ export type Category =
   | "Holidays"
   | "MLB Teams"
   | "Sports"
+  | "Valorant"
   // | "Chilis" // unused for now
   | "Math"
   | "Apps";
@@ -7730,6 +7731,19 @@ const FridgeCategory: CategoryMetadata = {
   ],
 };
 
+const ValorantCategory: CategoryMetadata = {
+  name: "Valorant",
+  folder: "valorant",
+  examples: [
+    {
+      name: "Jett",
+      image: "jett.jpg",
+      alternatives: [],
+    },
+    // ...more entries
+  ],
+};
+
 const GarageCategory: CategoryMetadata = {
   name: "Garage",
   folder: "garage",
@@ -8680,4 +8694,5 @@ export const CATEGORY_METADATA: Record<Category, CategoryMetadata> = {
   "The Office": TheOfficeCategory,
   Thanksgiving: ThanksgivingCategory,
   "Video Game Characters": VideoGameCharactersCategory,
+  "Valorant": ValorantCategory,
 };
