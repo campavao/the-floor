@@ -225,6 +225,7 @@ type UsedCategories = (typeof FLOOR_DATA_CONST)[number]["category"];
 type UnusedCategoriesFromConst = Exclude<Category, UsedCategories>;
 
 export type Category =
+  | "Time Tables"
   | "Pokemon"
   | "Broadway shows"
   | "Disney characters"
@@ -263,6 +264,9 @@ export type Category =
   | "MLB Teams"
   | "Sports"
   | "Valorant"
+  | "Anime"
+  | "Minecraft"
+  | "EU Flags"
   // | "Chilis" // unused for now
   | "Math"
   | "Apps";
@@ -273,6 +277,672 @@ export interface FloorData {
   hasPlayed: boolean;
   isStillInTheGame: boolean;
 }
+
+const EuropeanFlagsCategory: CategoryMetadata = {
+  name: "European Flags",
+  folder: "european-flags",
+  examples: [
+    {
+      name: "Germany",
+      image: "germany.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Netherlands",
+      image: "netherlands.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Denmark",
+      image: "denmark.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Ireland",
+      image: "ireland.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Austria",
+      image: "austria.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Ukraine",
+      image: "ukraine.jpg",
+      alternatives: [],
+    },
+    {
+      name: "France",
+      image: "france.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Switzerland",
+      image: "switzerland.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Greece",
+      image: "greece.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Poland",
+      image: "poland.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Spain",
+      image: "spain.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Italy",
+      image: "italy.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Portugal",
+      image: "portugal.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Norway",
+      image: "norway.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Finland",
+      image: "finland.jpg",
+      alternatives: [],
+    },
+    {
+      name: "United Kingdom",
+      image: "united-kingdom.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Belgium",
+      image: "belgium.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Russia",
+      image: "russia.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Sweden",
+      image: "sweden.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Turkey",
+      image: "turkey.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Slovakia",
+      image: "slovakia.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Estonia",
+      image: "estonia.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Slovenia",
+      image: "slovenia.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Cyprus",
+      image: "cyprus.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Luxembourg",
+      image: "luxembourg.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Latvia",
+      image: "latvia.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Lithuania",
+      image: "lithuania.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Romania",
+      image: "romania.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Malta",
+      image: "malta.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Iceland",
+      image: "iceland.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Bulgaria",
+      image: "bulgaria.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Serbia",
+      image: "serbia.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Monaco",
+      image: "monaco.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Hungary",
+      image: "hungary.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Czech Republic",
+      image: "czech-republic.jpg",
+      alternatives: ["Czechia"],
+    },
+    {
+      name: "Croatia",
+      image: "croatia.jpg",
+      alternatives: [],
+    },
+    {
+      name: "San Marino",
+      image: "san-marino.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Montenegro",
+      image: "montenegro.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Vatican City",
+      image: "vatican-city.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Georgia",
+      image: "georgia.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Albania",
+      image: "albania.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Kazakhstan",
+      image: "kazakhstan.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Kosovo",
+      image: "kosovo.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Liechtenstein",
+      image: "liechtenstein.jpg",
+      alternatives: [],
+    },
+    {
+      name: "North Macedonia",
+      image: "north-macedonia.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Andorra",
+      image: "andorra.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Bosnia and Herzegovina",
+      image: "bosnia-and-herzegovina.jpg",
+      alternatives: ["Bosnia"],
+    },
+    {
+      name: "Belarus",
+      image: "belarus.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Armenia",
+      image: "armenia.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Azerbaijan",
+      image: "azerbaijan.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Moldova",
+      image: "moldova.jpg",
+      alternatives: [],
+    },
+  ],
+};
+
+const MinecraftCategory: CategoryMetadata = {
+  name: "Minecraft",
+  folder: "minecraft",
+  examples: [
+    {
+      name: "Village",
+      image: "village.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Zombie",
+      image: "zombie.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Enderman",
+      image: "enderman.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Skeleton",
+      image: "skeleton.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Enchanting Table",
+      image: "enchanting-table.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Jungle",
+      image: "jungle.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Alex",
+      image: "alex.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Brewing Stand",
+      image: "brewing-stand.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Steve",
+      image: "steve.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Cave Spider",
+      image: "cave-spider.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Plains",
+      image: "plains.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Creeper",
+      image: "creeper.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Redstone Comparator",
+      image: "redstone-comparator.jpg",
+      alternatives: ["Comparator"],
+    },
+    {
+      name: "Eye of Ender",
+      image: "eye-of-ender.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Cherry Grove",
+      image: "cherry-grove.jpg",
+      alternatives: ["Cherry Blossom"],
+    },
+    {
+      name: "Axolotl",
+      image: "axolotl.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Elytra",
+      image: "elytra.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Wither",
+      image: "wither.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Shipwreck",
+      image: "shipwreck.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Warden",
+      image: "warden.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Ruined Portal",
+      image: "ruined-portal.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Blaze",
+      image: "blaze.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Desert Temple",
+      image: "desert-temple.jpg",
+      alternatives: [],
+    },
+    {
+      name: "ocelot",
+      image: "ocelot.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Ender Dragon",
+      image: "ender-dragon.jpg",
+      alternatives: ["Enderdragon"],
+    },
+    {
+      name: "Dried Ghast",
+      image: "dried-ghast.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Taiga",
+      image: "taiga.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Badlands",
+      image: "badlands.jpg",
+      alternatives: ["Mesa Biome"],
+    },
+    {
+      name: "Iron Golem",
+      image: "iron-golem.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Nether Wastes",
+      image: "nether-wastes.jpg",
+      alternatives: ["Nether"],
+    },
+    {
+      name: "Deep Dark",
+      image: "deep-dark.jpg",
+      alternatives: [],
+    },
+    {
+      name: "The End",
+      image: "the-end.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Ancient City",
+      image: "ancient-city.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Mangrove Swamp",
+      image: "mangrove-swamp.jpg",
+      alternatives: ["Mangrove"],
+    },
+    {
+      name: "Lush Caves",
+      image: "lush-caves.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Woodland Mansion",
+      image: "woodland-mansion.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Mushroom Fields",
+      image: "mushroom-fields.jpg",
+      alternatives: ["Mushroom Islands"],
+    },
+    {
+      name: "Warped Forest",
+      image: "warped-forest.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Ocean Monument",
+      image: "ocean-monument.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Beacon",
+      image: "beacon.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Pillager",
+      image: "pillager.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Stronghold",
+      image: "stronghold.jpg",
+      alternatives: [],
+    },
+  ],
+};
+
+const AnimeCategory: CategoryMetadata = {
+  name: "Anime",
+  folder: "anime",
+  examples: [
+    {
+      name: "Naruto",
+      image: "naruto.jpg",
+      alternatives: [],
+    },
+    {
+      name: "One Piece",
+      image: "one-piece.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Attack on Titan",
+      image: "attack-on-titan.jpg",
+      alternatives: ["AoT", "Shingeki no Kyojin"],
+    },
+    {
+      name: "Frieren",
+      image: "frieren.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Yuri!!! on ICE",
+      image: "yuri-on-ice.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Death Note",
+      image: "death-note.jpg",
+      alternatives: [],
+    },
+        {
+      name: "Chainsaw Man",
+      image: "chainsaw-man.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Dragon Ball Z",
+      image: "dragon-ball-z.jpg",
+      alternatives: ["DBZ"],
+    },
+    {
+      name: "Demon Slayer",
+      image: "demon-slayer.jpg",
+      alternatives: ["Kimetsu no Yaiba"],
+    },
+    {
+      name: "My Hero Academia",
+      image: "my-hero-academia.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Jujutsu Kaisen",
+      image: "jujutsu-kaisen.jpg",
+      alternatives: ["JJK"],
+    },
+    {
+      name: "Fullmetal Alchemist: Brotherhood",
+      image: "fullmetal-alchemist-brotherhood.jpg",
+      alternatives: ["FMAB", "FMA Brotherhood"],
+    },
+    {
+      name: "Sword Art Online",
+      image: "sword-art-online.jpg",
+      alternatives: ["SAO"],
+    },
+    {
+      name: "Tokyo Ghoul",
+      image: "tokyo-ghoul.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Hunter x Hunter",
+      image: "hunter-x-hunter.jpg",
+      alternatives: ["HxH"],
+    },
+    {
+      name: "One Punch Man",
+      image: "one-punch-man.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Cowboy Bebop",
+      image: "cowboy-bebop.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Your Name",
+      image: "your-name.jpg",
+      alternatives: ["Kimi no Na wa"],
+    },
+    {
+      name: "Neon Genesis Evangelion",
+      image: "neon-genesis-evangelion.jpg",
+      alternatives: ["Evangelion", "NGE"],
+    },
+    {
+      name: "My Neighbor Totoro",
+      image: "my-neighbor-totoro.jpg",
+      alternatives: ["Totoro"],
+    },
+    {
+      name: "Spy x Family",
+      image: "spy-x-family.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Haikyuu!!",
+      image: "haikyuu.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Mob Psycho 100",
+      image: "mob-psycho-100.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Fairy Tail",
+      image: "fairy-tail.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Steins;Gate",
+      image: "steins-gate.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Re:Zero",
+      image: "rezero.jpg",
+      alternatives: ["Re Zero"],
+    },
+    {
+      name: "Violet Evergarden",
+      image: "violet-evergarden.jpg",
+      alternatives: [],
+    },
+    {
+      name: "JoJo's Bizarre Adventure",
+      image: "jojos-bizarre-adventure.jpg",
+      alternatives: ["JoJo"],
+    },
+    {
+      name: "The Promised Neverland",
+      image: "the-promised-neverland.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Assassination Classroom",
+      image: "assassination-classroom.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Puella Magi Madoka Magica",
+      image: "puella-magi-madoka-magica.jpg",
+      alternatives: ["Madoka Magica"],
+    },
+    {
+      name: "Black Butler",
+      image: "black-butler.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Made in Abyss",
+      image: "made-in-abyss.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Parasyte",
+      image: "parasyte.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Fate/Zero",
+      image: "fate-zero.jpg",
+      alternatives: ["Fate"],
+    },
+    {
+      name: "Mashle: Magic and Muscles",
+      image: "mashle.jpg",
+      alternatives: ["Mashle"],
+    },
+  ],
+};
 
 export const FLOOR_DATA: FloorData[] =
   FLOOR_DATA_CONST as unknown as FloorData[];
@@ -295,6 +965,193 @@ type CategoryMetadata = {
   name: string;
   folder: string;
   examples: ImageExample[] | TextExample[];
+};
+
+const TimesTablesCategory: CategoryMetadata = {
+  name: "Times Tables",
+  folder: "times-tables",
+  examples: [
+    {
+      name: "18",
+      text: "2 x 9",
+      alternatives: [],
+    },
+    {
+      name: "72",
+      text: "8 x 9",
+      alternatives: [],
+    },
+    {
+      name: "22",
+      text: "2 x 11",
+      alternatives: [],
+    },
+    {
+      name: "66",
+      text: "6 x 11",
+      alternatives: [],
+    },
+    {
+      name: "35",
+      text: "5 x 7",
+      alternatives: [],
+    },
+    {
+      name: "55",
+      text: "5 x 11",
+      alternatives: [],
+    },
+    {
+      name: "30",
+      text: "3 x 10",
+      alternatives: [],
+    },
+    {
+      name: "90",
+      text: "9 x 10",
+      alternatives: [],
+    },
+    {
+      name: "24",
+      text: "4 x 6",
+      alternatives: [],
+    },
+    {
+      name: "48",
+      text: "4 x 12",
+      alternatives: [],
+    },
+    {
+      name: "9",
+      text: "1 x 9",
+      alternatives: [],
+    },
+    {
+      name: "6",
+      text: "2 x 3",
+      alternatives: [],
+    },
+    {
+      name: "27",
+      text: "3 x 9",
+      alternatives: [],
+    },
+    {
+      name: "110",
+      text: "10 x 11",
+      alternatives: [],
+    },
+    {
+      name: "32",
+      text: "4 x 8",
+      alternatives: [],
+    },
+    {
+      name: "14",
+      text: "2 x 7",
+      alternatives: [],
+    },
+    {
+      name: "25",
+      text: "5 x 5",
+      alternatives: [],
+    },
+    {
+      name: "60",
+      text: "6 x 10",
+      alternatives: [],
+    },
+    {
+      name: "28",
+      text: "4 x 7",
+      alternatives: [],
+    },
+    {
+      name: "20",
+      text: "4 x 5",
+      alternatives: [],
+    },
+    {
+      name: "6",
+      text: "1 x 6",
+      alternatives: [],
+    },
+    {
+      name: "16",
+      text: "2 x 8",
+      alternatives: [],
+    },
+    {
+      name: "12",
+      text: "3 x 4",
+      alternatives: [],
+    },
+    {
+      name: "44",
+      text: "4 x 11",
+      alternatives: [],
+    },
+    {
+      name: "21",
+      text: "3 x 7",
+      alternatives: [],
+    },
+    {
+      name: "72",
+      text: "6 x 12",
+      alternatives: [],
+    },
+    {
+      name: "36",
+      text: "6 x 6",
+      alternatives: [],
+    },
+    {
+      name: "30",
+      text: "5 x 6",
+      alternatives: [],
+    },
+    {
+      name: "11",
+      text: "1 x 11",
+      alternatives: [],
+    },
+    {
+      name: "24",
+      text: "3 x 8",
+      alternatives: [],
+    },
+    {
+      name: "144",
+      text: "12 x 12",
+      alternatives: [],
+    },
+    {
+      name: "18",
+      text: "3 x 6",
+      alternatives: [],
+    },
+    {
+      name: "63",
+      text: "7 x 9",
+      alternatives: [],
+    },
+    {
+      name: "8",
+      text: "2 x 4",
+      alternatives: [],
+    },
+    {
+      name: "56",
+      text: "7 x 8",
+      alternatives: [],
+    },
+    {
+      name: "8",
+      text: "1 x 8",
+      alternatives: [],
+    },
+  ],
 };
 
 const PokemonCategory: CategoryMetadata = {
@@ -7736,11 +8593,315 @@ const ValorantCategory: CategoryMetadata = {
   folder: "valorant",
   examples: [
     {
+      name: "Brimstone",
+      image: "brimstone.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Phantom",
+      image: "phantom.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Shorty",
+      image: "shorty.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Gekko",
+      image: "gekko.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Sunset",
+      image: "sunset.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Miks",
+      image: "miks.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Lotus",
+      image: "lotus.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Skye",
+      image: "skye.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Icebox",
+      image: "icebox.jpg",
+      alternatives: [],
+    },
+    {
+      name: "KAY/O",
+      image: "kayo.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Neon",
+      image: "neon.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Cypher",
+      image: "cypher.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Ascent",
+      image: "ascent.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Bucky",
+      image: "bucky.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Ares",
+      image: "ares.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Stinger",
+      image: "stinger.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Marshal",
+      image: "marshal.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Guardian",
+      image: "guardian.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Killjoy",
+      image: "killjoy.jpg",
+      alternatives: ["KJ"],
+    },
+    {
+      name: "Abyss",
+      image: "abyss.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Omen",
+      image: "omen.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Haven",
+      image: "haven.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Viper",
+      image: "viper.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Sova",
+      image: "sova.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Bind",
+      image: "bind.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Vandal",
+      image: "vandal.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Bulldog",
+      image: "bulldog.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Waylay",
+      image: "waylay.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Bandit",
+      image: "bandit.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Judge",
+      image: "judge.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Reyna",
+      image: "reyna.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Veto",
+      image: "veto.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Odin",
+      image: "odin.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Split",
+      image: "split.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Breach",
+      image: "breach.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Frenzy",
+      image: "frenzy.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Fracture",
+      image: "fracture.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Sage",
+      image: "sage.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Vyse",
+      image: "vyse.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Pearl",
+      image: "pearl.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Outlaw",
+      image: "outlaw.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Corrode",
+      image: "corrode.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Raze",
+      image: "raze.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Iso",
+      image: "iso.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Operator",
+      image: "operator.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Yoru",
+      image: "yoru.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Chamber",
+      image: "chamber.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Tejo",
+      image: "tejo.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Astra",
+      image: "astra.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Melee",
+      image: "melee.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Spectre",
+      image: "spectre.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Ghost",
+      image: "ghost.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Clove",
+      image: "clove.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Fade",
+      image: "fade.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Breeze",
+      image: "breeze.jpg",
+      alternatives: [],
+    },
+    {
       name: "Jett",
       image: "jett.jpg",
       alternatives: [],
     },
-    // ...more entries
+    {
+      name: "Harbor",
+      image: "harbor.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Phoenix",
+      image: "phoenix.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Sheriff",
+      image: "sheriff.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Summit",
+      image: "summit.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Classic",
+      image: "classic.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Deadlock",
+      image: "deadlock.jpg",
+      alternatives: [],
+    },
   ],
 };
 
@@ -8695,4 +9856,8 @@ export const CATEGORY_METADATA: Record<Category, CategoryMetadata> = {
   Thanksgiving: ThanksgivingCategory,
   "Video Game Characters": VideoGameCharactersCategory,
   "Valorant": ValorantCategory,
+  "Time Tables": TimesTablesCategory,
+  "Anime": AnimeCategory,
+  "Minecraft": MinecraftCategory,
+  "EU Flags": EuropeanFlagsCategory,
 };
