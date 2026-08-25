@@ -10113,7 +10113,7 @@ const VideoGamesCategory: CategoryMetadata = {
      },
      {
       name: "Mario 64",
-      image: "mario64.jpg",
+      image: "Mario64.jpg",
       alternatives: ["Super Mario 64"],
      },
      {
@@ -10158,7 +10158,7 @@ const VideoGamesCategory: CategoryMetadata = {
      },
      {
       name: "SSX Tricky",
-      image: "ssxtricky.jpg",
+      image: "ssxtricky.png",
       alternatives: [],
      },
      {
@@ -10253,12 +10253,12 @@ const VideoGamesCategory: CategoryMetadata = {
      },
      {
       name: "Uncharted",
-      image: "Uncharted.jpg",
+      image: "uncharted.jpg",
       alternatives: [],
      },
      {
       name: "Candy Crush",
-      image: "candrycrush.jpg",
+      image: "candycrush.jpg",
       alternatives: [],
      },
      {
@@ -10278,7 +10278,7 @@ const VideoGamesCategory: CategoryMetadata = {
      },
      {
       name: "Fall Guys",
-      image: "fallguys.jpg",
+      image: "fallguys.png",
       alternatives: [],
      },
      {
