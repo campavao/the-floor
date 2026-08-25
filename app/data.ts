@@ -266,6 +266,7 @@ export type Category =
   // | "Chilis" // unused for now
   | "Math"
   | "Apps"
+  | "Pool Equipment"
   | "Video Games"
   ;
 
@@ -8694,6 +8695,208 @@ const SportsCategory: CategoryMetadata = {
   ],
 };
 
+const PoolEquipmentCategory: CategoryMetadata = {
+  name: "Pool Equipment",
+  folder: "pool-equipment",
+  examples: [
+    {
+      name: "No Diving Sign",
+      image: "no-diving-sign.jpg",
+      alternatives: ["No Diving"],
+    },
+    {
+      name: "Pool Lift",
+      image: "pool-lift.jpg",
+      alternatives: ["ADA Pool Lift", "Pool Chair Lift"],
+    },
+    {
+      name: "Pool Light",
+      image: "pool-light.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Depth Marker",
+      image: "depth-marker.webp",
+      alternatives: ["Depth Marking"],
+    },
+    {
+      name: "Gate Latch",
+      image: "gate-latch.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Self-Closing Hinge",
+      image: "self-closing-hinge.jpg",
+      alternatives: ["Self Closing Hinge"],
+    },
+    {
+      name: "Pool Gate",
+      image: "pool-gate.jpg",
+      alternatives: ["Safety Gate"],
+    },
+    {
+      name: "AED",
+      image: "AED.jpg",
+      alternatives: ["Defibrillator", "Automated External Defibrillator"],
+    },
+    {
+      name: "First Aid Kit",
+      image: "first-aid-kit.jpg",
+      alternatives: ["First-Aid Kit"],
+    },
+    {
+      name: "Lifeguard",
+      image: "lifeguard.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Shepherd's Crook",
+      image: "shepherds-crook.jpg",
+      alternatives: ["Rescue Hook", "Pool Hook", "Shepherds Crook"],
+    },
+    {
+      name: "Ring Buoy",
+      image: "ring-buoy.jpg",
+      alternatives: ["Life Ring", "Lifebuoy", "Life Preserver"],
+    },
+    {
+      name: "Lifeguard Chair",
+      image: "lifeguard-chair.jpg",
+      alternatives: ["Lifeguard Stand"],
+    },
+    {
+      name: "Pool Handrail",
+      image: "pool-handrail.png",
+      alternatives: ["Handrail"],
+    },
+    {
+      name: "Pool Ladder",
+      image: "pool-ladder.jpg",
+      alternatives: ["Ladder"],
+    },
+    {
+      name: "Telescopic Pole",
+      image: "telescopic-pool.webp",
+      alternatives: ["Telescoping Pole", "Pool Pole"],
+    },
+    {
+      name: "Pool Net",
+      image: "pool-net.jpg",
+      alternatives: ["Skimmer Net", "Leaf Net", "Hand Skimmer"],
+    },
+    {
+      name: "Pool Brush",
+      image: "pool-brush.webp",
+      alternatives: [],
+    },
+    {
+      name: "Pool Vacuum",
+      image: "pool-vacuum.jpg",
+      alternatives: ["Vacuum"],
+    },
+    {
+      name: "Vacuum Port",
+      image: "vacuum-port.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Return Jet",
+      image: "return-jet.webp",
+      alternatives: ["Return", "Jet", "Inlet"],
+    },
+    {
+      name: "Main Drain",
+      image: "main-drain.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Main Drain Cover",
+      image: "main-drain-cover.webp",
+      alternatives: ["Drain Cover"],
+    },
+    {
+      name: "Flow Meter",
+      image: "flow-meter.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Pool Thermometer",
+      image: "pool-thermometer.webp",
+      alternatives: ["Thermometer"],
+    },
+    {
+      name: "pH Meter",
+      image: "ph-meter.jpg",
+      alternatives: ["PH Meter"],
+    },
+    {
+      name: "Pool Test Strips",
+      image: "pool-test-strips.webp",
+      alternatives: ["Test Strips"],
+    },
+    {
+      name: "Pool Test Kit",
+      image: "pool-test-kit.jpg",
+      alternatives: ["Test Kit", "Water Test Kit"],
+    },
+    {
+      name: "Chlorine Tablets",
+      image: "chlorine-tablets.jpg",
+      alternatives: ["Chlorine Tabs", "Chlorine Pucks"],
+    },
+    {
+      name: "Chlorinator",
+      image: "chlorinator.jpg",
+      alternatives: ["Chlorine Feeder"],
+    },
+    {
+      name: "Pool Heater",
+      image: "pool-heater.jpg",
+      alternatives: ["Heater"],
+    },
+    {
+      name: "Backwash",
+      image: "backwash.jpg",
+      alternatives: ["Backwash Valve"],
+    },
+    {
+      name: "Pressure Gauge",
+      image: "pressure-gauge.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Filter Cartridge",
+      image: "filter-cartridge.jpg",
+      alternatives: ["Cartridge"],
+    },
+    {
+      name: "Pool Filter",
+      image: "pool-filter.jpg",
+      alternatives: ["Filter"],
+    },
+    {
+      name: "Pump Strainer Basket",
+      image: "pump-strainer-basket.jpg",
+      alternatives: ["Strainer Basket", "Pump Basket"],
+    },
+    {
+      name: "Pool Pump",
+      image: "pool-pump.jpg",
+      alternatives: ["Pump"],
+    },
+    {
+      name: "Pool Skimmer",
+      image: "pool-skimmer.jpg",
+      alternatives: ["Skimmer"],
+    },
+    {
+      name: "Skimmer Basket",
+      image: "skimmer-basket.jpg",
+      alternatives: [],
+    },
+  ],
+};
+
 const VideoGamesCategory: CategoryMetadata = {
   name: "Video Games",
   folder: "video-games",
@@ -8949,6 +9152,7 @@ export const CATEGORY_METADATA: Record<Category, CategoryMetadata> = {
   Movies: MoviesCategory,
   "Pop divas": PopDivasCategory,
   Pokemon: PokemonCategory,
+  "Pool Equipment": PoolEquipmentCategory,
   "Reality tv shows": RealityTvShowsCategory,
   "Rom Coms": RomComsCategory,
   "Spirit Halloween Catalogue": SpiritHalloweenCatalogueCategory,
