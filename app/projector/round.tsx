@@ -25,6 +25,19 @@ export enum REVEAL_STATE {
   FINISHED = "FINISHED",
 }
 
+/**
+ * How many images stay mounted around the one on screen.
+ *
+ * Every example used to be mounted at once with only opacity hiding the rest,
+ * so opening a round downloaded the whole category -- 75 MB for City
+ * Skylines, 60 MB for Pop Divas -- to show one picture at a time. The index
+ * only ever advances by one, so keeping a single frame behind for the
+ * crossfade and a few ahead to preload gives the identical instant
+ * transition for a fraction of the bytes.
+ */
+const KEEP_BEHIND = 1;
+const KEEP_AHEAD = 3;
+
 export default function Round({
   category,
   challenger,
@@ -377,25 +390,6 @@ export function RoundDisplay({
 }) {
   const example = examples[selectedExampleIndex];
 
-  // Preload upcoming images to prevent flashing
-  useEffect(() => {
-    const preloadImages = () => {
-      // Preload the next 3 images
-      for (let i = 1; i <= 3; i++) {
-        const nextIndex = selectedExampleIndex + i;
-        if (nextIndex < examples.length) {
-          const nextExample = examples[nextIndex];
-          if (nextExample && "image" in nextExample) {
-            const img = new Image();
-            img.src = `/images/${folder}/${nextExample.image}`;
-          }
-        }
-      }
-    };
-
-    preloadImages();
-  }, [selectedExampleIndex, examples, folder]);
-
   return (
     <div className="relative w-full h-full flex items-center justify-center">
       {examples.map((example, index) => {
@@ -415,6 +409,15 @@ export function RoundDisplay({
               {example.text}
             </p>
           );
+        }
+
+        // Outside the window the image is not in the DOM at all, so the
+        // browser never requests it.
+        if (
+          index < selectedExampleIndex - KEEP_BEHIND ||
+          index > selectedExampleIndex + KEEP_AHEAD
+        ) {
+          return null;
         }
 
         return (

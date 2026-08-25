@@ -106,10 +106,15 @@ export default function CategoriesPage() {
                   ) : isImageExample ? (
                     <div className="flex flex-col gap-3">
                       <div className="bg-gray-800 rounded-md overflow-hidden flex items-center justify-center min-h-[200px]">
+                        {/* Browsing a category renders every example at
+                            once, so without lazy loading the browser fetches
+                            all ~50 images up front to fill a 200px box. */}
                         <img
                           src={`/images/${categoryData.folder}/${item.image}`}
                           alt={item.name}
                           className="max-w-full max-h-[200px] object-contain"
+                          loading="lazy"
+                          decoding="async"
                         />
                       </div>
                       <div className="flex flex-col gap-2">

@@ -48,6 +48,16 @@ public/images/sea-creatures/
 
 Square-ish images with transparent backgrounds look best in the grid.
 
+Don't worry about file size — drop the originals in and run:
+
+```bash
+node scripts/optimize-images.mjs
+```
+
+It caps the longest edge at 2048px and re-encodes in place, keeping filenames
+and formats. 2048 is chosen so the projector never has to upscale on a 1080p
+screen. `npm test` fails if an oversized image slips through.
+
 **2. Register it in `app/data.ts`** — a `CategoryMetadata` const, the name
 added to the `Category` union, and an entry in `CATEGORY_METADATA`. Copy a
 neighbouring category; the shape is short:
@@ -80,7 +90,7 @@ images to everyone else. This has already happened once.
 ## Checks
 
 ```bash
-npm test        # category data: images resolve, no duplicates, shapes are sane
+npm test        # category data + image assets: refs resolve, files decode, nothing oversized
 npm run build   # production build
 ```
 
