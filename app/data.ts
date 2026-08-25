@@ -226,6 +226,7 @@ type UnusedCategoriesFromConst = Exclude<Category, UsedCategories>;
 
 export type Category =
   | "Pokemon"
+  | "Fruits"
   | "Broadway shows"
   | "Disney characters"
   | "Kitchen gadgets"
@@ -3262,6 +3263,64 @@ const HarryPotterCharactersCategory: CategoryMetadata = {
       alternatives: [],
     },
     { name: "Pomona Sprout", image: "pomona-sprout.jpg", alternatives: [] },
+  ],
+};
+
+const FruitsCategory: CategoryMetadata = {
+  name: "Fruits",
+  folder: "fruits",
+  examples: [
+    { name: "Apple", image: "apple.png", alternatives: ["Apples"] },
+    { name: "Banana", image: "banana.png", alternatives: ["Bananas"] },
+    { name: "Blackberry", image: "blackberry.png", alternatives: ["Blackberries"] },
+    { name: "Blueberry", image: "blueberry.png", alternatives: ["Blueberries"] },
+    { name: "Coconut", image: "coconut.png", alternatives: ["Coconuts"] },
+    { name: "Cherry", image: "cherry.png", alternatives: ["Cherries"] },
+    { name: "Dates", image: "dates.png", alternatives: ["Date"] },
+    { name: "Dragon Fruit", image: "dragon-fruit.png", alternatives: ["Pitaya"] },
+    { name: "Durian", image: "durian.png", alternatives: [] },
+    { name: "Grapes", image: "grapes.png", alternatives: ["Grape"] },
+    { name: "Kiwi", image: "kiwi.png", alternatives: ["Kiwifruit"] },
+    { name: "Jackfruit", image: "jackfruit.png", alternatives: ["Jack Fruit"] },
+    { name: "Lemon", image: "lemon.png", alternatives: ["Lemons"] },
+    { name: "Lime", image: "lime.png", alternatives: ["Limes"] },
+    { name: "Lychee", image: "lychee.png", alternatives: ["Litchi"] },
+    { name: "Mango", image: "mango.png", alternatives: ["Mangoes"] },
+    { name: "Mangosteen", image: "mangosteen.png", alternatives: [] },
+    { name: "Melon", image: "melon.png", alternatives: ["Melons"] },
+    { name: "Orange", image: "orange.png", alternatives: ["Oranges"] },
+    { name: "Papaya", image: "papaya.png", alternatives: ["Papayas"] },
+    { name: "Passion Fruit", image: "passion-fruit.png", alternatives: [] },
+    { name: "Peach", image: "peach.png", alternatives: ["Peaches"] },
+    { name: "Pear", image: "pear.png", alternatives: ["Pears"] },
+    { name: "Pineapple", image: "pineapple.png", alternatives: ["Pineapples"] },
+    { name: "Pomegranate", image: "pomegranate.png", alternatives: [] },
+    { name: "Rambutan", image: "rambutan.png", alternatives: [] },
+    { name: "Raspberries", image: "raspberries.png", alternatives: ["Raspberry"] },
+    { name: "Strawberry", image: "strawberry.png", alternatives: ["Strawberries"] },
+    { name: "Tangerine", image: "tangerine.png", alternatives: ["Tangerines"] },
+    { name: "Watermelon", image: "watermelon.png", alternatives: ["Watermelons"] },
+    { name: "Guava", image: "guava.png", alternatives: [] },
+    { name: "Plum", image: "plum.png", alternatives: ["Plums"] },
+    { name: "Persimmon", image: "persimmon.png", alternatives: [] },
+    { name: "Pomelo", image: "pomelo.png", alternatives: ["Pommelo"] },
+    { name: "Star Fruit", image: "star-fruit.png", alternatives: ["Carambola"] },
+    { name: "Longan", image: "longan.png", alternatives: [] },
+    { name: "Loquat", image: "loquat.png", alternatives: [] },
+    { name: "Cranberry", image: "cranberry.png", alternatives: ["Cranberries"] },
+    { name: "Apricot", image: "apricot.png", alternatives: ["Apricots"] },
+    { name: "Honeydew", image: "honeydew.png", alternatives: ["Honeydew Melon"] },
+    { name: "Avocado", image: "avocado.png", alternatives: ["Avocados"] },
+    { name: "Cacao", image: "cacao.png", alternatives: ["Cocoa"] },
+    { name: "Calamansi", image: "calamansi.png", alternatives: ["Calamondin"] },
+    { name: "Cucumber", image: "cucumber.png", alternatives: ["Cucumbers"] },
+    { name: "Eggplant", image: "eggplant.png", alternatives: ["Aubergine"] },
+    { name: "Okra", image: "okra.png", alternatives: ["Lady Finger", "Lady's Finger"] },
+    { name: "Raisin", image: "raisin.png", alternatives: ["Raisins"] },
+    { name: "Star Apple", image: "star-apple.png", alternatives: [] },
+    { name: "Tamarind", image: "tamarind.png", alternatives: ["Tamarine"] },
+    { name: "Tomato", image: "tomato.png", alternatives: ["Tomatoes"] },
+    { name: "Ube", image: "ube.png", alternatives: ["Purple Yam"] },
   ],
 };
 
@@ -8861,6 +8920,7 @@ const VideoGamesCategory: CategoryMetadata = {
 export const CATEGORY_METADATA: Record<Category, CategoryMetadata> = {
   "Airport Codes": AirportCodesCategory,
   "Amusement Parks": AmusementParksCategory,
+  "Fruits": FruitsCategory,
   Apps: AppsCategory,
   "Board games": BoardGamesCategory,
   Books: BooksCategory,
