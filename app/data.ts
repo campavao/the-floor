@@ -227,6 +227,7 @@ type UnusedCategoriesFromConst = Exclude<Category, UsedCategories>;
 export type Category =
   | "Time Tables"
   | "Pokemon"
+  | "Fruits"
   | "Broadway shows"
   | "Disney characters"
   | "Kitchen gadgets"
@@ -269,7 +270,10 @@ export type Category =
   | "EU Flags"
   // | "Chilis" // unused for now
   | "Math"
-  | "Apps";
+  | "Apps"
+  | "Pool Equipment"
+  | "Video Games"
+  ;
 
 export interface FloorData {
   person: string;
@@ -4118,6 +4122,64 @@ const HarryPotterCharactersCategory: CategoryMetadata = {
       alternatives: [],
     },
     { name: "Pomona Sprout", image: "pomona-sprout.jpg", alternatives: [] },
+  ],
+};
+
+const FruitsCategory: CategoryMetadata = {
+  name: "Fruits",
+  folder: "fruits",
+  examples: [
+    { name: "Apple", image: "apple.png", alternatives: ["Apples"] },
+    { name: "Banana", image: "banana.png", alternatives: ["Bananas"] },
+    { name: "Blackberry", image: "blackberry.png", alternatives: ["Blackberries"] },
+    { name: "Blueberry", image: "blueberry.png", alternatives: ["Blueberries"] },
+    { name: "Coconut", image: "coconut.png", alternatives: ["Coconuts"] },
+    { name: "Cherry", image: "cherry.png", alternatives: ["Cherries"] },
+    { name: "Dates", image: "dates.png", alternatives: ["Date"] },
+    { name: "Dragon Fruit", image: "dragon-fruit.png", alternatives: ["Pitaya"] },
+    { name: "Durian", image: "durian.png", alternatives: [] },
+    { name: "Grapes", image: "grapes.png", alternatives: ["Grape"] },
+    { name: "Kiwi", image: "kiwi.png", alternatives: ["Kiwifruit"] },
+    { name: "Jackfruit", image: "jackfruit.png", alternatives: ["Jack Fruit"] },
+    { name: "Lemon", image: "lemon.png", alternatives: ["Lemons"] },
+    { name: "Lime", image: "lime.png", alternatives: ["Limes"] },
+    { name: "Lychee", image: "lychee.png", alternatives: ["Litchi"] },
+    { name: "Mango", image: "mango.png", alternatives: ["Mangoes"] },
+    { name: "Mangosteen", image: "mangosteen.png", alternatives: [] },
+    { name: "Melon", image: "melon.png", alternatives: ["Melons"] },
+    { name: "Orange", image: "orange.png", alternatives: ["Oranges"] },
+    { name: "Papaya", image: "papaya.png", alternatives: ["Papayas"] },
+    { name: "Passion Fruit", image: "passion-fruit.png", alternatives: [] },
+    { name: "Peach", image: "peach.png", alternatives: ["Peaches"] },
+    { name: "Pear", image: "pear.png", alternatives: ["Pears"] },
+    { name: "Pineapple", image: "pineapple.png", alternatives: ["Pineapples"] },
+    { name: "Pomegranate", image: "pomegranate.png", alternatives: [] },
+    { name: "Rambutan", image: "rambutan.png", alternatives: [] },
+    { name: "Raspberries", image: "raspberries.png", alternatives: ["Raspberry"] },
+    { name: "Strawberry", image: "strawberry.png", alternatives: ["Strawberries"] },
+    { name: "Tangerine", image: "tangerine.png", alternatives: ["Tangerines"] },
+    { name: "Watermelon", image: "watermelon.png", alternatives: ["Watermelons"] },
+    { name: "Guava", image: "guava.png", alternatives: [] },
+    { name: "Plum", image: "plum.png", alternatives: ["Plums"] },
+    { name: "Persimmon", image: "persimmon.png", alternatives: [] },
+    { name: "Pomelo", image: "pomelo.png", alternatives: ["Pommelo"] },
+    { name: "Star Fruit", image: "star-fruit.png", alternatives: ["Carambola"] },
+    { name: "Longan", image: "longan.png", alternatives: [] },
+    { name: "Loquat", image: "loquat.png", alternatives: [] },
+    { name: "Cranberry", image: "cranberry.png", alternatives: ["Cranberries"] },
+    { name: "Apricot", image: "apricot.png", alternatives: ["Apricots"] },
+    { name: "Honeydew", image: "honeydew.png", alternatives: ["Honeydew Melon"] },
+    { name: "Avocado", image: "avocado.png", alternatives: ["Avocados"] },
+    { name: "Cacao", image: "cacao.png", alternatives: ["Cocoa"] },
+    { name: "Calamansi", image: "calamansi.png", alternatives: ["Calamondin"] },
+    { name: "Cucumber", image: "cucumber.png", alternatives: ["Cucumbers"] },
+    { name: "Eggplant", image: "eggplant.png", alternatives: ["Aubergine"] },
+    { name: "Okra", image: "okra.png", alternatives: ["Lady Finger", "Lady's Finger"] },
+    { name: "Raisin", image: "raisin.png", alternatives: ["Raisins"] },
+    { name: "Star Apple", image: "star-apple.png", alternatives: [] },
+    { name: "Tamarind", image: "tamarind.png", alternatives: ["Tamarine"] },
+    { name: "Tomato", image: "tomato.png", alternatives: ["Tomatoes"] },
+    { name: "Ube", image: "ube.png", alternatives: ["Purple Yam"] },
   ],
 };
 
@@ -9808,6 +9870,425 @@ const SportsCategory: CategoryMetadata = {
   ],
 };
 
+const PoolEquipmentCategory: CategoryMetadata = {
+  name: "Pool Equipment",
+  folder: "pool-equipment",
+  examples: [
+    {
+      name: "No Diving Sign",
+      image: "no-diving-sign.jpg",
+      alternatives: ["No Diving"],
+    },
+    {
+      name: "Pool Lift",
+      image: "pool-lift.jpg",
+      alternatives: ["ADA Pool Lift", "Pool Chair Lift"],
+    },
+    {
+      name: "Pool Light",
+      image: "pool-light.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Depth Marker",
+      image: "depth-marker.webp",
+      alternatives: ["Depth Marking"],
+    },
+    {
+      name: "Gate Latch",
+      image: "gate-latch.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Self-Closing Hinge",
+      image: "self-closing-hinge.jpg",
+      alternatives: ["Self Closing Hinge"],
+    },
+    {
+      name: "Pool Gate",
+      image: "pool-gate.jpg",
+      alternatives: ["Safety Gate"],
+    },
+    {
+      name: "AED",
+      image: "AED.jpg",
+      alternatives: ["Defibrillator", "Automated External Defibrillator"],
+    },
+    {
+      name: "First Aid Kit",
+      image: "first-aid-kit.jpg",
+      alternatives: ["First-Aid Kit"],
+    },
+    {
+      name: "Lifeguard",
+      image: "lifeguard.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Shepherd's Crook",
+      image: "shepherds-crook.jpg",
+      alternatives: ["Rescue Hook", "Pool Hook", "Shepherds Crook"],
+    },
+    {
+      name: "Ring Buoy",
+      image: "ring-buoy.jpg",
+      alternatives: ["Life Ring", "Lifebuoy", "Life Preserver"],
+    },
+    {
+      name: "Lifeguard Chair",
+      image: "lifeguard-chair.jpg",
+      alternatives: ["Lifeguard Stand"],
+    },
+    {
+      name: "Pool Handrail",
+      image: "pool-handrail.png",
+      alternatives: ["Handrail"],
+    },
+    {
+      name: "Pool Ladder",
+      image: "pool-ladder.jpg",
+      alternatives: ["Ladder"],
+    },
+    {
+      name: "Telescopic Pole",
+      image: "telescopic-pool.webp",
+      alternatives: ["Telescoping Pole", "Pool Pole"],
+    },
+    {
+      name: "Pool Net",
+      image: "pool-net.jpg",
+      alternatives: ["Skimmer Net", "Leaf Net", "Hand Skimmer"],
+    },
+    {
+      name: "Pool Brush",
+      image: "pool-brush.webp",
+      alternatives: [],
+    },
+    {
+      name: "Pool Vacuum",
+      image: "pool-vacuum.jpg",
+      alternatives: ["Vacuum"],
+    },
+    {
+      name: "Vacuum Port",
+      image: "vacuum-port.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Return Jet",
+      image: "return-jet.webp",
+      alternatives: ["Return", "Jet", "Inlet"],
+    },
+    {
+      name: "Main Drain",
+      image: "main-drain.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Main Drain Cover",
+      image: "main-drain-cover.webp",
+      alternatives: ["Drain Cover"],
+    },
+    {
+      name: "Flow Meter",
+      image: "flow-meter.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Pool Thermometer",
+      image: "pool-thermometer.webp",
+      alternatives: ["Thermometer"],
+    },
+    {
+      name: "pH Meter",
+      image: "ph-meter.jpg",
+      alternatives: ["PH Meter"],
+    },
+    {
+      name: "Pool Test Strips",
+      image: "pool-test-strips.webp",
+      alternatives: ["Test Strips"],
+    },
+    {
+      name: "Pool Test Kit",
+      image: "pool-test-kit.jpg",
+      alternatives: ["Test Kit", "Water Test Kit"],
+    },
+    {
+      name: "Chlorine Tablets",
+      image: "chlorine-tablets.jpg",
+      alternatives: ["Chlorine Tabs", "Chlorine Pucks"],
+    },
+    {
+      name: "Chlorinator",
+      image: "chlorinator.jpg",
+      alternatives: ["Chlorine Feeder"],
+    },
+    {
+      name: "Pool Heater",
+      image: "pool-heater.jpg",
+      alternatives: ["Heater"],
+    },
+    {
+      name: "Backwash",
+      image: "backwash.jpg",
+      alternatives: ["Backwash Valve"],
+    },
+    {
+      name: "Pressure Gauge",
+      image: "pressure-gauge.jpg",
+      alternatives: [],
+    },
+    {
+      name: "Filter Cartridge",
+      image: "filter-cartridge.jpg",
+      alternatives: ["Cartridge"],
+    },
+    {
+      name: "Pool Filter",
+      image: "pool-filter.jpg",
+      alternatives: ["Filter"],
+    },
+    {
+      name: "Pump Strainer Basket",
+      image: "pump-strainer-basket.jpg",
+      alternatives: ["Strainer Basket", "Pump Basket"],
+    },
+    {
+      name: "Pool Pump",
+      image: "pool-pump.jpg",
+      alternatives: ["Pump"],
+    },
+    {
+      name: "Pool Skimmer",
+      image: "pool-skimmer.jpg",
+      alternatives: ["Skimmer"],
+    },
+    {
+      name: "Skimmer Basket",
+      image: "skimmer-basket.jpg",
+      alternatives: [],
+    },
+  ],
+};
+
+const VideoGamesCategory: CategoryMetadata = {
+  name: "Video Games",
+  folder: "video-games",
+  examples: [
+     {
+      name: "Guitar Hero",
+      image: "guitarhero.jpg",
+      alternatives: [],
+     },
+     {
+      name: "Lego Batman",
+      image: "legobatman.jpg",
+      alternatives: [],
+     },
+     {
+      name: "Fortnite",
+      image: "fortnite.jpg",
+      alternatives: [],
+     },
+     {
+      name: "Super Smash Bros",
+      image: "supersmashbros.jpg",
+      alternatives: [],
+     },
+     {
+      name: "Call of Dutye",
+      image: "callofduty.jpg",
+      alternatives: [],
+     },
+     {
+      name: "God of War",
+      image: "GodofWar.png",
+      alternatives: [],
+     },
+     {
+      name: "Halo",
+      image: "Halo.jpg",
+      alternatives: [],
+     },
+     {
+      name: "Mario 64",
+      image: "mario64.jpg",
+      alternatives: ["Super Mario 64"],
+     },
+     {
+      name: "Among Us",
+      image: "amongus.jpg",
+      alternatives: [],
+     },
+     {
+      name: "Angry Birds",
+      image: "angrybirds.jpg",
+      alternatives: [],
+     },
+     {
+      name: "Madden",
+      image: "madden.jpg",
+      alternatives: [],
+     },
+     {
+      name: "Overwatch",
+      image: "overwatch.jpg",
+      alternatives: [],
+     },
+     {
+      name: "Animal Crossing",
+      image: "animalcrossing.jpg",
+      alternatives: [],
+     },
+     {
+      name: "Wii Sports",
+      image: "wiisports.jpg",
+      alternatives: [],
+     },
+     {
+      name: "Skylanders",
+      image: "skylanders.jpg",
+      alternatives: [],
+     },
+     {
+      name: "Lego Star Wars",
+      image: "legostarwars.jpg",
+      alternatives: [],
+     },
+     {
+      name: "SSX Tricky",
+      image: "ssxtricky.jpg",
+      alternatives: [],
+     },
+     {
+      name: "Mario Kart",
+      image: "mariokart.jpg",
+      alternatives: [],
+     },
+     {
+      name: "Pac Man",
+      image: "pacman.jpg",
+      alternatives: [],
+     },
+     {
+      name: "The Legend of Zelda",
+      image: "legendofzelda.jpg",
+      alternatives: ["Breath of the Wild"],
+     },
+     {
+      name: "Tetris",
+      image: "tetris.jpg",
+      alternatives: [],
+     },
+     {
+      name: "Pokemon Go",
+      image: "pokemongo.png",
+      alternatives: [],
+     },
+     {
+      name: "Mario and Sonic at the Olympic Games",
+      image: "mariosonicolympic.png",
+      alternatives: [],
+     },
+     {
+      name: "Star Wars The Force Unleashed",
+      image: "starwarsforceunleashed.jpg",
+      alternatives: [],
+     },
+     {
+      name: "The Sims",
+      image: "thesims.jpg",
+      alternatives: [],
+     },
+     {
+      name: "Rachet and Clank",
+      image: "rachet&clank.jpg",
+      alternatives: [],
+     },
+     {
+      name: "Batman Arkham Asylum",
+      image: "batmanarkhamasylum.jpg",
+      alternatives: [],
+     },
+     {
+      name: "Fallout",
+      image: "fallout.jpg",
+      alternatives: [],
+     },
+     {
+      name: "Boomerang Fu",
+      image: "boomerangfu.jpg",
+      alternatives: [],
+     },
+     {
+      name: "Star Wars Battlefront",
+      image: "starwarsbattlefront.jpg",
+      alternatives: [],
+     },
+     {
+      name: "Assassin's Creed",
+      image: "assassinscreed.jpg",
+      alternatives: [],
+     },
+     {
+      name: "Minecraft",
+      image: "minecraft.jpg",
+      alternatives: [],
+     },
+     {
+      name: "Disney Extreme Skate Adventure",
+      image: "disneyextremeskateadventure.png",
+      alternatives: [],
+     },
+     {
+      name: "Pong",
+      image: "pong.png",
+      alternatives: [],
+     },
+     {
+      name: "Tomb Raider",
+      image: "tombraider.jpg",
+      alternatives: [],
+     },
+     {
+      name: "Uncharted",
+      image: "Uncharted.jpg",
+      alternatives: [],
+     },
+     {
+      name: "Candy Crush",
+      image: "candrycrush.jpg",
+      alternatives: [],
+     },
+     {
+      name: "Kingdom Hearts",
+      image: "kingdomhearts.png",
+      alternatives: [],
+     },
+     {
+      name: "Gang Beasts",
+      image: "gangbeasts.jpg",
+      alternatives: [],
+     },
+     {
+      name: "Palworld",
+      image: "palworld.jpg",
+      alternatives: [],
+     },
+     {
+      name: "Fall Guys",
+      image: "fallguys.jpg",
+      alternatives: [],
+     },
+     {
+      name: "Horizon Zero Dawn",
+      image: "horizonzerodawn.jpg",
+      alternatives: [],
+     },
+  ],
+};
+
 // const ChilisCategory: CategoryMetadata = {
 //   name: "Chilis",
 //   folder: "chilis",
@@ -9817,6 +10298,7 @@ const SportsCategory: CategoryMetadata = {
 export const CATEGORY_METADATA: Record<Category, CategoryMetadata> = {
   "Airport Codes": AirportCodesCategory,
   "Amusement Parks": AmusementParksCategory,
+  "Fruits": FruitsCategory,
   Apps: AppsCategory,
   "Board games": BoardGamesCategory,
   Books: BooksCategory,
@@ -9845,6 +10327,7 @@ export const CATEGORY_METADATA: Record<Category, CategoryMetadata> = {
   Movies: MoviesCategory,
   "Pop divas": PopDivasCategory,
   Pokemon: PokemonCategory,
+  "Pool Equipment": PoolEquipmentCategory,
   "Reality tv shows": RealityTvShowsCategory,
   "Rom Coms": RomComsCategory,
   "Spirit Halloween Catalogue": SpiritHalloweenCatalogueCategory,
@@ -9855,6 +10338,7 @@ export const CATEGORY_METADATA: Record<Category, CategoryMetadata> = {
   "The Office": TheOfficeCategory,
   Thanksgiving: ThanksgivingCategory,
   "Video Game Characters": VideoGameCharactersCategory,
+  "Video Games": VideoGamesCategory,
   "Valorant": ValorantCategory,
   "Time Tables": TimesTablesCategory,
   "Anime": AnimeCategory,
