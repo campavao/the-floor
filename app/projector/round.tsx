@@ -54,7 +54,15 @@ export default function Round({
   ) => void;
 }) {
   const { folder, examples: rawExamples } = CATEGORY_METADATA[category];
-  const channel = new BroadcastChannel("the-floor-presenter");
+  // One send-only channel for the lifetime of the component. Constructing it
+  // during render created a new one every frame, none of which were ever
+  // closed -- and because it sits in onRoundFinish's dependency list, it also
+  // made that callback (and everything depending on it) unstable.
+  const presenterChannelRef = useRef<BroadcastChannel | null>(null);
+  if (!presenterChannelRef.current) {
+    presenterChannelRef.current = new BroadcastChannel("the-floor-presenter");
+  }
+  const channel = presenterChannelRef.current;
   const searchParams = useSearchParams();
   const { playSound, preloadSounds } = useSound();
 
@@ -72,6 +80,7 @@ export default function Round({
   );
 
   const revealExampleNameRef = useRef(revealExampleName);
+  const selectedExampleIndexRef = useRef(selectedExampleIndex);
 
   const shuffle = (items: any[]) => {
     return items.sort(() => Math.random() - 0.5);
@@ -88,6 +97,18 @@ export default function Round({
   useEffect(() => {
     revealExampleNameRef.current = revealExampleName;
   }, [revealExampleName]);
+
+  useEffect(() => {
+    selectedExampleIndexRef.current = selectedExampleIndex;
+  }, [selectedExampleIndex]);
+
+  useEffect(
+    () => () => {
+      presenterChannelRef.current?.close();
+      presenterChannelRef.current = null;
+    },
+    []
+  );
 
   const onRoundFinish = useCallback(
     (forceWin?: "challenger" | "defender") => {
@@ -121,15 +142,21 @@ export default function Round({
   const onNext = useCallback(
     async (timeout: number = 1000) => {
       await new Promise((resolve) => setTimeout(resolve, timeout));
-      if (examples.length - 1 === selectedExampleIndex) {
+
+      // Read the index as it is when the timer fires rather than when this
+      // callback was created. Advancing from a captured value meant a call
+      // made a few examples ago would set the round back to that example,
+      // showing the wrong picture for a frame.
+      const current = selectedExampleIndexRef.current;
+      if (examples.length - 1 === current) {
         setRevealExampleName(REVEAL_STATE.FINISHED);
         return;
       }
 
       setRevealExampleName(REVEAL_STATE.NOT_REVEALED);
-      setSelectedExampleIndex(selectedExampleIndex + 1);
+      setSelectedExampleIndex(current + 1);
     },
-    [examples, selectedExampleIndex]
+    [examples]
   );
 
   const onPass = useCallback(async () => {
@@ -212,34 +239,50 @@ export default function Round({
     return () => clearInterval(interval);
   }, [currentTurn]);
 
+  // The handlers change identity on every example, but the subscription must
+  // not: it is held in a ref so the effect below can run exactly once.
+  const handlers = useRef({ onRoundFinish, onPass, onReveal, playSound });
   useEffect(() => {
+    handlers.current = { onRoundFinish, onPass, onReveal, playSound };
+  }, [onRoundFinish, onPass, onReveal, playSound]);
+
+  useEffect(() => {
+    // This previously returned its cleanup from inside the message listener
+    // rather than from the effect, so no channel was ever closed. Combined
+    // with deps that changed on every example, each advance left another live
+    // listener behind, and a single press from the presenter reached all of
+    // them at once.
     const channel = new BroadcastChannel("the-floor-projector");
-    channel.addEventListener("message", (event) => {
+
+    const onMessage = (event: MessageEvent) => {
       switch (event.data.type) {
         case PROJECTOR_MESSAGE_TYPE.START_ROUND:
           setCountdown(3);
           setRevealExampleName(REVEAL_STATE.NOT_REVEALED);
-          playSound("countdown");
+          handlers.current.playSound("countdown");
           break;
         case PROJECTOR_MESSAGE_TYPE.FINISH_ROUND:
-          onRoundFinish(event.data.forceWin);
+          handlers.current.onRoundFinish(event.data.forceWin);
           break;
         case PROJECTOR_MESSAGE_TYPE.PASS_ROUND:
-          onPass();
+          handlers.current.onPass();
           break;
         case PROJECTOR_MESSAGE_TYPE.REVEAL_ROUND:
-          onReveal();
+          handlers.current.onReveal();
           break;
         default:
           console.warn("Unknown message type", event.data.type);
           break;
       }
+    };
 
-      return () => {
-        channel.close();
-      };
-    });
-  }, [onRoundFinish, onPass, onReveal, playSound]);
+    channel.addEventListener("message", onMessage);
+
+    return () => {
+      channel.removeEventListener("message", onMessage);
+      channel.close();
+    };
+  }, []);
 
   useEffect(() => {
     preloadSounds();
