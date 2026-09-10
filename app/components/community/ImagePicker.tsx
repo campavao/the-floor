@@ -25,6 +25,7 @@ export default function ImagePicker({
   itemName,
   categoryName,
   initialQuery,
+  webSearchAvailable = false,
   onPick,
   onPickUrl,
   onPickFile,
@@ -33,6 +34,8 @@ export default function ImagePicker({
   itemName: string;
   categoryName: string;
   initialQuery: string;
+  /** Hidden unless the deployment has a key for it. */
+  webSearchAvailable?: boolean;
   onPick: (result: ImageResult) => void;
   onPickUrl: (url: string) => void;
   onPickFile: (file: File) => void;
@@ -141,11 +144,13 @@ export default function ImagePicker({
               }}
               className="bg-gray-800 text-white p-2 rounded border border-[#00d4ff]/60"
             >
-              {Object.entries(SOURCE_LABELS).map(([value, label]) => (
-                <option key={value} value={value}>
-                  {label}
-                </option>
-              ))}
+              {Object.entries(SOURCE_LABELS)
+                .filter(([value]) => value !== "web" || webSearchAvailable)
+                .map(([value, label]) => (
+                  <option key={value} value={value}>
+                    {label}
+                  </option>
+                ))}
             </select>
             <FloorButton
               variant="rectangular"
@@ -173,9 +178,12 @@ export default function ImagePicker({
                 that.
               </p>
               <p className="text-sm">
-                Commons and Openverse are strong on animals, food, places and
-                public figures, and thin on branded or pop-culture things. For
-                those, paste a link or upload a file below.
+                Commons and Openverse are free-licence archives: strong on
+                animals, food, places and public figures, and they carry
+                essentially no branded or pop-culture artwork.
+                {webSearchAvailable
+                  ? " Try Web images for those."
+                  : " For those, paste a link or upload a file below."}
               </p>
             </div>
           )}

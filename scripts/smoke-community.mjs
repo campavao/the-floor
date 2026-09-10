@@ -95,11 +95,25 @@ check("refuses a private address", ssrfResult.status === 400, ssrfResult.body.er
 // 5. Upload enough real images to publish -- all at once, on purpose.
 // Sequential uploads hid a lost update: each request rewrote the whole item
 // array from its own snapshot, so parallel ones overwrote each other.
+//
+// The bytes are posted as files, which is what the browser does: it fetches
+// and shrinks the image itself so fifty downloads don't all come from one
+// datacenter IP. Twelve concurrent server-side fetches of the same URL is
+// something no real client does and something Wikimedia rate-limits.
+const sample = await fetch(IMAGE, {
+  headers: { "User-Agent": "the-floor-smoke/1.0 (+https://the-floor-game.vercel.app)" },
+});
+if (!sample.ok) {
+  check(`fetch sample image (HTTP ${sample.status})`, false);
+  process.exit(1);
+}
+const bytes = new Uint8Array(await sample.arrayBuffer());
+
 const uploads = await Promise.all(
   itemIds.slice(0, 12).map(async (itemId) => {
     const form = new FormData();
     form.append("itemId", itemId);
-    form.append("sourceUrl", IMAGE);
+    form.append("file", new Blob([bytes], { type: "image/jpeg" }), "image.jpg");
     form.append("creditSource", "Wikimedia Commons");
     const result = await author.call(`/api/community/categories/${id}/images`, {
       method: "POST",
@@ -111,12 +125,30 @@ const uploads = await Promise.all(
 );
 check("uploads 12 images concurrently", uploads.every(Boolean), `${uploads.filter(Boolean).length}/12`);
 
+// The server-side fetch path still exists for pasted links, so check it once
+// rather than twelve times at once.
+const viaUrl = new FormData();
+viaUrl.append("itemId", itemIds[12]);
+viaUrl.append("sourceUrl", IMAGE);
+const urlResult = await author.call(`/api/community/categories/${id}/images`, {
+  method: "POST",
+  body: viaUrl,
+});
+check(
+  "server can still fetch a pasted URL",
+  urlResult.status === 200,
+  urlResult.body?.error ?? "ok"
+);
+
+// 12 from the concurrent batch plus the one fetched server-side.
+const EXPECTED_WITH_IMAGES = 13;
+
 const afterUpload = await author.call(`/api/community/categories/${id}`);
 const withImages = afterUpload.body.category?.items?.filter((item) => item.imageUrl).length;
 check(
   "concurrent uploads all survive",
-  withImages === 12,
-  `${withImages}/12 items kept an image`
+  withImages === EXPECTED_WITH_IMAGES,
+  `${withImages}/${EXPECTED_WITH_IMAGES} items kept an image`
 );
 
 // 6. Stranger cannot upload into someone else's category
@@ -134,7 +166,7 @@ const published = await author.call(`/api/community/categories/${id}/publish`, {
 check("publishes once it has enough", published.status === 200, `status ${published.status}`);
 check(
   "drops items that never got an image",
-  published.body.category?.items?.length === 12,
+  published.body.category?.items?.length === EXPECTED_WITH_IMAGES,
   `${published.body.category?.items?.length} items`
 );
 check(

@@ -158,6 +158,30 @@ app/api/community/...   the routes
 app/community/...       browse and create pages
 ```
 
+### 4. Branded and pop-culture images — Serper (optional)
+
+```
+SERPER_API_KEY=...
+```
+
+Commons and Openverse are free-licence archives. They contain essentially no
+trademarked artwork, and no amount of keyword tuning changes that — searching
+Commons for "Tony the Tiger" returns a wristwatch, and "Snap Crackle and Pop"
+returns a tugboat. If your categories are cereal mascots, video game characters
+or brand logos, that's the wall you hit.
+
+Serper is a Google Images API: 2,500 searches a month free, then about $1 per
+1,000. With a key set, "Web images" appears as a source in the Find dialog and
+an opt-in checkbox appears for auto-fill.
+
+**Auto-fill leaves it off by default on purpose** — one 50-item category spends
+fifty searches, so the free allowance is about fifty categories a month if
+every one uses it. Leaving it to the Find dialog means the quota is spent only
+on the items that actually need it.
+
+Without the key nothing changes: the source isn't offered, and paste-a-link and
+upload stay the fallback.
+
 ### Image search runs in the browser
 
 Wikimedia Commons and Openverse are keyless and send CORS headers, so searching

@@ -18,7 +18,7 @@ import type { ImageCredit } from "./types";
  * pop-culture items. That's what the paste-a-URL and upload paths are for.
  */
 
-export type ImageSource = "commons" | "openverse";
+export type ImageSource = "commons" | "openverse" | "web";
 
 export type ImageResult = {
   id: string;
@@ -35,6 +35,7 @@ export type ImageResult = {
 export const SOURCE_LABELS: Record<ImageSource, string> = {
   commons: "Wikimedia Commons",
   openverse: "Openverse",
+  web: "Web images",
 };
 
 type SearchOptions = {
@@ -145,6 +146,32 @@ const openverseSearch = async (
   });
 };
 
+/**
+ * Google results, through our own endpoint.
+ *
+ * The odd one out: it needs a key, so unlike Commons and Openverse it can't be
+ * called from the browser and costs a function invocation per search. That's
+ * why it's opt-in and kept off the automatic path by default.
+ */
+const webSearch = async (
+  query: string,
+  { signal }: { signal?: AbortSignal }
+): Promise<ImageResult[]> => {
+  const response = await fetch("/api/community/search-images", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ q: query }),
+    signal,
+  });
+
+  const body = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    throw new Error(body?.error ?? `Web search failed (HTTP ${response.status})`);
+  }
+
+  return (body.images ?? []) as ImageResult[];
+};
+
 export async function searchImages(
   query: string,
   { source, minEdge, limit, signal }: SearchOptions
@@ -155,7 +182,9 @@ export async function searchImages(
   const results =
     source === "commons"
       ? await commonsSearch(trimmed, { limit, signal })
-      : await openverseSearch(trimmed, { limit, signal });
+      : source === "web"
+        ? await webSearch(trimmed, { signal })
+        : await openverseSearch(trimmed, { limit, signal });
 
   // Reported dimensions aren't always present. Keep unknowns rather than
   // hiding them -- the server checks the real bytes anyway and will say no.

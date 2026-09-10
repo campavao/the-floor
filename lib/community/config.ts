@@ -109,6 +109,12 @@ export const r2Config = () => {
   };
 };
 
+/**
+ * Optional. Unlocks Google image results for branded and pop-culture items
+ * that free-licence archives don't carry. 2,500 searches a month are free.
+ */
+export const serperApiKey = () => trimmed(process.env.SERPER_API_KEY);
+
 export const databaseUrl = () =>
   trimmed(process.env.DATABASE_URL) ?? trimmed(process.env.POSTGRES_URL);
 

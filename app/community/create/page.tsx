@@ -54,12 +54,46 @@ export default function CreateCategoryPage() {
   const [picking, setPicking] = useState<string | null>(null);
   const [editing, setEditing] = useState<string | null>(null);
 
+  /**
+   * What this deployment offers. AI suggestions and web image search each
+   * depend on a key that may not be set, and offering a button that answers
+   * 503 is worse than not offering it.
+   */
+  const [capabilities, setCapabilities] = useState({
+    aiSuggestions: false,
+    webImageSearch: false,
+  });
+
+  /**
+   * Which source auto-fill uses.
+   *
+   * Web search is the only one carrying branded or pop-culture artwork --
+   * Commons will answer "Tony the Tiger" with a wristwatch -- but it's metered
+   * and one category spends fifty calls, so it stays opt-in per category.
+   */
+  const [useWebForAutoFill, setUseWebForAutoFill] = useState(false);
+
+  useEffect(() => {
+    fetch("/api/community/capabilities")
+      .then((response) => response.json())
+      .then((found) =>
+        setCapabilities({
+          aiSuggestions: Boolean(found.aiSuggestions),
+          webImageSearch: Boolean(found.webImageSearch),
+        })
+      )
+      .catch(() => undefined);
+  }, []);
+
   // Auto-fill walks the grid in the background; this lets it stop cleanly when
   // the author hits Stop.
   const cancelRef = useRef(false);
 
   /** Set before `setCategoryId`, so the fill can start in the same tick. */
   const categoryIdRef = useRef<string | null>(null);
+
+  /** Read inside the long-running fill, which outlives the render that started it. */
+  const webForAutoFillRef = useRef(false);
 
   /**
    * The background fill runs for a minute or more while every cell it touches
@@ -74,6 +108,10 @@ export default function CreateCategoryPage() {
   useEffect(() => {
     cellsRef.current = cells;
   }, [cells]);
+
+  useEffect(() => {
+    webForAutoFillRef.current = useWebForAutoFill;
+  }, [useWebForAutoFill]);
 
   const patchCell = useCallback((itemId: string, patch: Partial<Cell>) => {
     setCells((previous) => {
@@ -161,7 +199,7 @@ export default function CreateCategoryPage() {
         if (results.length === 0) {
           patchCell(itemId, { status: "searching", message: undefined });
           results = await searchForItem(itemName, name, {
-            source: "commons",
+            source: webForAutoFillRef.current ? "web" : "commons",
             minEdge: LIMITS.minSourceImageEdge,
             limit: 12,
           });
@@ -412,14 +450,16 @@ export default function CreateCategoryPage() {
               <span className="font-semibold" style={{ color: "#00d4ff" }}>
                 Items — one per line
               </span>
-              <FloorButton
-                variant="rectangular"
-                className="text-sm font-semibold"
-                disabled={name.trim().length < 2 || working}
-                onClick={onSuggest}
-              >
-                {working ? "Thinking…" : "Suggest 50 with AI"}
-              </FloorButton>
+              {capabilities.aiSuggestions && (
+                <FloorButton
+                  variant="rectangular"
+                  className="text-sm font-semibold"
+                  disabled={name.trim().length < 2 || working}
+                  onClick={onSuggest}
+                >
+                  {working ? "Thinking…" : "Suggest 50 with AI"}
+                </FloorButton>
+              )}
             </div>
             <textarea
               value={manualList}
@@ -506,6 +546,22 @@ export default function CreateCategoryPage() {
           </div>
         </div>
 
+        {capabilities.webImageSearch && (
+          <label className="flex items-start gap-2 text-sm text-white/70">
+            <input
+              type="checkbox"
+              checked={useWebForAutoFill}
+              onChange={(event) => setUseWebForAutoFill(event.target.checked)}
+              className="mt-1"
+            />
+            <span>
+              Use web image search to fill the gaps. Slower and metered, but
+              it&rsquo;s the only source with branded and pop-culture pictures —
+              Wikimedia answers &ldquo;Tony the Tiger&rdquo; with a wristwatch.
+            </span>
+          </label>
+        )}
+
         {withImages < LIMITS.minItemsToPublish && (
           <p className="text-white/50 text-sm">
             {LIMITS.minItemsToPublish - withImages} more picture
@@ -538,6 +594,7 @@ export default function CreateCategoryPage() {
         <ImagePicker
           itemName={pickingCell.item.name}
           categoryName={name}
+          webSearchAvailable={capabilities.webImageSearch}
           initialQuery={defaultQuery(pickingCell.item.name, name)}
           onPick={(result) => onPickResult(picking, result)}
           onPickUrl={(url) => onPickUrl(picking, url)}
