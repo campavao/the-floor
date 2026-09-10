@@ -97,10 +97,29 @@ npm run build   # production build
 CI runs both on every pull request, deliberately on Linux so casing bugs
 surface there instead of in production.
 
+## Community categories
+
+Adding a category the way above means a pull request, which is the right
+amount of friction for the built-in set. For everyone else there's
+`/community` — name a category, get a list of items suggested for you, pick a
+picture for each one in a grid, crop or erase watermarks, publish.
+
+Those live outside the repo and nobody reviews them before they appear, so
+they're kept in their own pool, ranked by votes and hidden when reported. Hosts
+opt into the ones they want and they show up in the presenter's category list
+alongside the built-in ones.
+
+It runs locally with no accounts and no keys — see
+[COMMUNITY_SETUP.md](COMMUNITY_SETUP.md) for that and for wiring up storage,
+a database and item suggestions.
+
 ## Built with
 
-Next.js and Tailwind, deployed on Vercel. No database, no accounts, no
-server — every page is static and the game state lives in your browser.
+Next.js and Tailwind, deployed on Vercel. The game itself has no database, no
+accounts and no server — every page is static and the game state lives in your
+browser. The community tool adds Postgres for the category list, Cloudflare R2
+for the images, and the AI Gateway for item suggestions; without those
+configured, the rest of the site is unaffected.
 
 ## Disclaimer
 

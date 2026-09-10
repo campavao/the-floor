@@ -12,13 +12,18 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^1.1.0",
     "@vercel/analytics": "^1.6.1",
+    "ai": "^7.0.97",
+    "aws4fetch": "^1.0.20",
     "canvas-confetti": "^1.9.4",
     "classnames": "^2.5.1",
     "next": "^16.3.1",
     "react": "19.2.1",
     "react-dom": "19.2.1",
-    "usehooks-ts": "^3.1.1"
+    "sharp": "^0.35.4",
+    "usehooks-ts": "^3.1.1",
+    "zod": "^4.6.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
@@ -30,7 +35,6 @@
     "axios": "^1.13.2",
     "eslint": "^9",
     "eslint-config-next": "16.0.7",
-    "sharp": "^0.35.0",
     "tailwindcss": "^4",
     "typescript": "^5",
     "unsplash-js": "^7.0.20",

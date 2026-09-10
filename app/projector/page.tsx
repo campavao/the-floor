@@ -7,7 +7,9 @@ import {
   useRef,
   useState,
 } from "react";
-import { Category, FLOOR_DATA, FloorData, GameDetails } from "../data";
+import { CategoryId, FLOOR_DATA, FloorData, GameDetails } from "../data";
+import { categoryDisplayName } from "../categories/registry";
+import { useCommunityCategories } from "../categories/useCommunityCategories";
 import classNames from "classnames";
 import { PROJECTOR_MESSAGE_TYPE } from "../presenter/page";
 import Round from "./round";
@@ -17,7 +19,7 @@ import FloorPageLayout from "../components/FloorPageLayout";
 import FloorButton from "../components/FloorButton";
 
 interface Round {
-  category: Category;
+  category: CategoryId;
   challenger: FloorData;
   defender: FloorData;
 }
@@ -37,6 +39,8 @@ export function Projector() {
     "the-floor-round",
     undefined
   );
+
+  const { categories: communityCategories } = useCommunityCategories();
 
   const [isRandomizing, setIsRandomizing] = useState(false);
 
@@ -178,7 +182,7 @@ export function Projector() {
   const onSelectOrMerge = (
     winner: FloorData,
     loser: FloorData,
-    newCategory: Category
+    newCategory: CategoryId
   ) => {
     const newWinnerPiece = {
       ...winner,
@@ -317,6 +321,10 @@ export function Projector() {
             <FloorPiece
               key={floorPiece.category + "-" + index}
               floorPiece={floorPiece}
+              categoryName={categoryDisplayName(
+                floorPiece.category,
+                communityCategories
+              )}
               isSelected={isSameCategoryAndPerson}
               isHighlighted={!isRandomizing && isHighlighted}
               isRandomizing={isRandomizing}
@@ -332,6 +340,7 @@ export function Projector() {
 
 function FloorPiece({
   floorPiece,
+  categoryName,
   isSelected,
   isRandomizing = false,
   isHighlighted = isRandomizing,
@@ -339,6 +348,8 @@ function FloorPiece({
   selectedFloorPiece,
 }: {
   floorPiece: FloorData;
+  /** Display name for the tile's category -- ids are opaque for community ones. */
+  categoryName: string;
   /** Selected floor piece */
   isSelected: boolean;
   /** Highlighted floor piece surrounding the selected floor piece */
@@ -368,10 +379,7 @@ function FloorPiece({
       onClick={onClick}
     >
       <p>{floorPiece.person}</p>
-      {/* <p>{floorPiece.category}</p> */}
-      {(isSelected || isHighlighted) && !isRandomizing && (
-        <p>{floorPiece.category}</p>
-      )}
+      {(isSelected || isHighlighted) && !isRandomizing && <p>{categoryName}</p>}
     </button>
   );
 }

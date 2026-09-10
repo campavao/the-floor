@@ -1,0 +1,217 @@
+# The community category pool
+
+Two pools, on purpose.
+
+**Curated** — the categories in `app/data.ts`, images in `public/images/`. Hand
+made, reviewed in a pull request, deployed with the site. Free forever, because
+they're just files in the repo. Nothing here changes that.
+
+**Community** — made in the browser at `/community/create` by anyone, stored
+outside the repo, never reviewed by a human before it goes live. Votes rank it;
+reports hide it. This is the new part.
+
+The game treats them the same once a host picks one. Everything else about them
+is different, including who is responsible for what's in them.
+
+## Trying it with no accounts and no keys
+
+```bash
+npm run dev
+```
+
+Open <http://localhost:3000/community/create>. It works immediately: categories
+go to `.community-dev/db.json` and images to `public/community-dev/`, both
+gitignored. The AI suggest button is the only thing that won't work — type or
+paste a list instead.
+
+This fallback refuses to start in production, so there's no way to accidentally
+ship it.
+
+## Going live
+
+Three services, all on free tiers.
+
+### 1. Images — Cloudflare R2
+
+R2 rather than Vercel Blob for one reason: **egress is free**. Blob's Hobby
+allowance is 1 GB stored and 2,000 writes a month, and one 50-item category is
+50 writes — so about 40 categories a month, and blowing through it disables Blob
+for 30 days with no way to pay your way out. R2's free tier is 10 GB, 1M writes,
+10M reads, and unlimited bandwidth.
+
+1. Create a bucket (R2 → Create bucket).
+2. Give it a public URL: either enable the `r2.dev` subdomain (fine to start,
+   rate-limited and not meant for production) or attach a custom domain.
+3. Create an API token with **Object Read & Write** on that bucket.
+4. Add a CORS policy, or the image editor can't read pixels back out of the
+   canvas:
+
+```json
+[
+  {
+    "AllowedOrigins": ["https://the-floor-game.vercel.app", "http://localhost:3000"],
+    "AllowedMethods": ["GET"],
+    "AllowedHeaders": ["*"],
+    "MaxAgeSeconds": 3600
+  }
+]
+```
+
+```
+R2_ACCOUNT_ID=...
+R2_ACCESS_KEY_ID=...
+R2_SECRET_ACCESS_KEY=...
+R2_BUCKET=the-floor-community
+R2_PUBLIC_BASE_URL=https://images.example.com
+```
+
+### 2. Categories — Postgres
+
+Any Postgres works. Neon through the Vercel Marketplace keeps billing in one
+place and scales to zero without the manual un-pausing that Supabase's free tier
+needs after a quiet week.
+
+```bash
+psql "$DATABASE_URL" -f lib/community/schema.sql
+```
+
+```
+DATABASE_URL=postgres://...
+```
+
+### 3. Item suggestions — Vercel AI Gateway
+
+```
+AI_GATEWAY_API_KEY=...
+```
+
+On Vercel this can come from the deployment's OIDC token instead. Without it the
+suggest button reports itself as unconfigured and the rest of the tool carries
+on.
+
+## What it costs
+
+Measured, not guessed — run `node scripts/bench-image-size.mjs` to redo it.
+
+| | |
+| --- | --- |
+| Stored image | ~129 KB average (WebP, 1600px long edge, q80) |
+| One 50-item category | ~6.3 MB |
+| R2's free 10 GB | ~1,600 categories |
+| Egress | free, any volume |
+| 50 AI suggestions | ~1.5K output tokens, a fraction of a cent |
+| AI Gateway free credit | $5/month — thousands of category generations |
+
+For comparison, the 40 curated categories in the repo average 135 KB per image
+across 1,972 files, so a community category costs about what a curated one does.
+
+The thing that actually protects the budget is `lib/community/config.ts`. Every
+image is re-encoded to a bounded WebP before it's stored, so nobody can upload a
+25 MB JPEG and have it served to a projector. Raise `storedImageMaxEdge` and the
+numbers above move with it; dropping to 1280/78 roughly halves them.
+
+Two rules worth not breaking:
+
+- **Community images never go through `next/image`.** Hobby includes 5,000
+  transformations a month and an unmoderated pool would eat that in a day. They
+  are plain `<img>` tags pointed at R2, which is already a CDN.
+- **Keys are content-hashed and served `immutable`.** A given URL's bytes never
+  change, so repeat views are cache hits and cost nothing.
+
+## How it's put together
+
+```
+lib/community/
+  config.ts     limits, credentials, the cost knobs
+  db.ts         Postgres, plus the on-disk dev fallback
+  storage.ts    R2, plus the on-disk dev fallback
+  images.ts     sharp normalisation + SSRF-guarded fetching
+  inpaint.ts    the erase brush (see below)
+  search.ts     Commons + Openverse, runs in the browser
+  validate.ts   what we accept from a request
+app/api/community/...   the routes
+app/community/...       browse and create pages
+```
+
+### Image search runs in the browser
+
+Wikimedia Commons and Openverse are keyless and send CORS headers, so searching
+costs us nothing at all — no functions, no bandwidth, no API key. Only the image
+an author actually keeps is sent to the server.
+
+This is a deliberate change from the earlier attempt, which called Google's
+Custom Search JSON API. That API is closed to new customers and shuts down on
+2027-01-01, and its fallback — scraping Google's HTML from a serverless function
+— gets a consent page rather than pictures.
+
+The honest limitation: these sources are excellent for animals, food, places,
+plants and public figures, and thin for branded or pop-culture things. "Pokémon"
+will not go well. That's what the paste-a-link and upload-a-file paths are for,
+and why the picker mentions them when a search comes back empty.
+
+### The erase brush is real inpainting
+
+`lib/community/inpaint.ts` walks inward from the edge of the painted region and
+gives each pixel a distance-weighted average of the neighbours already known —
+the approach OpenCV calls `INPAINT_TELEA`, which is what the original desktop
+tool fell back to. Because it only reads from outside the mask, the watermark
+never contributes to its own replacement.
+
+Blurring the masked area instead leaves a grey ghost in the shape of the logo.
+`tests/inpaint.test.ts` asserts the difference.
+
+It's good on the backgrounds watermarks usually sit on and only passable across
+hard edges, which is why Crop sits next to it and is often the better tool.
+
+## Moderation
+
+There isn't any, in the sense of a person checking things before they appear.
+What there is instead:
+
+- Drafts are private to their author until explicitly published.
+- Publishing requires at least 12 items with images; items without one are
+  dropped rather than shipped broken.
+- Three reports from three different browsers hides a category from every
+  listing immediately, pending a look. Deliberately a low bar.
+- Votes rank; they don't publish or unpublish.
+
+Identity is a random key in an httpOnly cookie the server sets. It's not an
+account — someone determined can clear cookies and vote again — but a page
+can't claim to be a different voter, which is the part that matters.
+
+### Promoting to curated
+
+The intended path for anything good: pull its images into `public/images/`, add
+it to `app/data.ts`, open a PR, then delete the community copy. The best content
+becomes free-forever repo content and storage stays bounded. Voting is the
+shortlist.
+
+## Checking it still works
+
+```bash
+npm test                                  # unit tests, no server needed
+npm run dev
+node scripts/smoke-community.mjs          # the API, including the security rules
+npm install --no-save playwright
+node scripts/e2e-community.mjs            # the whole flow in a browser
+```
+
+The last one creates a category, watches every cell fetch a picture, paints and
+erases in the editor, publishes, votes, adds it to a game, and confirms it turns
+up in the presenter's category list and plays.
+
+The Postgres statements need their own check, because the app reaches Neon over
+an HTTP driver that only speaks to Neon — so nothing above touches them. Point
+this at any Postgres:
+
+```bash
+npm install --no-save pg
+node scripts/verify-schema-sql.mjs "postgres://..."
+```
+
+It applies the schema and exercises the two statements that have to be right
+under concurrency: the per-item `jsonb` patch several uploads run at once, and
+the vote recount. Both are checked with parallel writers.
+
+`scripts/bench-image-size.mjs` re-measures the storage numbers above against
+live Commons images.

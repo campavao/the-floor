@@ -275,9 +275,23 @@ export type Category =
   | "Video Games"
   ;
 
+/**
+ * Anything the game will accept as a category key.
+ *
+ * The curated categories in this file are a closed union, which is what keeps
+ * `CATEGORY_METADATA` exhaustive and gives contributors autocomplete. Community
+ * categories only exist at runtime, so the game itself has to key off a plain
+ * string. `string & {}` keeps the literal suggestions in editors while still
+ * accepting a `community:<id>` key.
+ *
+ * Resolve one of these into something renderable with `resolveCategory` in
+ * `app/categories/registry.ts` -- never index `CATEGORY_METADATA` directly.
+ */
+export type CategoryId = Category | (string & {});
+
 export interface FloorData {
   person: string;
-  category: Category;
+  category: CategoryId;
   hasPlayed: boolean;
   isStillInTheGame: boolean;
 }

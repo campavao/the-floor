@@ -222,6 +222,11 @@ export default function CategoriesPage() {
               How to Add More Categories
             </FloorButton>
           </Link>
+          <Link href="/community" prefetch={false}>
+            <FloorButton variant="rectangular" className="font-semibold">
+              Community Categories
+            </FloorButton>
+          </Link>
         </div>
       </div>
     </FloorPageLayout>

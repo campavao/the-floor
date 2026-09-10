@@ -2,13 +2,9 @@
 "use client";
 import classNames from "classnames";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import {
-  Category,
-  CATEGORY_METADATA,
-  FloorData,
-  ImageExample,
-  TextExample,
-} from "../data";
+import { CategoryId, FloorData } from "../data";
+import { resolveCategory, type ResolvedExample } from "../categories/registry";
+import { useCommunityCategories } from "../categories/useCommunityCategories";
 import {
   PRESENTER_MESSAGE_TYPE,
   PROJECTOR_MESSAGE_TYPE,
@@ -44,25 +40,38 @@ export default function Round({
   defender,
   onFinish,
 }: {
-  category: Category;
+  category: CategoryId;
   challenger: FloorData;
   defender: FloorData;
   onFinish: (
     winner: FloorData,
     loser: FloorData,
-    newCategory: Category
+    newCategory: CategoryId
   ) => void;
 }) {
-  const { folder, examples: rawExamples } = CATEGORY_METADATA[category];
+  const { categories: communityCategories, ready: categoriesReady } =
+    useCommunityCategories();
+  const resolved = useMemo(
+    () => resolveCategory(category, communityCategories),
+    [category, communityCategories]
+  );
+  const rawExamples = useMemo(() => resolved?.examples ?? [], [resolved]);
   // One send-only channel for the lifetime of the component. Constructing it
   // during render created a new one every frame, none of which were ever
   // closed -- and because it sits in onRoundFinish's dependency list, it also
   // made that callback (and everything depending on it) unstable.
+  //
+  // Opened on demand rather than during render so it survives the unmount
+  // cleanup below: in development React mounts, tears down and remounts, and a
+  // channel captured during the first render is already closed by the time the
+  // effects run again. Posting to it throws InvalidStateError.
   const presenterChannelRef = useRef<BroadcastChannel | null>(null);
-  if (!presenterChannelRef.current) {
-    presenterChannelRef.current = new BroadcastChannel("the-floor-presenter");
-  }
-  const channel = presenterChannelRef.current;
+  const channel = useCallback(() => {
+    if (!presenterChannelRef.current) {
+      presenterChannelRef.current = new BroadcastChannel("the-floor-presenter");
+    }
+    return presenterChannelRef.current;
+  }, []);
   const searchParams = useSearchParams();
   const { playSound, preloadSounds } = useSound();
 
@@ -82,13 +91,11 @@ export default function Round({
   const revealExampleNameRef = useRef(revealExampleName);
   const selectedExampleIndexRef = useRef(selectedExampleIndex);
 
-  const shuffle = (items: any[]) => {
-    return items.sort(() => Math.random() - 0.5);
-  };
-
   const examples = useMemo(() => {
     if (searchParams.get("debug") === "true") {
-      return shuffle(rawExamples);
+      // Copy first: `rawExamples` is the memoised resolution, and sorting in
+      // place rewrote the category itself.
+      return [...rawExamples].sort(() => Math.random() - 0.5);
     }
 
     return rawExamples;
@@ -124,7 +131,7 @@ export default function Round({
 
       onFinish(winner, loser, challenger.category);
 
-      channel.postMessage({
+      channel().postMessage({
         type: PRESENTER_MESSAGE_TYPE.END_ROUND,
       });
     },
@@ -290,7 +297,7 @@ export default function Round({
 
   useEffect(() => {
     const example = examples[selectedExampleIndex];
-    channel.postMessage({
+    channel().postMessage({
       type: PRESENTER_MESSAGE_TYPE.SET_CURRENT_ROUND_EXAMPLE,
       category,
       example,
@@ -315,6 +322,26 @@ export default function Round({
     revealExampleName === REVEAL_STATE.PASSED ||
     revealExampleName === REVEAL_STATE.FINISHED;
 
+  // A saved game can name a community category this browser no longer holds.
+  // Say so rather than showing an empty white board for 45 seconds -- but only
+  // once the store has actually been read, or the server (which has no
+  // localStorage) would render this for every community category.
+  if (!resolved && categoriesReady) {
+    return (
+      <FloorPageLayout>
+        <div className="flex flex-col items-center justify-center w-full h-full gap-4 p-10 text-center">
+          <p className="text-6xl font-bold text-yellow-500">
+            Category unavailable
+          </p>
+          <p className="text-2xl text-white/80">
+            “{String(category)}” isn’t loaded in this browser. Re-add it from
+            the community page to play this round.
+          </p>
+        </div>
+      </FloorPageLayout>
+    );
+  }
+
   if (currentTurn == null) {
     return (
       <FloorPageLayout>
@@ -334,7 +361,6 @@ export default function Round({
           <RoundDisplay
             examples={examples}
             selectedExampleIndex={selectedExampleIndex}
-            folder={folder}
           />
         </div>
         <div className="flex flex-col gap-2 w-full">
@@ -425,14 +451,10 @@ export default function Round({
 export function RoundDisplay({
   examples,
   selectedExampleIndex,
-  folder,
 }: {
-  examples: ImageExample[] | TextExample[];
+  examples: ResolvedExample[];
   selectedExampleIndex: number;
-  folder: string;
 }) {
-  const example = examples[selectedExampleIndex];
-
   return (
     <div className="relative w-full h-full flex items-center justify-center">
       {examples.map((example, index) => {
@@ -465,7 +487,8 @@ export function RoundDisplay({
 
         return (
           <img
-            src={`/images/${folder}/${example.image}`}
+            src={example.src}
+            alt=""
             className={classNames(
               "absolute h-full w-auto max-w-full object-contain rounded transition-opacity duration-200",
               {
@@ -473,7 +496,7 @@ export function RoundDisplay({
                 "opacity-100": isSelected,
               }
             )}
-            key={`${folder}-${example.image}-${index}`}
+            key={`${example.src}-${index}`}
             loading="eager"
             decoding="sync"
           />

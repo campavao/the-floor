@@ -1,12 +1,12 @@
 "use client";
 import { useSearchParams } from "next/navigation";
-import { Category } from "../data";
+import { CategoryId } from "../data";
 import Round from "../projector/round";
 import { Suspense } from "react";
 
 export function Demo() {
   const searchParams = useSearchParams();
-  const category = searchParams.get("category") as Category | undefined;
+  const category = searchParams.get("category") as CategoryId | undefined;
 
   if (!category) {
     return <div>No category provided</div>;

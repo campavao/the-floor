@@ -1,7 +1,14 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { Category, CATEGORY_METADATA, FloorData, GameDetails } from "../data";
+import { CategoryId, FloorData, GameDetails } from "../data";
+import {
+  categoryDisplayName,
+  listSelectableCategories,
+  resolveCategory,
+  type ResolvedExample,
+} from "../categories/registry";
+import { useCommunityCategories } from "../categories/useCommunityCategories";
 import { REVEAL_STATE, RoundDisplay } from "../projector/round";
 import FloorButton from "../components/FloorButton";
 import FloorPageLayout from "../components/FloorPageLayout";
@@ -32,16 +39,12 @@ export default function PresenterPage({
 }) {
   const [projectorWindow, setProjectorWindow] = useState<Window | null>(null);
   const [roundDetails, setRoundDetails] = useState<{
-    category: Category;
+    category: CategoryId;
     challenger: FloorData;
     defender: FloorData;
     exampleIndex: number;
     roundState: REVEAL_STATE;
-    example: {
-      name: string;
-      image: string;
-      alternatives: string[];
-    };
+    example: ResolvedExample;
   }>();
   const [gameDetails, setGameDetails] = useState<GameDetails | undefined>(
     undefined
@@ -56,24 +59,20 @@ export default function PresenterPage({
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
   const [newPlayerName, setNewPlayerName] = useState("");
   const [newPlayerCategory, setNewPlayerCategory] = useState<
-    Category | undefined
+    CategoryId | undefined
   >(undefined);
   const [editPlayerName, setEditPlayerName] = useState("");
   const [editPlayerCategory, setEditPlayerCategory] = useState<
-    Category | undefined
+    CategoryId | undefined
   >(undefined);
 
   const [demoDetails, setDemoDetails] = useState<{
-    category: Category;
+    category: CategoryId;
   }>();
 
-  const [debugExamples, setDebugExamples] = useState<
-    {
-      name: string;
-      image: string;
-      alternatives: string[];
-    }[]
-  >();
+  const [debugExamples, setDebugExamples] = useState<ResolvedExample[]>();
+
+  const { categories: communityCategories } = useCommunityCategories();
 
   const desktopPlayWarning = (
     <div
@@ -97,8 +96,8 @@ export default function PresenterPage({
       return debugExamples;
     }
 
-    return CATEGORY_METADATA[roundDetails.category].examples;
-  }, [roundDetails?.category, debugExamples]);
+    return resolveCategory(roundDetails.category, communityCategories)?.examples ?? [];
+  }, [roundDetails?.category, debugExamples, communityCategories]);
 
   const channel = new BroadcastChannel("the-floor-projector");
 
@@ -115,7 +114,7 @@ export default function PresenterPage({
 
   const triggerStartDemoRound = () => {
     const newWindow = window.open(
-      `/demo?category=${demoDetails?.category}`,
+      `/demo?category=${encodeURIComponent(demoDetails?.category ?? "")}`,
       "debug",
       "fullscreen=yes"
     );
@@ -237,19 +236,24 @@ export default function PresenterPage({
     // Get used categories to prevent duplicates
     const usedCategories = new Set(gameDetails.data.map((p) => p.category));
 
-    // Filter players based on search query
-    const filteredPlayers = gameDetails.data.filter(
-      (player) =>
-        player.person.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        player.category.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+    // Filter players based on search query. Match on the display name so
+    // searching for a community category finds it by what's on screen rather
+    // than by its opaque id.
+    const filteredPlayers = gameDetails.data.filter((player) => {
+      const query = searchQuery.toLowerCase();
+      return (
+        player.person.toLowerCase().includes(query) ||
+        categoryDisplayName(player.category, communityCategories)
+          .toLowerCase()
+          .includes(query)
+      );
+    });
 
     // Get available categories (not used by other players)
-    const getAvailableCategories = (currentCategory?: Category) => {
-      return Object.keys(CATEGORY_METADATA).filter(
-        (cat) => !usedCategories.has(cat as Category) || cat === currentCategory
-      ) as Category[];
-    };
+    const getAvailableCategories = (currentCategory?: CategoryId) =>
+      listSelectableCategories(communityCategories).filter(
+        ({ id }) => !usedCategories.has(id) || id === currentCategory
+      );
 
     const handleAddPlayer = () => {
       if (!newPlayerName.trim() || newPlayerCategory === undefined) return;
@@ -366,16 +370,14 @@ export default function PresenterPage({
               <select
                 value={newPlayerCategory || ""}
                 onChange={(e) =>
-                  setNewPlayerCategory(
-                    e.target.value ? (e.target.value as Category) : undefined
-                  )
+                  setNewPlayerCategory(e.target.value || undefined)
                 }
                 className="flex-1 bg-gray-800 text-white p-3 rounded-md border-2 border-[#00d4ff] focus:outline-none focus:ring-2 focus:ring-[#00d4ff]"
               >
                 <option value="">Select category...</option>
-                {getAvailableCategories().map((category) => (
-                  <option key={category} value={category}>
-                    {category}
+                {getAvailableCategories().map(({ id, name, source }) => (
+                  <option key={id} value={id}>
+                    {source === "community" ? `${name} (community)` : name}
                   </option>
                 ))}
               </select>
@@ -433,18 +435,16 @@ export default function PresenterPage({
                           <select
                             value={editPlayerCategory || ""}
                             onChange={(e) =>
-                              setEditPlayerCategory(
-                                e.target.value
-                                  ? (e.target.value as Category)
-                                  : undefined
-                              )
+                              setEditPlayerCategory(e.target.value || undefined)
                             }
                             className="bg-gray-800 text-white p-2 rounded-md border border-[#00d4ff] focus:outline-none focus:ring-2 focus:ring-[#00d4ff]"
                           >
                             {getAvailableCategories(player.category).map(
-                              (category) => (
-                                <option key={category} value={category}>
-                                  {category}
+                              ({ id, name, source }) => (
+                                <option key={id} value={id}>
+                                  {source === "community"
+                                    ? `${name} (community)`
+                                    : name}
                                 </option>
                               )
                             )}
@@ -476,7 +476,10 @@ export default function PresenterPage({
                               className="text-sm font-semibold"
                               style={{ color: "#00d4ff" }}
                             >
-                              {player.category}
+                              {categoryDisplayName(
+                                player.category,
+                                communityCategories
+                              )}
                             </p>
                           </div>
                           <div className="flex gap-2">
@@ -552,20 +555,18 @@ export default function PresenterPage({
               Category:
             </span>
             <select
-              onChange={(e) =>
-                setDemoDetails({ category: e.target.value as Category })
-              }
+              onChange={(e) => setDemoDetails({ category: e.target.value })}
               value={demoDetails?.category}
               className="w-full sm:w-auto bg-gray-900 text-white p-3 rounded-md border-2 border-[#00d4ff] focus:outline-none focus:ring-2 focus:ring-[#00d4ff] focus:ring-offset-2 focus:ring-offset-black"
               style={{ boxShadow: "0 0 10px rgba(0, 212, 255, 0.3)" }}
             >
-              {Object.keys(CATEGORY_METADATA)
-                .sort()
-                .map((category) => (
-                  <option key={category} value={category}>
-                    {category}
+              {listSelectableCategories(communityCategories).map(
+                ({ id, name, source }) => (
+                  <option key={id} value={id}>
+                    {source === "community" ? `${name} (community)` : name}
                   </option>
-                ))}
+                )
+              )}
             </select>
           </label>
           <div className="flex flex-col sm:flex-row justify-between gap-4 mt-6">
@@ -720,7 +721,6 @@ export default function PresenterPage({
                 <RoundDisplay
                   examples={examples}
                   selectedExampleIndex={roundDetails.exampleIndex}
-                  folder={CATEGORY_METADATA[roundDetails.category].folder}
                 />
               </div>
             )}
@@ -751,7 +751,7 @@ export default function PresenterPage({
               {players.map((p, i) => (
                 <li key={i}>
                   <span className="font-semibold">{p.person}</span> —{" "}
-                  {p.category}
+                  {categoryDisplayName(p.category, communityCategories)}
                 </li>
               ))}
             </ul>
@@ -864,6 +864,13 @@ export default function PresenterPage({
             prefetch={false}
           >
             View available categories
+          </Link>
+          <Link
+            className="font-semibold text-base text-center"
+            href="/community"
+            prefetch={false}
+          >
+            Community categories
           </Link>
           <Link
             className="font-semibold text-base text-center"
