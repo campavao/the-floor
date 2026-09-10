@@ -22,8 +22,22 @@ const check = (name, passed, detail = "") => {
 };
 
 const browser = await chromium.launch();
+
+const bypass = process.env.VERCEL_BYPASS;
 const context = await browser.newContext({ viewport: { width: 1400, height: 1000 } });
 const page = await context.newPage();
+
+// Vercel preview deployments sit behind SSO. Trade the bypass secret for a
+// cookie on the first request rather than setting a header on every one:
+// Playwright's extraHTTPHeaders apply to cross-origin requests too, and an
+// unrecognised header turns the image searches against Commons and Openverse
+// into preflighted requests that they reject.
+if (bypass) {
+  await page.goto(
+    `${BASE}/?x-vercel-protection-bypass=${bypass}&x-vercel-set-bypass-cookie=true`,
+    { waitUntil: "domcontentloaded" }
+  );
+}
 
 const consoleErrors = [];
 page.on("console", (message) => {
