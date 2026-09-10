@@ -90,16 +90,28 @@ pulls one into `.env.local`, so local development needs no key at all.
 
 **The Gateway will not serve a request until there's a card on file**, even for
 the free credits. It answers 403 `customer_verification_required` until you add
-one under AI Gateway in the dashboard. Adding a card doesn't charge you: it
-unlocks $5 of credit that refreshes every 30 days, which is thousands of
-category generations at ~1.5K output tokens each.
+one under AI Gateway in the dashboard. Adding a card doesn't charge you.
 
-One trap worth knowing: **the recurring $5 ends permanently the first time you
-buy credits.** If suggestions ever run dry, wait for the refresh rather than
-topping up, or you lose the monthly allowance for good.
+What the card gets you is less than it sounds, and it's worth being precise
+because the marketing isn't. Tested on a Hobby account with a card and the
+full $5 credit unspent:
+
+- **Newer models refuse outright.** Anything at `gemini-3.x` and up answers
+  "Free tier users do not have access to this model", credit balance
+  irrelevant.
+- **Older models work but are rate-limited hard.** A handful of requests in a
+  row exhausts the limit for that model, and it takes minutes to recover.
+- **The $5 credit does not lift the limit.** Only *purchasing* credits moves
+  you to the paid tier — and doing that **permanently ends the monthly $5**.
+
+In practice that's fine for what this does: one person clicking "suggest" once
+per category is exactly the shape the free tier tolerates. Generating fifty
+categories back to back is not. `SUGGEST_MODELS` in `lib/community/config.ts`
+lists the models verified to answer, tried in order — the limits are per model,
+so the second usually works when the first won't.
 
 Without any of this the suggest button explains itself and the rest of the tool
-works — typing or pasting a list is the fallback, and it's what the flow is
+works. Typing or pasting a list is the fallback, and it's what the flow is
 built around anyway.
 
 ## What it costs
