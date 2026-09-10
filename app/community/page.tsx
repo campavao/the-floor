@@ -159,9 +159,24 @@ export default function CommunityPage() {
           ))}
         </div>
 
-        {error && <p className="text-yellow-200 text-sm">{error}</p>}
+        {error && status !== "error" && (
+          <p className="text-yellow-200 text-sm">{error}</p>
+        )}
 
         {status === "loading" && <p className="text-white/60 py-12">Loading…</p>}
+
+        {status === "error" && (
+          <div className="text-white/60 py-16 text-center flex flex-col gap-3">
+            <p className="text-yellow-200">{error}</p>
+            <p className="text-sm">
+              The rest of the game is unaffected —{" "}
+              <Link href="/categories" className="underline text-[#00d4ff]">
+                the built-in categories
+              </Link>{" "}
+              don&rsquo;t need any of this.
+            </p>
+          </div>
+        )}
 
         {status === "ready" && categories.length === 0 && (
           <div className="text-white/60 py-16 text-center flex flex-col gap-3">

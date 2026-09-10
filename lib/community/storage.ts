@@ -3,7 +3,7 @@ import path from "node:path";
 
 import { AwsClient } from "aws4fetch";
 
-import { isProduction, r2Config } from "./config";
+import { NotConfigured, isProduction, r2Config } from "./config";
 
 export type ImageStore = {
   /** Writes the object and returns the URL a browser should load it from. */
@@ -111,9 +111,10 @@ export const imageStore = (): ImageStore => {
   }
 
   if (isProduction()) {
-    throw new Error(
-      "Community images need R2. Set R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, " +
-        "R2_SECRET_ACCESS_KEY, R2_BUCKET and R2_PUBLIC_BASE_URL."
+    throw new NotConfigured(
+      "Community image storage isn't set up on this deployment yet. It needs " +
+        "R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY, R2_BUCKET " +
+        "and R2_PUBLIC_BASE_URL."
     );
   }
 

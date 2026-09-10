@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 
+import { NotConfigured } from "./config";
 import { ImageRejected } from "./images";
 import { InvalidInput } from "./validate";
 
@@ -21,6 +22,13 @@ export const handle = async (
   } catch (error) {
     if (error instanceof InvalidInput || error instanceof ImageRejected) {
       return fail(error.message, 400);
+    }
+
+    // Deployed but not provisioned yet. Say which variables are missing rather
+    // than "something went wrong" -- it isn't a fault, it's a setup step, and
+    // the site sits in this state between merging and provisioning.
+    if (error instanceof NotConfigured) {
+      return fail(error.message, 503);
     }
 
     console.error("[community]", error);

@@ -3,7 +3,7 @@ import path from "node:path";
 
 import { neon } from "@neondatabase/serverless";
 
-import { LIMITS, databaseUrl, isProduction } from "./config";
+import { LIMITS, NotConfigured, databaseUrl, isProduction } from "./config";
 import { newId, slugify } from "./ids";
 import type {
   CommunityCategoryRecord,
@@ -497,9 +497,9 @@ export const repo = (): Repo => {
   }
 
   if (isProduction()) {
-    throw new Error(
-      "Community categories need Postgres. Set DATABASE_URL and run " +
-        "lib/community/schema.sql against it."
+    throw new NotConfigured(
+      "Community categories aren't set up on this deployment yet. " +
+        "It needs DATABASE_URL, with lib/community/schema.sql applied."
     );
   }
 

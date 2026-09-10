@@ -13,6 +13,20 @@
  * production.
  */
 
+/**
+ * Thrown when the tool is deployed but its storage isn't set up yet.
+ *
+ * Distinct from a genuine failure so the API can answer 503 with the actual
+ * missing variables instead of a generic "something went wrong" -- the site
+ * sits in exactly this state between merging and provisioning.
+ */
+export class NotConfigured extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = "NotConfigured";
+  }
+}
+
 export const LIMITS = {
   /** Matches the curated categories, which run about 50 examples each. */
   maxItemsPerCategory: 60,
