@@ -36,14 +36,24 @@ const r2Store = (config: NonNullable<ReturnType<typeof r2Config>>): ImageStore =
 
   return {
     async put(key, body, contentType) {
+      const bytes = new Uint8Array(body);
+
       const response = await client.fetch(objectUrl(key), {
         method: "PUT",
-        body: new Uint8Array(body),
+        body: bytes,
+        // Next.js wraps global fetch, and the wrapper doesn't carry over the
+        // Content-Length that plain fetch infers from a sized body -- so the
+        // request goes out chunked and R2's S3 API rejects it with 411
+        // MissingContentLength. Bare Node gets this right, which is why it
+        // only shows up once the code runs inside a route.
         headers: {
           "Content-Type": contentType,
+          "Content-Length": String(bytes.byteLength),
           // Keys are content-hashed, so a given URL's bytes never change.
           "Cache-Control": "public, max-age=31536000, immutable",
         },
+        // Uploads are not something to serve from a cache.
+        cache: "no-store",
       });
 
       if (!response.ok) {

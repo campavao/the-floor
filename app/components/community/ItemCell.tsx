@@ -41,6 +41,13 @@ export default function ItemCell({
             src={item.imageUrl}
             alt={item.name}
             loading="lazy"
+            // Must match the editor, which loads the same URL with
+            // crossOrigin="anonymous". The browser caches the CORS mode
+            // alongside the response, so a plain load here poisons the cache
+            // for the editor: it gets the cached non-CORS copy back and can't
+            // read the pixels, and "Edit" fails on every image that has
+            // already been displayed.
+            crossOrigin="anonymous"
             className="w-full h-full object-contain"
           />
         ) : (

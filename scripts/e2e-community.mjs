@@ -72,7 +72,10 @@ try {
   await page.locator("button[title='Crop or erase text and watermarks']").first().click();
   await page.waitForSelector("text=/Editing/", { timeout: 10_000 });
   const canvas = page.locator("canvas");
-  check("editor opens with a canvas", await canvas.isVisible());
+  // The canvas mounts at 0x0 and only gets its size once the image has
+  // decoded, so painting before then silently does nothing.
+  await page.waitForSelector("canvas[data-ready='true']", { timeout: 30_000 });
+  check("editor opens with a loaded canvas", await canvas.isVisible());
 
   const box = await canvas.boundingBox();
   await page.mouse.move(box.x + box.width * 0.4, box.y + box.height * 0.4);

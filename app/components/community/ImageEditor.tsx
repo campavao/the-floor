@@ -349,19 +349,29 @@ export default function ImageEditor({
           </button>
         </div>
 
-        <div className="flex-1 overflow-auto p-4 flex items-center justify-center bg-black/40 min-h-[320px]">
+        <div className="relative flex-1 overflow-auto p-4 flex items-center justify-center bg-black/40 min-h-[320px]">
           {error && !ready ? (
             <p className="text-red-300 text-center">{error}</p>
           ) : (
-            <canvas
-              ref={viewRef}
-              onPointerDown={onPointerDown}
-              onPointerMove={onPointerMove}
-              onPointerUp={onPointerUp}
-              onPointerCancel={onPointerUp}
-              className="max-w-full max-h-[55vh] object-contain touch-none"
-              style={{ cursor: tool === "erase" ? "crosshair" : "cell" }}
-            />
+            <>
+              {/* Stays mounted while loading: the image's onload writes
+                  straight to this canvas, so the ref has to already exist. */}
+              {!ready && (
+                <p className="text-[#00d4ff] animate-pulse absolute">
+                  Loading image…
+                </p>
+              )}
+              <canvas
+                ref={viewRef}
+                data-ready={ready ? "true" : "false"}
+                onPointerDown={onPointerDown}
+                onPointerMove={onPointerMove}
+                onPointerUp={onPointerUp}
+                onPointerCancel={onPointerUp}
+                className="max-w-full max-h-[55vh] object-contain touch-none"
+                style={{ cursor: tool === "erase" ? "crosshair" : "cell" }}
+              />
+            </>
           )}
         </div>
 
