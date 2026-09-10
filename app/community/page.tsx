@@ -127,7 +127,8 @@ export default function CommunityPage() {
               Community categories
             </h1>
             <p className="text-white/70">
-              Made by anyone, checked by nobody. These are kept separate from the{" "}
+              Made by the community, results may vary. These are kept separate
+              from the{" "}
               <Link href="/categories" className="underline text-[#00d4ff]">
                 built-in categories
               </Link>
