@@ -43,6 +43,16 @@ export type Repo = {
   remove(id: string): Promise<void>;
   list(options: ListOptions): Promise<StoredCategory[]>;
   listByAuthor(authorKey: string): Promise<StoredCategory[]>;
+  /** Drafts nobody has touched since `before`, for the cleanup job. */
+  listStaleDrafts(before: string, limit: number): Promise<StoredCategory[]>;
+  /**
+   * Every image key any category still points at.
+   *
+   * The cleanup job diffs this against the bucket, so a partial result would
+   * make live images look unreferenced -- implementations must return all of
+   * them or throw.
+   */
+  allImageKeys(): Promise<Set<string>>;
   vote(
     id: string,
     voterKey: string,
@@ -233,6 +243,28 @@ const postgresRepo = (connectionString: string): Repo => {
          limit 50
       `;
       return rows.map(fromRow);
+    },
+
+    async listStaleDrafts(before, limit) {
+      const rows = await sql`
+        select * from community_categories
+         where status = 'draft' and updated_at < ${before}
+         order by updated_at asc
+         limit ${limit}
+      `;
+      return rows.map(fromRow);
+    },
+
+    async allImageKeys() {
+      const rows = await sql`
+        select jsonb_array_elements(items)->>'imageKey' as key
+          from community_categories
+      `;
+      return new Set(
+        rows
+          .map((row) => row.key)
+          .filter((key): key is string => typeof key === "string" && key !== "")
+      );
     },
 
     async vote(id, voterKey, direction) {
@@ -437,6 +469,19 @@ const devRepo = (): Repo => {
         .filter((c) => c.authorKey === authorKey)
         .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt))
         .slice(0, 50),
+
+    listStaleDrafts: async (before, limit) =>
+      (await read()).categories
+        .filter((c) => c.status === "draft" && c.updatedAt < before)
+        .sort((a, b) => a.updatedAt.localeCompare(b.updatedAt))
+        .slice(0, limit),
+
+    allImageKeys: async () =>
+      new Set(
+        (await read()).categories
+          .flatMap((c) => c.items.map((item) => item.imageKey))
+          .filter((key): key is string => Boolean(key))
+      ),
 
     vote: (id, voterKey, direction) =>
       mutate((data) => {

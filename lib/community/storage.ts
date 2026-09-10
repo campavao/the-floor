@@ -1,14 +1,22 @@
-import { mkdir, unlink, writeFile } from "node:fs/promises";
+import { mkdir, readdir, stat, unlink, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 import { AwsClient } from "aws4fetch";
 
 import { NotConfigured, isProduction, r2Config } from "./config";
 
+export type StoredObject = { key: string; uploadedAt: Date };
+
 export type ImageStore = {
   /** Writes the object and returns the URL a browser should load it from. */
   put(key: string, body: Buffer, contentType: string): Promise<string>;
   remove(key: string): Promise<void>;
+  /**
+   * Everything in the store. Used by the cleanup job to find objects nothing
+   * points at, so it must be complete -- a truncated listing is fine (those
+   * objects are simply not considered) but a silently partial one is not.
+   */
+  list(): Promise<StoredObject[]>;
   describe(): string;
 };
 
@@ -69,10 +77,41 @@ const r2Store = (config: NonNullable<ReturnType<typeof r2Config>>): ImageStore =
 
     async remove(key) {
       // Best effort. A leaked object costs a fraction of a cent; failing a
-      // user's save because cleanup didn't work is worse.
+      // user's save because cleanup didn't work is worse. The cleanup job
+      // sweeps up whatever this misses.
       await client
         .fetch(objectUrl(key), { method: "DELETE" })
         .catch(() => undefined);
+    },
+
+    async list() {
+      const objects: StoredObject[] = [];
+      let token: string | undefined;
+
+      do {
+        const url = new URL(`${config.endpoint}/${config.bucket}`);
+        url.searchParams.set("list-type", "2");
+        url.searchParams.set("max-keys", "1000");
+        if (token) url.searchParams.set("continuation-token", token);
+
+        const response = await client.fetch(url.toString());
+        if (!response.ok) {
+          throw new Error(`R2 refused the listing (HTTP ${response.status})`);
+        }
+
+        const xml = await response.text();
+        for (const entry of xml.matchAll(
+          /<Contents>[\s\S]*?<Key>([^<]+)<\/Key>[\s\S]*?<LastModified>([^<]+)<\/LastModified>[\s\S]*?<\/Contents>/g
+        )) {
+          objects.push({ key: entry[1], uploadedAt: new Date(entry[2]) });
+        }
+
+        token = /<IsTruncated>true<\/IsTruncated>/.test(xml)
+          ? xml.match(/<NextContinuationToken>([^<]+)<\/NextContinuationToken>/)?.[1]
+          : undefined;
+      } while (token);
+
+      return objects;
     },
 
     describe: () => `Cloudflare R2 (${config.bucket})`,
@@ -103,6 +142,33 @@ const localStore = (): ImageStore => {
 
     async remove(key) {
       await unlink(safe(key)).catch(() => undefined);
+    },
+
+    async list() {
+      const walk = async (dir: string): Promise<StoredObject[]> => {
+        const entries = await readdir(dir, { withFileTypes: true }).catch(
+          () => []
+        );
+
+        const found = await Promise.all(
+          entries.map(async (entry) => {
+            const full = path.join(dir, entry.name);
+            if (entry.isDirectory()) return walk(full);
+
+            const info = await stat(full);
+            return [
+              {
+                key: path.relative(root, full).split(path.sep).join("/"),
+                uploadedAt: info.mtime,
+              },
+            ];
+          })
+        );
+
+        return found.flat();
+      };
+
+      return walk(root);
     },
 
     describe: () => "local disk (public/community-dev)",

@@ -1,5 +1,6 @@
 "use client";
 
+import { fetchAndShrink } from "@/lib/community/clientImage";
 import type { ImageResult } from "@/lib/community/search";
 import type {
   CommunityCategorySummary,
@@ -74,14 +75,27 @@ export const reportCategory = (
 ): Promise<{ reported: boolean; hidden: boolean }> =>
   postJson(`/api/community/categories/${id}/report`, { reason });
 
+const creditFields = (form: FormData, credit: ImageResult["credit"]) => {
+  form.append("creditSource", credit.source);
+  if (credit.sourceUrl) form.append("creditSourceUrl", credit.sourceUrl);
+  if (credit.author) form.append("creditAuthor", credit.author);
+  if (credit.license) form.append("creditLicense", credit.license);
+};
+
 /**
- * Hand the server a URL and let it do the fetching.
+ * Attach a search result, downloading it in the browser where possible.
  *
- * The browser can't download most of these itself -- the hosts don't send CORS
- * headers -- and doing it server-side is also what lets us size-check and
- * re-encode before anything reaches storage.
+ * Both sources send permissive CORS headers, so the bytes come straight from
+ * the visitor to Commons or Openverse rather than through us. That matters:
+ * pulling fifty images per category from a single Vercel IP got the server
+ * rate-limited (HTTP 429) on almost every request. It also means we upload a
+ * shrunken ~130 KB WebP instead of the server downloading the multi-megabyte
+ * original.
+ *
+ * The server path stays as a fallback for anything the browser can't fetch,
+ * and re-encodes whatever arrives either way.
  */
-export const attachImageFromResult = (
+export const attachImageFromResult = async (
   categoryId: string,
   itemId: string,
   result: ImageResult,
@@ -89,11 +103,14 @@ export const attachImageFromResult = (
 ): Promise<{ item: CommunityItem }> => {
   const form = new FormData();
   form.append("itemId", itemId);
-  form.append("sourceUrl", result.fullUrl);
-  form.append("creditSource", result.credit.source);
-  if (result.credit.sourceUrl) form.append("creditSourceUrl", result.credit.sourceUrl);
-  if (result.credit.author) form.append("creditAuthor", result.credit.author);
-  if (result.credit.license) form.append("creditLicense", result.credit.license);
+  creditFields(form, result.credit);
+
+  try {
+    const shrunk = await fetchAndShrink(result.fullUrl, signal);
+    form.append("file", shrunk, "image.webp");
+  } catch {
+    form.append("sourceUrl", result.fullUrl);
+  }
 
   return fetch(`/api/community/categories/${categoryId}/images`, {
     method: "POST",

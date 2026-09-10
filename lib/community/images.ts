@@ -139,17 +139,43 @@ export async function fetchSourceImage(rawUrl: string): Promise<Buffer> {
     }
   }
 
-  const response = await fetch(url, {
-    redirect: "error",
-    signal: AbortSignal.timeout(15_000),
-    headers: {
-      // Some hosts 403 an empty UA. Identify honestly rather than spoofing.
-      "User-Agent": "the-floor-game-community-tool/1.0 (+https://the-floor-game.vercel.app)",
-      Accept: "image/*",
-    },
-  }).catch(() => undefined);
+  // Every request from here shares one datacenter IP, so an image host sees
+  // the whole site's traffic as a single client and throttles accordingly.
+  // Most images are fetched by the visitor's browser for exactly that reason;
+  // this path is the fallback, so it backs off rather than giving up.
+  let response: Response | undefined;
+
+  for (let attempt = 0; attempt < 3; attempt += 1) {
+    response = await fetch(url, {
+      redirect: "error",
+      signal: AbortSignal.timeout(15_000),
+      headers: {
+        // Some hosts 403 an empty UA. Identify honestly rather than spoofing;
+        // Wikimedia's policy asks for a contactable agent string.
+        "User-Agent":
+          "the-floor-game-community-tool/1.0 (+https://the-floor-game.vercel.app)",
+        Accept: "image/*",
+      },
+    }).catch(() => undefined);
+
+    if (response?.status !== 429) break;
+
+    const retryAfter = Number(response.headers.get("retry-after"));
+    const waitMs = Number.isFinite(retryAfter) && retryAfter > 0
+      ? Math.min(retryAfter * 1000, 5_000)
+      : 500 * 2 ** attempt;
+
+    if (attempt < 2) {
+      await new Promise((resolve) => setTimeout(resolve, waitMs));
+    }
+  }
 
   if (!response?.ok) {
+    if (response?.status === 429) {
+      throw new ImageRejected(
+        "That image host is rate-limiting us. Try the Find button and pick one directly."
+      );
+    }
     throw new ImageRejected(
       `Couldn't download that image${response ? ` (HTTP ${response.status})` : ""}.`
     );

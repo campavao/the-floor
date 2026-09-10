@@ -52,6 +52,29 @@ export const LIMITS = {
 
   /** Reports needed before a category drops out of the listings automatically. */
   reportsBeforeAutoHide: 3,
+
+  /**
+   * How long an untouched draft survives before the cleanup job removes it and
+   * its images.
+   *
+   * Someone who starts a category, fetches forty pictures and closes the tab
+   * leaves those forty objects behind forever otherwise -- nobody ever deletes
+   * an abandoned draft, so without this the storage claim elsewhere in the docs
+   * is not actually true. Long enough to come back to it after a week.
+   */
+  abandonedDraftDays: 7,
+
+  /**
+   * Objects younger than this are never swept, even with nothing pointing at
+   * them: an upload in flight is written before the row that references it.
+   */
+  orphanGraceHours: 24,
+
+  /**
+   * Ceiling on deletions per cleanup run. A bug that miscomputes "unreferenced"
+   * should cost a bounded number of images, not the bucket.
+   */
+  maxDeletesPerRun: 500,
 } as const;
 
 const trimmed = (value: string | undefined) => {
@@ -90,12 +113,22 @@ export const databaseUrl = () =>
   trimmed(process.env.DATABASE_URL) ?? trimmed(process.env.POSTGRES_URL);
 
 /**
- * The AI Gateway reads `AI_GATEWAY_API_KEY` itself, and on Vercel it can use
- * the deployment's OIDC token instead. We only check so the UI can hide the
- * suggest button rather than offering something that 500s.
+ * Whether it's worth attempting an AI Gateway call at all.
+ *
+ * Deliberately permissive. On Vercel the SDK authenticates with the
+ * deployment's OIDC token, which it obtains itself -- it is not necessarily
+ * sitting in `VERCEL_OIDC_TOKEN` where an earlier version of this check looked
+ * for it, so requiring that turned a working deployment into "AI suggestions
+ * aren't configured". Being wrong in this direction costs one failed request
+ * that the route already explains; being wrong the other way hides a feature
+ * that works.
  */
 export const hasAiGateway = () =>
-  Boolean(trimmed(process.env.AI_GATEWAY_API_KEY) || trimmed(process.env.VERCEL_OIDC_TOKEN));
+  Boolean(
+    trimmed(process.env.AI_GATEWAY_API_KEY) ||
+      trimmed(process.env.VERCEL_OIDC_TOKEN) ||
+      trimmed(process.env.VERCEL)
+  );
 
 export const isProduction = () => process.env.NODE_ENV === "production";
 

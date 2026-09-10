@@ -204,6 +204,48 @@ Identity is a random key in an httpOnly cookie the server sets. It's not an
 account — someone determined can clear cookies and vote again — but a page
 can't claim to be a different voter, which is the part that matters.
 
+## Keeping storage honest
+
+Two leaks accumulate on their own, so `/api/community/cleanup` runs daily
+(`vercel.json`, 4am, the once-a-day maximum a Hobby account allows):
+
+- **Abandoned drafts.** Someone names a category, fetches forty pictures and
+  closes the tab. Only the author can delete a category, and they've gone.
+  Drafts untouched for `abandonedDraftDays` (7) go, images and all.
+- **Orphaned objects.** Deleting an image is deliberately best-effort so a
+  failed cleanup can't fail somebody's save — which means a failed delete
+  leaves the object behind with nothing pointing at it. Anything the database
+  doesn't reference is swept.
+
+Three guards, because this endpoint deletes things:
+
+- Objects younger than `orphanGraceHours` (24) are never swept. An upload is
+  written *before* the row that references it, so a recent unreferenced object
+  is normal rather than garbage.
+- The reference set is read before any deletion and a failure aborts the run —
+  a partial answer would make live images look orphaned.
+- `maxDeletesPerRun` (500) caps the damage from a bug, and anything skipped is
+  reported rather than silently dropped.
+
+`CRON_SECRET` must be set. Vercel signs cron requests with it, and in
+production the route refuses to run without it — otherwise it's an
+unauthenticated endpoint that deletes things. Run it by hand with:
+
+```bash
+curl -H "Authorization: Bearer $CRON_SECRET" https://…/api/community/cleanup
+```
+
+It answers with what it did, and doing nothing is the normal result.
+
+### Should uploads wait until publish instead?
+
+They could, and it would remove the abandoned-draft half of this. The reason
+they don't: the draft is server-side, so closing the tab halfway through fifty
+images loses nothing. Holding them in the browser instead would make publish a
+fifty-file upload that can fail halfway, and would trade this job for
+IndexedDB persistence. It also wouldn't remove the orphan sweep, since
+best-effort deletes leak either way.
+
 ### Promoting to curated
 
 The intended path for anything good: pull its images into `public/images/`, add
