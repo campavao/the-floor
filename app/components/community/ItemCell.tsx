@@ -1,6 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
+import { useEffect, useRef, useState } from "react";
+
 import type { CommunityItem } from "@/lib/community/types";
 
 export type CellStatus =
@@ -33,14 +35,46 @@ export default function ItemCell({
 }) {
   const busy = status === "searching" || status === "uploading";
 
+  /**
+   * Retry a freshly-uploaded image that isn't being served yet.
+   *
+   * Objects go into R2 over the S3 API, but the public URL is a separate edge
+   * that can still 404 for a moment afterwards -- so the grid would show a
+   * broken image immediately after an edit and stay broken until a reload. The
+   * cache-buster matters: without it the retry just re-reads the cached 404.
+   */
+  const [attempt, setAttempt] = useState(0);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    setAttempt(0);
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, [item.imageUrl]);
+
+  const onImageError = () => {
+    if (attempt >= 3) return;
+    timerRef.current = setTimeout(
+      () => setAttempt((previous) => previous + 1),
+      600 * (attempt + 1)
+    );
+  };
+
+  const src =
+    item.imageUrl && attempt > 0
+      ? `${item.imageUrl}${item.imageUrl.includes("?") ? "&" : "?"}retry=${attempt}`
+      : item.imageUrl;
+
   return (
     <div className="bg-gray-900/60 border border-[#00d4ff]/40 rounded-lg overflow-hidden flex flex-col">
       <div className="relative aspect-square bg-black flex items-center justify-center">
-        {item.imageUrl ? (
+        {src ? (
           <img
-            src={item.imageUrl}
+            src={src}
             alt={item.name}
             loading="lazy"
+            onError={onImageError}
             // Must match the editor, which loads the same URL with
             // crossOrigin="anonymous". The browser caches the CORS mode
             // alongside the response, so a plain load here poisons the cache
