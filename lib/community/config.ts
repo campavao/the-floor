@@ -106,8 +106,20 @@ export const isProduction = () => process.env.NODE_ENV === "production";
 export const isUsingDevFallback = () =>
   !isProduction() && (!r2Config() || !databaseUrl());
 
-/** The models the tool asks for, newest cheap tiers at time of writing. */
-export const MODELS = {
-  suggestItems: "google/gemini-3.8-flash",
-  eraseObject: "google/gemini-3.1-flash-image",
-} as const;
+/**
+ * Models to try for item suggestions, in order.
+ *
+ * A list rather than one name because AI Gateway rate-limits the free tier
+ * *per model*: when one is exhausted its neighbour usually isn't, and trying
+ * three costs nothing extra when the first works. The newer Gemini tiers are
+ * deliberately absent -- they refuse free-tier requests outright rather than
+ * rate-limiting them, so they'd only ever waste a round trip.
+ *
+ * Verified against the live Gateway on a Hobby account: these two answer, and
+ * everything newer returns "Free tier users do not have access to this model".
+ */
+export const SUGGEST_MODELS = [
+  "google/gemini-2.5-flash-lite",
+  "openai/gpt-oss-120b",
+  "google/gemini-2.5-flash",
+] as const;
