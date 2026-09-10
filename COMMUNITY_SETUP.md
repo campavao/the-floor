@@ -85,9 +85,22 @@ DATABASE_URL=postgres://...
 AI_GATEWAY_API_KEY=...
 ```
 
-On Vercel this can come from the deployment's OIDC token instead. Without it the
-suggest button reports itself as unconfigured and the rest of the tool carries
-on.
+On Vercel this can come from the deployment's OIDC token instead — `vercel link`
+pulls one into `.env.local`, so local development needs no key at all.
+
+**The Gateway will not serve a request until there's a card on file**, even for
+the free credits. It answers 403 `customer_verification_required` until you add
+one under AI Gateway in the dashboard. Adding a card doesn't charge you: it
+unlocks $5 of credit that refreshes every 30 days, which is thousands of
+category generations at ~1.5K output tokens each.
+
+One trap worth knowing: **the recurring $5 ends permanently the first time you
+buy credits.** If suggestions ever run dry, wait for the refresh rather than
+topping up, or you lose the monthly allowance for good.
+
+Without any of this the suggest button explains itself and the rest of the tool
+works — typing or pasting a list is the fallback, and it's what the flow is
+built around anyway.
 
 ## What it costs
 

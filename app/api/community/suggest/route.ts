@@ -63,12 +63,39 @@ export async function POST(request: Request) {
       LIMITS.maxItemsPerCategory
     );
 
-    const { output } = await generateText({
-      model: MODELS.suggestItems,
-      system: SYSTEM,
-      output: Output.object({ schema: Suggestions }),
-      prompt: `Category: "${name}"\n\nSuggest ${count} items.`,
-    });
+    let output: z.infer<typeof Suggestions>;
+    try {
+      ({ output } = await generateText({
+        model: MODELS.suggestItems,
+        system: SYSTEM,
+        output: Output.object({ schema: Suggestions }),
+        prompt: `Category: "${name}"\n\nSuggest ${count} items.`,
+      }));
+    } catch (error) {
+      // Gateway problems are almost always account setup rather than a bug, and
+      // "something went wrong" sends people looking in the wrong place. Pass
+      // the reason through -- the author can still type a list either way.
+      const detail = error instanceof Error ? error.message : "";
+
+      if (/credit card|verification/i.test(detail)) {
+        return fail(
+          "The AI Gateway needs a card on file before it will release its free " +
+            "monthly credits. Add one in the Vercel dashboard under AI Gateway, " +
+            "or just type the items in yourself.",
+          503
+        );
+      }
+
+      if (/credit|quota|balance|limit/i.test(detail)) {
+        return fail(
+          "The AI Gateway credit for this month is used up. Type the items in " +
+            "yourself, or wait for it to refresh.",
+          503
+        );
+      }
+
+      throw error;
+    }
 
     // The model is usually well behaved, but it is not a validator: dedupe and
     // trim here so the create page can render the result without thinking.
