@@ -2,6 +2,7 @@ import { repo } from "@/lib/community/db";
 import { fail, handle, json } from "@/lib/community/http";
 import { imageKey } from "@/lib/community/ids";
 import { readKey } from "@/lib/community/identity";
+import { isAdmin } from "@/lib/community/adminSession";
 import { LIMITS } from "@/lib/community/config";
 import { fetchSourceImage, normalizeImage } from "@/lib/community/images";
 import { imageStore } from "@/lib/community/storage";
@@ -20,6 +21,9 @@ type Params = { params: Promise<{ id: string }> };
  * `parseItems` refuses to read image fields off the request.
  *
  * Accepts either a multipart upload (`file`) or a URL to fetch (`sourceUrl`).
+ *
+ * Owner or admin: the admin's whole job is replacing a picture that shouldn't
+ * be there, and it goes through the same normalisation as everything else.
  */
 export async function POST(request: Request, { params }: Params) {
   return handle(async () => {
@@ -28,7 +32,7 @@ export async function POST(request: Request, { params }: Params) {
     const category = await repo().get(id);
 
     if (!category) return fail("No category with that id.", 404);
-    if (!key || category.authorKey !== key) {
+    if ((!key || category.authorKey !== key) && !(await isAdmin())) {
       return fail("That isn't your category.", 403);
     }
 
@@ -102,7 +106,7 @@ export async function POST(request: Request, { params }: Params) {
   });
 }
 
-/** Detach an image without deleting the item. */
+/** Detach an image without deleting the item. Owner or admin. */
 export async function DELETE(request: Request, { params }: Params) {
   return handle(async () => {
     const { id } = await params;
@@ -110,7 +114,7 @@ export async function DELETE(request: Request, { params }: Params) {
     const category = await repo().get(id);
 
     if (!category) return fail("No category with that id.", 404);
-    if (!key || category.authorKey !== key) {
+    if ((!key || category.authorKey !== key) && !(await isAdmin())) {
       return fail("That isn't your category.", 403);
     }
 

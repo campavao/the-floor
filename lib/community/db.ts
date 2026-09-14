@@ -11,6 +11,7 @@ import type {
   CommunityCategoryView,
   CommunityItem,
   ListOptions,
+  ModerationRow,
 } from "./types";
 
 /** Same as the public record, plus the owner token the API must never leak. */
@@ -40,8 +41,20 @@ export type Repo = {
     patch: Partial<CommunityItem>
   ): Promise<StoredCategory | undefined>;
   publish(id: string): Promise<StoredCategory | undefined>;
+  /**
+   * Take a category out of every listing, or put it back.
+   *
+   * Unhiding also clears its reports: it's been looked at, and leaving the
+   * count where it was would mean the very next report hides it again.
+   */
+  setHidden(id: string, hidden: boolean): Promise<StoredCategory | undefined>;
   remove(id: string): Promise<void>;
   list(options: ListOptions): Promise<StoredCategory[]>;
+  /**
+   * Everything, for the admin: drafts and hidden categories included, the
+   * ones most in need of a look first.
+   */
+  listForModeration(limit: number): Promise<StoredCategory[]>;
   listByAuthor(authorKey: string): Promise<StoredCategory[]>;
   /** Drafts nobody has touched since `before`, for the cleanup job. */
   listStaleDrafts(before: string, limit: number): Promise<StoredCategory[]>;
@@ -92,15 +105,33 @@ const blankCategory = (
   publishedAt: null,
 });
 
-/** Strips `authorKey` and answers the two questions the UI needs about you. */
+/** Strips `authorKey` and answers the questions the UI needs about you. */
 export const toView = (
   category: StoredCategory,
   myVote: VoteDirection,
-  isOwner: boolean
+  isOwner: boolean,
+  isAdmin = false
 ): CommunityCategoryView => {
   const { authorKey: _authorKey, ...rest } = category;
-  return { ...rest, myVote, isOwner };
+  return { ...rest, myVote, isOwner, isAdmin, canEdit: isOwner || isAdmin };
 };
+
+export const toModerationRow = (category: StoredCategory): ModerationRow => ({
+  id: category.id,
+  name: category.name,
+  status: category.status,
+  itemCount: category.items.length,
+  previewImageUrls: category.items
+    .map((item) => item.imageUrl)
+    .filter((url): url is string => Boolean(url))
+    .slice(0, 4),
+  upvotes: category.upvotes,
+  downvotes: category.downvotes,
+  reportCount: category.reportCount,
+  hiddenAt: category.hiddenAt,
+  publishedAt: category.publishedAt,
+  updatedAt: category.updatedAt,
+});
 
 export const toSummary = (
   category: StoredCategory,
@@ -213,6 +244,26 @@ const postgresRepo = (connectionString: string): Repo => {
       return rows[0] ? fromRow(rows[0]) : undefined;
     },
 
+    async setHidden(id, hidden) {
+      if (!hidden) {
+        await sql`delete from community_reports where category_id = ${id}`;
+      }
+      const rows = hidden
+        ? await sql`
+            update community_categories
+               set hidden_at = coalesce(hidden_at, now()), updated_at = now()
+             where id = ${id}
+            returning *
+          `
+        : await sql`
+            update community_categories
+               set hidden_at = null, report_count = 0, updated_at = now()
+             where id = ${id}
+            returning *
+          `;
+      return rows[0] ? fromRow(rows[0]) : undefined;
+    },
+
     async remove(id) {
       await sql`delete from community_categories where id = ${id}`;
     },
@@ -241,6 +292,17 @@ const postgresRepo = (connectionString: string): Repo => {
          where author_key = ${authorKey}
          order by updated_at desc
          limit 50
+      `;
+      return rows.map(fromRow);
+    },
+
+    async listForModeration(limit) {
+      const rows = await sql`
+        select * from community_categories
+         order by (hidden_at is not null) desc,
+                  report_count desc,
+                  updated_at desc
+         limit ${limit}
       `;
       return rows.map(fromRow);
     },
@@ -446,6 +508,22 @@ const devRepo = (): Repo => {
         return category;
       }),
 
+    setHidden: (id, hidden) =>
+      mutate((data) => {
+        const category = data.categories.find((c) => c.id === id);
+        if (!category) return undefined;
+
+        if (hidden) {
+          category.hiddenAt = category.hiddenAt ?? now();
+        } else {
+          data.reports = data.reports.filter((r) => r.categoryId !== id);
+          category.hiddenAt = null;
+          category.reportCount = 0;
+        }
+        category.updatedAt = now();
+        return category;
+      }),
+
     remove: (id) =>
       mutate((data) => {
         data.categories = data.categories.filter((c) => c.id !== id);
@@ -469,6 +547,16 @@ const devRepo = (): Repo => {
         .filter((c) => c.authorKey === authorKey)
         .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt))
         .slice(0, 50),
+
+    listForModeration: async (limit) =>
+      (await read()).categories
+        .sort(
+          (a, b) =>
+            Number(Boolean(b.hiddenAt)) - Number(Boolean(a.hiddenAt)) ||
+            b.reportCount - a.reportCount ||
+            b.updatedAt.localeCompare(a.updatedAt)
+        )
+        .slice(0, limit),
 
     listStaleDrafts: async (before, limit) =>
       (await read()).categories

@@ -2,6 +2,7 @@ import { imageStore } from "@/lib/community/storage";
 import { repo, toView } from "@/lib/community/db";
 import { fail, handle, json, readJson } from "@/lib/community/http";
 import { readKey } from "@/lib/community/identity";
+import { isAdmin } from "@/lib/community/adminSession";
 import { parseItems } from "@/lib/community/validate";
 
 type Params = { params: Promise<{ id: string }> };
@@ -14,22 +15,28 @@ export async function GET(_request: Request, { params }: Params) {
 
     const key = await readKey();
     const isOwner = Boolean(key) && category.authorKey === key;
+    const admin = await isAdmin();
+    const canEdit = isOwner || admin;
 
     // Drafts are only visible to whoever started them, and a category the
-    // community has reported into the ground stops being browsable.
-    if (category.status === "draft" && !isOwner) {
+    // community has reported into the ground stops being browsable. The
+    // admin sees both -- a hidden category is exactly the one they need to
+    // look at.
+    if (category.status === "draft" && !canEdit) {
       return fail("No category with that id.", 404);
     }
-    if (category.hiddenAt && !isOwner) {
+    if (category.hiddenAt && !canEdit) {
       return fail("That category is hidden pending review.", 410);
     }
 
     const votes = key ? await repo().getVotes([id], key) : {};
-    return json({ category: toView(category, votes[id] ?? 0, isOwner) });
+    return json({
+      category: toView(category, votes[id] ?? 0, isOwner, admin),
+    });
   });
 }
 
-/** Rename, reorder, add or drop items. Owner only. */
+/** Rename, reorder, add or drop items. Owner or admin. */
 export async function PATCH(request: Request, { params }: Params) {
   return handle(async () => {
     const { id } = await params;
@@ -37,7 +44,9 @@ export async function PATCH(request: Request, { params }: Params) {
     const category = await repo().get(id);
 
     if (!category) return fail("No category with that id.", 404);
-    if (!key || category.authorKey !== key) {
+    const isOwner = Boolean(key) && category.authorKey === key;
+    const admin = await isAdmin();
+    if (!isOwner && !admin) {
       return fail("That isn't your category.", 403);
     }
 
@@ -59,10 +68,11 @@ export async function PATCH(request: Request, { params }: Params) {
 
     await Promise.all(orphaned.map((imageKey) => imageStore().remove(imageKey)));
 
-    return json({ category: toView(saved, 0, true) });
+    return json({ category: toView(saved, 0, isOwner, admin) });
   });
 }
 
+/** Owner or admin. Takes the images with it. */
 export async function DELETE(_request: Request, { params }: Params) {
   return handle(async () => {
     const { id } = await params;
@@ -70,7 +80,8 @@ export async function DELETE(_request: Request, { params }: Params) {
     const category = await repo().get(id);
 
     if (!category) return fail("No category with that id.", 404);
-    if (!key || category.authorKey !== key) {
+    const isOwner = Boolean(key) && category.authorKey === key;
+    if (!isOwner && !(await isAdmin())) {
       return fail("That isn't your category.", 403);
     }
 

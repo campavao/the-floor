@@ -42,6 +42,10 @@ export type CommunityCategoryRecord = {
 /** A record plus the caller's relationship to it. Never leaks `authorKey`. */
 export type CommunityCategoryView = CommunityCategoryRecord & {
   isOwner: boolean;
+  /** Signed in with the admin secret -- see `lib/community/admin.ts`. */
+  isAdmin: boolean;
+  /** Owner or admin: may replace images, drop items, or delete the category. */
+  canEdit: boolean;
   myVote: -1 | 0 | 1;
 };
 
@@ -59,6 +63,25 @@ export type CommunityCategorySummary = {
   publishedAt: string | null;
   myVote: -1 | 0 | 1;
   isOwner: boolean;
+};
+
+/**
+ * One row of the admin's moderation list. Everything, including drafts and
+ * hidden categories, with the numbers an admin decides on -- and nothing that
+ * identifies the author, because there's nothing to identify them by.
+ */
+export type ModerationRow = {
+  id: string;
+  name: string;
+  status: CategoryStatus;
+  itemCount: number;
+  previewImageUrls: string[];
+  upvotes: number;
+  downvotes: number;
+  reportCount: number;
+  hiddenAt: string | null;
+  publishedAt: string | null;
+  updatedAt: string;
 };
 
 export type ListOptions = {

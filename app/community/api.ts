@@ -6,6 +6,7 @@ import type {
   CommunityCategorySummary,
   CommunityCategoryView,
   CommunityItem,
+  ModerationRow,
 } from "@/lib/community/types";
 
 /** The message from the API if it sent one, so the UI never says "Error 400". */
@@ -74,6 +75,32 @@ export const reportCategory = (
   reason: string
 ): Promise<{ reported: boolean; hidden: boolean }> =>
   postJson(`/api/community/categories/${id}/report`, { reason });
+
+export const deleteCategory = (id: string): Promise<{ deleted: boolean }> =>
+  fetch(`/api/community/categories/${id}`, { method: "DELETE" }).then(unwrap);
+
+/* ------------------------------------------------------------------ admin */
+
+export const getAdminSession = (): Promise<{
+  admin: boolean;
+  configured: boolean;
+}> => fetch("/api/community/admin/session").then(unwrap);
+
+export const signInAsAdmin = (secret: string): Promise<{ admin: boolean }> =>
+  postJson("/api/community/admin/session", { secret });
+
+export const signOutAsAdmin = (): Promise<{ admin: boolean }> =>
+  fetch("/api/community/admin/session", { method: "DELETE" }).then(unwrap);
+
+export const listForModeration = (): Promise<{ categories: ModerationRow[] }> =>
+  fetch("/api/community/admin/categories").then(unwrap);
+
+/** Admin only. Hide a category from every listing, or put it back. */
+export const setCategoryHidden = (
+  id: string,
+  hidden: boolean
+): Promise<{ category: CommunityCategoryView }> =>
+  postJson(`/api/community/categories/${id}/moderate`, { hidden });
 
 const creditFields = (form: FormData, credit: ImageResult["credit"]) => {
   form.append("creditSource", credit.source);

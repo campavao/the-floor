@@ -154,8 +154,9 @@ lib/community/
   inpaint.ts    the erase brush (see below)
   search.ts     Commons + Openverse, runs in the browser
   validate.ts   what we accept from a request
+  admin.ts      the shared admin secret and the cookie derived from it
 app/api/community/...   the routes
-app/community/...       browse and create pages
+app/community/...       browse, create, edit and admin pages
 ```
 
 ### 4. Branded and pop-culture images — Serper (optional)
@@ -227,6 +228,45 @@ What there is instead:
 Identity is a random key in an httpOnly cookie the server sets. It's not an
 account — someone determined can clear cookies and vote again — but a page
 can't claim to be a different voter, which is the part that matters.
+
+### The admin
+
+Reports take three browsers and then wait for "a look". When someone publishes
+a photo that has to come down *now*, that isn't fast enough — and the author's
+cookie is the only thing that can edit a category, so without this the fix is
+a database session.
+
+```
+COMMUNITY_ADMIN_SECRET=...
+```
+
+One shared secret, long and random (`openssl rand -base64 32` is fine). Sign
+in at `/community/admin` and you can do, to any category, what its author can:
+
+- **Edit** it — every category page grows an *Edit* button that opens the same
+  Find / Edit / Remove grid the create page uses. *Find* swaps in a different
+  picture, *Edit* crops or erases part of it, *×* drops the item. Replacing a
+  picture deletes the old object from storage in the same request, so the
+  offending image is gone rather than just unlinked.
+- **Hide** it from every listing, or **unhide** one the reports got wrong.
+  Unhiding clears the reports too — otherwise the next one would tip it
+  straight back over the threshold.
+- **Delete** it, images and all.
+
+The admin page lists everything — drafts and hidden categories included,
+hidden first, then the most reported — with those three actions on each row.
+
+What it doesn't do: the secret never goes into the cookie (the cookie holds an
+HMAC derived from it, so rotating the secret signs every admin out), and there
+is no account, no roles and no audit log. For one or two people running a fan
+game that's the right amount of machinery; anything more would want real
+accounts. Without the variable set, `/community/admin` says so and every admin
+route answers 403.
+
+One thing to know: adding a category to a game copies it into that browser's
+localStorage, so a game that already has the bad version keeps its own copy.
+The old image URL stops working the moment it's replaced, though, so the
+square shows as broken rather than showing the picture.
 
 ## Keeping storage honest
 

@@ -2,6 +2,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { use, useEffect, useState } from "react";
 
 import FloorButton from "@/app/components/FloorButton";
@@ -10,7 +11,12 @@ import { useCommunityCategories } from "@/app/categories/useCommunityCategories"
 import { communityCategoryId } from "@/app/categories/registry";
 import type { CommunityCategoryView } from "@/lib/community/types";
 
-import { getCategory, reportCategory } from "../api";
+import {
+  deleteCategory,
+  getCategory,
+  reportCategory,
+  setCategoryHidden,
+} from "../api";
 
 /**
  * Everything in one category, with credits.
@@ -26,6 +32,7 @@ export default function CommunityCategoryPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = use(params);
+  const router = useRouter();
 
   const [category, setCategory] = useState<CommunityCategoryView | null>(null);
   const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
@@ -67,6 +74,33 @@ export default function CommunityCategoryPage({
           src: item.imageUrl as string,
         })),
     });
+  };
+
+  /** Admin: take it out of the listings, or put it back after a look. */
+  const onToggleHidden = async () => {
+    if (!category) return;
+    try {
+      const { category: next } = await setCategoryHidden(id, !category.hiddenAt);
+      setCategory(next);
+      setError("");
+    } catch (caught) {
+      setError(caught instanceof Error ? caught.message : "Couldn't do that.");
+    }
+  };
+
+  /** Owner or admin. Gone for good, images included. */
+  const onDelete = async () => {
+    if (!category) return;
+    if (!window.confirm(`Delete "${category.name}" and all its images? This can't be undone.`)) {
+      return;
+    }
+    try {
+      await deleteCategory(id);
+      removeCategory(id);
+      router.push("/community");
+    } catch (caught) {
+      setError(caught instanceof Error ? caught.message : "Couldn't delete.");
+    }
   };
 
   const onReport = async () => {
@@ -122,11 +156,20 @@ export default function CommunityCategoryPage({
             </h1>
             <p className="text-white/60">
               {category.items.length} items
-              {category.status === "draft" ? " · draft, only you can see this" : ""}
+              {category.status === "draft" ? " · draft, not published" : ""}
+              {category.hiddenAt ? " · hidden from listings" : ""}
+              {category.isAdmin ? " · signed in as admin" : ""}
             </p>
           </div>
 
-          <div className="flex gap-2">
+          <div className="flex gap-2 flex-wrap">
+            {category.canEdit && (
+              <Link href={`/community/${category.id}/edit`}>
+                <FloorButton variant="rectangular" className="font-semibold">
+                  Edit
+                </FloorButton>
+              </Link>
+            )}
             {added ? (
               <FloorButton
                 variant="rectangular"
@@ -209,12 +252,30 @@ export default function CommunityCategoryPage({
               ))}
           </ul>
 
-          <button
-            onClick={onReport}
-            className="text-xs text-white/40 hover:text-red-300 self-start mt-4"
-          >
-            Report this category
-          </button>
+          <div className="flex flex-wrap gap-4 mt-4">
+            <button
+              onClick={onReport}
+              className="text-xs text-white/40 hover:text-red-300"
+            >
+              Report this category
+            </button>
+            {category.isAdmin && (
+              <button
+                onClick={onToggleHidden}
+                className="text-xs text-white/40 hover:text-yellow-200"
+              >
+                {category.hiddenAt ? "Unhide (clears reports)" : "Hide from listings"}
+              </button>
+            )}
+            {category.canEdit && (
+              <button
+                onClick={onDelete}
+                className="text-xs text-white/40 hover:text-red-300"
+              >
+                Delete this category
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </FloorPageLayout>

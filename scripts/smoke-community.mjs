@@ -224,7 +224,85 @@ check(
   !afterHide.body.categories?.some((c) => c.id === id)
 );
 
-// 11. Cleanup
+// 11. Admin. Only exercised when the secret is in the environment, since a
+// deployment without one has no admin to test.
+const adminSecret = process.env.COMMUNITY_ADMIN_SECRET?.trim();
+if (adminSecret) {
+  const admin = makeClient("admin");
+
+  const anon = await admin.call("/api/community/admin/categories");
+  check("moderation list needs a session", anon.status === 403, anon.body.error);
+
+  const wrong = await admin.json("/api/community/admin/session", "POST", { secret: "nope" });
+  check("wrong secret is refused", wrong.status === 403, wrong.body.error);
+
+  const strangerHide = await stranger.json(`/api/community/categories/${id}/moderate`, "POST", {
+    hidden: false,
+  });
+  check("stranger cannot unhide", strangerHide.status === 403, strangerHide.body.error);
+
+  const signedIn = await admin.json("/api/community/admin/session", "POST", { secret: adminSecret });
+  check("admin can sign in", signedIn.status === 200 && signedIn.body.admin === true);
+
+  const who = await admin.call("/api/community/admin/session");
+  check("session sticks", who.body.admin === true, JSON.stringify(who.body));
+
+  const seesHidden = await admin.call(`/api/community/categories/${id}`);
+  check(
+    "admin can open a hidden category",
+    seesHidden.status === 200 && seesHidden.body.category?.canEdit === true,
+    `status ${seesHidden.status}`
+  );
+
+  const list = await admin.call("/api/community/admin/categories");
+  const row = list.body.categories?.find((c) => c.id === id);
+  check("hidden category is in the moderation list", Boolean(row?.hiddenAt));
+
+  const unhidden = await admin.json(`/api/community/categories/${id}/moderate`, "POST", {
+    hidden: false,
+  });
+  check(
+    "admin can unhide, which clears the reports",
+    unhidden.status === 200 &&
+      unhidden.body.category?.hiddenAt === null &&
+      unhidden.body.category?.reportCount === 0,
+    JSON.stringify({ status: unhidden.status, error: unhidden.body.error })
+  );
+
+  const backInList = await stranger.call("/api/community/categories?sort=new");
+  check("unhidden category is listed again", backInList.body.categories?.some((c) => c.id === id));
+
+  const replaced = new FormData();
+  replaced.append("itemId", itemIds[0]);
+  replaced.append("file", new Blob([bytes], { type: "image/jpeg" }), "image.jpg");
+  replaced.append("creditSource", "Admin replacement");
+  const replacedResult = await admin.call(`/api/community/categories/${id}/images`, {
+    method: "POST",
+    body: replaced,
+  });
+  check(
+    "admin can replace a picture",
+    replacedResult.status === 200 && replacedResult.body.item?.credit?.source === "Admin replacement",
+    replacedResult.body?.error ?? "ok"
+  );
+
+  const trimmed = await admin.json(`/api/community/categories/${id}`, "PATCH", {
+    items: itemIds.slice(1, EXPECTED_WITH_IMAGES).map((itemId) => ({ id: itemId, name: `Snack ${itemId}` })),
+  });
+  check(
+    "admin can drop an item",
+    trimmed.status === 200 && trimmed.body.category?.items?.length === EXPECTED_WITH_IMAGES - 1,
+    `${trimmed.body.category?.items?.length} items`
+  );
+
+  const signedOut = await admin.call("/api/community/admin/session", { method: "DELETE" });
+  const afterOut = await admin.call("/api/community/admin/categories");
+  check("sign out ends the session", signedOut.status === 200 && afterOut.status === 403);
+} else {
+  console.log("skip  admin checks (set COMMUNITY_ADMIN_SECRET to run them)");
+}
+
+// 12. Cleanup
 const deleted = await author.call(`/api/community/categories/${id}`, { method: "DELETE" });
 check("author can delete", deleted.status === 200, `status ${deleted.status}`);
 
