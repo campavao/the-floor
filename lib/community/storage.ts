@@ -100,10 +100,20 @@ const r2Store = (config: NonNullable<ReturnType<typeof r2Config>>): ImageStore =
         }
 
         const xml = await response.text();
-        for (const entry of xml.matchAll(
-          /<Contents>[\s\S]*?<Key>([^<]+)<\/Key>[\s\S]*?<LastModified>([^<]+)<\/LastModified>[\s\S]*?<\/Contents>/g
-        )) {
-          objects.push({ key: entry[1], uploadedAt: new Date(entry[2]) });
+
+        // Split into <Contents> blocks before reading fields, rather than one
+        // regex spanning the document. A pattern that expects a field order
+        // silently matches *across* blocks when the order differs -- R2 emits
+        // Key, Size, LastModified -- swallowing one object per match and
+        // halving the listing. The cleanup only skips objects it can't see, so
+        // that failed quietly in the safe direction, which is the worst kind.
+        for (const chunk of xml.split("<Contents>").slice(1)) {
+          const block = chunk.split("</Contents>")[0];
+          const key = block.match(/<Key>([^<]+)<\/Key>/)?.[1];
+          const modified = block.match(/<LastModified>([^<]+)<\/LastModified>/)?.[1];
+          if (key && modified) {
+            objects.push({ key, uploadedAt: new Date(modified) });
+          }
         }
 
         token = /<IsTruncated>true<\/IsTruncated>/.test(xml)
