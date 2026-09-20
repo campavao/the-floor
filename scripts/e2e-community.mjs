@@ -119,8 +119,13 @@ try {
   const card = page.getByRole("link", { name: "E2E Fruits", exact: true }).first();
   check("appears in the pool", await card.isVisible());
 
-  const ownerUpvote = page.getByLabel("Upvote").first();
-  check("cannot vote on your own category", await ownerUpvote.isDisabled());
+  // Scope to our own card: the pool has other people's categories in it now,
+  // and their upvote buttons are enabled exactly as they should be.
+  const ownUpvote = page.locator(
+    'xpath=//a[normalize-space(.)="E2E Fruits"]/ancestor::div[contains(@class,"rounded-lg")][1]' +
+      '//button[@aria-label="Upvote"]'
+  );
+  check("cannot vote on your own category", await ownUpvote.first().isDisabled());
 
   // ----------------------------------------------------- detail + credits
   await card.click();
@@ -136,14 +141,23 @@ try {
   await page.goBack({ waitUntil: "networkidle" });
 
   // --------------------------------------------------- add to a real game
-  await page.getByRole("button", { name: "Add to my game" }).first().click();
+  // Our card specifically, for the same reason as the vote check above.
+  await page
+    .locator(
+      'xpath=//a[normalize-space(.)="E2E Fruits"]/ancestor::div[contains(@class,"rounded-lg")][1]' +
+        '//button[normalize-space(.)="Add to my game"]'
+    )
+    .first()
+    .click();
   await page.waitForSelector("text=Remove", { timeout: 10_000 });
   check("adds to this browser", await page.getByText(/loaded in this browser/).isVisible());
 
   const stored = await page.evaluate(() =>
     JSON.parse(localStorage.getItem("the-floor-community-categories") ?? "{}")
   );
-  const key = Object.keys(stored)[0];
+  const key = Object.keys(stored).find(
+    (k) => stored[k]?.name === "E2E Fruits"
+  );
   check("stored under a namespaced key", key?.startsWith("community:"), key);
   check(
     "snapshot carries absolute image urls",
@@ -190,10 +204,13 @@ try {
   const body = await page.locator("body").textContent();
   check("demo round resolves the community category", !body.includes("Category unavailable"));
 
-  // A freshly written object can 404 on R2's public edge for a moment after
-  // the S3 write returns, so the grid retries. Those 404s are expected and
-  // self-healing; anything else is not.
-  const transient = /404|ERR_FAILED|r2\.dev/i;
+  // Two upstream conditions the code already handles, so they're noise here
+  // rather than failures: a freshly written object can 404 on R2's public edge
+  // for a moment after the S3 write returns (the grid retries), and an image
+  // host can 429 a browser that's fetching a lot at once (the upload falls
+  // back to the server). The "every image renders" check below is what proves
+  // the handling worked.
+  const transient = /404|429|ERR_FAILED|r2\.dev/i;
   const realErrors = consoleErrors.filter((message) => !transient.test(message));
   check("no unexpected console errors", realErrors.length === 0, realErrors.slice(0, 3).join(" | "));
 

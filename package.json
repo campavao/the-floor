@@ -18,7 +18,7 @@
     "aws4fetch": "^1.0.20",
     "canvas-confetti": "^1.9.4",
     "classnames": "^2.5.1",
-    "next": "^16.3.1",
+    "next": "^16.3.5",
     "react": "19.2.1",
     "react-dom": "19.2.1",
     "sharp": "^0.35.4",
