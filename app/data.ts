@@ -264,8 +264,8 @@ export type Category =
   | "Holidays"
   | "MLB Teams"
   | "NBA Teams"
-  | "NHL Teams"
   | "NFL Teams"
+  | "NHL Teams"
   | "Sports"
   | "Valorant"
   | "Anime"
@@ -10456,11 +10456,11 @@ export const CATEGORY_METADATA: Record<Category, CategoryMetadata> = {
   Laundry: LaundryCategory,
   Math: MathCategory,
   "MLB Teams": MlbTeamsCategory,
-  "NBA Teams": NbaTeamsCategory,
   Movies: MoviesCategory,
+  "NBA Teams": NbaTeamsCategory,
   "NFL Teams": NflTeamsCategory,
-  "Pop divas": PopDivasCategory,
   "NHL Teams": NhlTeamsCategory,
+  "Pop divas": PopDivasCategory,
   Pokemon: PokemonCategory,
   "Pool Equipment": PoolEquipmentCategory,
   "Reality tv shows": RealityTvShowsCategory,
