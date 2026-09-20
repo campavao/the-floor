@@ -60,9 +60,12 @@ export const getCategory = (
   fetch(`/api/community/categories/${id}`).then(unwrap);
 
 export const listCategories = (
-  sort: "top" | "new" = "top"
+  sort: "top" | "new" = "top",
+  offset = 0
 ): Promise<{ categories: CommunityCategorySummary[]; hasMore: boolean }> =>
-  fetch(`/api/community/categories?sort=${sort}`).then(unwrap);
+  fetch(
+    `/api/community/categories?sort=${sort}&offset=${offset}`
+  ).then(unwrap);
 
 export const voteOnCategory = (
   id: string,

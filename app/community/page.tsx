@@ -19,19 +19,52 @@ export default function CommunityPage() {
   const [error, setError] = useState("");
   const [pending, setPending] = useState<string | null>(null);
 
+  /**
+   * The API has always paged -- the page just never asked for the second one,
+   * so everything past the first 24 was unreachable.
+   */
+  const [hasMore, setHasMore] = useState(false);
+  const [loadingMore, setLoadingMore] = useState(false);
+
   const { categories: mine, addCategory, removeCategory } = useCommunityCategories();
 
   const load = useCallback(async (which: "top" | "new") => {
     setStatus("loading");
     try {
-      const { categories: found } = await listCategories(which);
+      const { categories: found, hasMore: more } = await listCategories(which);
       setCategories(found);
+      setHasMore(more);
       setStatus("ready");
     } catch (caught) {
       setError(caught instanceof Error ? caught.message : "Couldn't load.");
       setStatus("error");
     }
   }, []);
+
+  const loadMore = useCallback(async () => {
+    setLoadingMore(true);
+    setError("");
+    try {
+      // Offset by what's on screen rather than a page counter: the two only
+      // agree while nothing is published mid-browse.
+      const { categories: found, hasMore: more } = await listCategories(
+        sort,
+        categories.length
+      );
+
+      setCategories((previous) => {
+        // Paging by offset can repeat a category if one is published while
+        // you're reading, which would also collide on React's keys.
+        const seen = new Set(previous.map((category) => category.id));
+        return [...previous, ...found.filter((c) => !seen.has(c.id))];
+      });
+      setHasMore(more);
+    } catch (caught) {
+      setError(caught instanceof Error ? caught.message : "Couldn't load more.");
+    } finally {
+      setLoadingMore(false);
+    }
+  }, [sort, categories.length]);
 
   useEffect(() => {
     load(sort);
@@ -190,7 +223,18 @@ export default function CommunityPage() {
           </div>
         )}
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {/* Switching sort takes a couple of seconds against a cold database.
+            Leaving the previous results at full strength means you can vote on
+            a row that's about to be replaced, so they're visibly stale and
+            inert until the new page arrives. */}
+        <div
+          className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 transition-opacity ${
+            status === "loading" && categories.length > 0
+              ? "opacity-40 pointer-events-none"
+              : ""
+          }`}
+          aria-busy={status === "loading"}
+        >
           {categories.map((category) => {
             const added = communityCategoryId(category.id) in mine;
 
@@ -285,6 +329,25 @@ export default function CommunityPage() {
             );
           })}
         </div>
+
+        {status === "ready" && hasMore && (
+          <div className="flex justify-center pt-2">
+            <FloorButton
+              variant="rectangular"
+              className="font-semibold"
+              disabled={loadingMore}
+              onClick={loadMore}
+            >
+              {loadingMore ? "Loading…" : "Load more"}
+            </FloorButton>
+          </div>
+        )}
+
+        {status === "ready" && !hasMore && categories.length > 0 && (
+          <p className="text-white/40 text-sm text-center pt-2">
+            That&rsquo;s all {categories.length} of them.
+          </p>
+        )}
 
         {Object.keys(mine).length > 0 && (
           <p className="text-white/60 text-sm border-t border-white/10 pt-4">
