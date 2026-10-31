@@ -32,6 +32,7 @@ export type Repo = {
     name: string;
     items: CommunityItem[];
     authorKey: string;
+    language?: string | null;
   }): Promise<StoredCategory>;
   get(id: string): Promise<StoredCategory | undefined>;
   saveItems(id: string, items: CommunityItem[]): Promise<StoredCategory | undefined>;
@@ -56,8 +57,13 @@ export type Repo = {
    * count where it was would mean the very next report hides it again.
    */
   setHidden(id: string, hidden: boolean): Promise<StoredCategory | undefined>;
+  setLanguage(id: string, language: string): Promise<StoredCategory | undefined>;
   remove(id: string): Promise<void>;
   list(options: ListOptions): Promise<StoredCategory[]>;
+  /** How many browsable categories each language has, most first. */
+  languageCounts(): Promise<Array<{ language: string; count: number }>>;
+  /** Categories from before language tagging, for the admin's backfill. */
+  listWithoutLanguage(limit: number): Promise<StoredCategory[]>;
   /**
    * Everything, for the admin: drafts and hidden categories included, the
    * ones most in need of a look first.
@@ -96,7 +102,8 @@ const now = () => new Date().toISOString();
 const blankCategory = (
   name: string,
   items: CommunityItem[],
-  authorKey: string
+  authorKey: string,
+  language: string | null = null
 ): StoredCategory => ({
   id: newId(),
   name,
@@ -111,6 +118,7 @@ const blankCategory = (
   createdAt: now(),
   updatedAt: now(),
   publishedAt: null,
+  language,
 });
 
 /** Strips `authorKey` and answers the questions the UI needs about you. */
@@ -121,7 +129,14 @@ export const toView = (
   isAdmin = false
 ): CommunityCategoryView => {
   const { authorKey: _authorKey, ...rest } = category;
-  return { ...rest, myVote, isOwner, isAdmin, canEdit: isOwner || isAdmin };
+  return {
+    ...rest,
+    language: category.language ?? null,
+    myVote,
+    isOwner,
+    isAdmin,
+    canEdit: isOwner || isAdmin,
+  };
 };
 
 export const toModerationRow = (category: StoredCategory): ModerationRow => ({
@@ -139,6 +154,7 @@ export const toModerationRow = (category: StoredCategory): ModerationRow => ({
   hiddenAt: category.hiddenAt,
   publishedAt: category.publishedAt,
   updatedAt: category.updatedAt,
+  language: category.language ?? null,
 });
 
 export const toSummary = (
@@ -158,6 +174,7 @@ export const toSummary = (
   downvotes: category.downvotes,
   score: category.upvotes - category.downvotes,
   publishedAt: category.publishedAt,
+  language: category.language ?? null,
   myVote,
   isOwner,
 });
@@ -184,18 +201,20 @@ const fromRow = (row: Row): StoredCategory => ({
   publishedAt: row.published_at
     ? new Date(row.published_at as string).toISOString()
     : null,
+  language: typeof row.language === "string" ? row.language : null,
 });
 
 const postgresRepo = (connectionString: string): Repo => {
   const sql = neon(connectionString);
 
   return {
-    async create({ name, items, authorKey }) {
-      const draft = blankCategory(name, items, authorKey);
+    async create({ name, items, authorKey, language }) {
+      const draft = blankCategory(name, items, authorKey, language);
       await sql`
-        insert into community_categories (id, name, slug, status, items, author_key)
+        insert into community_categories
+               (id, name, slug, status, items, author_key, language)
         values (${draft.id}, ${draft.name}, ${draft.slug}, 'draft',
-                ${JSON.stringify(items)}::jsonb, ${authorKey})
+                ${JSON.stringify(items)}::jsonb, ${authorKey}, ${draft.language})
       `;
       return draft;
     },
@@ -276,15 +295,29 @@ const postgresRepo = (connectionString: string): Repo => {
       await sql`delete from community_categories where id = ${id}`;
     },
 
-    async list({ sort, limit, offset, query }) {
+    async setLanguage(id, language) {
+      // Deliberately leaves updated_at alone: the cleanup job reads it as
+      // "last worked on", and relabelling isn't work on the category.
+      const rows = await sql`
+        update community_categories set language = ${language}
+         where id = ${id}
+        returning *
+      `;
+      return rows[0] ? fromRow(rows[0]) : undefined;
+    },
+
+    async list({ sort, limit, offset, query, language }) {
       // "%" alone matches every name, so a blank search is the plain listing.
       const pattern = `%${likePattern(query)}%`;
+      // Likewise a null language is "any".
+      const lang = language || null;
       const rows =
         sort === "new"
           ? await sql`
               select * from community_categories
                where status = 'published' and hidden_at is null
                  and name ilike ${pattern}
+                 and (${lang}::text is null or language = ${lang})
                order by published_at desc nulls last
                limit ${limit} offset ${offset}
             `
@@ -292,9 +325,35 @@ const postgresRepo = (connectionString: string): Repo => {
               select * from community_categories
                where status = 'published' and hidden_at is null
                  and name ilike ${pattern}
+                 and (${lang}::text is null or language = ${lang})
                order by (upvotes - downvotes) desc, published_at desc nulls last
                limit ${limit} offset ${offset}
             `;
+      return rows.map(fromRow);
+    },
+
+    async languageCounts() {
+      const rows = await sql`
+        select language, count(*)::int as count
+          from community_categories
+         where status = 'published' and hidden_at is null
+           and language is not null
+         group by language
+         order by count desc, language
+      `;
+      return rows.map((row) => ({
+        language: String(row.language),
+        count: Number(row.count),
+      }));
+    },
+
+    async listWithoutLanguage(limit) {
+      const rows = await sql`
+        select * from community_categories
+         where language is null
+         order by created_at
+         limit ${limit}
+      `;
       return rows.map(fromRow);
     },
 
@@ -478,9 +537,9 @@ const devRepo = (): Repo => {
     data.categories.filter((c) => c.status === "published" && !c.hiddenAt);
 
   return {
-    create: ({ name, items, authorKey }) =>
+    create: ({ name, items, authorKey, language }) =>
       mutate((data) => {
-        const draft = blankCategory(name, items, authorKey);
+        const draft = blankCategory(name, items, authorKey, language);
         data.categories.push(draft);
         return draft;
       }),
@@ -543,11 +602,39 @@ const devRepo = (): Repo => {
         data.reports = data.reports.filter((r) => r.categoryId !== id);
       }),
 
-    list: async ({ sort, limit, offset, query }) => {
+    setLanguage: (id, language) =>
+      mutate((data) => {
+        const category = data.categories.find((c) => c.id === id);
+        if (!category) return undefined;
+        category.language = language;
+        return category;
+      }),
+
+    languageCounts: async () => {
+      const counts = new Map<string, number>();
+      for (const category of published(await read())) {
+        if (!category.language) continue;
+        counts.set(category.language, (counts.get(category.language) ?? 0) + 1);
+      }
+      return [...counts]
+        .map(([language, count]) => ({ language, count }))
+        .sort((a, b) => b.count - a.count || a.language.localeCompare(b.language));
+    },
+
+    listWithoutLanguage: async (limit) =>
+      (await read()).categories
+        // Files written before tagging have no key at all, not a null.
+        .filter((c) => !c.language)
+        .sort((a, b) => a.createdAt.localeCompare(b.createdAt))
+        .slice(0, limit),
+
+    list: async ({ sort, limit, offset, query, language }) => {
       const data = await read();
       const needle = (query ?? "").trim().toLowerCase();
-      const matching = published(data).filter((c) =>
-        c.name.toLowerCase().includes(needle)
+      const matching = published(data).filter(
+        (c) =>
+          c.name.toLowerCase().includes(needle) &&
+          (!language || c.language === language)
       );
       const sorted = matching.sort((a, b) =>
         sort === "new"

@@ -20,14 +20,23 @@ create table if not exists community_categories (
   hidden_at     timestamptz,
   created_at    timestamptz not null default now(),
   updated_at    timestamptz not null default now(),
-  published_at  timestamptz
+  published_at  timestamptz,
+  -- ISO 639-1 ("pl", "fr"). Guessed when the draft is made, then the
+  -- creator's to correct. Null only for rows from before it existed.
+  language      text
 );
+
+-- For databases created before the column above. Safe to re-run.
+alter table community_categories add column if not exists language text;
 
 -- Listings read published, unhidden categories ordered by score or recency.
 create index if not exists community_categories_browse
   on community_categories (status, hidden_at, published_at desc);
 create index if not exists community_categories_score
   on community_categories (status, hidden_at, (upvotes - downvotes) desc);
+-- The browse page filters by language more often than not.
+create index if not exists community_categories_language
+  on community_categories (status, hidden_at, language);
 create index if not exists community_categories_author
   on community_categories (author_key);
 

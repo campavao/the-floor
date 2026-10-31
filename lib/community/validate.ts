@@ -1,5 +1,6 @@
 import { LIMITS } from "./config";
 import { newId } from "./ids";
+import { isLanguage, type Language } from "./languages";
 import type { CommunityItem } from "./types";
 
 export class InvalidInput extends Error {
@@ -27,6 +28,13 @@ export const parseCategoryName = (value: unknown): string => {
     );
   }
   return name;
+};
+
+export const parseLanguage = (value: unknown): Language => {
+  if (!isLanguage(value)) {
+    throw new InvalidInput("Pick a language from the list.");
+  }
+  return value;
 };
 
 const parseAlternatives = (value: unknown): string[] => {

@@ -7,8 +7,10 @@ import { use, useEffect, useState } from "react";
 
 import FloorButton from "@/app/components/FloorButton";
 import FloorPageLayout from "@/app/components/FloorPageLayout";
+import LanguageSelect from "@/app/components/community/LanguageSelect";
 import { useCommunityCategories } from "@/app/categories/useCommunityCategories";
 import { communityCategoryId } from "@/app/categories/registry";
+import { languageName } from "@/lib/community/languages";
 import type { CommunityCategoryView } from "@/lib/community/types";
 
 import {
@@ -16,6 +18,7 @@ import {
   getCategory,
   reportCategory,
   setCategoryHidden,
+  setCategoryLanguage,
 } from "../api";
 
 /**
@@ -37,6 +40,7 @@ export default function CommunityCategoryPage({
   const [category, setCategory] = useState<CommunityCategoryView | null>(null);
   const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
   const [error, setError] = useState("");
+  const [savingLanguage, setSavingLanguage] = useState(false);
 
   const { categories: mine, addCategory, removeCategory } = useCommunityCategories();
   const added = communityCategoryId(id) in mine;
@@ -159,7 +163,38 @@ export default function CommunityCategoryPage({
               {category.status === "draft" ? " · draft, not published" : ""}
               {category.hiddenAt ? " · hidden from listings" : ""}
               {category.isAdmin ? " · signed in as admin" : ""}
+              {!category.canEdit && category.language
+                ? ` · ${languageName(category.language)}`
+                : ""}
             </p>
+            {category.canEdit && (
+              <label className="flex items-center gap-2 text-sm text-white/60 mt-2">
+                Written in
+                <LanguageSelect
+                  value={category.language}
+                  disabled={savingLanguage}
+                  onChange={async (next) => {
+                    setSavingLanguage(true);
+                    setError("");
+                    try {
+                      const { category: saved } = await setCategoryLanguage(
+                        category.id,
+                        next
+                      );
+                      setCategory((current) =>
+                        current ? { ...current, language: saved.language } : current
+                      );
+                    } catch (caught) {
+                      setError(
+                        caught instanceof Error ? caught.message : "Couldn't save that."
+                      );
+                    } finally {
+                      setSavingLanguage(false);
+                    }
+                  }}
+                />
+              </label>
+            )}
           </div>
 
           <div className="flex gap-2 flex-wrap">

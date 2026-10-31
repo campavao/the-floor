@@ -37,6 +37,8 @@ export type CommunityCategoryRecord = {
   createdAt: string;
   updatedAt: string;
   publishedAt: string | null;
+  /** ISO 639-1, from `lib/community/languages.ts`. Null on categories older than tagging. */
+  language: string | null;
 };
 
 /** A record plus the caller's relationship to it. Never leaks `authorKey`. */
@@ -61,6 +63,7 @@ export type CommunityCategorySummary = {
   downvotes: number;
   score: number;
   publishedAt: string | null;
+  language: string | null;
   myVote: -1 | 0 | 1;
   isOwner: boolean;
 };
@@ -82,6 +85,7 @@ export type ModerationRow = {
   hiddenAt: string | null;
   publishedAt: string | null;
   updatedAt: string;
+  language: string | null;
 };
 
 export type ListOptions = {
@@ -90,4 +94,6 @@ export type ListOptions = {
   offset: number;
   /** Case-insensitive substring of the category name. Blank means everything. */
   query?: string;
+  /** Only categories tagged with this language. Omitted means every language. */
+  language?: string;
 };

@@ -1,7 +1,13 @@
 import { repo, toSummary } from "@/lib/community/db";
+import { detectLanguage } from "@/lib/community/detectLanguage";
 import { ensureKey, readKey } from "@/lib/community/identity";
 import { handle, json, readJson } from "@/lib/community/http";
-import { parseCategoryName, parseItems } from "@/lib/community/validate";
+import { isLanguage, preferredLanguage } from "@/lib/community/languages";
+import {
+  parseCategoryName,
+  parseItems,
+  parseLanguage,
+} from "@/lib/community/validate";
 
 /** Browse the published pool. */
 export async function GET(request: Request) {
@@ -12,8 +18,18 @@ export async function GET(request: Request) {
     const offset = Math.max(Number(params.get("offset")) || 0, 0);
     // Names are short, so anything longer than this can't match anyway.
     const query = (params.get("q") ?? "").trim().slice(0, 100);
+    // An unknown code is "every language", not an error: it's a filter, and
+    // an old link shouldn't break the page.
+    const lang = params.get("lang");
+    const language = isLanguage(lang) ? lang : undefined;
 
-    const categories = await repo().list({ sort, limit, offset, query });
+    const categories = await repo().list({
+      sort,
+      limit,
+      offset,
+      query,
+      language,
+    });
 
     // Reading the list shouldn't mint an identity -- only voting and creating
     // do that. So this uses readKey, and an anonymous visitor just sees no
@@ -46,9 +62,29 @@ export async function POST(request: Request) {
     const name = parseCategoryName(body.name);
     const items = parseItems(body.items);
 
-    const authorKey = await ensureKey();
-    const created = await repo().create({ name, items, authorKey });
+    // The creator can name it outright; otherwise guess, leaning on their
+    // browser's language when the text alone doesn't settle it. Either way
+    // the build page shows the result and lets them change it.
+    const language =
+      body.language === undefined || body.language === null
+        ? await detectLanguage(
+            name,
+            items.map((item) => item.name),
+            preferredLanguage(request.headers.get("accept-language"))
+          )
+        : parseLanguage(body.language);
 
-    return json({ id: created.id, name: created.name, items: created.items }, 201);
+    const authorKey = await ensureKey();
+    const created = await repo().create({ name, items, authorKey, language });
+
+    return json(
+      {
+        id: created.id,
+        name: created.name,
+        items: created.items,
+        language: created.language,
+      },
+      201
+    );
   });
 }
