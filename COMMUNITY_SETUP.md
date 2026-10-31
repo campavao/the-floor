@@ -79,6 +79,14 @@ psql "$DATABASE_URL" -f lib/community/schema.sql
 DATABASE_URL=postgres://...
 ```
 
+The schema file is also the migration: every statement in it is safe to
+re-run, and it adds whatever an older database is missing. **Run it again
+before deploying any change to it** — the code that ships with a new column
+reads and writes that column straight away. The `language` column, for
+instance, has to exist before the deploy that tags categories by language;
+after that deploy, sign in at `/community/admin` and press **Tag languages** to
+guess a language for the categories made before tagging existed.
+
 ### 3. Item suggestions — Vercel AI Gateway
 
 ```

@@ -36,8 +36,27 @@ export const suggestItems = (
 export const createDraft = (
   name: string,
   items: DraftItemInput[]
-): Promise<{ id: string; name: string; items: CommunityItem[] }> =>
-  postJson("/api/community/categories", { name, items });
+): Promise<{
+  id: string;
+  name: string;
+  items: CommunityItem[];
+  /** The server's guess, for the creator to confirm or change. */
+  language: string | null;
+}> => postJson("/api/community/categories", { items, name });
+
+export const setCategoryLanguage = (
+  id: string,
+  language: string
+): Promise<{ category: CommunityCategoryView }> =>
+  fetch(`/api/community/categories/${id}`, {
+    body: JSON.stringify({ language }),
+    headers: { "Content-Type": "application/json" },
+    method: "PATCH",
+  }).then(unwrap);
+
+export const listLanguages = (): Promise<{
+  languages: Array<{ language: string; count: number }>;
+}> => fetch("/api/community/languages").then(unwrap);
 
 export const saveItems = (
   id: string,
@@ -62,10 +81,12 @@ export const getCategory = (
 export const listCategories = (
   sort: "top" | "new" = "top",
   offset = 0,
-  query = ""
+  query = "",
+  language: string | null = null
 ): Promise<{ categories: CommunityCategorySummary[]; hasMore: boolean }> => {
   const params = new URLSearchParams({ offset: String(offset), sort });
   if (query.trim()) params.set("q", query.trim());
+  if (language) params.set("lang", language);
   return fetch(`/api/community/categories?${params}`).then(unwrap);
 };
 
@@ -90,6 +111,12 @@ export const getAdminSession = (): Promise<{
   admin: boolean;
   configured: boolean;
 }> => fetch("/api/community/admin/session").then(unwrap);
+
+/** Admin only. Tag every category from before language tagging existed. */
+export const backfillLanguages = (): Promise<{
+  tagged: number;
+  remaining: number;
+}> => postJson("/api/community/admin/languages", {});
 
 export const signInAsAdmin = (secret: string): Promise<{ admin: boolean }> =>
   postJson("/api/community/admin/session", { secret });

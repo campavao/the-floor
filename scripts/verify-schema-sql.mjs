@@ -205,6 +205,73 @@ try {
   );
   check("hidden categories drop out of the browse query", listed.rowCount === 0);
 
+  // ------------------------------------------------ search and language
+  // Same shape as `list` in lib/community/db.ts: a null language means any,
+  // and the search term arrives with ILIKE's wildcards already escaped.
+  const LIST = `
+    select name from community_categories
+     where status = 'published' and hidden_at is null
+       and name ilike $1
+       and ($2::text is null or language = $2)
+     order by name`;
+
+  await pool.query(`delete from community_categories where id like 'lang-%'`);
+  for (const [id, name, language] of [
+    ["lang-1", "Polskie miasta", "pl"],
+    ["lang-2", "Polskie jedzenie", "pl"],
+    ["lang-3", "Animaux", "fr"],
+    ["lang-4", "100% Juice", "en"],
+    ["lang-5", "1000 Juices", null],
+  ]) {
+    await pool.query(
+      `insert into community_categories
+              (id, name, slug, author_key, status, published_at, language)
+       values ($1, $2, $1, 'author-key', 'published', now(), $3)`,
+      [id, name, language]
+    );
+  }
+
+  const names = async (pattern, language) =>
+    (await pool.query(LIST, [pattern, language])).rows.map((row) => row.name);
+
+  check("a null language lists every language", (await names("%", null)).length === 5);
+  check(
+    "a language lists only its own",
+    (await names("%", "pl")).join() === "Polskie jedzenie,Polskie miasta"
+  );
+  check(
+    "language and search combine",
+    (await names("%miasta%", "pl")).join() === "Polskie miasta"
+  );
+  check(
+    "search is case-insensitive",
+    (await names("%POLSKIE%", null)).length === 2
+  );
+  check(
+    "an escaped % is a literal percent sign",
+    (await names("%100\\%%", null)).join() === "100% Juice"
+  );
+
+  const counts = (
+    await pool.query(`
+      select language, count(*)::int as count
+        from community_categories
+       where status = 'published' and hidden_at is null
+         and language is not null and id like 'lang-%'
+       group by language
+       order by count desc, language`)
+  ).rows;
+  check(
+    "language counts skip untagged rows, most first",
+    JSON.stringify(counts) ===
+      JSON.stringify([
+        { language: "pl", count: 2 },
+        { language: "en", count: 1 },
+        { language: "fr", count: 1 },
+      ])
+  );
+  await pool.query(`delete from community_categories where id like 'lang-%'`);
+
   await pool.query(`delete from community_categories where id = 'test-1'`);
   const orphans = await pool.query(
     `select count(*)::int as n from community_votes where category_id = 'test-1'`

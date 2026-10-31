@@ -8,9 +8,42 @@ import FloorButton from "@/app/components/FloorButton";
 import FloorPageLayout from "@/app/components/FloorPageLayout";
 import { useCommunityCategories } from "@/app/categories/useCommunityCategories";
 import { communityCategoryId } from "@/app/categories/registry";
+import {
+  isLanguage,
+  languageName,
+  preferredLanguage,
+} from "@/lib/community/languages";
 import type { CommunityCategorySummary } from "@/lib/community/types";
 
-import { getCategory, listCategories, reportCategory, voteOnCategory } from "./api";
+import {
+  getCategory,
+  listCategories,
+  listLanguages,
+  reportCategory,
+  voteOnCategory,
+} from "./api";
+
+/** "all", or a language code. Remembered per browser. */
+const LANGUAGE_KEY = "the-floor-community-language";
+
+const readStoredLanguage = (): string | null | undefined => {
+  try {
+    const stored = window.localStorage.getItem(LANGUAGE_KEY);
+    if (stored === "all") return null;
+    if (isLanguage(stored)) return stored;
+  } catch {
+    // Private mode or blocked storage: fall through to the browser's language.
+  }
+  return undefined;
+};
+
+const storeLanguage = (language: string | null) => {
+  try {
+    window.localStorage.setItem(LANGUAGE_KEY, language ?? "all");
+  } catch {
+    // Not worth surfacing; the choice just won't be remembered.
+  }
+};
 
 export default function CommunityPage() {
   const [sort, setSort] = useState<"top" | "new">("top");
@@ -36,6 +69,46 @@ export default function CommunityPage() {
   const latest = useRef(0);
 
   /**
+   * Which language to show: a code, null for every language, or undefined
+   * until that's been decided. Nothing is fetched while it's undefined --
+   * otherwise a Polish visitor would get every language and then watch it
+   * get swapped for Polish a moment later.
+   */
+  const [language, setLanguage] = useState<string | null | undefined>(
+    undefined
+  );
+  const [languages, setLanguages] = useState<
+    Array<{ language: string; count: number }>
+  >([]);
+
+  useEffect(() => {
+    // A choice made here before wins over everything.
+    const stored = readStoredLanguage();
+    if (stored !== undefined) setLanguage(stored);
+
+    listLanguages()
+      .then(({ languages: found }) => {
+        setLanguages(found);
+        // Otherwise the browser's language -- but only if there's something
+        // in it. Defaulting a Portuguese visitor to an empty Portuguese
+        // filter would make the pool look empty.
+        if (stored === undefined) {
+          const preferred = preferredLanguage(navigator.languages);
+          const available = found.some((entry) => entry.language === preferred);
+          setLanguage(preferred && available ? preferred : null);
+        }
+      })
+      .catch(() => {
+        if (stored === undefined) setLanguage(null);
+      });
+  }, []);
+
+  const chooseLanguage = (next: string | null) => {
+    storeLanguage(next);
+    setLanguage(next);
+  };
+
+  /**
    * The API has always paged -- the page just never asked for the second one,
    * so everything past the first 24 was unreachable.
    */
@@ -44,25 +117,29 @@ export default function CommunityPage() {
 
   const { categories: mine, addCategory, removeCategory } = useCommunityCategories();
 
-  const load = useCallback(async (which: "top" | "new", q: string) => {
-    const ticket = ++latest.current;
-    setStatus("loading");
-    try {
-      const { categories: found, hasMore: more } = await listCategories(
-        which,
-        0,
-        q
-      );
-      if (ticket !== latest.current) return;
-      setCategories(found);
-      setHasMore(more);
-      setStatus("ready");
-    } catch (caught) {
-      if (ticket !== latest.current) return;
-      setError(caught instanceof Error ? caught.message : "Couldn't load.");
-      setStatus("error");
-    }
-  }, []);
+  const load = useCallback(
+    async (which: "top" | "new", q: string, lang: string | null) => {
+      const ticket = ++latest.current;
+      setStatus("loading");
+      try {
+        const { categories: found, hasMore: more } = await listCategories(
+          which,
+          0,
+          q,
+          lang
+        );
+        if (ticket !== latest.current) return;
+        setCategories(found);
+        setHasMore(more);
+        setStatus("ready");
+      } catch (caught) {
+        if (ticket !== latest.current) return;
+        setError(caught instanceof Error ? caught.message : "Couldn't load.");
+        setStatus("error");
+      }
+    },
+    []
+  );
 
   const loadMore = useCallback(async () => {
     // Not a new ticket: this extends the current listing, and is dropped if
@@ -76,7 +153,8 @@ export default function CommunityPage() {
       const { categories: found, hasMore: more } = await listCategories(
         sort,
         categories.length,
-        query
+        query,
+        language ?? null
       );
       if (ticket !== latest.current) return;
 
@@ -93,11 +171,12 @@ export default function CommunityPage() {
     } finally {
       setLoadingMore(false);
     }
-  }, [sort, categories.length, query]);
+  }, [sort, categories.length, query, language]);
 
   useEffect(() => {
-    load(sort, query);
-  }, [sort, query, load]);
+    if (language === undefined) return;
+    load(sort, query, language);
+  }, [sort, query, language, load]);
 
   const onVote = async (id: string, direction: -1 | 1) => {
     const current = categories.find((category) => category.id === id);
@@ -235,6 +314,31 @@ export default function CommunityPage() {
               {option}
             </button>
           ))}
+
+          {languages.length > 0 && (
+            <select
+              value={language ?? "all"}
+              onChange={(event) =>
+                chooseLanguage(
+                  event.target.value === "all" ? null : event.target.value
+                )
+              }
+              aria-label="Language"
+              className="px-3 py-2 text-sm font-semibold rounded bg-gray-800 text-white/90 border border-transparent focus:border-[#00d4ff] focus:outline-none"
+            >
+              <option value="all">All languages</option>
+              {/* A remembered choice can outlive its last category; keep it
+                  selectable rather than silently showing something else. */}
+              {language && !languages.some((l) => l.language === language) && (
+                <option value={language}>{languageName(language)} (0)</option>
+              )}
+              {languages.map((entry) => (
+                <option key={entry.language} value={entry.language}>
+                  {languageName(entry.language)} ({entry.count})
+                </option>
+              ))}
+            </select>
+          )}
         </div>
 
         {error && status !== "error" && (
@@ -256,16 +360,30 @@ export default function CommunityPage() {
           </div>
         )}
 
-        {status === "ready" && categories.length === 0 && query && (
+        {status === "ready" && categories.length === 0 && (query || language) && (
           <div className="text-white/60 py-16 text-center flex flex-col gap-3">
-            <p>No categories match &ldquo;{query}&rdquo;.</p>
             <p>
-              <button
-                onClick={() => setSearch("")}
-                className="underline text-[#00d4ff]"
-              >
-                Clear the search
-              </button>{" "}
+              {language
+                ? `No ${languageName(language)} categories`
+                : "No categories"}
+              {query ? <> match &ldquo;{query}&rdquo;.</> : " yet."}
+            </p>
+            <p>
+              {language ? (
+                <button
+                  onClick={() => chooseLanguage(null)}
+                  className="underline text-[#00d4ff]"
+                >
+                  Look in every language
+                </button>
+              ) : (
+                <button
+                  onClick={() => setSearch("")}
+                  className="underline text-[#00d4ff]"
+                >
+                  Clear the search
+                </button>
+              )}{" "}
               or{" "}
               <Link href="/community/create" className="underline text-[#00d4ff]">
                 make it yourself.
@@ -274,7 +392,7 @@ export default function CommunityPage() {
           </div>
         )}
 
-        {status === "ready" && categories.length === 0 && !query && (
+        {status === "ready" && categories.length === 0 && !query && !language && (
           <div className="text-white/60 py-16 text-center flex flex-col gap-3">
             <p>Nothing here yet.</p>
             <p>
@@ -327,6 +445,10 @@ export default function CommunityPage() {
                     </Link>
                     <p className="text-white/50 text-sm">
                       {category.itemCount} items
+                      {/* Redundant when the list is already one language. */}
+                      {!language && category.language
+                        ? ` · ${languageName(category.language)}`
+                        : ""}
                       {category.isOwner ? " · yours" : ""}
                     </p>
                   </div>
@@ -412,6 +534,17 @@ export default function CommunityPage() {
                   categories.length === 1 ? "category matches" : "categories match"
                 } “${query}”.`
               : <>That&rsquo;s all {categories.length} of them.</>}
+            {language && (
+              <>
+                {" "}
+                <button
+                  onClick={() => chooseLanguage(null)}
+                  className="underline text-[#00d4ff]"
+                >
+                  Show every language
+                </button>
+              </>
+            )}
           </p>
         )}
 
