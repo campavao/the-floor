@@ -88,4 +88,6 @@ export type ListOptions = {
   sort: "top" | "new";
   limit: number;
   offset: number;
+  /** Case-insensitive substring of the category name. Blank means everything. */
+  query?: string;
 };

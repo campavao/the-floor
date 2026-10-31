@@ -10,8 +10,10 @@ export async function GET(request: Request) {
     const sort = params.get("sort") === "new" ? "new" : "top";
     const limit = Math.min(Math.max(Number(params.get("limit")) || 24, 1), 48);
     const offset = Math.max(Number(params.get("offset")) || 0, 0);
+    // Names are short, so anything longer than this can't match anyway.
+    const query = (params.get("q") ?? "").trim().slice(0, 100);
 
-    const categories = await repo().list({ sort, limit, offset });
+    const categories = await repo().list({ sort, limit, offset, query });
 
     // Reading the list shouldn't mint an identity -- only voting and creating
     // do that. So this uses readKey, and an anonymous visitor just sees no

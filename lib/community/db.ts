@@ -19,6 +19,14 @@ export type StoredCategory = CommunityCategoryRecord & { authorKey: string };
 
 export type VoteDirection = -1 | 0 | 1;
 
+/**
+ * A search term made literal for ILIKE, so typing "100%" or "a_b" searches for
+ * those characters instead of treating them as wildcards. Backslash is
+ * Postgres's default LIKE escape.
+ */
+const likePattern = (query: string | undefined) =>
+  (query ?? "").trim().replace(/[\\%_]/g, (match) => `\\${match}`);
+
 export type Repo = {
   create(input: {
     name: string;
@@ -268,18 +276,22 @@ const postgresRepo = (connectionString: string): Repo => {
       await sql`delete from community_categories where id = ${id}`;
     },
 
-    async list({ sort, limit, offset }) {
+    async list({ sort, limit, offset, query }) {
+      // "%" alone matches every name, so a blank search is the plain listing.
+      const pattern = `%${likePattern(query)}%`;
       const rows =
         sort === "new"
           ? await sql`
               select * from community_categories
                where status = 'published' and hidden_at is null
+                 and name ilike ${pattern}
                order by published_at desc nulls last
                limit ${limit} offset ${offset}
             `
           : await sql`
               select * from community_categories
                where status = 'published' and hidden_at is null
+                 and name ilike ${pattern}
                order by (upvotes - downvotes) desc, published_at desc nulls last
                limit ${limit} offset ${offset}
             `;
@@ -531,9 +543,13 @@ const devRepo = (): Repo => {
         data.reports = data.reports.filter((r) => r.categoryId !== id);
       }),
 
-    list: async ({ sort, limit, offset }) => {
+    list: async ({ sort, limit, offset, query }) => {
       const data = await read();
-      const sorted = published(data).sort((a, b) =>
+      const needle = (query ?? "").trim().toLowerCase();
+      const matching = published(data).filter((c) =>
+        c.name.toLowerCase().includes(needle)
+      );
+      const sorted = matching.sort((a, b) =>
         sort === "new"
           ? (b.publishedAt ?? "").localeCompare(a.publishedAt ?? "")
           : b.upvotes - b.downvotes - (a.upvotes - a.downvotes) ||
