@@ -61,11 +61,13 @@ export const getCategory = (
 
 export const listCategories = (
   sort: "top" | "new" = "top",
-  offset = 0
-): Promise<{ categories: CommunityCategorySummary[]; hasMore: boolean }> =>
-  fetch(
-    `/api/community/categories?sort=${sort}&offset=${offset}`
-  ).then(unwrap);
+  offset = 0,
+  query = ""
+): Promise<{ categories: CommunityCategorySummary[]; hasMore: boolean }> => {
+  const params = new URLSearchParams({ offset: String(offset), sort });
+  if (query.trim()) params.set("q", query.trim());
+  return fetch(`/api/community/categories?${params}`).then(unwrap);
+};
 
 export const voteOnCategory = (
   id: string,

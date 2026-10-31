@@ -2,7 +2,7 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import FloorButton from "@/app/components/FloorButton";
 import FloorPageLayout from "@/app/components/FloorPageLayout";
@@ -19,6 +19,22 @@ export default function CommunityPage() {
   const [error, setError] = useState("");
   const [pending, setPending] = useState<string | null>(null);
 
+  /** What's in the box, and what was last sent -- the latter trails by a beat. */
+  const [search, setSearch] = useState("");
+  const [query, setQuery] = useState("");
+
+  useEffect(() => {
+    const timer = setTimeout(() => setQuery(search.trim()), 300);
+    return () => clearTimeout(timer);
+  }, [search]);
+
+  /**
+   * Each listing request takes a ticket. Typing fires several in a row and a
+   * cold database can answer them out of order, so only the newest one is
+   * allowed to land.
+   */
+  const latest = useRef(0);
+
   /**
    * The API has always paged -- the page just never asked for the second one,
    * so everything past the first 24 was unreachable.
@@ -28,20 +44,30 @@ export default function CommunityPage() {
 
   const { categories: mine, addCategory, removeCategory } = useCommunityCategories();
 
-  const load = useCallback(async (which: "top" | "new") => {
+  const load = useCallback(async (which: "top" | "new", q: string) => {
+    const ticket = ++latest.current;
     setStatus("loading");
     try {
-      const { categories: found, hasMore: more } = await listCategories(which);
+      const { categories: found, hasMore: more } = await listCategories(
+        which,
+        0,
+        q
+      );
+      if (ticket !== latest.current) return;
       setCategories(found);
       setHasMore(more);
       setStatus("ready");
     } catch (caught) {
+      if (ticket !== latest.current) return;
       setError(caught instanceof Error ? caught.message : "Couldn't load.");
       setStatus("error");
     }
   }, []);
 
   const loadMore = useCallback(async () => {
+    // Not a new ticket: this extends the current listing, and is dropped if
+    // the search or sort changes underneath it.
+    const ticket = latest.current;
     setLoadingMore(true);
     setError("");
     try {
@@ -49,8 +75,10 @@ export default function CommunityPage() {
       // agree while nothing is published mid-browse.
       const { categories: found, hasMore: more } = await listCategories(
         sort,
-        categories.length
+        categories.length,
+        query
       );
+      if (ticket !== latest.current) return;
 
       setCategories((previous) => {
         // Paging by offset can repeat a category if one is published while
@@ -60,15 +88,16 @@ export default function CommunityPage() {
       });
       setHasMore(more);
     } catch (caught) {
+      if (ticket !== latest.current) return;
       setError(caught instanceof Error ? caught.message : "Couldn't load more.");
     } finally {
       setLoadingMore(false);
     }
-  }, [sort, categories.length]);
+  }, [sort, categories.length, query]);
 
   useEffect(() => {
-    load(sort);
-  }, [sort, load]);
+    load(sort, query);
+  }, [sort, query, load]);
 
   const onVote = async (id: string, direction: -1 | 1) => {
     const current = categories.find((category) => category.id === id);
@@ -177,7 +206,22 @@ export default function CommunityPage() {
           </Link>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
+          <div className="w-full sm:w-auto sm:flex-1 sm:max-w-md">
+            <input
+              type="search"
+              value={search}
+              onChange={(event) => setSearch(event.target.value)}
+              onKeyDown={(event) => {
+                if (event.key === "Escape") setSearch("");
+              }}
+              placeholder="Search categories…"
+              aria-label="Search community categories"
+              maxLength={100}
+              className="w-full px-4 py-2 text-sm rounded bg-gray-800 text-white placeholder-white/40 border border-transparent focus:border-[#00d4ff] focus:outline-none"
+            />
+          </div>
+
           {(["top", "new"] as const).map((option) => (
             <button
               key={option}
@@ -212,7 +256,25 @@ export default function CommunityPage() {
           </div>
         )}
 
-        {status === "ready" && categories.length === 0 && (
+        {status === "ready" && categories.length === 0 && query && (
+          <div className="text-white/60 py-16 text-center flex flex-col gap-3">
+            <p>No categories match &ldquo;{query}&rdquo;.</p>
+            <p>
+              <button
+                onClick={() => setSearch("")}
+                className="underline text-[#00d4ff]"
+              >
+                Clear the search
+              </button>{" "}
+              or{" "}
+              <Link href="/community/create" className="underline text-[#00d4ff]">
+                make it yourself.
+              </Link>
+            </p>
+          </div>
+        )}
+
+        {status === "ready" && categories.length === 0 && !query && (
           <div className="text-white/60 py-16 text-center flex flex-col gap-3">
             <p>Nothing here yet.</p>
             <p>
@@ -345,7 +407,11 @@ export default function CommunityPage() {
 
         {status === "ready" && !hasMore && categories.length > 0 && (
           <p className="text-white/40 text-sm text-center pt-2">
-            That&rsquo;s all {categories.length} of them.
+            {query
+              ? `${categories.length} ${
+                  categories.length === 1 ? "category matches" : "categories match"
+                } “${query}”.`
+              : <>That&rsquo;s all {categories.length} of them.</>}
           </p>
         )}
 
