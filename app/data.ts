@@ -276,6 +276,7 @@ export type Category =
   | "Apps"
   | "Pool Equipment"
   | "Video Games"
+  | "Bollywood Celebs"
   ;
 
 /**
@@ -10427,11 +10428,69 @@ const NhlTeamsCategory: CategoryMetadata = {
 //   examples: [],
 // };
 
+const BollywoodCelebsCategory: CategoryMetadata = {
+  name: "Bollywood Celebs",
+  folder: "bollywood-celebs",
+  examples: [
+    { name: "Shah Rukh Khan", image: "shah-rukh-khan.jpg", alternatives: ["SRK", "King Khan"] },
+    { name: "Radhika Apte", image: "radhika-apte.jpg", alternatives: [] },
+    { name: "Varun Dhawan", image: "varun-dhawan.jpg", alternatives: [] },
+    { name: "Pankaj Tripathi", image: "pankaj-tripathi.jpg", alternatives: [] },
+    { name: "Deepika Padukone", image: "deepika-padukone.jpg", alternatives: [] },
+    { name: "Jimmy Shergill", image: "jimmy-shergill.jpg", alternatives: [] },
+    { name: "Salman Khan", image: "salman-khan.jpg", alternatives: [] },
+    { name: "Kiara Advani", image: "kiara-advani.jpg", alternatives: [] },
+    { name: "Vijay Raaz", image: "vijay-raaz.jpg", alternatives: [] },
+    { name: "Alia Bhatt", image: "alia-bhatt.jpg", alternatives: [] },
+    { name: "Amitabh Bachchan", image: "amitabh-bachchan.jpg", alternatives: ["Big B"] },
+    { name: "Konkona Sen Sharma", image: "konkona-sen-sharma.jpg", alternatives: ["Konkona Sen-Sharma"] },
+    { name: "Kartik Aaryan", image: "kartik-aaryan.jpg", alternatives: [] },
+    { name: "Shefali Shah", image: "shefali-shah.jpg", alternatives: [] },
+    { name: "Ranbir Kapoor", image: "ranbir-kapoor.jpg", alternatives: [] },
+    { name: "Boman Irani", image: "boman-irani.jpg", alternatives: [] },
+    { name: "Katrina Kaif", image: "katrina-kaif.jpg", alternatives: [] },
+    { name: "Jaideep Ahlawat", image: "jaideep-ahlawat.jpg", alternatives: [] },
+    { name: "Akshay Kumar", image: "akshay-kumar.jpg", alternatives: [] },
+    { name: "Amrita Rao", image: "amrita-rao.jpg", alternatives: [] },
+    { name: "Ranveer Singh", image: "ranveer-singh.jpg", alternatives: [] },
+    { name: "Tabu", image: "tabu.jpg", alternatives: [] },
+    { name: "Anushka Sharma", image: "anushka-sharma.jpg", alternatives: [] },
+    { name: "Nawazuddin Siddiqui", image: "nawazuddin-siddiqui.jpg", alternatives: [] },
+    { name: "Kajol", image: "kajol.jpg", alternatives: [] },
+    { name: "Vicky Kaushal", image: "vicky-kaushal.jpg", alternatives: [] },
+    { name: "Divya Dutta", image: "divya-dutta.jpg", alternatives: [] },
+    { name: "Hrithik Roshan", image: "hrithik-roshan.jpg", alternatives: [] },
+    { name: "Arshad Warsi", image: "arshad-warsi.jpg", alternatives: [] },
+    { name: "Kareena Kapoor Khan", image: "kareena-kapoor-khan.jpg", alternatives: ["Kareena Kapoor"] },
+    { name: "Kay Kay Menon", image: "kay-kay-menon.jpg", alternatives: ["KK Menon"] },
+    { name: "Shraddha Kapoor", image: "shraddha-kapoor.jpg", alternatives: [] },
+    { name: "Manoj Bajpayee", image: "manoj-bajpayee.jpg", alternatives: ["Manoj Bajpai"] },
+    { name: "Aishwarya Rai Bachchan", image: "aishwarya-rai-bachchan.jpg", alternatives: ["Aishwarya Rai"] },
+    { name: "Sidharth Malhotra", image: "sidharth-malhotra.jpg", alternatives: [] },
+    { name: "Abhay Deol", image: "abhay-deol.jpg", alternatives: [] },
+    { name: "Madhuri Dixit", image: "madhuri-dixit.jpg", alternatives: [] },
+    { name: "Rajkummar Rao", image: "rajkummar-rao.jpg", alternatives: ["Raj Kumar Rao"] },
+    { name: "Priyanka Chopra", image: "priyanka-chopra.jpg", alternatives: ["Priyanka Chopra Jonas"] },
+    { name: "Anil Kapoor", image: "anil-kapoor.jpg", alternatives: [] },
+    { name: "Vidya Balan", image: "vidya-balan.jpg", alternatives: [] },
+    { name: "Saif Ali Khan", image: "saif-ali-khan.jpg", alternatives: [] },
+    { name: "Janhvi Kapoor", image: "janhvi-kapoor.jpg", alternatives: ["Jhanvi Kapoor"] },
+    { name: "John Abraham", image: "john-abraham.jpg", alternatives: [] },
+    { name: "Rani Mukerji", image: "rani-mukerji.jpg", alternatives: ["Rani Mukherjee"] },
+    { name: "Kriti Sanon", image: "kriti-sanon.jpg", alternatives: [] },
+    { name: "Ajay Devgn", image: "ajay-devgn.jpg", alternatives: ["Ajay Devgan"] },
+    { name: "Sara Ali Khan", image: "sara-ali-khan.jpg", alternatives: [] },
+    { name: "Parineeti Chopra", image: "parineeti-chopra.jpg", alternatives: [] },
+    { name: "Tiger Shroff", image: "tiger-shroff.jpg", alternatives: [] },
+  ],
+};
+
 export const CATEGORY_METADATA: Record<Category, CategoryMetadata> = {
   "Airport Codes": AirportCodesCategory,
   "Amusement Parks": AmusementParksCategory,
   "Fruits": FruitsCategory,
   Apps: AppsCategory,
+  "Bollywood Celebs": BollywoodCelebsCategory,
   "Board games": BoardGamesCategory,
   Books: BooksCategory,
   "Brand slogans": BrandSlogansCategory,
