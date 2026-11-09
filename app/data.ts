@@ -271,6 +271,7 @@ export type Category =
   | "Anime"
   | "Minecraft"
   | "EU Flags"
+  | "Lego"
   // | "Chilis" // unused for now
   | "Math"
   | "Apps"
