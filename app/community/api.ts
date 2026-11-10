@@ -7,6 +7,7 @@ import type {
   CommunityCategoryView,
   CommunityItem,
   ModerationRow,
+  OwnCategoryRow,
 } from "@/lib/community/types";
 
 /** The message from the API if it sent one, so the UI never says "Error 400". */
@@ -39,15 +40,33 @@ export const createDraft = (
 ): Promise<{ id: string; name: string; items: CommunityItem[] }> =>
   postJson("/api/community/categories", { name, items });
 
-export const saveItems = (
+const patchCategory = (
   id: string,
-  items: Array<Pick<CommunityItem, "id" | "name" | "alternatives">>
+  payload: unknown
 ): Promise<{ category: CommunityCategoryView }> =>
   fetch(`/api/community/categories/${id}`, {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ items }),
+    body: JSON.stringify(payload),
   }).then(unwrap);
+
+/**
+ * Replace the item list. An entry with an `id` keeps that item's picture; one
+ * without is new and starts with none.
+ */
+export const saveItems = (
+  id: string,
+  items: Array<{ id?: string; name: string; alternatives?: string[] }>
+): Promise<{ category: CommunityCategoryView }> => patchCategory(id, { items });
+
+export const renameCategory = (
+  id: string,
+  name: string
+): Promise<{ category: CommunityCategoryView }> => patchCategory(id, { name });
+
+/** Everything this browser has made, drafts included. */
+export const listMine = (): Promise<{ categories: OwnCategoryRow[] }> =>
+  fetch("/api/community/mine").then(unwrap);
 
 export const publishCategory = (
   id: string

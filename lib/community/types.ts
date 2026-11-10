@@ -84,6 +84,14 @@ export type ModerationRow = {
   updatedAt: string;
 };
 
+/**
+ * One row of "Your categories": what the author needs to find their own work
+ * again, drafts and hidden ones included. No report count -- that's the
+ * admin's number, and showing it would tell someone exactly how close they are
+ * to the auto-hide threshold.
+ */
+export type OwnCategoryRow = Omit<ModerationRow, "reportCount">;
+
 export type ListOptions = {
   sort: "top" | "new";
   limit: number;

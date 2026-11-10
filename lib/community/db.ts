@@ -12,6 +12,7 @@ import type {
   CommunityItem,
   ListOptions,
   ModerationRow,
+  OwnCategoryRow,
 } from "./types";
 
 /** Same as the public record, plus the owner token the API must never leak. */
@@ -35,6 +36,8 @@ export type Repo = {
   }): Promise<StoredCategory>;
   get(id: string): Promise<StoredCategory | undefined>;
   saveItems(id: string, items: CommunityItem[]): Promise<StoredCategory | undefined>;
+  /** Change the name, and the slug that's derived from it. */
+  rename(id: string, name: string): Promise<StoredCategory | undefined>;
   /**
    * Merge a patch into one item, atomically.
    *
@@ -141,6 +144,12 @@ export const toModerationRow = (category: StoredCategory): ModerationRow => ({
   updatedAt: category.updatedAt,
 });
 
+/** One of the caller's own categories, drafts and hidden ones included. */
+export const toOwnRow = (category: StoredCategory): OwnCategoryRow => {
+  const { reportCount: _reportCount, ...row } = toModerationRow(category);
+  return row;
+};
+
 export const toSummary = (
   category: StoredCategory,
   myVote: VoteDirection,
@@ -211,6 +220,16 @@ const postgresRepo = (connectionString: string): Repo => {
       const rows = await sql`
         update community_categories
            set items = ${JSON.stringify(items)}::jsonb, updated_at = now()
+         where id = ${id}
+        returning *
+      `;
+      return rows[0] ? fromRow(rows[0]) : undefined;
+    },
+
+    async rename(id, name) {
+      const rows = await sql`
+        update community_categories
+           set name = ${name}, slug = ${slugify(name)}, updated_at = now()
          where id = ${id}
         returning *
       `;
@@ -492,6 +511,16 @@ const devRepo = (): Repo => {
         const category = data.categories.find((c) => c.id === id);
         if (!category) return undefined;
         category.items = items;
+        category.updatedAt = now();
+        return category;
+      }),
+
+    rename: (id, name) =>
+      mutate((data) => {
+        const category = data.categories.find((c) => c.id === id);
+        if (!category) return undefined;
+        category.name = name;
+        category.slug = slugify(name);
         category.updatedAt = now();
         return category;
       }),

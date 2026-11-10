@@ -3,7 +3,7 @@ import { repo, toView } from "@/lib/community/db";
 import { fail, handle, json, readJson } from "@/lib/community/http";
 import { readKey } from "@/lib/community/identity";
 import { isAdmin } from "@/lib/community/adminSession";
-import { parseItems } from "@/lib/community/validate";
+import { parseCategoryPatch } from "@/lib/community/validate";
 
 type Params = { params: Promise<{ id: string }> };
 
@@ -36,7 +36,7 @@ export async function GET(_request: Request, { params }: Params) {
   });
 }
 
-/** Rename, reorder, add or drop items. Owner or admin. */
+/** Rename the category; rename, reorder, add or drop items. Owner or admin. */
 export async function PATCH(request: Request, { params }: Params) {
   return handle(async () => {
     const { id } = await params;
@@ -51,22 +51,33 @@ export async function PATCH(request: Request, { params }: Params) {
     }
 
     const body = await readJson(request);
-    // `existing` carries the stored image fields across, so a client can
+    // The stored items carry their image fields across, so a client can
     // reorder or rename without being able to invent an imageUrl.
-    const items = parseItems(body.items, { existing: category.items });
+    const { name, items } = parseCategoryPatch(body, category.items);
 
-    const keptKeys = new Set(
-      items.map((item) => item.imageKey).filter(Boolean) as string[]
-    );
-    const orphaned = category.items
-      .map((item) => item.imageKey)
-      .filter((imageKey): imageKey is string => Boolean(imageKey))
-      .filter((imageKey) => !keptKeys.has(imageKey));
+    let saved: typeof category | undefined = category;
 
-    const saved = await repo().saveItems(id, items);
-    if (!saved) return fail("No category with that id.", 404);
+    if (name !== undefined && name !== category.name) {
+      saved = await repo().rename(id, name);
+      if (!saved) return fail("No category with that id.", 404);
+    }
 
-    await Promise.all(orphaned.map((imageKey) => imageStore().remove(imageKey)));
+    if (items) {
+      const keptKeys = new Set(
+        items.map((item) => item.imageKey).filter(Boolean) as string[]
+      );
+      const orphaned = category.items
+        .map((item) => item.imageKey)
+        .filter((imageKey): imageKey is string => Boolean(imageKey))
+        .filter((imageKey) => !keptKeys.has(imageKey));
+
+      saved = await repo().saveItems(id, items);
+      if (!saved) return fail("No category with that id.", 404);
+
+      await Promise.all(
+        orphaned.map((imageKey) => imageStore().remove(imageKey))
+      );
+    }
 
     return json({ category: toView(saved, 0, isOwner, admin) });
   });
