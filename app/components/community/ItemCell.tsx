@@ -3,6 +3,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
+import { LIMITS } from "@/lib/community/config";
 import type { CommunityItem } from "@/lib/community/types";
 
 export type CellStatus =
@@ -23,6 +24,7 @@ export default function ItemCell({
   onSearch,
   onEdit,
   onRemove,
+  onSaveDetails,
 }: {
   item: CommunityItem;
   status: CellStatus;
@@ -32,8 +34,59 @@ export default function ItemCell({
   onSearch: () => void;
   onEdit: () => void;
   onRemove: () => void;
+  /**
+   * Makes the name editable. Resolves once the new name and alternate answers
+   * are saved; a rejection keeps the form open with its message.
+   */
+  onSaveDetails?: (details: {
+    name: string;
+    alternatives: string[];
+  }) => Promise<void>;
 }) {
   const busy = status === "searching" || status === "uploading";
+
+  const [renaming, setRenaming] = useState(false);
+  const [draftName, setDraftName] = useState(item.name);
+  const [draftAlternatives, setDraftAlternatives] = useState("");
+  const [savingDetails, setSavingDetails] = useState(false);
+  const [detailsError, setDetailsError] = useState("");
+
+  const startRenaming = () => {
+    setDraftName(item.name);
+    setDraftAlternatives(item.alternatives.join(", "));
+    setDetailsError("");
+    setRenaming(true);
+  };
+
+  const submitDetails = async (event: React.FormEvent) => {
+    event.preventDefault();
+    if (!onSaveDetails || savingDetails) return;
+
+    const name = draftName.trim();
+    if (!name) {
+      setDetailsError("It needs a name.");
+      return;
+    }
+
+    setSavingDetails(true);
+    setDetailsError("");
+    try {
+      await onSaveDetails({
+        name,
+        alternatives: draftAlternatives
+          .split(",")
+          .map((entry) => entry.trim())
+          .filter(Boolean),
+      });
+      setRenaming(false);
+    } catch (caught) {
+      setDetailsError(
+        caught instanceof Error ? caught.message : "Couldn't save that."
+      );
+    } finally {
+      setSavingDetails(false);
+    }
+  };
 
   /**
    * Retry a freshly-uploaded image that isn't being served yet.
@@ -110,9 +163,73 @@ export default function ItemCell({
       </div>
 
       <div className="p-2 flex flex-col gap-2">
-        <p className="font-semibold text-sm text-white truncate" title={item.name}>
-          {item.name}
-        </p>
+        {renaming ? (
+          <form onSubmit={submitDetails} className="flex flex-col gap-1">
+            <input
+              value={draftName}
+              onChange={(event) => setDraftName(event.target.value)}
+              onKeyDown={(event) => {
+                if (event.key === "Escape") setRenaming(false);
+              }}
+              maxLength={LIMITS.maxItemNameLength}
+              aria-label={`Name for ${item.name}`}
+              autoFocus
+              className="bg-gray-800 text-white text-sm px-2 py-1 rounded border border-[#00d4ff] focus:outline-none"
+            />
+            <input
+              value={draftAlternatives}
+              onChange={(event) => setDraftAlternatives(event.target.value)}
+              onKeyDown={(event) => {
+                if (event.key === "Escape") setRenaming(false);
+              }}
+              placeholder="Also accept (comma separated)"
+              aria-label={`Other accepted answers for ${item.name}`}
+              className="bg-gray-800 text-white text-[11px] px-2 py-1 rounded border border-white/20 focus:border-[#00d4ff] focus:outline-none"
+            />
+            {detailsError && (
+              <p className="text-[11px] leading-tight text-red-300">
+                {detailsError}
+              </p>
+            )}
+            <div className="grid grid-cols-2 gap-1">
+              <button
+                type="submit"
+                disabled={savingDetails}
+                className="text-[11px] py-1 rounded bg-[#00d4ff] text-black font-semibold disabled:opacity-50"
+              >
+                {savingDetails ? "Saving…" : "Save"}
+              </button>
+              <button
+                type="button"
+                onClick={() => setRenaming(false)}
+                disabled={savingDetails}
+                className="text-[11px] py-1 rounded bg-gray-800 text-white/80 hover:bg-gray-700 disabled:opacity-40"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        ) : onSaveDetails ? (
+          <button
+            onClick={startRenaming}
+            disabled={busy}
+            title="Rename, or add other accepted answers"
+            className="text-left group disabled:opacity-40"
+          >
+            <span className="font-semibold text-sm text-white truncate block group-hover:text-[#00d4ff]">
+              {item.name} <span className="text-white/40 text-xs">✎</span>
+            </span>
+            {item.alternatives.length > 0 && (
+              <span className="text-[11px] text-white/50 truncate block">
+                also: {item.alternatives.join(", ")}
+              </span>
+            )}
+          </button>
+        ) : (
+          <p className="font-semibold text-sm text-white truncate" title={item.name}>
+            {item.name}
+          </p>
+        )}
 
         {message && (
           <p
