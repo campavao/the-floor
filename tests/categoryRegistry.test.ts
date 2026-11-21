@@ -1,8 +1,9 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
 import {
   COMMUNITY_ID_PREFIX,
   categoryDisplayName,
+  curatedImageSrc,
   communityCategoryId,
   isCommunityCategoryId,
   isCuratedCategoryId,
@@ -40,6 +41,10 @@ const community: Record<string, CommunityCategory> = {
 };
 
 describe("resolving curated categories", () => {
+  afterEach(() => {
+    vi.unstubAllEnvs();
+  });
+
   it("turns folder + filename into a src the browser can load", () => {
     const resolved = resolveCategory("Fruits");
 
@@ -49,6 +54,20 @@ describe("resolving curated categories", () => {
       name: "Apple",
       alternatives: ["Apples"],
       src: "/images/fruits/apple.png",
+    });
+  });
+
+  it("serves curated images from the image host when one is configured", () => {
+    vi.stubEnv(
+      "NEXT_PUBLIC_CURATED_IMAGE_BASE_URL",
+      "https://pub-example.r2.dev"
+    );
+
+    expect(curatedImageSrc("fruits", "apple.png")).toBe(
+      "https://pub-example.r2.dev/images/fruits/apple.png"
+    );
+    expect(resolveCategory("Fruits")?.examples[0]).toMatchObject({
+      src: "https://pub-example.r2.dev/images/fruits/apple.png",
     });
   });
 

@@ -152,6 +152,17 @@ describe("listing stored objects", () => {
     const { store } = await load();
     expect(await store.list()).toEqual([]);
   });
+
+  it("never shows the curated images that share the bucket", async () => {
+    const { store } = await load();
+    await writeObject("images/fruits/apple.png", hoursAgo(48));
+    await writeObject("categories/abc/one.webp", hoursAgo(48));
+
+    const objects = await store.list();
+    expect(objects.map((o: { key: string }) => o.key)).toEqual([
+      "categories/abc/one.webp",
+    ]);
+  });
 });
 
 describe("deciding what counts as an orphan", () => {
