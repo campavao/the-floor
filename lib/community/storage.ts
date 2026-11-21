@@ -4,6 +4,7 @@ import path from "node:path";
 import { AwsClient } from "aws4fetch";
 
 import { NotConfigured, isProduction, r2Config } from "./config";
+import { COMMUNITY_IMAGE_PREFIX } from "./ids";
 
 export type StoredObject = { key: string; uploadedAt: Date };
 
@@ -12,9 +13,11 @@ export type ImageStore = {
   put(key: string, body: Buffer, contentType: string): Promise<string>;
   remove(key: string): Promise<void>;
   /**
-   * Everything in the store. Used by the cleanup job to find objects nothing
-   * points at, so it must be complete -- a truncated listing is fine (those
-   * objects are simply not considered) but a silently partial one is not.
+   * Every community image in the store -- only keys under
+   * COMMUNITY_IMAGE_PREFIX, since the bucket also holds the curated images and
+   * the cleanup job deletes whatever it is shown that nothing references. Must
+   * be complete -- a truncated listing is fine (those objects are simply not
+   * considered) but a silently partial one is not.
    */
   list(): Promise<StoredObject[]>;
   describe(): string;
@@ -91,6 +94,7 @@ const r2Store = (config: NonNullable<ReturnType<typeof r2Config>>): ImageStore =
       do {
         const url = new URL(`${config.endpoint}/${config.bucket}`);
         url.searchParams.set("list-type", "2");
+        url.searchParams.set("prefix", COMMUNITY_IMAGE_PREFIX);
         url.searchParams.set("max-keys", "1000");
         if (token) url.searchParams.set("continuation-token", token);
 
@@ -178,7 +182,7 @@ const localStore = (): ImageStore => {
         return found.flat();
       };
 
-      return walk(root);
+      return walk(path.join(root, COMMUNITY_IMAGE_PREFIX));
     },
 
     describe: () => "local disk (public/community-dev)",

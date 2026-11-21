@@ -19,9 +19,15 @@ export const slugify = (value: string): string =>
     .replace(/^-+|-+$/g, "")
     .slice(0, 60) || "category";
 
+/**
+ * Where community images live in the bucket. The bucket also holds the curated
+ * images under `images/`, which the cleanup job must never see.
+ */
+export const COMMUNITY_IMAGE_PREFIX = "categories/";
+
 /** Storage key for one item's image. Content-hashed so it can be cached forever. */
 export const imageKey = (
   categoryId: string,
   itemId: string,
   hash: string
-): string => `categories/${categoryId}/${itemId}-${hash}.webp`;
+): string => `${COMMUNITY_IMAGE_PREFIX}${categoryId}/${itemId}-${hash}.webp`;

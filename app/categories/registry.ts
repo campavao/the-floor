@@ -10,7 +10,8 @@ import {
  * Turning a category key into something the screen can render.
  *
  * Curated categories live in `app/data.ts` and point at files under
- * `public/images/<folder>/`. Community categories are created in the browser
+ * `public/images/<folder>/` -- served from R2 in production, see
+ * `curatedImageSrc`. Community categories are created in the browser
  * and point at absolute URLs on the image host. The game shouldn't have to care
  * which it got, so both collapse into a `ResolvedCategory` whose image examples
  * carry a ready-to-use `src`.
@@ -84,6 +85,14 @@ export const isTextExample = (
   example: ResolvedExample
 ): example is ResolvedTextExample => "text" in example;
 
+/**
+ * The URL of a curated image. Production builds serve public/images from R2
+ * (see next.config.ts); everywhere else the base is empty and the path is
+ * served by Next itself.
+ */
+export const curatedImageSrc = (folder: string, image: string): string =>
+  `${process.env.NEXT_PUBLIC_CURATED_IMAGE_BASE_URL ?? ""}/images/${folder}/${image}`;
+
 const resolveCuratedExample = (
   folder: string,
   example: ImageExample | TextExample
@@ -99,7 +108,7 @@ const resolveCuratedExample = (
   return {
     name: example.name,
     alternatives: example.alternatives,
-    src: `/images/${folder}/${example.image}`,
+    src: curatedImageSrc(folder, example.image),
   };
 };
 

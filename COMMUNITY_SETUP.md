@@ -65,6 +65,14 @@ R2_BUCKET=the-floor-community
 R2_PUBLIC_BASE_URL=https://images.example.com
 ```
 
+The same bucket also serves the curated images. Production builds on Vercel
+(`VERCEL_ENV=production`) run `scripts/sync-curated-images.mjs` before
+`next build`, which uploads anything new or changed in `public/images/` to
+`images/` in the bucket, and the build points every curated image at
+`R2_PUBLIC_BASE_URL/images/...`. Preview deployments and local dev keep serving
+`public/images/` directly. Community images live under `categories/`, and the
+cleanup job only ever lists that prefix.
+
 ### 2. Categories — Postgres
 
 Any Postgres works. Neon through the Vercel Marketplace keeps billing in one

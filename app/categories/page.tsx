@@ -10,6 +10,7 @@ import {
 import FloorPageLayout from "../components/FloorPageLayout";
 import FloorButton from "../components/FloorButton";
 import Link from "next/link";
+import { curatedImageSrc } from "./registry";
 
 export default function CategoriesPage() {
   const [containerRef, setContainerRef] = useState<HTMLDivElement | null>(null);
@@ -110,7 +111,7 @@ export default function CategoriesPage() {
                             once, so without lazy loading the browser fetches
                             all ~50 images up front to fill a 200px box. */}
                         <img
-                          src={`/images/${categoryData.folder}/${item.image}`}
+                          src={curatedImageSrc(categoryData.folder, item.image)}
                           alt={item.name}
                           className="max-w-full max-h-[200px] object-contain"
                           loading="lazy"

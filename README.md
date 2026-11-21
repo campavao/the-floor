@@ -119,7 +119,9 @@ Next.js and Tailwind, deployed on Vercel. The game itself has no database, no
 accounts and no server — every page is static and the game state lives in your
 browser. The community tool adds Postgres for the category list, Cloudflare R2
 for the images, and the AI Gateway for item suggestions; without those
-configured, the rest of the site is unaffected.
+configured, the rest of the site is unaffected. When R2 is configured,
+production also serves the curated images from it — see
+[COMMUNITY_SETUP.md](COMMUNITY_SETUP.md).
 
 ## Disclaimer
 
