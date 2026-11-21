@@ -118,6 +118,57 @@ export const parseItems = (
   return items;
 };
 
+/**
+ * What an edit is allowed to change: the name, the items, the language, or
+ * any mix of them.
+ *
+ * Renaming two items to the same thing is refused rather than deduplicated.
+ * `parseItems` drops the later duplicate, which is the right call for a pasted
+ * list -- but on a saved category the dropped item's picture is then deleted
+ * as an orphan, so a typo in a rename would quietly destroy an image.
+ */
+export const parseCategoryPatch = (
+  body: Record<string, unknown>,
+  existing: CommunityItem[]
+): { name?: string; items?: CommunityItem[]; language?: Language } => {
+  const patch: { name?: string; items?: CommunityItem[]; language?: Language } =
+    {};
+
+  if (body.name !== undefined) patch.name = parseCategoryName(body.name);
+  if (body.language !== undefined) patch.language = parseLanguage(body.language);
+
+  if (body.items !== undefined) {
+    if (Array.isArray(body.items)) {
+      const seen = new Set<string>();
+      for (const entry of body.items) {
+        const key = cleanText(
+          (entry as Record<string, unknown> | null)?.name
+        ).toLowerCase();
+        if (!key) continue;
+        if (seen.has(key)) {
+          throw new InvalidInput(
+            `There are two items called "${cleanText(
+              (entry as Record<string, unknown>).name
+            )}". Each one needs its own name.`
+          );
+        }
+        seen.add(key);
+      }
+    }
+    patch.items = parseItems(body.items, { existing });
+  }
+
+  if (
+    patch.name === undefined &&
+    patch.items === undefined &&
+    patch.language === undefined
+  ) {
+    throw new InvalidInput("Nothing to change.");
+  }
+
+  return patch;
+};
+
 export const assertPublishable = (items: CommunityItem[]): void => {
   const withImages = items.filter((item) => item.imageUrl);
 

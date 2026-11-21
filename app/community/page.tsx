@@ -8,17 +8,22 @@ import FloorButton from "@/app/components/FloorButton";
 import FloorPageLayout from "@/app/components/FloorPageLayout";
 import { useCommunityCategories } from "@/app/categories/useCommunityCategories";
 import { communityCategoryId } from "@/app/categories/registry";
+import { LIMITS } from "@/lib/community/config";
 import {
   isLanguage,
   languageName,
   preferredLanguage,
 } from "@/lib/community/languages";
-import type { CommunityCategorySummary } from "@/lib/community/types";
+import type {
+  CommunityCategorySummary,
+  OwnCategoryRow,
+} from "@/lib/community/types";
 
 import {
   getCategory,
   listCategories,
   listLanguages,
+  listMine,
   reportCategory,
   voteOnCategory,
 } from "./api";
@@ -178,6 +183,26 @@ export default function CommunityPage() {
     load(sort, query, language);
   }, [sort, query, language, load]);
 
+  /**
+   * What this browser has made, drafts included. Separate from the listing
+   * above on purpose: a draft never appears there, so without this the only
+   * way back to one was still having its URL.
+   */
+  const [own, setOwn] = useState<OwnCategoryRow[]>([]);
+
+  useEffect(() => {
+    let cancelled = false;
+    listMine()
+      .then(({ categories: found }) => {
+        if (!cancelled) setOwn(found);
+      })
+      // Not worth an error banner: the pool below is the page's real job.
+      .catch(() => undefined);
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   const onVote = async (id: string, direction: -1 | 1) => {
     const current = categories.find((category) => category.id === id);
     if (!current) return;
@@ -284,6 +309,58 @@ export default function CommunityPage() {
             </FloorButton>
           </Link>
         </div>
+
+        {own.length > 0 && (
+          <section
+            aria-labelledby="your-categories"
+            className="bg-gray-900/60 border border-[#00d4ff]/40 rounded-lg p-4 flex flex-col gap-3"
+          >
+            <div>
+              <h2
+                id="your-categories"
+                className="text-xl font-bold"
+                style={{ color: "#00d4ff" }}
+              >
+                Your categories
+              </h2>
+              <p className="text-white/50 text-sm">
+                Made in this browser. Drafts are only visible to you, and are
+                removed after {LIMITS.abandonedDraftDays} days untouched.
+              </p>
+            </div>
+
+            <ul className="flex flex-col divide-y divide-white/10">
+              {own.map((category) => (
+                <li
+                  key={category.id}
+                  className="flex flex-wrap items-center gap-x-4 gap-y-1 py-2"
+                >
+                  <Link
+                    href={`/community/${category.id}`}
+                    className="font-semibold text-white hover:text-[#00d4ff]"
+                  >
+                    {category.name}
+                  </Link>
+                  <span className="text-white/50 text-sm">
+                    {category.itemCount} items ·{" "}
+                    {category.hiddenAt
+                      ? "hidden pending review"
+                      : category.status === "draft"
+                        ? "draft"
+                        : "published"}
+                  </span>
+                  <div className="flex-1" />
+                  <Link
+                    href={`/community/${category.id}/edit`}
+                    className="text-sm px-3 py-1 rounded bg-[#00d4ff] text-black font-semibold"
+                  >
+                    {category.status === "draft" ? "Finish" : "Edit"}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
 
         <div className="flex flex-wrap items-center gap-2">
           <div className="w-full sm:w-auto sm:flex-1 sm:max-w-md">
@@ -449,7 +526,17 @@ export default function CommunityPage() {
                       {!language && category.language
                         ? ` · ${languageName(category.language)}`
                         : ""}
-                      {category.isOwner ? " · yours" : ""}
+                      {category.isOwner && (
+                        <>
+                          {" · yours · "}
+                          <Link
+                            href={`/community/${category.id}/edit`}
+                            className="underline text-[#00d4ff]"
+                          >
+                            edit
+                          </Link>
+                        </>
+                      )}
                     </p>
                   </div>
 

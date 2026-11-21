@@ -10,6 +10,7 @@ import ImageEditor from "@/app/components/community/ImageEditor";
 import ImagePicker from "@/app/components/community/ImagePicker";
 import ItemCell, { type CellStatus } from "@/app/components/community/ItemCell";
 import { useCommunityCategories } from "@/app/categories/useCommunityCategories";
+import { LIMITS } from "@/lib/community/config";
 import { defaultQuery, type ImageResult } from "@/lib/community/search";
 import type { CommunityCategoryView } from "@/lib/community/types";
 
@@ -19,9 +20,21 @@ import {
   attachImageFromUrl,
   deleteCategory,
   getCategory,
+  publishCategory,
+  renameCategory,
   saveItems,
   setCategoryHidden,
 } from "../../api";
+
+type Items = CommunityCategoryView["items"];
+
+/** What the server needs to recognise an item it already has. */
+const asPayload = (items: Items) =>
+  items.map((item) => ({
+    id: item.id,
+    name: item.name,
+    alternatives: item.alternatives,
+  }));
 
 type CellState = { status: CellStatus; message?: string };
 
@@ -33,6 +46,11 @@ type CellState = { status: CellStatus; message?: string };
  * one of them is wrong. So there's no auto-fill and no "Next" -- just the same
  * Find / Edit / Remove per square, against a saved category, for whoever is
  * allowed to touch it: the author, or the admin (see `lib/community/admin.ts`).
+ *
+ * The words are editable too: the category's name, each item's name and its
+ * other accepted answers, and new items can be added to the end. A draft can
+ * be published from here, which is what makes "Your categories" a real way
+ * back to unfinished work.
  *
  * Changes save as they're made. Replacing a picture deletes the old object
  * from storage as part of the same request, so the offending image is gone,
@@ -55,6 +73,11 @@ export default function EditCategoryPage({
   const [working, setWorking] = useState(false);
 
   const [webSearchAvailable, setWebSearchAvailable] = useState(false);
+
+  /** `null` while the title is just a title. */
+  const [nameDraft, setNameDraft] = useState<string | null>(null);
+  const [newItems, setNewItems] = useState("");
+  const [notice, setNotice] = useState("");
 
   const { removeCategory } = useCommunityCategories();
 
@@ -149,18 +172,133 @@ export default function EditCategoryPage({
     setError("");
 
     try {
-      const { category: saved } = await saveItems(
-        id,
-        remaining.map((item) => ({
-          id: item.id,
-          name: item.name,
-          alternatives: item.alternatives,
-        }))
-      );
+      const { category: saved } = await saveItems(id, asPayload(remaining));
       setCategory(saved);
     } catch (caught) {
       setCategory(category);
       setError(caught instanceof Error ? caught.message : "Couldn't remove that.");
+    }
+  };
+
+  const onRename = async (event: React.FormEvent) => {
+    event.preventDefault();
+    if (!category || nameDraft === null) return;
+
+    const next = nameDraft.trim();
+    if (next === category.name) {
+      setNameDraft(null);
+      return;
+    }
+
+    setWorking(true);
+    setError("");
+    try {
+      const { category: saved } = await renameCategory(id, next);
+      setCategory(saved);
+      setNameDraft(null);
+    } catch (caught) {
+      setError(caught instanceof Error ? caught.message : "Couldn't rename it.");
+    } finally {
+      setWorking(false);
+    }
+  };
+
+  /**
+   * Rename one item or change what else counts as a right answer. Throws on
+   * failure so the cell keeps its form open with the reason in it.
+   */
+  const onSaveDetails = async (
+    itemId: string,
+    details: { name: string; alternatives: string[] }
+  ) => {
+    if (!category) return;
+
+    const clash = category.items.some(
+      (item) =>
+        item.id !== itemId &&
+        item.name.toLowerCase() === details.name.toLowerCase()
+    );
+    if (clash) throw new Error(`There's already a "${details.name}".`);
+
+    const { category: saved } = await saveItems(
+      id,
+      asPayload(
+        category.items.map((item) =>
+          item.id === itemId ? { ...item, ...details } : item
+        )
+      )
+    );
+    setCategory(saved);
+  };
+
+  const parsedNewItems = newItems
+    .split(/[\n,]/)
+    .map((line) => line.trim())
+    .filter(Boolean);
+
+  const onAddItems = async () => {
+    if (!category || parsedNewItems.length === 0) return;
+
+    // Skipped here, and said out loud, rather than sent: the server refuses a
+    // list with two items of the same name.
+    const taken = new Set(category.items.map((item) => item.name.toLowerCase()));
+    const fresh: string[] = [];
+    for (const name of parsedNewItems) {
+      const key = name.toLowerCase();
+      if (taken.has(key)) continue;
+      taken.add(key);
+      fresh.push(name);
+    }
+
+    const room = LIMITS.maxItemsPerCategory - category.items.length;
+    const adding = fresh.slice(0, Math.max(room, 0));
+    const skipped = parsedNewItems.length - adding.length;
+
+    if (adding.length === 0) {
+      setNotice(
+        room <= 0
+          ? `This category is full — ${LIMITS.maxItemsPerCategory} items is the limit.`
+          : "Those are all in the category already."
+      );
+      return;
+    }
+
+    setWorking(true);
+    setError("");
+    setNotice("");
+    try {
+      const { category: saved } = await saveItems(id, [
+        ...asPayload(category.items),
+        ...adding.map((name) => ({ name })),
+      ]);
+      setCategory(saved);
+      setNewItems("");
+      setNotice(
+        `Added ${adding.length} item${adding.length === 1 ? "" : "s"}` +
+          (skipped > 0
+            ? `, skipped ${skipped} (already there, or over the ${LIMITS.maxItemsPerCategory}-item limit).`
+            : ".") +
+          " Use Find to give each one a picture."
+      );
+    } catch (caught) {
+      setError(caught instanceof Error ? caught.message : "Couldn't add those.");
+    } finally {
+      setWorking(false);
+    }
+  };
+
+  const onPublish = async () => {
+    if (!category) return;
+    setWorking(true);
+    setError("");
+    try {
+      const { category: published } = await publishCategory(id);
+      setCategory({ ...category, ...published, isAdmin: category.isAdmin });
+      setNotice("Published — it's in the community pool now.");
+    } catch (caught) {
+      setError(caught instanceof Error ? caught.message : "Couldn't publish.");
+    } finally {
+      setWorking(false);
     }
   };
 
@@ -249,12 +387,52 @@ export default function EditCategoryPage({
             >
               ← Back to the category
             </Link>
-            <h1
-              className="text-3xl font-bold glow-text mt-2"
-              style={{ color: "#00d4ff" }}
-            >
-              Editing “{category.name}”
-            </h1>
+            {nameDraft === null ? (
+              <h1
+                className="text-3xl font-bold glow-text mt-2 flex flex-wrap items-baseline gap-3"
+                style={{ color: "#00d4ff" }}
+              >
+                <span>Editing “{category.name}”</span>
+                <button
+                  onClick={() => setNameDraft(category.name)}
+                  className="text-sm font-normal underline text-white/60 hover:text-white"
+                >
+                  Rename
+                </button>
+              </h1>
+            ) : (
+              <form
+                onSubmit={onRename}
+                className="flex flex-wrap items-center gap-2 mt-2"
+              >
+                <input
+                  value={nameDraft}
+                  onChange={(event) => setNameDraft(event.target.value)}
+                  onKeyDown={(event) => {
+                    if (event.key === "Escape") setNameDraft(null);
+                  }}
+                  maxLength={LIMITS.maxCategoryNameLength}
+                  aria-label="Category name"
+                  autoFocus
+                  className="bg-gray-800 text-white text-xl font-bold px-3 py-2 rounded-md border-2 border-[#00d4ff] focus:outline-none focus:ring-2 focus:ring-[#00d4ff] min-w-[16rem]"
+                />
+                <FloorButton
+                  type="submit"
+                  variant="rectangular"
+                  className="text-sm font-semibold"
+                  disabled={working || nameDraft.trim().length < 2}
+                >
+                  Save name
+                </FloorButton>
+                <button
+                  type="button"
+                  onClick={() => setNameDraft(null)}
+                  className="text-sm underline text-white/60 hover:text-white"
+                >
+                  Cancel
+                </button>
+              </form>
+            )}
             <p className="text-white/60 text-sm">
               {withImages} of {category.items.length} have a picture
               {category.status === "draft" ? " · draft" : " · published"}
@@ -265,6 +443,21 @@ export default function EditCategoryPage({
           </div>
 
           <div className="flex gap-2 flex-wrap">
+            {category.status === "draft" && category.isOwner && (
+              <FloorButton
+                variant="rectangular"
+                className="text-sm font-semibold"
+                disabled={working || withImages < LIMITS.minItemsToPublish}
+                title={
+                  withImages < LIMITS.minItemsToPublish
+                    ? `Needs ${LIMITS.minItemsToPublish} items with pictures`
+                    : undefined
+                }
+                onClick={onPublish}
+              >
+                Publish
+              </FloorButton>
+            )}
             {category.isAdmin && (
               <FloorButton
                 variant="rectangular"
@@ -287,6 +480,7 @@ export default function EditCategoryPage({
         </div>
 
         <p className="text-white/50 text-sm">
+          Click a name to change it or add other accepted answers.{" "}
           <strong className="text-white/70">Find</strong> swaps in a different
           picture, <strong className="text-white/70">Edit</strong> crops or
           erases part of this one, and <strong className="text-white/70">×</strong>{" "}
@@ -295,7 +489,17 @@ export default function EditCategoryPage({
           until it&rsquo;s re-added.
         </p>
 
+        {category.status === "draft" && withImages < LIMITS.minItemsToPublish && (
+          <p className="text-white/50 text-sm">
+            {LIMITS.minItemsToPublish - withImages} more picture
+            {LIMITS.minItemsToPublish - withImages === 1 ? "" : "s"} needed
+            before this can be published. Items without one are dropped when you
+            publish.
+          </p>
+        )}
+
         {error && <p className="text-red-300">{error}</p>}
+        {notice && <p className="text-[#00d4ff] text-sm">{notice}</p>}
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
           {category.items.map((item) => {
@@ -311,9 +515,45 @@ export default function EditCategoryPage({
                 onSearch={() => setPicking(item.id)}
                 onEdit={() => setEditing(item.id)}
                 onRemove={() => onRemove(item.id)}
+                onSaveDetails={(details) => onSaveDetails(item.id, details)}
               />
             );
           })}
+        </div>
+
+        <div className="flex flex-col gap-2 border-t border-white/10 pt-6 max-w-2xl">
+          <label
+            htmlFor="new-items"
+            className="font-semibold"
+            style={{ color: "#00d4ff" }}
+          >
+            Add items — one per line
+          </label>
+          <textarea
+            id="new-items"
+            value={newItems}
+            onChange={(event) => setNewItems(event.target.value)}
+            rows={4}
+            disabled={category.items.length >= LIMITS.maxItemsPerCategory}
+            placeholder={"Slush Puppie\nBeef jerky"}
+            className="bg-gray-800 text-white p-3 rounded-md border-2 border-[#00d4ff]/60 focus:outline-none focus:ring-2 focus:ring-[#00d4ff] font-mono text-sm disabled:opacity-40"
+          />
+          <div className="flex flex-wrap items-center gap-4">
+            <FloorButton
+              variant="rectangular"
+              className="text-sm font-semibold"
+              disabled={working || parsedNewItems.length === 0}
+              onClick={onAddItems}
+            >
+              {parsedNewItems.length > 1
+                ? `Add ${parsedNewItems.length} items`
+                : "Add item"}
+            </FloorButton>
+            <p className="text-white/50 text-sm">
+              {category.items.length} of {LIMITS.maxItemsPerCategory} used. New
+              items start without a picture.
+            </p>
+          </div>
         </div>
       </div>
 
