@@ -271,6 +271,7 @@ export type Category =
   | "Anime"
   | "Minecraft"
   | "EU Flags"
+  | "Lego"
   // | "Chilis" // unused for now
   | "Math"
   | "Apps"
@@ -10427,6 +10428,57 @@ const NhlTeamsCategory: CategoryMetadata = {
 //   examples: [],
 // };
 
+const LegoCategory: CategoryMetadata = {
+  name: "LEGO",
+  folder: "lego",
+  examples: [
+    { name: "Ambulance", image: "ambulance.png", alternatives: ["Emergency Ambulance", "City Ambulance"] },
+    { name: "The Art of the Brick", image: "art-of-the-brick.jpg", alternatives: ["Art of the Brick"] },
+    { name: "Bamboo", image: "bamboo.jpg", alternatives: ["Bamboo Plant", "Botanical Bamboo"] },
+    { name: "Bionicle", image: "bionicle.png", alternatives: ["Bionicle Canisters", "Toa", "Technic Bionicle"] },
+    { name: "Bonsai Tree", image: "bonsai-tree.jpg", alternatives: ["Bonsai", "Lego Bonsai"] },
+    { name: "Lion Knights' Castle", image: "castle.jpg", alternatives: ["Castle", "Lego Castle", "Lion Knights Castle"] },
+    { name: "Cinderella Castle", image: "cinderella-castle.jpg", alternatives: ["Disney Castle", "Mini Disney Castle", "Cinderella's Castle"] },
+    { name: "Creeper", image: "creeper.jpg", alternatives: ["Minecraft Creeper", "The Creeper"] },
+    { name: "DC Super-Villains", image: "dc-super-villans.jpg", alternatives: ["Lego DC Super-Villains", "DC Super Villains", "Lego DC Super Villains"] },
+    { name: "Death Star", image: "death-star.jpg", alternatives: ["Lego Death Star", "Star Wars Death Star"] },
+    { name: "Doctor Doom", image: "doctor-doom.jpg", alternatives: ["Dr Doom", "Dr. Doom"] },
+    { name: "Duplo", image: "duplo.jpg", alternatives: ["Lego Duplo", "Duplo Tub"] },
+    { name: "Emmet", image: "emmet.png", alternatives: ["Emmet Brickowski", "The Lego Movie Emmet"] },
+    { name: "Fire Station", image: "fire-station.jpg", alternatives: ["Lego Fire Station", "City Fire Station"] },
+    { name: "Flamingo", image: "flamingo.jpg", alternatives: ["Pink Flamingo", "Lego Flamingo"] },
+    { name: "Green Goblin", image: "green-goblin.jpg", alternatives: ["Norman Osborn"] },
+    { name: "Lego Harry Potter", image: "harry-potter.jpg", alternatives: ["Harry Potter", "Lego Harry Potter: Years 1-4", "Lego Harry Potter Game"] },
+    { name: "Lamborghini Countach", image: "lambo.jpg", alternatives: ["Lamborghini", "Countach", "Speed Champions Lamborghini"] },
+    { name: "Lightning McQueen", image: "lightning-mcqueen.jpg", alternatives: ["Cars Lightning McQueen", "McQueen"] },
+    { name: "Llama", image: "llama.jpeg", alternatives: ["Fortnite Llama", "Loot Llama"] },
+    { name: "Lego Batman", image: "lego-batman.jpg", alternatives: ["Lego Batman: The Videogame", "Batman"] },
+    { name: "London Telephone Box", image: "london-phone-booth.png", alternatives: ["Red London Telephone Box", "London Phone Booth", "Telephone Booth"] },
+    { name: "Lucy", image: "lucy-wyldstyle.jpg", alternatives: ["Wyldstyle", "Lucy Wyldstyle"] },
+    { name: "Lego Marvel Super Heroes", image: "marvel-super-heroes.jpg", alternatives: ["Marvel Super Heroes", "Lego Marvel"] },
+    { name: "Millennium Falcon", image: "milenium-falcon.jpg", alternatives: ["Millenium Falcon", "UCS Millennium Falcon", "Star Wars Millennium Falcon"] },
+    { name: "Ninjago City", image: "ninjago.jpg", alternatives: ["Ninjago", "Ninjago City Gardens"] },
+    { name: "Giant Panda", image: "panda.jpg", alternatives: ["Panda", "Pandas", "Lego Pandas"] },
+    { name: "Pixar Luxo Jr. Lamp", image: "pixar-lamp.jpg", alternatives: ["Pixar Lamp", "Luxo Jr.", "Luxo Lamp"] },
+    { name: "Pizzeria", image: "pizzeria.jpg", alternatives: ["Pizza Van", "City Pizzeria", "Pizza Shop"] },
+    { name: "Pokémon Starters", image: "pokemon.png", alternatives: ["Charizard", "Mega Construx Starter", "Pokemon"] },
+    { name: "Police Station", image: "police-station.jpg", alternatives: ["City Police Station", "Modular Police Station"] },
+    { name: "Rivendell", image: "rivendell.jpg", alternatives: ["Lord of the Rings Rivendell", "LOTR Rivendell"] },
+    { name: "Bouquet of Roses", image: "roses.png", alternatives: ["Roses", "Lego Roses", "Botanical Roses"] },
+    { name: "Simba", image: "simba.jpg", alternatives: ["Young Simba", "The Lion King Simba"] },
+    { name: "Lego Star Wars: The Complete Saga", image: "star-wars.jpg", alternatives: ["Lego Star Wars", "The Complete Saga"] },
+    { name: "Steamboat", image: "steamboat.jpg", alternatives: ["Steamboat Willie Mickey", "Lego Steamboat Willie"] },
+    { name: "Stitch", image: "stitch.png", alternatives: ["Lilo and Stitch", "Lilo & Stitch"] },
+    { name: "LEGO Store", image: "store.jpg", alternatives: ["Lego Store", "The Lego Store", "Lego Brand Retail Store"] },
+    { name: "Titanic", image: "titanic.jpg", alternatives: ["RMS Titanic", "Lego Titanic"] },
+    { name: "Unikitty", image: "unikitty.jpg", alternatives: ["Princess Unikitty", "The Lego Movie Unikitty"] },
+    { name: "WALL-E", image: "wall-e.jpg", alternatives: ["Wall-E", "Walle", "WALL•E"] },
+    { name: "Will Ferrell", image: "will-ferrell.jpg", alternatives: ["Lord Business", "The Man Upstairs"] },
+    { name: "Winnie the Pooh", image: "winnie-the-pooh.jpg", alternatives: ["Pooh Bear", "Pooh"] },
+    { name: "Wolverine", image: "wolverine.jpeg", alternatives: ["Logan", "X-Men Wolverine"] },
+  ],
+};
+
 export const CATEGORY_METADATA: Record<Category, CategoryMetadata> = {
   "Airport Codes": AirportCodesCategory,
   "Amusement Parks": AmusementParksCategory,
@@ -10454,6 +10506,7 @@ export const CATEGORY_METADATA: Record<Category, CategoryMetadata> = {
   "Junk drawer": JunkDrawerCategory,
   "Kitchen gadgets": KitchenGadgetsCategory,
   Laundry: LaundryCategory,
+  "Lego": LegoCategory,
   Math: MathCategory,
   "MLB Teams": MlbTeamsCategory,
   Movies: MoviesCategory,
