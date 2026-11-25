@@ -8,7 +8,10 @@ import { use, useEffect, useState } from "react";
 import FloorButton from "@/app/components/FloorButton";
 import FloorPageLayout from "@/app/components/FloorPageLayout";
 import { useCommunityCategories } from "@/app/categories/useCommunityCategories";
-import { communityCategoryId } from "@/app/categories/registry";
+import {
+  communityCategoryId,
+  toCommunityCategory,
+} from "@/app/categories/registry";
 import type { CommunityCategoryView } from "@/lib/community/types";
 
 import {
@@ -63,17 +66,7 @@ export default function CommunityCategoryPage({
 
   const onAdd = () => {
     if (!category) return;
-    addCategory({
-      id: category.id,
-      name: category.name,
-      examples: category.items
-        .filter((item) => item.imageUrl)
-        .map((item) => ({
-          name: item.name,
-          alternatives: item.alternatives,
-          src: item.imageUrl as string,
-        })),
-    });
+    addCategory(toCommunityCategory(category));
   };
 
   /** Admin: take it out of the listings, or put it back after a look. */

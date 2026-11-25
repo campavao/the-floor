@@ -72,7 +72,14 @@ export default function PresenterPage({
 
   const [debugExamples, setDebugExamples] = useState<ResolvedExample[]>();
 
-  const { categories: communityCategories } = useCommunityCategories();
+  const inPlay = useMemo(
+    () => [
+      ...(liveGameDetails?.data?.map((piece) => piece.category) ?? []),
+      roundDetails?.category,
+    ],
+    [liveGameDetails, roundDetails?.category]
+  );
+  const { categories: communityCategories } = useCommunityCategories(inPlay);
 
   const desktopPlayWarning = (
     <div

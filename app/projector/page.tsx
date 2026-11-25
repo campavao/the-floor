@@ -40,7 +40,14 @@ export function Projector() {
     undefined
   );
 
-  const { categories: communityCategories } = useCommunityCategories();
+  const inPlay = useMemo(
+    () => [
+      ...(gameDetails?.data?.map((piece: FloorData) => piece.category) ?? []),
+      round?.category,
+    ],
+    [gameDetails, round?.category]
+  );
+  const { categories: communityCategories } = useCommunityCategories(inPlay);
 
   const [isRandomizing, setIsRandomizing] = useState(false);
 

@@ -7,7 +7,10 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import FloorButton from "@/app/components/FloorButton";
 import FloorPageLayout from "@/app/components/FloorPageLayout";
 import { useCommunityCategories } from "@/app/categories/useCommunityCategories";
-import { communityCategoryId } from "@/app/categories/registry";
+import {
+  communityCategoryId,
+  toCommunityCategory,
+} from "@/app/categories/registry";
 import { LIMITS } from "@/lib/community/config";
 import type {
   CommunityCategorySummary,
@@ -168,17 +171,7 @@ export default function CommunityPage() {
     setError("");
     try {
       const { category } = await getCategory(summary.id);
-      addCategory({
-        id: category.id,
-        name: category.name,
-        examples: category.items
-          .filter((item) => item.imageUrl)
-          .map((item) => ({
-            name: item.name,
-            alternatives: item.alternatives,
-            src: item.imageUrl as string,
-          })),
-      });
+      addCategory(toCommunityCategory(category));
     } catch (caught) {
       setError(caught instanceof Error ? caught.message : "Couldn't add that.");
     } finally {

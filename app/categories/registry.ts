@@ -61,6 +61,51 @@ export const communityCategoryId = (id: string): string =>
 export const isCommunityCategoryId = (id: CategoryId): boolean =>
   typeof id === "string" && id.startsWith(COMMUNITY_ID_PREFIX);
 
+/** The shape of a community category as the API returns it. */
+type PublishedCategory = {
+  id: string;
+  name: string;
+  items: ReadonlyArray<{
+    name: string;
+    alternatives: string[];
+    imageUrl: string | null;
+  }>;
+};
+
+/**
+ * The snapshot a browser stores when a category is added to its game. Items
+ * still waiting for a picture are left out -- a round can't show them.
+ */
+export const toCommunityCategory = (
+  category: PublishedCategory
+): CommunityCategory => ({
+  examples: category.items.flatMap((item) =>
+    item.imageUrl
+      ? [{ alternatives: item.alternatives, name: item.name, src: item.imageUrl }]
+      : []
+  ),
+  id: category.id,
+  name: category.name,
+});
+
+/**
+ * The community categories among `ids` that this browser doesn't hold, as the
+ * bare ids the API takes. Curated names, blanks and duplicates are skipped.
+ */
+export const missingCommunityIds = (
+  ids: ReadonlyArray<CategoryId | undefined>,
+  community: Readonly<Record<string, CommunityCategory>>
+): string[] => {
+  const missing = new Set<string>();
+  for (const id of ids) {
+    if (!id || !isCommunityCategoryId(id)) continue;
+    const key = communityCategoryId(id);
+    if (own(community, key)) continue;
+    missing.add(key.slice(COMMUNITY_ID_PREFIX.length));
+  }
+  return [...missing];
+};
+
 /**
  * Own-property lookup only.
  *
