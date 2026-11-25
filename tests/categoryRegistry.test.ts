@@ -10,7 +10,9 @@ import {
   isImageExample,
   isTextExample,
   listSelectableCategories,
+  missingCommunityIds,
   resolveCategory,
+  toCommunityCategory,
   type CommunityCategory,
 } from "../app/categories/registry";
 import { CATEGORY_METADATA } from "../app/data";
@@ -202,5 +204,61 @@ describe("display names", () => {
       `${COMMUNITY_ID_PREFIX}gone`
     );
     expect(categoryDisplayName(undefined)).toBe("");
+  });
+});
+
+describe("restoring community categories", () => {
+  it("lists only the community categories this browser doesn't hold", () => {
+    expect(
+      missingCommunityIds(
+        [
+          "Fruits",
+          `${COMMUNITY_ID_PREFIX}abc-123`,
+          `${COMMUNITY_ID_PREFIX}gone-1`,
+          `${COMMUNITY_ID_PREFIX}gone-1`,
+          undefined,
+          `${COMMUNITY_ID_PREFIX}__proto__`,
+        ],
+        community
+      )
+    ).toEqual(["gone-1", "__proto__"]);
+  });
+
+  it("asks for nothing when everything is already here", () => {
+    expect(
+      missingCommunityIds(["Fruits", `${COMMUNITY_ID_PREFIX}zzz-999`], community)
+    ).toEqual([]);
+  });
+
+  it("stores what the API returns as a playable snapshot", () => {
+    const restored = toCommunityCategory({
+      id: "14fa08a30b574ee0",
+      items: [
+        {
+          alternatives: ["Milkyway"],
+          imageUrl: "https://images.example.com/candy/milky-way.webp",
+          name: "Milky Way",
+        },
+        { alternatives: [], imageUrl: null, name: "Still searching" },
+      ],
+      name: "Candy",
+    });
+
+    expect(restored).toEqual({
+      examples: [
+        {
+          alternatives: ["Milkyway"],
+          name: "Milky Way",
+          src: "https://images.example.com/candy/milky-way.webp",
+        },
+      ],
+      id: "14fa08a30b574ee0",
+      name: "Candy",
+    });
+    expect(
+      resolveCategory(`${COMMUNITY_ID_PREFIX}14fa08a30b574ee0`, {
+        [`${COMMUNITY_ID_PREFIX}14fa08a30b574ee0`]: restored,
+      })?.name
+    ).toBe("Candy");
   });
 });
