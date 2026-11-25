@@ -49,8 +49,12 @@ export default function Round({
     newCategory: CategoryId
   ) => void;
 }) {
-  const { categories: communityCategories, ready: categoriesReady } =
-    useCommunityCategories();
+  const restore = useMemo(() => [category], [category]);
+  const {
+    categories: communityCategories,
+    ready: categoriesReady,
+    restoring,
+  } = useCommunityCategories(restore);
   const resolved = useMemo(
     () => resolveCategory(category, communityCategories),
     [category, communityCategories]
@@ -326,6 +330,16 @@ export default function Round({
   // Say so rather than showing an empty white board for 45 seconds -- but only
   // once the store has actually been read, or the server (which has no
   // localStorage) would render this for every community category.
+  if (!resolved && categoriesReady && restoring.has(String(category))) {
+    return (
+      <FloorPageLayout>
+        <div className="flex flex-col items-center justify-center w-full h-full gap-4 p-10 text-center">
+          <p className="text-4xl font-bold text-white/80">Loading category…</p>
+        </div>
+      </FloorPageLayout>
+    );
+  }
+
   if (!resolved && categoriesReady) {
     return (
       <FloorPageLayout>
@@ -334,8 +348,8 @@ export default function Round({
             Category unavailable
           </p>
           <p className="text-2xl text-white/80">
-            “{String(category)}” isn’t loaded in this browser. Re-add it from
-            the community page to play this round.
+            “{String(category)}” isn’t in this browser and couldn’t be
+            fetched. It may have been deleted or hidden.
           </p>
         </div>
       </FloorPageLayout>
