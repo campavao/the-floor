@@ -18,6 +18,22 @@ import type {
 /** Same as the public record, plus the owner token the API must never leak. */
 export type StoredCategory = CommunityCategoryRecord & { authorKey: string };
 
+/**
+ * A category without its items: what a list, a vote or a report needs.
+ *
+ * The item list is the bulk of a row -- fifty items, each with an image URL,
+ * a storage key and a licence credit -- and the browse page used to fetch it
+ * for all 24 cards just to show a count and four thumbnails. That was ~370 KB
+ * from the database per page against ~16 KB sent to the browser, and it used
+ * up Neon's free 5 GB a month of network transfer. The count and thumbnails
+ * are now worked out inside Postgres, so only they leave it.
+ */
+export type StoredListing = Omit<StoredCategory, "items"> & {
+  itemCount: number;
+  /** The first four items that have a picture, in order. */
+  previewImageUrls: string[];
+};
+
 export type VoteDirection = -1 | 0 | 1;
 
 /**
@@ -62,17 +78,22 @@ export type Repo = {
   setHidden(id: string, hidden: boolean): Promise<StoredCategory | undefined>;
   setLanguage(id: string, language: string): Promise<StoredCategory | undefined>;
   remove(id: string): Promise<void>;
-  list(options: ListOptions): Promise<StoredCategory[]>;
+  /** Everything but the items -- for checks that don't read them. */
+  getListing(id: string): Promise<StoredListing | undefined>;
+  list(options: ListOptions): Promise<StoredListing[]>;
   /** How many browsable categories each language has, most first. */
   languageCounts(): Promise<Array<{ language: string; count: number }>>;
-  /** Categories from before language tagging, for the admin's backfill. */
+  /**
+   * Categories from before language tagging, for the admin's backfill. Full
+   * rows: the detector reads the item names.
+   */
   listWithoutLanguage(limit: number): Promise<StoredCategory[]>;
   /**
    * Everything, for the admin: drafts and hidden categories included, the
    * ones most in need of a look first.
    */
-  listForModeration(limit: number): Promise<StoredCategory[]>;
-  listByAuthor(authorKey: string): Promise<StoredCategory[]>;
+  listForModeration(limit: number): Promise<StoredListing[]>;
+  listByAuthor(authorKey: string): Promise<StoredListing[]>;
   /** Drafts nobody has touched since `before`, for the cleanup job. */
   listStaleDrafts(before: string, limit: number): Promise<StoredCategory[]>;
   /**
@@ -142,15 +163,25 @@ export const toView = (
   };
 };
 
-export const toModerationRow = (category: StoredCategory): ModerationRow => ({
+/** The listing shape of a full category, for the dev repo. */
+export const toListing = (category: StoredCategory): StoredListing => {
+  const { items, ...rest } = category;
+  return {
+    ...rest,
+    itemCount: items.length,
+    previewImageUrls: items
+      .map((item) => item.imageUrl)
+      .filter((url): url is string => Boolean(url))
+      .slice(0, 4),
+  };
+};
+
+export const toModerationRow = (category: StoredListing): ModerationRow => ({
   id: category.id,
   name: category.name,
   status: category.status,
-  itemCount: category.items.length,
-  previewImageUrls: category.items
-    .map((item) => item.imageUrl)
-    .filter((url): url is string => Boolean(url))
-    .slice(0, 4),
+  itemCount: category.itemCount,
+  previewImageUrls: category.previewImageUrls,
   upvotes: category.upvotes,
   downvotes: category.downvotes,
   reportCount: category.reportCount,
@@ -161,24 +192,21 @@ export const toModerationRow = (category: StoredCategory): ModerationRow => ({
 });
 
 /** One of the caller's own categories, drafts and hidden ones included. */
-export const toOwnRow = (category: StoredCategory): OwnCategoryRow => {
+export const toOwnRow = (category: StoredListing): OwnCategoryRow => {
   const { reportCount: _reportCount, ...row } = toModerationRow(category);
   return row;
 };
 
 export const toSummary = (
-  category: StoredCategory,
+  category: StoredListing,
   myVote: VoteDirection,
   isOwner: boolean
 ): CommunityCategorySummary => ({
   id: category.id,
   name: category.name,
   slug: category.slug,
-  itemCount: category.items.length,
-  previewImageUrls: category.items
-    .map((item) => item.imageUrl)
-    .filter((url): url is string => Boolean(url))
-    .slice(0, 4),
+  itemCount: category.itemCount,
+  previewImageUrls: category.previewImageUrls,
   upvotes: category.upvotes,
   downvotes: category.downvotes,
   score: category.upvotes - category.downvotes,
@@ -193,6 +221,37 @@ export const toSummary = (
 /* -------------------------------------------------------------------------- */
 
 type Row = Record<string, unknown>;
+
+/**
+ * Every column but `items`, plus the two things lists need from it. Computed
+ * in Postgres so the item list itself never crosses the network.
+ */
+const LISTING_COLUMNS = `
+  id, name, slug, status, author_key, upvotes, downvotes, report_count,
+  hidden_at, created_at, updated_at, published_at, language,
+  jsonb_array_length(items) as item_count,
+  coalesce((
+    select jsonb_agg(url order by position)
+      from (
+        select element->>'imageUrl' as url, position
+          from jsonb_array_elements(items)
+               with ordinality as entries(element, position)
+         where coalesce(element->>'imageUrl', '') <> ''
+         order by position
+         limit 4
+      ) as previews
+  ), '[]'::jsonb) as preview_image_urls`;
+
+const fromListingRow = (row: Row): StoredListing => {
+  const { items: _items, ...rest } = fromRow({ ...row, items: [] });
+  return {
+    ...rest,
+    itemCount: Number(row.item_count ?? 0),
+    previewImageUrls: ((row.preview_image_urls as unknown[]) ?? []).filter(
+      (url): url is string => typeof url === "string"
+    ),
+  };
+};
 
 const fromRow = (row: Row): StoredCategory => ({
   id: String(row.id),
@@ -215,6 +274,8 @@ const fromRow = (row: Row): StoredCategory => ({
 
 const postgresRepo = (connectionString: string): Repo => {
   const sql = neon(connectionString);
+  // A constant, never user input -- unsafe() only means "not a parameter".
+  const listing = sql.unsafe(LISTING_COLUMNS);
 
   return {
     async create({ name, items, authorKey, language }) {
@@ -233,6 +294,13 @@ const postgresRepo = (connectionString: string): Repo => {
         select * from community_categories where id = ${id}
       `;
       return rows[0] ? fromRow(rows[0]) : undefined;
+    },
+
+    async getListing(id) {
+      const rows = await sql`
+        select ${listing} from community_categories where id = ${id}
+      `;
+      return rows[0] ? fromListingRow(rows[0]) : undefined;
     },
 
     async saveItems(id, items) {
@@ -333,7 +401,7 @@ const postgresRepo = (connectionString: string): Repo => {
       const rows =
         sort === "new"
           ? await sql`
-              select * from community_categories
+              select ${listing} from community_categories
                where status = 'published' and hidden_at is null
                  and name ilike ${pattern}
                  and (${lang}::text is null or language = ${lang})
@@ -341,14 +409,14 @@ const postgresRepo = (connectionString: string): Repo => {
                limit ${limit} offset ${offset}
             `
           : await sql`
-              select * from community_categories
+              select ${listing} from community_categories
                where status = 'published' and hidden_at is null
                  and name ilike ${pattern}
                  and (${lang}::text is null or language = ${lang})
                order by (upvotes - downvotes) desc, published_at desc nulls last
                limit ${limit} offset ${offset}
             `;
-      return rows.map(fromRow);
+      return rows.map(fromListingRow);
     },
 
     async languageCounts() {
@@ -378,23 +446,23 @@ const postgresRepo = (connectionString: string): Repo => {
 
     async listByAuthor(authorKey) {
       const rows = await sql`
-        select * from community_categories
+        select ${listing} from community_categories
          where author_key = ${authorKey}
          order by updated_at desc
          limit 50
       `;
-      return rows.map(fromRow);
+      return rows.map(fromListingRow);
     },
 
     async listForModeration(limit) {
       const rows = await sql`
-        select * from community_categories
+        select ${listing} from community_categories
          order by (hidden_at is not null) desc,
                   report_count desc,
                   updated_at desc
          limit ${limit}
       `;
-      return rows.map(fromRow);
+      return rows.map(fromListingRow);
     },
 
     async listStaleDrafts(before, limit) {
@@ -565,6 +633,11 @@ const devRepo = (): Repo => {
 
     get: async (id) => (await read()).categories.find((c) => c.id === id),
 
+    getListing: async (id) => {
+      const found = (await read()).categories.find((c) => c.id === id);
+      return found ? toListing(found) : undefined;
+    },
+
     saveItems: (id, items) =>
       mutate((data) => {
         const category = data.categories.find((c) => c.id === id);
@@ -671,14 +744,15 @@ const devRepo = (): Repo => {
           : b.upvotes - b.downvotes - (a.upvotes - a.downvotes) ||
             (b.publishedAt ?? "").localeCompare(a.publishedAt ?? "")
       );
-      return sorted.slice(offset, offset + limit);
+      return sorted.slice(offset, offset + limit).map(toListing);
     },
 
     listByAuthor: async (authorKey) =>
       (await read()).categories
         .filter((c) => c.authorKey === authorKey)
         .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt))
-        .slice(0, 50),
+        .slice(0, 50)
+        .map(toListing),
 
     listForModeration: async (limit) =>
       (await read()).categories
@@ -688,7 +762,8 @@ const devRepo = (): Repo => {
             b.reportCount - a.reportCount ||
             b.updatedAt.localeCompare(a.updatedAt)
         )
-        .slice(0, limit),
+        .slice(0, limit)
+        .map(toListing),
 
     listStaleDrafts: async (before, limit) =>
       (await read()).categories

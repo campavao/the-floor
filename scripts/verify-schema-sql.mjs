@@ -272,6 +272,100 @@ try {
   );
   await pool.query(`delete from community_categories where id like 'lang-%'`);
 
+  // ------------------------------------------------ list columns
+  // LISTING_COLUMNS from lib/community/db.ts, verbatim. Lists read this instead
+  // of `select *` so a category's items never leave the database just to be
+  // counted -- that's what used up Neon's free network transfer.
+  const LISTING_COLUMNS = `
+    id, name, slug, status, author_key, upvotes, downvotes, report_count,
+    hidden_at, created_at, updated_at, published_at, language,
+    jsonb_array_length(items) as item_count,
+    coalesce((
+      select jsonb_agg(url order by position)
+        from (
+          select element->>'imageUrl' as url, position
+            from jsonb_array_elements(items)
+                 with ordinality as entries(element, position)
+           where coalesce(element->>'imageUrl', '') <> ''
+           order by position
+           limit 4
+        ) as previews
+    ), '[]'::jsonb) as preview_image_urls`;
+
+  const credit = {
+    source: "Wikimedia Commons",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Some_long_file_name_here.jpg",
+    author: "Some Photographer",
+    license: "CC BY-SA 4.0",
+  };
+  const fullItem = (i, withImage) => ({
+    id: `item-${i}`,
+    name: `Item number ${i}`,
+    alternatives: [`Alt ${i}`],
+    imageKey: withImage ? `categories/list-1/item-${i}-0123456789abcdef.webp` : null,
+    imageUrl: withImage
+      ? `https://pub-0123456789abcdef.r2.dev/categories/list-1/item-${i}-0123456789abcdef.webp`
+      : null,
+    width: withImage ? 1600 : null,
+    height: withImage ? 1200 : null,
+    credit: withImage ? credit : null,
+  });
+  // 50 items; the first and fourth have no picture, so previews must skip them.
+  const listItems = Array.from({ length: 50 }, (_, i) => fullItem(i, i !== 0 && i !== 3));
+
+  await pool.query(`delete from community_categories where id like 'list-%'`);
+  await pool.query(
+    `insert into community_categories (id, name, slug, author_key, items)
+     values ('list-1', 'Listed', 'listed', 'author-key', $1::jsonb),
+            ('list-2', 'Empty', 'empty', 'author-key', '[]'::jsonb)`,
+    [JSON.stringify(listItems)]
+  );
+
+  const listings = Object.fromEntries(
+    (
+      await pool.query(
+        `select ${LISTING_COLUMNS} from community_categories where id like 'list-%'`
+      )
+    ).rows.map((row) => [row.id, row])
+  );
+  check("item_count counts every item", listings["list-1"].item_count === 50);
+  check(
+    "previews are the first four pictures, in order, skipping items without one",
+    JSON.stringify(listings["list-1"].preview_image_urls) ===
+      JSON.stringify(
+        [1, 2, 4, 5].map(
+          (i) => `https://pub-0123456789abcdef.r2.dev/categories/list-1/item-${i}-0123456789abcdef.webp`
+        )
+      )
+  );
+  check(
+    "an empty category has no previews and a count of 0",
+    listings["list-2"].item_count === 0 &&
+      Array.isArray(listings["list-2"].preview_image_urls) &&
+      listings["list-2"].preview_image_urls.length === 0
+  );
+  check("the listing leaves the items out", !("items" in listings["list-1"]));
+  check(
+    "the listing carries the language",
+    "language" in listings["list-1"] && listings["list-1"].language === null
+  );
+
+  const size = async (columns) =>
+    (
+      await pool.query(
+        `select sum(length(row_to_json(r)::text))::int as bytes
+           from (select ${columns} from community_categories where id = 'list-1') r`
+      )
+    ).rows[0].bytes;
+  const fullBytes = await size("*");
+  const listingBytes = await size(LISTING_COLUMNS);
+  check(
+    "the listing is a small fraction of the full row",
+    listingBytes * 10 < fullBytes,
+    `${fullBytes} bytes -> ${listingBytes} bytes`
+  );
+  await pool.query(`delete from community_categories where id like 'list-%'`);
+
   await pool.query(`delete from community_categories where id = 'test-1'`);
   const orphans = await pool.query(
     `select count(*)::int as n from community_votes where category_id = 'test-1'`
