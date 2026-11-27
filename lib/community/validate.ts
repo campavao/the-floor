@@ -1,5 +1,6 @@
 import { LIMITS } from "./config";
 import { newId } from "./ids";
+import { isLanguage, type Language } from "./languages";
 import type { CommunityItem } from "./types";
 
 export class InvalidInput extends Error {
@@ -27,6 +28,13 @@ export const parseCategoryName = (value: unknown): string => {
     );
   }
   return name;
+};
+
+export const parseLanguage = (value: unknown): Language => {
+  if (!isLanguage(value)) {
+    throw new InvalidInput("Pick a language from the list.");
+  }
+  return value;
 };
 
 const parseAlternatives = (value: unknown): string[] => {
@@ -111,7 +119,8 @@ export const parseItems = (
 };
 
 /**
- * What an edit is allowed to change: the name, the items, or both.
+ * What an edit is allowed to change: the name, the items, the language, or
+ * any mix of them.
  *
  * Renaming two items to the same thing is refused rather than deduplicated.
  * `parseItems` drops the later duplicate, which is the right call for a pasted
@@ -121,10 +130,12 @@ export const parseItems = (
 export const parseCategoryPatch = (
   body: Record<string, unknown>,
   existing: CommunityItem[]
-): { name?: string; items?: CommunityItem[] } => {
-  const patch: { name?: string; items?: CommunityItem[] } = {};
+): { name?: string; items?: CommunityItem[]; language?: Language } => {
+  const patch: { name?: string; items?: CommunityItem[]; language?: Language } =
+    {};
 
   if (body.name !== undefined) patch.name = parseCategoryName(body.name);
+  if (body.language !== undefined) patch.language = parseLanguage(body.language);
 
   if (body.items !== undefined) {
     if (Array.isArray(body.items)) {
@@ -147,7 +158,11 @@ export const parseCategoryPatch = (
     patch.items = parseItems(body.items, { existing });
   }
 
-  if (patch.name === undefined && patch.items === undefined) {
+  if (
+    patch.name === undefined &&
+    patch.items === undefined &&
+    patch.language === undefined
+  ) {
     throw new InvalidInput("Nothing to change.");
   }
 

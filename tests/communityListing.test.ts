@@ -29,6 +29,7 @@ const category: StoredCategory = {
   id: "c",
   // Items 0 and 3 have no picture yet.
   items: Array.from({ length: 10 }, (_, i) => item(i, i !== 0 && i !== 3)),
+  language: "pl",
   name: "Ten things",
   publishedAt: "2026-11-02T00:00:00.000Z",
   reportCount: 0,
@@ -58,6 +59,7 @@ describe("toListing", () => {
     const listing = toListing(category);
     expect(toSummary(listing, 1, false)).toMatchObject({
       itemCount: 10,
+      language: "pl",
       myVote: 1,
       previewImageUrls: listing.previewImageUrls,
       score: 3,

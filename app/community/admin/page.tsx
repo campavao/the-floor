@@ -6,13 +6,16 @@ import { useCallback, useEffect, useState } from "react";
 
 import FloorButton from "@/app/components/FloorButton";
 import FloorPageLayout from "@/app/components/FloorPageLayout";
+import LanguageSelect from "@/app/components/community/LanguageSelect";
 import type { ModerationRow } from "@/lib/community/types";
 
 import {
+  backfillLanguages,
   deleteCategory,
   getAdminSession,
   listForModeration,
   setCategoryHidden,
+  setCategoryLanguage,
   signInAsAdmin,
   signOutAsAdmin,
 } from "../api";
@@ -35,6 +38,7 @@ export default function CommunityAdminPage() {
   const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
   const [error, setError] = useState("");
   const [pending, setPending] = useState<string | null>(null);
+  const [tagging, setTagging] = useState(false);
 
   const load = useCallback(async () => {
     setStatus("loading");
@@ -77,6 +81,44 @@ export default function CommunityAdminPage() {
     await signOutAsAdmin().catch(() => undefined);
     setSession({ admin: false, configured: true });
     setRows([]);
+  };
+
+  const untagged = rows.filter((row) => !row.language).length;
+
+  const onTagLanguages = async () => {
+    setTagging(true);
+    setError("");
+    try {
+      const { tagged, remaining } = await backfillLanguages();
+      await load();
+      setError(
+        `Tagged ${tagged}.` +
+          (remaining > 0 ? ` ${remaining} couldn't be guessed — set those by hand.` : "")
+      );
+    } catch (caught) {
+      setError(caught instanceof Error ? caught.message : "Tagging failed.");
+    } finally {
+      setTagging(false);
+    }
+  };
+
+  const onLanguage = async (row: ModerationRow, language: string) => {
+    setPending(row.id);
+    setError("");
+    try {
+      const { category } = await setCategoryLanguage(row.id, language);
+      setRows((previous) =>
+        previous.map((candidate) =>
+          candidate.id === row.id
+            ? { ...candidate, language: category.language }
+            : candidate
+        )
+      );
+    } catch (caught) {
+      setError(caught instanceof Error ? caught.message : "Couldn't save that.");
+    } finally {
+      setPending(null);
+    }
   };
 
   const onToggleHidden = async (row: ModerationRow) => {
@@ -208,6 +250,27 @@ export default function CommunityAdminPage() {
 
         {error && <p className="text-yellow-200 text-sm">{error}</p>}
 
+        {untagged > 0 && (
+          <div className="border-2 border-[#00d4ff]/40 rounded-lg p-4 flex flex-wrap items-center gap-4">
+            <p className="text-white/80 flex-1 min-w-[16rem]">
+              {untagged === 1
+                ? "1 category has no language yet. It was"
+                : `${untagged} categories have no language yet. They were`}{" "}
+              made before tagging existed, so only &ldquo;All languages&rdquo;
+              shows {untagged === 1 ? "it" : "them"}. Guess them all, then fix
+              any wrong ones below.
+            </p>
+            <FloorButton
+              variant="rectangular"
+              className="text-sm font-semibold"
+              disabled={tagging}
+              onClick={onTagLanguages}
+            >
+              {tagging ? "Tagging… (takes a few seconds)" : "Tag languages"}
+            </FloorButton>
+          </div>
+        )}
+
         {status === "loading" && <p className="text-white/60 py-12">Loading…</p>}
 
         {status === "ready" && rows.length === 0 && (
@@ -262,6 +325,12 @@ export default function CommunityAdminPage() {
                       )}
                     </p>
                   </div>
+
+                  <LanguageSelect
+                    value={row.language}
+                    disabled={pending === row.id}
+                    onChange={(next) => onLanguage(row, next)}
+                  />
 
                   <div className="flex gap-2 flex-wrap">
                     <Link

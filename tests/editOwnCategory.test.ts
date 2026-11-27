@@ -96,6 +96,23 @@ describe("parseCategoryPatch", () => {
       InvalidInput
     );
   });
+
+  it("accepts a language on its own, so the picker needn't send the items", () => {
+    expect(parseCategoryPatch({ language: "pl" }, existing)).toEqual({
+      language: "pl",
+    });
+  });
+
+  it("refuses an unknown language before anything else is applied", () => {
+    // The route writes nothing until this returns, so throwing here is what
+    // keeps a bad language from saving the items or name alongside it.
+    expect(() =>
+      parseCategoryPatch(
+        { items: [{ id: "a", name: "Apple" }], language: "xx", name: "New" },
+        existing
+      )
+    ).toThrow(InvalidInput);
+  });
 });
 
 describe("the dev repo", () => {

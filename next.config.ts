@@ -17,6 +17,9 @@ const curatedImageBaseUrl =
     : "";
 
 const nextConfig: NextConfig = {
+  // The language detector's model is a 4 MB table of data. Bundling it buys
+  // nothing and slows every build, so it's loaded from node_modules instead.
+  serverExternalPackages: ["eld"],
   env: {
     NEXT_PUBLIC_CURATED_IMAGE_BASE_URL: curatedImageBaseUrl,
   },

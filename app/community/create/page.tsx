@@ -8,6 +8,7 @@ import FloorPageLayout from "@/app/components/FloorPageLayout";
 import ImageEditor from "@/app/components/community/ImageEditor";
 import ImagePicker from "@/app/components/community/ImagePicker";
 import ItemCell, { type CellStatus } from "@/app/components/community/ItemCell";
+import LanguageSelect from "@/app/components/community/LanguageSelect";
 import { LIMITS } from "@/lib/community/config";
 import {
   defaultQuery,
@@ -24,6 +25,7 @@ import {
   detachImage,
   publishCategory,
   saveItems,
+  setCategoryLanguage,
   suggestItems,
 } from "../api";
 
@@ -50,6 +52,10 @@ export default function CreateCategoryPage() {
   const [cells, setCells] = useState<Cell[]>([]);
   const [autoFilling, setAutoFilling] = useState(false);
   const [published, setPublished] = useState(false);
+
+  /** The server's guess at first; whatever the creator picks after that. */
+  const [language, setLanguage] = useState<string | null>(null);
+  const [savingLanguage, setSavingLanguage] = useState(false);
 
   const [picking, setPicking] = useState<string | null>(null);
   const [editing, setEditing] = useState<string | null>(null);
@@ -167,6 +173,7 @@ export default function CreateCategoryPage() {
       cellsRef.current = created;
 
       setCategoryId(draft.id);
+      setLanguage(draft.language);
       setCells(created);
       setPhase("build");
 
@@ -357,6 +364,22 @@ export default function CreateCategoryPage() {
     }
   };
 
+  const onLanguage = async (next: string) => {
+    if (!categoryId) return;
+    const previous = language;
+    // Optimistic: the select should move when it's clicked, not a beat later.
+    setLanguage(next);
+    setSavingLanguage(true);
+    try {
+      await setCategoryLanguage(categoryId, next);
+    } catch (caught) {
+      setLanguage(previous);
+      setError(caught instanceof Error ? caught.message : "Couldn't save that.");
+    } finally {
+      setSavingLanguage(false);
+    }
+  };
+
   const onPublish = async () => {
     if (!categoryId) return;
     setWorking(true);
@@ -406,6 +429,7 @@ export default function CreateCategoryPage() {
                 setManualList("");
                 setCells([]);
                 setCategoryId(null);
+                setLanguage(null);
               }}
             >
               Make another
@@ -512,6 +536,17 @@ export default function CreateCategoryPage() {
               {withImages} of {cells.length} have a picture
               {autoFilling ? " · still fetching…" : ""}
             </p>
+            <label className="flex items-center gap-2 text-sm text-white/70 mt-2">
+              Written in
+              <LanguageSelect
+                value={language}
+                onChange={onLanguage}
+                disabled={savingLanguage}
+              />
+              <span className="text-white/40">
+                so people can find it in their language
+              </span>
+            </label>
           </div>
 
           <div className="flex gap-2 flex-wrap">
@@ -538,7 +573,11 @@ export default function CreateCategoryPage() {
             <FloorButton
               variant="rectangular"
               className="text-sm font-semibold"
-              disabled={working || withImages < LIMITS.minItemsToPublish}
+              disabled={
+                working ||
+                savingLanguage ||
+                withImages < LIMITS.minItemsToPublish
+              }
               onClick={onPublish}
             >
               {working ? "Publishing…" : "Publish"}
