@@ -22,7 +22,8 @@ export async function POST(request: Request, { params }: Params) {
     }
     const direction = raw as -1 | 0 | 1;
 
-    const category = await repo().get(id);
+    // Only the status and owner matter here, so leave the items in the database.
+    const category = await repo().getListing(id);
     if (!category || category.status !== "published" || category.hiddenAt) {
       return fail("No category with that id.", 404);
     }

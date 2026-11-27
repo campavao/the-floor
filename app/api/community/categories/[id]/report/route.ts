@@ -21,7 +21,8 @@ export async function POST(request: Request, { params }: Params) {
     const body = await readJson(request);
     const reason = cleanText(body.reason).slice(0, 500);
 
-    const category = await repo().get(id);
+    // Only the status and owner matter here, so leave the items in the database.
+    const category = await repo().getListing(id);
     if (!category || category.status !== "published") {
       return fail("No category with that id.", 404);
     }
